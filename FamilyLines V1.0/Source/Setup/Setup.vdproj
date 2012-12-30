@@ -562,7 +562,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FamilyLines V1.0 Beta"
         "ProductCode" = "8:{D344D0F8-1E31-47BC-9D0B-3854F044BB25}"
-        "PackageCode" = "8:{8E153DD5-876E-4833-884C-21363445EB12}"
+        "PackageCode" = "8:{9DF8A887-0BE2-416C-9E5D-ED1DB7E3B991}"
         "UpgradeCode" = "8:{0C764179-2F6C-4601-A633-3BC5E3CB3586}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
