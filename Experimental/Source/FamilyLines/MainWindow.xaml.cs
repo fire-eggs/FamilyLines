@@ -1936,5 +1936,38 @@ namespace KBS.FamilyLines
             test.Show();
         }
 
+        private void LocationConcordance_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommonDialog();
+            dialog.InitialDirectory = People.ApplicationFolderPath;
+            dialog.Filter.Add(new FilterEntry("Text Files (.txt)" /*Properties.Resources.TextFiles*/, 
+                                              "*.txt" /*Properties.Resources.TextExt*/));
+            dialog.Filter.Add(new FilterEntry(Properties.Resources.AllFiles, Properties.Resources.AllExtension));
+            dialog.Title = "Location to Surnames Concordance"; //Properties.Resources.ConcordanceTitle;
+            dialog.DefaultExtension = ".txt"; //Properties.Resources.TextDefaultExt;
+            dialog.ShowSave();
+
+            if (string.IsNullOrEmpty(dialog.FileName))
+                return;
+
+            Experimental.LocationConcordance(dialog.FileName, family);
+        }
+
+        private void MapToKML_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommonDialog();
+            dialog.InitialDirectory = People.ApplicationFolderPath;
+            dialog.Filter.Add(new FilterEntry("KML Files (.kml)" /*Properties.Resources.KMLFiles*/, 
+                                              "*.kml" /*Properties.Resources.KMLExt*/ ));
+            dialog.Filter.Add(new FilterEntry(Properties.Resources.AllFiles, Properties.Resources.AllExtension));
+            dialog.Title = "KML file for birth, marriage and death locations"; // Properties.Resources.MapToKMLTitle;
+            dialog.DefaultExtension = ".kml"; // Properties.Resources.KMLDefaultExt;
+            dialog.ShowSave();
+
+            if (string.IsNullOrEmpty(dialog.FileName))
+                return;
+
+            Experimental.DumpKML(dialog.FileName, family);
+        }
     }
 }

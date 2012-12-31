@@ -2344,6 +2344,22 @@ namespace KBS.FamilyLinesLib
             return Name;
         }
 
+        // KBR NOTE: Experimental for KML
+        public Collection<SpouseRelationship> GetMarriages()
+        {
+            var marrs = new Collection<SpouseRelationship>();
+            foreach (var relationship in relationships)
+            {
+                var spouseRelationship = relationship as SpouseRelationship;
+                if (spouseRelationship != null && spouseRelationship.MarriageDate.HasValue)
+                {
+                    marrs.Add(spouseRelationship);
+                }
+            }
+            return marrs;
+        }
+
+
         #endregion
 
         #region IDataErrorInfo Members

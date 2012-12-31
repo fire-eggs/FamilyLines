@@ -53,6 +53,9 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="SharpKml">
+      <HintPath>..\..\Libraries\SharpKml.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -66,6 +69,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Attachment.cs" />
+    <Compile Include="Experimental.cs" />
     <Compile Include="PlacesExport.cs" />
     <Compile Include="Properties\Resources.en-GB.Designer.cs">
       <DependentUpon>Resources.en-GB.resx</DependentUpon>
