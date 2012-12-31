@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
+using KBS.FamilyLines.Controls;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines

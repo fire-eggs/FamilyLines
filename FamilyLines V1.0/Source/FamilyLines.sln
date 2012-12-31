@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{C354EA53-F548-45D1-B441-2589EBD113C5}"
 	ProjectSection(SolutionItems) = preProject
-		..\Libraries\Microsoft.WindowsAPICodePack.dll = ..\Libraries\Microsoft.WindowsAPICodePack.dll
-		..\Libraries\Microsoft.WindowsAPICodePack.Shell.dll = ..\Libraries\Microsoft.WindowsAPICodePack.Shell.dll
 		..\Libraries\WPFToolkit.Design.dll = ..\Libraries\WPFToolkit.Design.dll
 		..\Libraries\WPFToolkit.Design.pdb = ..\Libraries\WPFToolkit.Design.pdb
 		..\Libraries\WPFToolkit.dll = ..\Libraries\WPFToolkit.dll
