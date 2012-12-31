@@ -3,9 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:KBS.FamilyLinesLib="clr-namespace:KBS.FamilyLinesLib;assembly=FamilyShowLib"
+      xmlns:KBS.FamilyLinesLib="clr-namespace:KBS.FamilyLinesLib;assembly=FamilyLinesLib"
       xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
-      xmlns:local="clr-namespace:KBS.FamilyLines" xmlns:Controls="clr-namespace:KBS.FamilyLines.Controls"
+      xmlns:local="clr-namespace:KBS.FamilyLines" 
+        xmlns:Controls="clr-namespace:KBS.FamilyLines.Controls"
         mc:Ignorable="d"
 
       Width="960"
@@ -134,10 +135,14 @@
                     <MenuItem x:Name="shadowMenu" Header="Hide Shadows" Click="ShowShadows_Click"/>
                     <MenuItem Header="{x:Static properties:Resources.PrintMenu}" Command="Print" Icon="{StaticResource printico}"/>
                     <MenuItem Header="{x:Static properties:Resources.PrintXPSMenu}" Click="ExportXps"/>
-                    <MenuItem Header="KBR Test Print" Click="PrintKBR"/>
                 </MenuItem>
                 
                 <MenuItem Header="{x:Static properties:Resources.ThemesHeader}" x:Name="ThemesMenu" Style="{DynamicResource MenuItemStyle}"/>
+                
+                <MenuItem Header="Test">
+                    <MenuItem Header="Family View Test" Click="MenuItem_Click"/>
+                    <MenuItem Header="Test Print" Click="PrintKBR"/>
+                </MenuItem>
                 
                 <MenuItem Header="{x:Static properties:Resources.Help}" x:Name="HelpMenu" Style="{DynamicResource MenuItemStyle}">
                     <MenuItem Header="{x:Static properties:Resources.LanguageMenu}" Click="Languages" Icon="{StaticResource languageico}"/>

@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
+using KBS.FamilyLines.Controls.FamilyView;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines
@@ -1926,6 +1927,13 @@ namespace KBS.FamilyLines
 
             // TODO this is my brute-force mechanism to rebuild the diagram - make it better
             DiagramControl.Diagram.OnFamilyContentChanged(null, new ContentChangedEventArgs(null));
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Window test = new TestWindow();
+            test.Owner = this;
+            test.Show();
         }
 
     }
