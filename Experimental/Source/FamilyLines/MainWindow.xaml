@@ -142,6 +142,8 @@
                 <MenuItem Header="Test">
                     <MenuItem Header="Family View Test" Click="MenuItem_Click"/>
                     <MenuItem Header="Test Print" Click="PrintKBR"/>
+                    <MenuItem Header="Location Concordance..." Click="LocationConcordance_Click" />
+                    <MenuItem Header="Map to KML..." Click="MapToKML_Click" />
                 </MenuItem>
                 
                 <MenuItem Header="{x:Static properties:Resources.Help}" x:Name="HelpMenu" Style="{DynamicResource MenuItemStyle}">
