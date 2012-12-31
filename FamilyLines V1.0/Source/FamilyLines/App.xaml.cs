@@ -4,10 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Shell;
 using System.Xml.Serialization;
+using KBS.FamilyLines.Controls;
 using KBS.FamilyLinesLib;
-using Microsoft.WindowsAPICodePack.Taskbar;
-using Microsoft.WindowsAPICodePack.Shell;
 using System.Reflection;
 using KBS.FamilyLines.Properties;
 
@@ -126,24 +126,32 @@ namespace KBS.FamilyLines
         {
             string systemFolder = Environment.GetFolderPath(Environment.SpecialFolder.System);
             string applicationFilePath = Assembly.GetExecutingAssembly().Location;
-            var taskBar = TaskBar.Create(window, Settings.Default.AppId, new JumpListLink[]
-            {
-                new JumpListLink(applicationFilePath, KBS.FamilyLines.Properties.Resources.StartANewFamilyTree)
-                {
-                    Arguments = "/n",
-                    IconReference = new IconReference(Path.Combine(systemFolder, "shell32.dll"), 0),
-                },
-                new JumpListLink(applicationFilePath, KBS.FamilyLines.Properties.Resources.OpenMenu)
-                {
-                    Arguments = "/o",
-                    IconReference = new IconReference(Path.Combine(systemFolder, "shell32.dll"), 4),
-                },
-                new JumpListLink(applicationFilePath, KBS.FamilyLines.Properties.Resources.GedcomMenu)
-                {
-                    Arguments = "/i",
-                    IconReference = new IconReference(Path.Combine(systemFolder, "shell32.dll"), 4),
-                }
-            });
+
+            // KBR 12/31/2012 Use the .NET 4.0 classes instead of the WindowsAPICodePack
+            var jtask1 = new JumpTask();
+            jtask1.Title = FamilyLines.Properties.Resources.StartANewFamilyTree;
+            jtask1.ApplicationPath = applicationFilePath;
+            jtask1.Arguments = "/n";
+            jtask1.IconResourcePath = Path.Combine(systemFolder, "shell32.dll");
+            jtask1.IconResourceIndex = 0;
+
+            var jtask2 = new JumpTask();
+            jtask2.Title = FamilyLines.Properties.Resources.OpenMenu;
+            jtask2.ApplicationPath = applicationFilePath;
+            jtask2.Arguments = "/o";
+            jtask2.IconResourcePath = Path.Combine(systemFolder, "shell32.dll");
+            jtask2.IconResourceIndex = 4;
+
+            var jtask3 = new JumpTask();
+            jtask3.Title = FamilyLines.Properties.Resources.GedcomMenu;
+            jtask3.Description = FamilyLines.Properties.Resources.GedcomMenu;
+            jtask3.ApplicationPath = applicationFilePath;
+            jtask3.Arguments = "/i";
+            jtask3.IconResourcePath = Path.Combine(systemFolder, "shell32.dll");
+            jtask3.IconResourceIndex = 4;
+
+            var jTasks = new[] {jtask1, jtask2, jtask3};
+            TaskBar.Create(window, null, jTasks);
         }
 
         protected override void OnExit(ExitEventArgs e)
