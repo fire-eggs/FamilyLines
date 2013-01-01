@@ -51,6 +51,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D19C4537558F1445E34C394B97B64E6F"
+        "OwnerKey" = "8:_40AFD9ABF0564EFE874EC7568BD44525"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DAA7A665DCD24D49BE1627A95E227CA5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -70,7 +76,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C205E796D9794844881B7ACAB652D152"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C4174A596C3549E7800012C3DABE5E79"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D19C4537558F1445E34C394B97B64E6F"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -81,7 +99,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\FamilyLines_1.0beta.msi"
+        "OutputFilename" = "8:Debug\\Family Lines 0.5 beta.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -245,6 +263,11 @@
             "AssemblyAsmDisplayName" = "8:FamilyLinesLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_C205E796D9794844881B7ACAB652D152"
+                    {
+                    "Name" = "8:FamilyLinesLib.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:..\\FamilyLinesLib\\bin\\Debug\\FamilyLinesLib.dll"
             "TargetName" = "8:"
@@ -262,6 +285,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D19C4537558F1445E34C394B97B64E6F"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:FamilyLinesLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D19C4537558F1445E34C394B97B64E6F"
+                    {
+                    "Name" = "8:FamilyLinesLib.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:FamilyLinesLib.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_983FFC338C5641F7AEB6E7C78C0CC9AE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DAA7A665DCD24D49BE1627A95E227CA5"
@@ -416,7 +470,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FamilyLines V1.0 Beta"
         "ProductCode" = "8:{D344D0F8-1E31-47BC-9D0B-3854F044BB25}"
-        "PackageCode" = "8:{C35961AC-9560-44CE-A3BF-5933C5033055}"
+        "PackageCode" = "8:{C135A9A4-E437-4469-BB0C-AF1551DD718F}"
         "UpgradeCode" = "8:{0C764179-2F6C-4601-A633-3BC5E3CB3586}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -538,7 +592,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_76F6C91354F1440F95A34D97926A6CA0"
             {
-            "Name" = "8:Family Lines Beta 1.0"
+            "Name" = "8:Family Lines 0.5"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -552,7 +606,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DA211607E6FF40EA9A6DEF97870D1B9F"
             {
-            "Name" = "8:Family Lines Beta 1.0"
+            "Name" = "8:Family Lines 0.5"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
