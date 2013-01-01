@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0717F6812D6FF7E12B64563C5C01A4B4"
-        "OwnerKey" = "8:_40AFD9ABF0564EFE874EC7568BD44525"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3A63BEAB51A7495DA1F4297EFE1AE50C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -76,19 +70,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C205E796D9794844881B7ACAB652D152"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C4174A596C3549E7800012C3DABE5E79"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0717F6812D6FF7E12B64563C5C01A4B4"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -196,37 +178,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0717F6812D6FF7E12B64563C5C01A4B4"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FamilyLinesLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_0717F6812D6FF7E12B64563C5C01A4B4"
-                    {
-                    "Name" = "8:FamilyLinesLib.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:FamilyLinesLib.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_983FFC338C5641F7AEB6E7C78C0CC9AE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A63BEAB51A7495DA1F4297EFE1AE50C"
             {
             "SourcePath" = "8:..\\FamilyLines\\Sample Files\\Windsor.familyx"
@@ -294,11 +245,6 @@
             "AssemblyAsmDisplayName" = "8:FamilyLinesLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C205E796D9794844881B7ACAB652D152"
-                    {
-                    "Name" = "8:FamilyLinesLib.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\FamilyLinesLib\\bin\\Debug\\FamilyLinesLib.dll"
             "TargetName" = "8:"
@@ -592,7 +538,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_76F6C91354F1440F95A34D97926A6CA0"
             {
-            "Name" = "8:Kith and Kin Beta 1.0"
+            "Name" = "8:Family Lines Beta 1.0"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -606,7 +552,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DA211607E6FF40EA9A6DEF97870D1B9F"
             {
-            "Name" = "8:Kith and Kin Beta 1.0"
+            "Name" = "8:Family Lines Beta 1.0"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
