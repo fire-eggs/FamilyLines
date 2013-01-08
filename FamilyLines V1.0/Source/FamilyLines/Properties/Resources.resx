@@ -334,7 +334,7 @@
     <value>(Exporting)</value>
   </data>
   <data name="FamilyShow" xml:space="preserve">
-    <value>FamilyLines</value>
+    <value>Family Lines</value>
   </data>
   <data name="GedcomMenu" xml:space="preserve">
     <value>Import GEDCOM...</value>

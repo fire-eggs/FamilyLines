@@ -49,13 +49,13 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
     <TargetCulture>en-US</TargetCulture>
-    <ProductName>FamilyLines</ProductName>
-    <PublisherName>FamilyLines</PublisherName>
-    <MinimumRequiredVersion>4.0.0.0</MinimumRequiredVersion>
+    <ProductName>Family Lines</ProductName>
+    <PublisherName>Family Lines</PublisherName>
+    <MinimumRequiredVersion>0.1.0.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>familyshow.htm</WebPage>
+    <WebPage>familylines.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>4.2.0.%2a</ApplicationVersion>
+    <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>

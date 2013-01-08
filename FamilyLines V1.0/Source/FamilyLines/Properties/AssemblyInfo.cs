@@ -11,11 +11,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FamilyLines")]
+[assembly: AssemblyTitle("Family Lines")]
 [assembly: AssemblyDescription("FamilyLines, an open source genealogy application")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FamilyLines")]
+[assembly: AssemblyProduct("Family Lines")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -59,7 +59,7 @@ using System.Windows;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersionAttribute("1.0.0.0")]
+[assembly: AssemblyVersion("0.1.0.0")]
+[assembly: AssemblyFileVersionAttribute("0.1.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("")]
 [assembly: GuidAttribute("E5760515-2849-4f7f-A582-56369460A5D9")]
