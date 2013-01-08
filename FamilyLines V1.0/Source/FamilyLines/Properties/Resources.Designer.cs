@@ -1450,7 +1450,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FamilyLines.
+        ///   Looks up a localized string similar to Family Lines.
         /// </summary>
         public static string FamilyShow {
             get {
