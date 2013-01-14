@@ -6,8 +6,9 @@
    xmlns:local="clr-namespace:KBS.FamilyLines"
    xmlns:sys="clr-namespace:System;assembly=mscorlib"
    xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
-   x:Class="KBS.FamilyLines.Details" DataContextChanged="UserControl_DataContextChanged" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-   xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls" mc:Ignorable="d" Width="277" >
+   x:Class="KBS.FamilyLines.Details" DataContextChanged="UserControl_DataContextChanged" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d" Width="277" >
     <UserControl.Resources>
 
         <ResourceDictionary>
