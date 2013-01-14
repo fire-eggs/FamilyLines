@@ -163,9 +163,16 @@ namespace KBS.FamilyLines
             GenderDistributionControl1.Refresh();
         }
 
+        private bool _visible;
+        public void MakeVisible()
+        {
+            _visible = true;
+        }
+
         void OnFamilyContentChanged(object sender, ContentChangedEventArgs e)
         {
-            Refresh();
+            if (_visible)
+                Refresh();
         }
 
         /// <summary>
@@ -182,6 +189,8 @@ namespace KBS.FamilyLines
         /// </summary>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            _visible = false;
+
             App.Family.OnContentChanged();
             RaiseEvent(new RoutedEventArgs(CloseButtonClickEvent));
         }

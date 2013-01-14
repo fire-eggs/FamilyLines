@@ -68,6 +68,7 @@ namespace KBS.FamilyLines
 
         private void DetailsControl_FamilyDataClick(object sender, RoutedEventArgs e)
         {
+            FamilyDataControl.MakeVisible();
             FamilyDataControl.Refresh();
             // Uses an animation to show the Family Data Control
             ((Storyboard)this.Resources["ShowFamilyData"]).Begin(this);
