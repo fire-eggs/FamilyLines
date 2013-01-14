@@ -141,7 +141,11 @@
                 
                 <MenuItem Header="Test">
                     <MenuItem Header="Family View Test" Click="MenuItem_Click"/>
-                    <MenuItem Header="Test Print" Click="PrintKBR"/>
+                    <MenuItem Header="Print Preview - Full Chart" Click="PrintKBR"/>
+                    <MenuItem Header="Print Preview - Current View" Click="PrintKBR2"/>
+                    <MenuItem Header="Print Preview - Full Chart (Variant)" Click="PrintKBR3"/>
+                    <MenuItem Header="Print Preview - WPFPrintEngine" Click="PrintSUT"/>
+                    <MenuItem Header="Print Preview - VisualPrint" Click="PrintSUT2"/>
                     <MenuItem Header="Location Concordance..." Click="LocationConcordance_Click" />
                     <MenuItem Header="Map to KML..." Click="MapToKML_Click" />
                 </MenuItem>

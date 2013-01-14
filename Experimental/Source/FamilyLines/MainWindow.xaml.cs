@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.IO.Packaging;
+using System.Printing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -8,8 +9,12 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
+using KBS.FamilyLines.Controls;
 using KBS.FamilyLines.Controls.FamilyView;
 using KBS.FamilyLinesLib;
+using SUT.PrintEngine.Paginators;
+using SUT.PrintEngine.Utils;
+using VisualPrint;
 
 namespace KBS.FamilyLines
 {
@@ -638,8 +643,73 @@ namespace KBS.FamilyLines
 
         #region print menu
 
+        private void PrintSUT(object sender, RoutedEventArgs e)
+        {
+            // Print the full chart with the SUT WPF Print Engine
+            // http://www.codeproject.com/Articles/238135/WPF-Print-Engine-Part-I
+
+            var visual = DiagramControl.Diagram;
+            var visualSize = new Size(visual.ActualWidth * visual.Scale,
+                                      (visual.ActualHeight + 100) * visual.Scale);
+            var printControl = PrintControlFactory.Create(visualSize, visual);
+
+//            var printControl = PrintControlFactory.Create(visual);
+            printControl.ShowPrintPreview();
+        }
+
+        private FlowDocument _document;
+
+        private void OnPrint(object sender, RoutedEventArgs e)
+        {
+            //FlowDocument document = (e.Source as PreviewWindow).Document;
+            //if (document == null)
+            //    return;
+            DocumentPaginator paginator = ((IDocumentPaginatorSource)_document).DocumentPaginator;
+            new PrintDialog().PrintDocument(paginator, "Printing");
+        }
+
+        private void PrintSUT2(object sender, RoutedEventArgs e)
+        {
+
+            // Print the full chart with Fred Song's VisualPrint
+            // http://www.codeproject.com/Articles/164033/WPF-Visual-Print-Component
+
+            var visual = DiagramControl.Diagram;
+
+            _document = PrintHelper.CreateFlowDocument(visual, new Size(816,1248));
+
+            PreviewWindow win = new PreviewWindow(_document);
+            win.Print += new RoutedEventHandler(OnPrint);
+            win.Owner = this;
+            win.ShowDialog();
+        }
+
+        private void PrintKBR3(object sender, RoutedEventArgs e)
+        {
+            PrintHelper.DoPreview("foo", DiagramControl.Diagram);
+        }
+
+        private void PrintKBR2(object sender, RoutedEventArgs e)
+        {
+            // DiagramBorder - prints only the current view.
+
+            DiagramControl.ZoomSliderPanel.Visibility = Visibility.Hidden;
+            DiagramControl.TimeSliderPanel.Visibility = Visibility.Hidden;
+
+            PrintHelper.PrintPreview(this, DiagramBorder);
+
+            if (!hideDiagramControls)
+            {
+                DiagramControl.ZoomSliderPanel.Visibility = Visibility.Visible;
+                DiagramControl.TimeSliderPanel.Visibility = Visibility.Visible;
+            }
+
+        }
+
         private void PrintKBR(object sender, RoutedEventArgs e)
         {
+            // DiagramControl.Diagram - prints the full tree
+
             PrintHelper.PrintPreview(this, DiagramControl.Diagram);
 
 #if false
