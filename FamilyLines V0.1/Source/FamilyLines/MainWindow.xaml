@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:KBS.FamilyLinesLib="clr-namespace:KBS.FamilyLinesLib;assembly=FamilyShowLib"
+      xmlns:KBS.FamilyLinesLib="clr-namespace:KBS.FamilyLinesLib;assembly=FamilyLinesLib"
       xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
       xmlns:local="clr-namespace:KBS.FamilyLines" xmlns:Controls="clr-namespace:KBS.FamilyLines.Controls"
         mc:Ignorable="d"
