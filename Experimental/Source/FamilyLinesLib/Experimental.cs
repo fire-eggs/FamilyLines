@@ -368,7 +368,7 @@ namespace KBS.FamilyLinesLib
                 var filen = Path.GetFileNameWithoutExtension(gedcomFilePath);
                 File.WriteAllText(filen + ".kml", ser.Xml);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO need a better response
             }
