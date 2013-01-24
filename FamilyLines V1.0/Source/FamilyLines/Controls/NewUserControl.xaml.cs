@@ -21,12 +21,21 @@ namespace KBS.FamilyLines.Controls
 
         public static readonly RoutedEvent AddButtonClickEvent = EventManager.RegisterRoutedEvent(
             "AddButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NewUserControl));
+        
+        public static readonly RoutedEvent CancelButtonClickEvent = EventManager.RegisterRoutedEvent(
+            "CancelButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NewUserControl));
 
         // Expose this event for this control's container
         public event RoutedEventHandler AddButtonClick
         {
             add { AddHandler(AddButtonClickEvent, value); }
             remove { RemoveHandler(AddButtonClickEvent, value); }
+        }
+
+        public event RoutedEventHandler CancelButtonClick
+        {
+            add { AddHandler(CancelButtonClickEvent, value); }
+            remove { RemoveHandler(CancelButtonClickEvent, value); }
         }
 
         #endregion
@@ -54,6 +63,11 @@ namespace KBS.FamilyLines.Controls
             RaiseEvent(new RoutedEventArgs(AddButtonClickEvent));
         }
 
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(CancelButtonClickEvent));
+        }
+
         #endregion
 
         #region helper methods
@@ -77,5 +91,6 @@ namespace KBS.FamilyLines.Controls
         }
 
         #endregion
+
     }
 }

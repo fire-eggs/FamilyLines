@@ -56,10 +56,32 @@
           <TextBox TextWrapping="Wrap" x:Name="BirthPlaceInputTextBox" Width="130" Height="22" HorizontalAlignment="Left" Margin="5,0,0,0" TabIndex="130"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="15,12.5,10,15" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Stretch">
-          <Button Content="{x:Static properties:Resources.Add}" x:Name="AddButton" VerticalAlignment="Bottom" Height="15" IsDefault="True" HorizontalAlignment="Left" Click="AddButton_Click" TabIndex="140" Style="{DynamicResource RedButtonStyle}"/>
-        </StackPanel>
-      </Grid>
+        <Button 
+            Content="{x:Static properties:Resources.Add}" 
+            x:Name="AddButton" 
+            VerticalAlignment="Bottom" 
+            Height="15" 
+            Grid.Row="2"
+            IsDefault="True" 
+            HorizontalAlignment="Center" 
+            Click="AddButton_Click" 
+            TabIndex="140" 
+            Style="{DynamicResource RedButtonStyle}"
+            />
+        <Button
+            Content="{x:Static properties:Resources.Cancel}" 
+            x:Name="CancelButton" 
+            VerticalAlignment="Bottom" 
+            Height="15" 
+            Grid.Row="3"
+            Grid.Column="1"
+            IsDefault="True" 
+            HorizontalAlignment="Center" 
+            Click="CancelButton_Click" 
+            TabIndex="140" 
+            Style="{DynamicResource RedButtonStyle}"
+                />
+        </Grid>
     </Border>
 
     <!-- Footer -->
