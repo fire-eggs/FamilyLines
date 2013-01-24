@@ -2129,7 +2129,9 @@
                                 AlternationCount="2"
                                 SelectionMode="Single"
                                 AutoGenerateColumns="False"
-                                SelectionChanged="FamilyListView_SelectionChanged">
+                                SelectionChanged="FamilyListView_SelectionChanged"
+                                ToolTip="Hold shift and click on other columns to multi-sort"
+                                    >
                         <DataGrid.Columns>
                           <DataGridTextColumn Header="{x:Static properties:Resources.Names}"   Width="64" Binding="{Binding FirstName}"/>
                           <DataGridTextColumn Header="{x:Static properties:Resources.Surname}" Width="64" Binding="{Binding LastName}"/>
