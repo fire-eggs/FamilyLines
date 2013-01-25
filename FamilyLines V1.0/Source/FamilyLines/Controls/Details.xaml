@@ -2112,7 +2112,16 @@
                             <TextBlock Text="{Binding Path=Items.Count, ElementName=FamilyListView}" FontWeight="Normal" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
                             <TextBlock Text=")" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
                             </StackPanel>
-                            <Button x:Name="FamilyDataButton" Content="{x:Static properties:Resources.FamilyData}" Style="{DynamicResource BlackButtonStyle}" Click="FamiliyDataButton_Click" HorizontalAlignment="Right" Width="Auto" MinWidth="80"/>
+                            
+                            <Button
+                                x:Name="FamilyDataButton" 
+                                Content="{x:Static properties:Resources.FamilyData}" 
+                                Style="{DynamicResource BlackButtonStyle}" 
+                                Click="FamiliyDataButton_Click" 
+                                HorizontalAlignment="Right" 
+                                Width="Auto" 
+                                MinWidth="80"
+                                    />
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Top">
                             <Label Margin="0,0,5,5" Content="{x:Static properties:Resources.Filter}" VerticalAlignment="Center"/>
@@ -2130,7 +2139,7 @@
                                 SelectionMode="Single"
                                 AutoGenerateColumns="False"
                                 SelectionChanged="FamilyListView_SelectionChanged"
-                                ToolTip="Hold shift and click on other columns to multi-sort"
+                                ToolTip="{x:Static properties:Resources.FamilyListViewToolTip}"
                                     >
                         <DataGrid.Columns>
                           <DataGridTextColumn Header="{x:Static properties:Resources.Names}"   Width="64" Binding="{Binding FirstName}"/>
