@@ -133,7 +133,7 @@
     <value>*.*</value>
   </data>
   <data name="AllFiles" xml:space="preserve">
-    <value>All Files (*.*)</value>
+    <value>Все файлы (*.*)</value>
   </data>
   <data name="DefaultFamilyxExtension" xml:space="preserve">
     <value>.familyx</value>
@@ -142,31 +142,31 @@
     <value>.ged</value>
   </data>
   <data name="DefaultStory" xml:space="preserve">
-    <value>Document information here.</value>
+    <value>Информация документа здесь.</value>
   </data>
   <data name="DefaultXpsExtension" xml:space="preserve">
     <value>.xps</value>
   </data>
   <data name="Export" xml:space="preserve">
-    <value>Export</value>
+    <value>Экспортировать</value>
   </data>
   <data name="FamilyxFiles" xml:space="preserve">
-    <value>Family.Show 4.0 Files (*.familyx)</value>
+    <value>Файлы Family.Show 4.0 (*.familyx)</value>
   </data>
   <data name="GedcomExtension" xml:space="preserve">
     <value>*.ged</value>
   </data>
   <data name="GedcomFailed" xml:space="preserve">
-    <value>Import Failed</value>
+    <value>Импортирование не удалось</value>
   </data>
   <data name="GedcomFailedMessage" xml:space="preserve">
-    <value>The GEDCOM file could not be imported.</value>
+    <value>Этот файл GEDCOM импортировать ме удалось.</value>
   </data>
   <data name="GedcomFiles" xml:space="preserve">
-    <value>GEDCOM Files (*.ged)</value>
+    <value>Файлы GEDCOM (*.ged)</value>
   </data>
   <data name="HeaderImport" xml:space="preserve">
-    <value>Import</value>
+    <value>Импорт</value>
   </data>
   <data name="JpegExtension" xml:space="preserve">
     <value>*.jpg</value>
@@ -175,25 +175,25 @@
     <value>JPEG File Interchange Format (*.jpg)</value>
   </data>
   <data name="NotImplemented" xml:space="preserve">
-    <value>The method or operation is not implemented.</value>
+    <value>Метода или операция не назначена.</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Сохранить</value>
   </data>
   <data name="Person" xml:space="preserve">
-    <value>Person</value>
+    <value>Человек</value>
   </data>
   <data name="NotSavedMessage" xml:space="preserve">
-    <value>Do you want to save changes to the current family?</value>
+    <value>Вы хотите сохранить изменения текущий семьи?</value>
   </data>
   <data name="ConfirmDeletePerson" xml:space="preserve">
-    <value>Do you want to delete this person?</value>
+    <value>Вы действительно хотите удалить этого человека?</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Открыть</value>
   </data>
   <data name="SaveAs" xml:space="preserve">
-    <value>Save As</value>
+    <value>Сохранить как</value>
   </data>
   <data name="StoryFontFamily" xml:space="preserve">
     <value>Segoe UI</value>
@@ -214,13 +214,13 @@
     <value>*.familyx</value>
   </data>
   <data name="ConfirmDeleteRelationship" xml:space="preserve">
-    <value>Do you want to remove this relationship?</value>
+    <value>Вы действительно хотите удалить эту связь?</value>
   </data>
   <data name="Relationship" xml:space="preserve">
-    <value>Relationship</value>
+    <value>Взаимоотношение</value>
   </data>
   <data name="Merge" xml:space="preserve">
-    <value>Merge</value>
+    <value>Объединить</value>
   </data>
   <data name="DefaulthtmlExtension" xml:space="preserve">
     <value>.html</value>
@@ -229,34 +229,34 @@
     <value>*.html</value>
   </data>
   <data name="htmlFiles" xml:space="preserve">
-    <value>Hyper Text Markup Language Files (*.html)</value>
+    <value>Файлы Hyper Text Markup Language (*.html)</value>
   </data>
   <data name="Link" xml:space="preserve">
-    <value>Link</value>
+    <value>Ссылка</value>
   </data>
   <data name="LinkFailed" xml:space="preserve">
-    <value>Link Failed</value>
+    <value>Не удалось соединить</value>
   </data>
   <data name="LinkAddMessage" xml:space="preserve">
-    <value>The selected file does not already exist in this familyx file.  Add the file instead.</value>
+    <value>Выбранный файл не существует в этом файле familyx. Добавьте файл вместо этого.</value>
   </data>
   <data name="Unsupported" xml:space="preserve">
-    <value>Unsupported Format</value>
+    <value>Неподдерживаемый формат</value>
   </data>
   <data name="UnsupportedPhotoMessage" xml:space="preserve">
-    <value>Only *.jpg, *.jpeg, *.png, *.tif, *.tiff or *.gif image formats are supported.</value>
+    <value>Только *.jpg, *.jpeg, *.png, *.tif, *.tiff or *.gif форматы изображение поддерживаются.</value>
   </data>
   <data name="NoMap" xml:space="preserve">
-    <value>Map</value>
+    <value>Карта</value>
   </data>
   <data name="ExportResult" xml:space="preserve">
-    <value>Export Result</value>
+    <value>Экспортировать результат</value>
   </data>
   <data name="PlacesMessage" xml:space="preserve">
-    <value>Do you want to view the file in the default map viewer?</value>
+    <value>Вы хотите просмотреть файл в вашей программе для просмотра карт по умолчанию?</value>
   </data>
   <data name="SourcesExportMessage" xml:space="preserve">
-    <value>Do you want to view the file in the default web browser?</value>
+    <value>Вы хотите просмотреть файл в вашем веб-браузере по умолчанию?</value>
   </data>
   <data name="DefaultkmlExtension" xml:space="preserve">
     <value>.kml</value>
@@ -268,754 +268,754 @@
     <value>Keyhole Markup Language (*.kml)</value>
   </data>
   <data name="ConfirmDeleteSource" xml:space="preserve">
-    <value>Do you want to remove this source?</value>
+    <value>Вы действительно хотите удалить этот источник?</value>
   </data>
   <data name="Source" xml:space="preserve">
-    <value>Source</value>
+    <value>Источник</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Ошибка</value>
   </data>
   <data name="AttachmentExists" xml:space="preserve">
-    <value>This file is already attached to this person.</value>
+    <value>Этот файл уже приклеплен к этому человеку.</value>
   </data>
   <data name="ConfirmDeleteAttachment" xml:space="preserve">
-    <value>Do you want to remove this attachment?</value>
+    <value>Вы действительно хотите удалить это прикрепление?</value>
   </data>
   <data name="Attachment" xml:space="preserve">
-    <value>Attachment</value>
+    <value>Прикрепление</value>
   </data>
   <data name="UnsupportedAttachmentMessage" xml:space="preserve">
-    <value>Please consult the help file for a complete list of supported attachment formats.</value>
+    <value>Пожалуйста обратитесь к файлу помощи для получения полного списка поддерживаемых форматов креплении.</value>
   </data>
   <data name="GedcomExportFailedMessage" xml:space="preserve">
-    <value>The familyx file could not be exported to GEDCOM.</value>
+    <value>Этот файл familyx не может быть экспортирован в GEDCOM.</value>
   </data>
   <data name="GedcomExportSucessfulMessage" xml:space="preserve">
-    <value>The familyx file was sucessfully exported to GEDCOM.</value>
+    <value>Этот файл familyx был успешно экспортируется в GEDCOM.</value>
   </data>
   <data name="PhotoExistsMessage" xml:space="preserve">
-    <value>This photo is already attached to this person.</value>
+    <value>Эта фотография уже прикреплена к этому человеку.</value>
   </data>
   <data name="ConfirmDeleteRepository" xml:space="preserve">
-    <value>Do you want to remove this repository?</value>
+    <value>Вы действительно хотите удалить эту репозиторию?</value>
   </data>
   <data name="Repository" xml:space="preserve">
-    <value>Repository</value>
+    <value>Репозитория</value>
   </data>
   <data name="InvalidURL" xml:space="preserve">
-    <value>The link is not a valid URL.</value>
+    <value>Ссылка не корректная</value>
   </data>
   <data name="ConfirmDeletePhoto" xml:space="preserve">
-    <value>Do you want to remove this photo?</value>
+    <value>Вы действительно хотите удалить эту фотографию?</value>
   </data>
   <data name="Photo" xml:space="preserve">
-    <value>Photo</value>
+    <value>Фото</value>
   </data>
   <data name="SelectPersonFirstMessage" xml:space="preserve">
-    <value>Select a person from the list first.</value>
+    <value>Вначале выберите имя из списка.</value>
   </data>
   <data name="AttachmentExtension" xml:space="preserve">
     <value>*.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.odp; *.odt; *.ods; *.xps; *.htm; *.html; *.pdf; *.txt; *.kml; *.kmz; *.jpeg; *.jpg; *.png; *.rtf</value>
   </data>
   <data name="AttachmentFiles" xml:space="preserve">
-    <value>Attachment Files (*.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.odp; *.odt; *.ods; *.xps; *.htm; *.html; *.pdf; *.txt; *.kml; *.kmz; *.jpeg; *.jpg; *.png; *.rtf)</value>
+    <value>Фаилы прикрепление (*.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.odp; *.odt; *.ods; *.xps; *.htm; *.html; *.pdf; *.txt; *.kml; *.kmz; *.jpeg; *.jpg; *.png; *.rtf)</value>
   </data>
   <data name="ImageExtension" xml:space="preserve">
     <value>*.jpeg; *.jpg; *.png; *.tif; *.tiff; *.gif</value>
   </data>
   <data name="ImageFiles" xml:space="preserve">
-    <value>Image Files (*.jpeg; *.jpg; *.png; *.tif; *.tiff; *.gif)</value>
+    <value>Файлы изображение (*.jpeg; *.jpg; *.png; *.tif; *.tiff; *.gif)</value>
   </data>
   <data name="ClearRecentFilesMenu" xml:space="preserve">
-    <value>Clear recent file list</value>
+    <value>Очистить список последних файлов</value>
   </data>
   <data name="ExportingStatus" xml:space="preserve">
-    <value>(Exporting)</value>
+    <value>(Экспортирование)</value>
   </data>
   <data name="FamilyShow" xml:space="preserve">
     <value>Family Lines</value>
   </data>
   <data name="GedcomMenu" xml:space="preserve">
-    <value>Import GEDCOM...</value>
+    <value>Импортировать GEDCOM ...</value>
   </data>
   <data name="HelpFileName" xml:space="preserve">
-    <value>help.chm</value>
+    <value>Помощь.chm</value>
   </data>
   <data name="http" xml:space="preserve">
     <value>http://</value>
   </data>
   <data name="ImportingStatus" xml:space="preserve">
-    <value>(Importing)</value>
+    <value>(импортирование)</value>
   </data>
   <data name="LoadingStatus" xml:space="preserve">
-    <value>(Loading)</value>
+    <value>(Загрузка)</value>
   </data>
   <data name="MergeExistingError" xml:space="preserve">
-    <value>An error occured while updating information between duplicate people.</value>
+    <value>Произошла ошибка при обновлении информации между дубликатными людьми.</value>
   </data>
   <data name="MergeFailed1" xml:space="preserve">
-    <value>Merge failed.  No changes have been made.</value>
+    <value>Объединение не удалось. Никакие изменения не были сделаны.</value>
   </data>
   <data name="MergeFailed2" xml:space="preserve">
-    <value>Merge failed.  Please reload your original file.</value>
+    <value>Объединение не удалось. Пожалуйста, перезагрузите ваш исходный файл.</value>
   </data>
   <data name="MergeMenu" xml:space="preserve">
-    <value>Merge...</value>
+    <value>Объединение...</value>
   </data>
   <data name="MergingStatus" xml:space="preserve">
-    <value>(Merging)</value>
+    <value>(Объединение)</value>
   </data>
   <data name="NoExistingAttachments" xml:space="preserve">
-    <value>There are no existing attachments.</value>
+    <value>Существующие вложения отсутствуют.</value>
   </data>
   <data name="NotSupportedExtension1" xml:space="preserve">
-    <value>The extension *</value>
+    <value>Расширение *</value>
   </data>
   <data name="NotSupportedExtension2" xml:space="preserve">
-    <value>is not supported.</value>
+    <value>не поддерживается.</value>
   </data>
   <data name="OpenMenu" xml:space="preserve">
-    <value>Open...</value>
+    <value>Открыть...</value>
   </data>
   <data name="ReportHeader1" xml:space="preserve">
-    <value>Family of</value>
+    <value>Семья</value>
   </data>
   <data name="ReportHeader2" xml:space="preserve">
-    <value>in</value>
+    <value>в</value>
   </data>
   <data name="SaveBeforeMerge" xml:space="preserve">
-    <value>Do you want to save changes to the current family before merging?</value>
+    <value>Вы хотите сохранить изменения текущей семьи перед объединением?</value>
   </data>
   <data name="UnableDeleteRepository1" xml:space="preserve">
-    <value>Unable to delete repository</value>
+    <value>Не удается удалить репозиторию</value>
   </data>
   <data name="UnableDeleteRepository2" xml:space="preserve">
-    <value>as this repository is linked to sources.</value>
+    <value>поскольку эта репозитория связана с источниками.</value>
   </data>
   <data name="UnableDeleteSource1" xml:space="preserve">
-    <value>Unable to delete source</value>
+    <value>Не удается удалить источник</value>
   </data>
   <data name="UnableDeleteSource2" xml:space="preserve">
-    <value>as this source is linked to citations.</value>
+    <value>так как этот источник связан с ссылками.</value>
   </data>
   <data name="UnsavedStatus" xml:space="preserve">
-    <value>(Unsaved)</value>
+    <value>(Не Сохранено)</value>
   </data>
   <data name="www" xml:space="preserve">
     <value>www.</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>en-US</value>
+    <value>ru-RU</value>
   </data>
   <data name="NewMenu" xml:space="preserve">
-    <value>New</value>
+    <value>Новое...</value>
   </data>
   <data name="ExportGedcomMenu" xml:space="preserve">
-    <value>Export GEDCOM...</value>
+    <value>Экспортировать GEDCOM...</value>
   </data>
   <data name="ExportHtmlMenu" xml:space="preserve">
-    <value>Export HTML...</value>
+    <value>Экспортировать HTML...</value>
   </data>
   <data name="ExportPlacesMenu" xml:space="preserve">
-    <value>Export Places...</value>
+    <value>Экспортировать места...</value>
   </data>
   <data name="SaveAsMenu" xml:space="preserve">
-    <value>Save As...</value>
+    <value>Сохранить как...</value>
   </data>
   <data name="AttachmentsMenu" xml:space="preserve">
-    <value>Attachments</value>
+    <value>Прикрепление</value>
   </data>
   <data name="ContentsMenu" xml:space="preserve">
-    <value>Contents</value>
+    <value>Содержимое</value>
   </data>
   <data name="FullScreen" xml:space="preserve">
-    <value>Full screen</value>
+    <value>Полный экран</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>Help</value>
+    <value>Помощь</value>
   </data>
   <data name="PhotosMenu" xml:space="preserve">
-    <value>Photos</value>
+    <value>Фотографии</value>
   </data>
   <data name="Print" xml:space="preserve">
-    <value>Print</value>
+    <value>Распечатать</value>
   </data>
   <data name="PrintMenu" xml:space="preserve">
-    <value>Print...</value>
+    <value>Распечатать...</value>
   </data>
   <data name="PrintXPSMenu" xml:space="preserve">
-    <value>Print tree as XPS...</value>
+    <value>Распечатать дерево как XPS...</value>
   </data>
   <data name="RepositoriesMenu" xml:space="preserve">
-    <value>Repositories</value>
+    <value>Репозиториев</value>
   </data>
   <data name="SourcesMenu" xml:space="preserve">
-    <value>Sources</value>
+    <value>Источники</value>
   </data>
   <data name="StatisticsMenu" xml:space="preserve">
-    <value>Statistics</value>
+    <value>Статистика</value>
   </data>
   <data name="StoriesMenu" xml:space="preserve">
-    <value>Stories</value>
+    <value>Истории</value>
   </data>
   <data name="LanguageMenu" xml:space="preserve">
-    <value>Language...</value>
+    <value>Язык...</value>
   </data>
   <data name="ActualText" xml:space="preserve">
     <value>Actual Text</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Добавить</value>
   </data>
   <data name="AddAFamilyMember" xml:space="preserve">
-    <value>Add a Family Member</value>
+    <value>Добавить члена семьи</value>
   </data>
   <data name="AddFather" xml:space="preserve">
-    <value>Add Father</value>
+    <value>Добавить отца</value>
   </data>
   <data name="Attachments" xml:space="preserve">
-    <value>Attachments</value>
+    <value>Прикрепление</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>Back</value>
+    <value>Назад</value>
   </data>
   <data name="BirthPlace" xml:space="preserve">
-    <value>Place of Birth</value>
+    <value>Место рождения</value>
   </data>
   <data name="Born" xml:space="preserve">
-    <value>Born</value>
+    <value>Родился/Родилась</value>
   </data>
   <data name="BurialDate" xml:space="preserve">
-    <value>Date of Burial</value>
+    <value>Дата похороны</value>
   </data>
   <data name="BurialPlace" xml:space="preserve">
-    <value>Place of Burial</value>
+    <value>Место Похороны</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отменить</value>
   </data>
   <data name="Citations" xml:space="preserve">
-    <value>Citations</value>
+    <value>Ссылки</value>
   </data>
   <data name="ConnectAFamilyMemberAs" xml:space="preserve">
-    <value>Connect a Family Member as</value>
+    <value>Связать члена семьи как</value>
   </data>
   <data name="CreateRelationship" xml:space="preserve">
-    <value>Create Relationship</value>
+    <value>Создать связь</value>
   </data>
   <data name="CremationDate" xml:space="preserve">
-    <value>Date of Cremation</value>
+    <value>Дата Кремации</value>
   </data>
   <data name="CremationPlace" xml:space="preserve">
-    <value>Place of Cremation</value>
+    <value>Место кремации</value>
   </data>
   <data name="DateOfBirth" xml:space="preserve">
-    <value>Date of Birth</value>
+    <value>Дата рождения</value>
   </data>
   <data name="DateOfDeath" xml:space="preserve">
-    <value>Date of Death</value>
+    <value>Дата смерти</value>
   </data>
   <data name="DeathPlace" xml:space="preserve">
-    <value>Place of Death</value>
+    <value>Место смерти</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Удалить</value>
   </data>
   <data name="Details" xml:space="preserve">
-    <value>Details</value>
+    <value>Детали</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Done</value>
+    <value>Завершено</value>
   </data>
   <data name="EditAttachments" xml:space="preserve">
-    <value>Edit Attachments</value>
+    <value>Редактировать вложения</value>
   </data>
   <data name="EditCitation" xml:space="preserve">
-    <value>Edit Citations</value>
+    <value>Редактировать ссылки</value>
   </data>
   <data name="EditDetails" xml:space="preserve">
-    <value>Edit Details</value>
+    <value>Редактировать детали</value>
   </data>
   <data name="EditMoreDetails" xml:space="preserve">
-    <value>Edit More Details</value>
+    <value>Редактировать больше детелей</value>
   </data>
   <data name="EditPerson" xml:space="preserve">
-    <value>Edit Person</value>
+    <value>Редактировать человека</value>
   </data>
   <data name="EditRelationships" xml:space="preserve">
-    <value>Edit Relationships</value>
+    <value>Редактировать связи</value>
   </data>
   <data name="Education" xml:space="preserve">
-    <value>Education</value>
+    <value>Образование</value>
   </data>
   <data name="FamilyData" xml:space="preserve">
-    <value>Family Data</value>
+    <value>Данные семьи</value>
   </data>
   <data name="FamilySpace" xml:space="preserve">
-    <value>Family </value>
+    <value>Семья</value>
   </data>
   <data name="Female" xml:space="preserve">
-    <value>Female</value>
+    <value>Женский</value>
   </data>
   <data name="Filter" xml:space="preserve">
-    <value>Filter</value>
+    <value>Фильтр</value>
   </data>
   <data name="FilterColon" xml:space="preserve">
-    <value>Filter: </value>
+    <value>Фильтр:</value>
   </data>
   <data name="From" xml:space="preserve">
-    <value>From</value>
+    <value>Из</value>
   </data>
   <data name="Gender" xml:space="preserve">
-    <value>Gender</value>
+    <value>Пол</value>
   </data>
   <data name="Living" xml:space="preserve">
-    <value>Living</value>
+    <value>Живой</value>
   </data>
   <data name="Male" xml:space="preserve">
-    <value>Male</value>
+    <value>Мужской</value>
   </data>
   <data name="MapToolTip" xml:space="preserve">
-    <value>Search for a map of this location in your default browser.</value>
+    <value>Искать это место на карте в вашем браузере.</value>
   </data>
   <data name="More" xml:space="preserve">
-    <value>More</value>
+    <value>Еще</value>
   </data>
   <data name="NameAge" xml:space="preserve">
-    <value>Name &amp; Age</value>
+    <value>Имя и возраст</value>
   </data>
   <data name="Names" xml:space="preserve">
-    <value>Name(s)</value>
+    <value>Названия</value>
   </data>
   <data name="NewHeader" xml:space="preserve">
-    <value>Add the first family member</value>
+    <value>Добавить первого члена семьи</value>
   </data>
   <data name="None" xml:space="preserve">
-    <value>None</value>
+    <value>Нисколько</value>
   </data>
   <data name="Note" xml:space="preserve">
-    <value>Note</value>
+    <value>Записка</value>
   </data>
   <data name="Occupation" xml:space="preserve">
-    <value>Occupation</value>
+    <value>Оккупация</value>
   </data>
   <data name="OfSpace" xml:space="preserve">
-    <value> of </value>
+    <value>из</value>
   </data>
   <data name="OpenRecent" xml:space="preserve">
-    <value>Open Recent</value>
+    <value>Открыть недавние</value>
   </data>
   <data name="Parents" xml:space="preserve">
-    <value>Parents</value>
+    <value>Родители</value>
   </data>
   <data name="PhotoStory" xml:space="preserve">
-    <value>Photos &amp; History</value>
+    <value>Фотографии и история</value>
   </data>
   <data name="Place" xml:space="preserve">
-    <value>Place</value>
+    <value>Место</value>
   </data>
   <data name="Relationships" xml:space="preserve">
-    <value>Relationships</value>
+    <value>Взаимоотношений</value>
   </data>
   <data name="Religion" xml:space="preserve">
-    <value>Religion</value>
+    <value>Религия</value>
   </data>
   <data name="RemoveParent" xml:space="preserve">
-    <value>Remove parent</value>
+    <value>Удалить родителя</value>
   </data>
   <data name="RemoveSibling" xml:space="preserve">
-    <value>Remove sibling</value>
+    <value>Удалить брата/сестру</value>
   </data>
   <data name="RemoveSpouse" xml:space="preserve">
-    <value>Remove spouse</value>
+    <value>Удалить супруга</value>
   </data>
   <data name="Restriction" xml:space="preserve">
-    <value>Restriction</value>
+    <value>Ограничение</value>
   </data>
   <data name="Siblings" xml:space="preserve">
-    <value>Siblings</value>
+    <value>Братья и сестры</value>
   </data>
   <data name="SpousePartner" xml:space="preserve">
-    <value>Spouse/Partner</value>
+    <value>Супруг/Партнер</value>
   </data>
   <data name="SpousePartnerCitation" xml:space="preserve">
-    <value>Spouse/Partner Citations</value>
+    <value>Ссылки Супруг/Партнер</value>
   </data>
   <data name="Suffix" xml:space="preserve">
-    <value>Suffix</value>
+    <value>Суффикс</value>
   </data>
   <data name="Surname" xml:space="preserve">
-    <value>Last Name</value>
+    <value>Фамилия</value>
   </data>
   <data name="ThemesHeader" xml:space="preserve">
-    <value>Themes</value>
+    <value>Тема</value>
   </data>
   <data name="To" xml:space="preserve">
-    <value>To</value>
+    <value>к</value>
   </data>
   <data name="ToSpace" xml:space="preserve">
-    <value>to </value>
+    <value>к</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Version </value>
+    <value>Версия</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome</value>
+    <value>Приветствие</value>
   </data>
   <data name="WhoAreTheParents" xml:space="preserve">
-    <value>Who are the parents?</value>
+    <value>Кто родители?</value>
   </data>
   <data name="AboutMenu" xml:space="preserve">
-    <value>About Family Lines</value>
+    <value>О программе</value>
   </data>
   <data name="Time" xml:space="preserve">
-    <value>Time</value>
+    <value>Время</value>
   </data>
   <data name="TagsColon" xml:space="preserve">
-    <value>Tags:</value>
+    <value>Теги:</value>
   </data>
   <data name="View" xml:space="preserve">
-    <value>View</value>
+    <value>Вид</value>
   </data>
   <data name="ZoomLabel" xml:space="preserve">
-    <value>Zoom</value>
+    <value>Увеличить</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>About</value>
+    <value>О</value>
   </data>
   <data name="Age" xml:space="preserve">
-    <value>Age</value>
+    <value>Возраст</value>
   </data>
   <data name="AgeDistributions" xml:space="preserve">
-    <value>Age Distributions</value>
+    <value>Распределения возрастов</value>
   </data>
   <data name="AllPeople" xml:space="preserve">
-    <value>All people</value>
+    <value>Все люди</value>
   </data>
   <data name="AncestralAnd" xml:space="preserve">
-    <value> ancestral and </value>
+    <value>наследственные и</value>
   </data>
   <data name="BirthDate" xml:space="preserve">
-    <value>Birth Date</value>
+    <value>Дата рождение</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>Продолжить</value>
   </data>
   <data name="Copyright" xml:space="preserve">
-    <value>Copyright © 2013</value>
+    <value>Авторское право © 2013</value>
   </data>
   <data name="CurrentPerson" xml:space="preserve">
-    <value>Current person </value>
+    <value>Текущий человек</value>
   </data>
   <data name="CurrentPersonWith" xml:space="preserve">
-    <value>Current person with </value>
+    <value>Текущий человек с</value>
   </data>
   <data name="DataQualityColon" xml:space="preserve">
-    <value>Data Quality:</value>
+    <value>Качество данных:</value>
   </data>
   <data name="DataStatusColon" xml:space="preserve">
-    <value>Data Status:</value>
+    <value>Статус данных:</value>
   </data>
   <data name="DeathDate" xml:space="preserve">
-    <value>Death Date</value>
+    <value>Дата смерти</value>
   </data>
   <data name="DescendantGenerations" xml:space="preserve">
-    <value>descendant generations</value>
+    <value>Потомки поколения</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Редактировать</value>
   </data>
   <data name="ExportHtml" xml:space="preserve">
-    <value>Export HTML</value>
+    <value>Экспортировать HTML</value>
   </data>
   <data name="ExportSourcesAndRepositories" xml:space="preserve">
-    <value>Export sources and repositories</value>
+    <value>Экспортировать источники и репозитории</value>
   </data>
   <data name="GenderDistributions" xml:space="preserve">
-    <value>Gender Distributions</value>
+    <value>Распределение пола</value>
   </data>
   <data name="HideLivingPeople" xml:space="preserve">
-    <value>Hide living people</value>
+    <value>Скрыть живых людей</value>
   </data>
   <data name="ImmediateRelatives" xml:space="preserve">
-    <value>Immediate relatives </value>
+    <value>непосредственныe родственники</value>
   </data>
   <data name="LivingStatus" xml:space="preserve">
-    <value>Living Status</value>
+    <value>Состояние жизни</value>
   </data>
   <data name="Localization" xml:space="preserve">
-    <value>Localization</value>
+    <value>Локализация</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Имя</value>
   </data>
   <data name="OK" xml:space="preserve">
-    <value>OK</value>
+    <value>Ладно</value>
   </data>
   <data name="Statistics" xml:space="preserve">
-    <value>Statistics</value>
+    <value>Статистика</value>
   </data>
   <data name="Stories" xml:space="preserve">
-    <value>Stories</value>
+    <value>Истории</value>
   </data>
   <data name="SummaryOfData" xml:space="preserve">
-    <value>Summary of Data</value>
+    <value>Сводка данных</value>
   </data>
   <data name="SummaryOfEvents" xml:space="preserve">
-    <value>Summary of Events</value>
+    <value>Сводка событий</value>
   </data>
   <data name="SummaryOfMedia" xml:space="preserve">
-    <value>Summary of Media</value>
+    <value>Обзор медии</value>
   </data>
   <data name="SummaryOfNames" xml:space="preserve">
-    <value>Summary of Names</value>
+    <value>Обзор имен</value>
   </data>
   <data name="UTF1" xml:space="preserve">
-    <value>FamilyLines has full support for the UTF-8 encoding format.  Unfortunately most GEDCOM files are not encoded in this format so during import, FamilyLines removes characters which it may not be able to display. If you use a language which has extended character sets, some information may be lost.</value>
+    <value>FamilyLines имеет полную поддержку формата кодирования UTF-8 . К сожалению, большинство GEDCOM файлы не закодированы в этом формате, поэтому во время импорта, FamilyLines удаляет символы которые он вероятно не сможет показать. Если вы используете язык который содержит расширенный набор символов, то некоторые могут быть потеряны.</value>
   </data>
   <data name="UTF2" xml:space="preserve">
-    <value>However it is possible to convert files to UTF-8 encoding using programs such as Notepad.  Once your file is correctly encoded, check 'Enable UTF-8 support' for full extended character support.</value>
+    <value>Тем не менее возможно конвертировать файлы в UTF-8 кодирование используя программы как Блокнот. Как только ваш файл закодирован правильно, убедитесь что "Включить поддержку UTF-8» разрешено для полной расширенной поддержки символов.</value>
   </data>
   <data name="Address" xml:space="preserve">
-    <value>Address</value>
+    <value>Адрес</value>
   </data>
   <data name="Author" xml:space="preserve">
-    <value>Author</value>
+    <value>Автор</value>
   </data>
   <data name="BracketRepositoryNameBracket" xml:space="preserve">
-    <value>(Repository Name)</value>
+    <value>(Имя хранилище)</value>
   </data>
   <data name="ChooseWhoToSaveColon" xml:space="preserve">
-    <value>Choose who to save:</value>
+    <value>Выбери что сохранить:</value>
   </data>
   <data name="Contains" xml:space="preserve">
-    <value>contains</value>
+    <value>Содержит</value>
   </data>
   <data name="CurrentPersonAndImmediateRelatives" xml:space="preserve">
-    <value>Current person and immediate relatives</value>
+    <value>Текущий человек и непосредственные родственники</value>
   </data>
   <data name="Died" xml:space="preserve">
-    <value>Died</value>
+    <value>Умерший</value>
   </data>
   <data name="IfPersons" xml:space="preserve">
-    <value>If person's</value>
+    <value>Если человека</value>
   </data>
   <data name="PrivacyTooltip" xml:space="preserve">
-    <value>Prevent details of living people being exported.</value>
+    <value>Предотвратить экспортирование подробности жизни людей.</value>
   </data>
   <data name="Publisher" xml:space="preserve">
-    <value>Publisher</value>
+    <value>Издатель</value>
   </data>
   <data name="Repositories" xml:space="preserve">
-    <value>Repositories</value>
+    <value>Репозиториев</value>
   </data>
   <data name="RepositoryList" xml:space="preserve">
-    <value>Repository List</value>
+    <value>Список репозиториев</value>
   </data>
   <data name="SourceList" xml:space="preserve">
-    <value>Source List</value>
+    <value>Список источников</value>
   </data>
   <data name="Sources" xml:space="preserve">
-    <value>Sources</value>
+    <value>Источники</value>
   </data>
   <data name="SourcesExportTooltip" xml:space="preserve">
-    <value>Allow sources and repository information to be exported.</value>
+    <value>Разрешить экспортирование источников и репозитории информации.</value>
   </data>
   <data name="AddNewImage" xml:space="preserve">
-    <value>Add new image...</value>
+    <value>Добавить новую картину</value>
   </data>
   <data name="DropPhotosIntoThisBox" xml:space="preserve">
-    <value>Drop photos into this box.</value>
+    <value>Забрасывайте фотографии в этот ящичек.</value>
   </data>
   <data name="LinkExistingImage" xml:space="preserve">
-    <value>Link existing image...</value>
+    <value>Соединенить существующие изображение...</value>
   </data>
   <data name="NoPrimary" xml:space="preserve">
-    <value>No primary</value>
+    <value>Нет основного</value>
   </data>
   <data name="SetAsPrimary" xml:space="preserve">
-    <value>Set as primary</value>
+    <value>Установить как основной</value>
   </data>
   <data name="Story" xml:space="preserve">
-    <value>Story</value>
+    <value>История</value>
   </data>
   <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+    <value>Инструменты</value>
   </data>
   <data name="AppendStar" xml:space="preserve">
-    <value>Append * to imported people's names.</value>
+    <value>Прибавить * к именам импортированным людям.</value>
   </data>
   <data name="ChooseTheLanguageColon" xml:space="preserve">
-    <value>Choose the language:</value>
+    <value>Выбрать язык:</value>
   </data>
   <data name="ClickContinue" xml:space="preserve">
-    <value>Click to 'Continue' to begin:</value>
+    <value>Нажмите "Далее" чтобы начать:</value>
   </data>
   <data name="ClickFinish" xml:space="preserve">
-    <value>Click 'Finish' to save and view your file:</value>
+    <value>Нажмите "Готово" для сохранения и просмотра файлов:</value>
   </data>
   <data name="Danish" xml:space="preserve">
-    <value>Danish</value>
+    <value>Датский</value>
   </data>
   <data name="ExistingCitation" xml:space="preserve">
-    <value>Existing Citation</value>
+    <value>Существующие ссылки</value>
   </data>
   <data name="ExistingInformation" xml:space="preserve">
-    <value>Existing Information</value>
+    <value>Существующая информация</value>
   </data>
   <data name="Field" xml:space="preserve">
-    <value>Field</value>
+    <value>Поле</value>
   </data>
   <data name="Finish" xml:space="preserve">
-    <value>Finish</value>
+    <value>Закончить</value>
   </data>
   <data name="LanguageChangeMessage" xml:space="preserve">
-    <value>The language change will take effect the next time the application starts.</value>
+    <value>Изменение языка вступит в силу при следующем запуске приложения.</value>
   </data>
   <data name="LanguageHeader" xml:space="preserve">
-    <value>Language</value>
+    <value>Язык</value>
   </data>
   <data name="MergeDuplicates" xml:space="preserve">
-    <value>Merge Duplicates</value>
+    <value>Объединить дубликаты</value>
   </data>
   <data name="MergeDuplicatesMessage1" xml:space="preserve">
-    <value>Some people in the existing tree were also in the file which was merged.</value>
+    <value>Некоторые люди в существующих деревьях были также в файле который был объединен.</value>
   </data>
   <data name="MergeDuplicatesMessage2" xml:space="preserve">
-    <value>In the next screen, you can update existing people where there is new or conflicting information.</value>
+    <value>На следующем экране вы можете обновить существующих людей где есть новая или конфликтующая информация.</value>
   </data>
   <data name="NewCitation" xml:space="preserve">
-    <value>New Citation</value>
+    <value>Новая Ссылка</value>
   </data>
   <data name="NewConflicting" xml:space="preserve">
-    <value>New or Conflicting Information</value>
+    <value>Новая или конфликтующая информация.</value>
   </data>
   <data name="Options" xml:space="preserve">
-    <value>Options</value>
+    <value>Опции</value>
   </data>
   <data name="Skip" xml:space="preserve">
-    <value>Skip</value>
+    <value>Пропустить</value>
   </data>
   <data name="Summary" xml:space="preserve">
     <value>Summary</value>
   </data>
   <data name="Uncited" xml:space="preserve">
-    <value>Uncited</value>
+    <value>Без ссылки</value>
   </data>
   <data name="Unknown" xml:space="preserve">
-    <value>Unknown</value>
+    <value>Неизвестно</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>Update</value>
+    <value>Обновление</value>
   </data>
   <data name="UpdateQuestion" xml:space="preserve">
-    <value>Update?</value>
+    <value>Обновить?</value>
   </data>
   <data name="Adopted" xml:space="preserve">
-    <value>Adopted</value>
+    <value>Приемный</value>
   </data>
   <data name="Birth" xml:space="preserve">
-    <value>Birth</value>
+    <value>Рождение</value>
   </data>
   <data name="Brother" xml:space="preserve">
-    <value>Brother</value>
+    <value>Брата</value>
   </data>
   <data name="Burial" xml:space="preserve">
-    <value>Burial</value>
+    <value>Похороны</value>
   </data>
   <data name="ConnectFamilyMember" xml:space="preserve">
-    <value>Connect Family Member...</value>
+    <value>Связать члена семьи ...</value>
   </data>
   <data name="Cremation" xml:space="preserve">
-    <value>Cremation</value>
+    <value>Кремация</value>
   </data>
   <data name="Current" xml:space="preserve">
-    <value>Current</value>
+    <value>Текущий</value>
   </data>
   <data name="Daughter" xml:space="preserve">
-    <value>Daughter</value>
+    <value>Дочь</value>
   </data>
   <data name="Death" xml:space="preserve">
-    <value>Death</value>
+    <value>Смерть</value>
   </data>
   <data name="Divorce" xml:space="preserve">
-    <value>Divorce</value>
+    <value>Развод</value>
   </data>
   <data name="Father" xml:space="preserve">
-    <value>Father</value>
+    <value>Отца</value>
   </data>
   <data name="Former" xml:space="preserve">
-    <value>Former</value>
+    <value>Бывший</value>
   </data>
   <data name="Fostered" xml:space="preserve">
-    <value>Foster</value>
+    <value>Взлелеянный</value>
   </data>
   <data name="Locked" xml:space="preserve">
-    <value>Locked</value>
+    <value>Заблокировано</value>
   </data>
   <data name="Marriage" xml:space="preserve">
-    <value>Marriage</value>
+    <value>Брак</value>
   </data>
   <data name="Mother" xml:space="preserve">
-    <value>Mother</value>
+    <value>Мать</value>
   </data>
   <data name="Natural" xml:space="preserve">
-    <value>Natural</value>
+    <value>Натуральный</value>
   </data>
   <data name="Private" xml:space="preserve">
-    <value>Private</value>
+    <value>Частное</value>
   </data>
   <data name="Sister" xml:space="preserve">
-    <value>Sister</value>
+    <value>Сестру</value>
   </data>
   <data name="Son" xml:space="preserve">
-    <value>Son</value>
+    <value>Сына</value>
   </data>
   <data name="Spouse" xml:space="preserve">
-    <value>Spouse/Partner</value>
+    <value>Супругу/Партнера</value>
   </data>
   <data name="Unrelated" xml:space="preserve">
-    <value>Unrelated</value>
+    <value>Несвязно</value>
   </data>
   <data name="DataSize" xml:space="preserve">
-    <value>Data Size</value>
+    <value>Размер данных</value>
   </data>
   <data name="Deceased" xml:space="preserve">
-    <value>Deceased</value>
+    <value>Покойный</value>
   </data>
   <data name="Divorces" xml:space="preserve">
-    <value>Divorces</value>
+    <value>Разводы</value>
   </data>
   <data name="EarliestKnownEvent" xml:space="preserve">
-    <value>Earliest known event</value>
+    <value>Старейшие известные события</value>
   </data>
   <data name="FactsEvents" xml:space="preserve">
-    <value>Facts/Events</value>
+    <value>Факты/События</value>
   </data>
   <data name="LatestKnownEvent" xml:space="preserve">
-    <value>Latest known event</value>
+    <value>Самое последнее известное событие</value>
   </data>
   <data name="Marriages" xml:space="preserve">
-    <value>Marriages</value>
+    <value>Браки</value>
   </data>
   <data name="Notes" xml:space="preserve">
-    <value>Notes</value>
+    <value>Записки</value>
   </data>
   <data name="Photos" xml:space="preserve">
-    <value>Photos</value>
+    <value>Фотографии</value>
   </data>
   <data name="StatisticsReport" xml:space="preserve">
-    <value>Statistics Report</value>
+    <value>Отчет статистики</value>
   </data>
   <data name="StatisticsReportFor" xml:space="preserve">
-    <value>Statistics Report for</value>
+    <value>Отчет статистики для</value>
   </data>
   <data name="TopBoysNames" xml:space="preserve">
-    <value>Top boys names</value>
+    <value>Топ имена мальчиков</value>
   </data>
   <data name="TopGirlsNames" xml:space="preserve">
-    <value>Top girls names</value>
+    <value>Топ имена девочек</value>
   </data>
   <data name="TopSurnames" xml:space="preserve">
     <value>Top last names</value>
@@ -1024,79 +1024,79 @@
     <value>XML</value>
   </data>
   <data name="FamilyStatistics" xml:space="preserve">
-    <value>Family Statistics</value>
+    <value>Статистика семьи</value>
   </data>
   <data name="HasAttachments" xml:space="preserve">
-    <value>This person has attachments.</value>
+    <value>Этот человек имеет вложения.</value>
   </data>
   <data name="HasCitations" xml:space="preserve">
-    <value>This person has citations.</value>
+    <value>Этот человек имеет ссылки.</value>
   </data>
   <data name="HasNotes" xml:space="preserve">
-    <value>This person has a note.</value>
+    <value>Этот человек имеет записку.</value>
   </data>
   <data name="HasPhotos" xml:space="preserve">
-    <value>This person has photos.</value>
+    <value>Этот человек имеет фотографии.</value>
   </data>
   <data name="HasRestrictions" xml:space="preserve">
-    <value>This person has a restriction.</value>
+    <value>Этот человек имеет ограничение.</value>
   </data>
   <data name="HideAncestors" xml:space="preserve">
-    <value>Hide ancestors</value>
+    <value>Скрыть предков</value>
   </data>
   <data name="HideAuntsAndUncles" xml:space="preserve">
-    <value>Hide aunts and uncles</value>
+    <value>Скрыть дяди и тети</value>
   </data>
   <data name="HideCurrentSpouse" xml:space="preserve">
-    <value>Hide current spouse</value>
+    <value>Скрыть текущего супруга</value>
   </data>
   <data name="HideDates" xml:space="preserve">
-    <value>Hide dates</value>
+    <value>Скрыть даты</value>
   </data>
   <data name="HideDescendants" xml:space="preserve">
-    <value>Hide descendants</value>
+    <value>Скрыть потомков</value>
   </data>
   <data name="HideInLaws" xml:space="preserve">
-    <value>Hide in laws</value>
+    <value>Скрыть свекрови</value>
   </data>
   <data name="HidePreviousSpouses" xml:space="preserve">
-    <value>Hide previous spouses</value>
+    <value>Скрыть предыдущих супруг</value>
   </data>
   <data name="HideSiblings" xml:space="preserve">
-    <value>Hide siblings</value>
+    <value>Скрыть братьев и сестер</value>
   </data>
   <data name="ID" xml:space="preserve">
-    <value>ID</value>
+    <value>Идентификация</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Image</value>
+    <value>Изображение</value>
   </data>
   <data name="IsLivingQuestion" xml:space="preserve">
-    <value>Is Living?</value>
+    <value>В живых?</value>
   </data>
   <data name="ShowAllGenerations" xml:space="preserve">
-    <value>Show all generations</value>
+    <value>Показать всех поколений</value>
   </data>
   <data name="ShowBloodlines" xml:space="preserve">
-    <value>Show bloodlines</value>
+    <value>Показать родословных</value>
   </data>
   <data name="ShowGenerationOutline" xml:space="preserve">
-    <value>Show generation outline</value>
+    <value>Показать набросок поколений</value>
   </data>
   <data name="ShowImmediateFamilyOnly" xml:space="preserve">
-    <value>Show immediate family only</value>
+    <value>Показать только непосредственных родственников</value>
   </data>
   <data name="ShowPhotos" xml:space="preserve">
-    <value>Show photos</value>
+    <value>Показать фотографии</value>
   </data>
   <data name="Birthdays" xml:space="preserve">
-    <value>Birthdays</value>
+    <value>Дни рождения</value>
   </data>
   <data name="Surnames" xml:space="preserve">
-    <value>Last Names</value>
+    <value>Фамилии</value>
   </data>
   <data name="PrivateRecord" xml:space="preserve">
-    <value>Private Record</value>
+    <value>Личные данные</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="KennedySampleFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -1106,67 +1106,67 @@
     <value>..\Sample Files\Windsor.familyx;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DateCalculator" xml:space="preserve">
-    <value>Date Calculator</value>
+    <value>Калькулятор даты</value>
   </data>
   <data name="DateCalculatorMessage" xml:space="preserve">
-    <value>Use this tool to help with calculating dates from evidence you have collected.</value>
+    <value>Используйте этот инструмент чтобы помочь с расчетом даты из данных собранными вами.</value>
   </data>
   <data name="Year" xml:space="preserve">
-    <value>Year</value>
+    <value>Год</value>
   </data>
   <data name="AddOrSubtract" xml:space="preserve">
-    <value>Add or subtract</value>
+    <value>Прибавтиь или вычитать</value>
   </data>
   <data name="AgeBirthDeath" xml:space="preserve">
-    <value>Ages, Births &amp; Deaths</value>
+    <value>Возрасты, Рождении и Смерти</value>
   </data>
   <data name="Calculate" xml:space="preserve">
-    <value>Calculate</value>
+    <value>Вычислять</value>
   </data>
   <data name="DateCalculatorMenu" xml:space="preserve">
-    <value>Date Calculator</value>
+    <value>Калькулятор даты</value>
   </data>
   <data name="DateTo" xml:space="preserve">
-    <value>to</value>
+    <value>к</value>
   </data>
   <data name="days" xml:space="preserve">
-    <value>days</value>
+    <value>Дней</value>
   </data>
   <data name="months" xml:space="preserve">
-    <value>months</value>
+    <value>месяцев</value>
   </data>
   <data name="Subtract" xml:space="preserve">
-    <value>Subtract</value>
+    <value>Вычитать</value>
   </data>
   <data name="years" xml:space="preserve">
-    <value>years</value>
+    <value>лет</value>
   </data>
   <data name="Black" xml:space="preserve">
-    <value>Black</value>
+    <value>Черная</value>
   </data>
   <data name="Silver" xml:space="preserve">
-    <value>Silver</value>
+    <value>Серебряная</value>
   </data>
   <data name="StartANewFamilyTree" xml:space="preserve">
-    <value>Start a new family tree...</value>
+    <value>Начать новое семейное древо...</value>
   </data>
   <data name="Links" xml:space="preserve">
-    <value>Links</value>
+    <value>Ссылки</value>
   </data>
   <data name="HideControls" xml:space="preserve">
-    <value>Hide diagram controls</value>
+    <value>Скрыть управления диаграммы</value>
   </data>
   <data name="SavingStatus" xml:space="preserve">
-    <value>(Saving)</value>
+    <value>(Сохраняется)</value>
   </data>
   <data name="DropPhotosHere" xml:space="preserve">
-    <value>Drop photos here.</value>
+    <value>Забрасывайте фотографии сюда.</value>
   </data>
   <data name="NoExistingPhotos" xml:space="preserve">
-    <value>There are no existing photos.</value>
+    <value>Существующие фотографии отсутствуют.</value>
   </data>
   <data name="Discussion" xml:space="preserve">
-    <value>Discussion</value>
+    <value>Обсуждение</value>
   </data>
   <data name="EULA" xml:space="preserve">
     <value>Apache License
@@ -1240,115 +1240,116 @@ In no event and under no legal theory, whether in tort (including negligence), c
 While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.</value>
   </data>
   <data name="Homepage" xml:space="preserve">
-    <value>Homepage</value>
+    <value>Домашняя страница</value>
   </data>
   <data name="People" xml:space="preserve">
-    <value>People</value>
+    <value>Люди</value>
   </data>
   <data name="ChooseWhatToExtractColon" xml:space="preserve">
-    <value>Choose what to extract:</value>
+    <value>Выберите что извлечь:</value>
   </data>
   <data name="CurrentPersonOnly" xml:space="preserve">
-    <value>Current person only</value>
+    <value>Только текущий человек</value>
   </data>
   <data name="ExtractHeader" xml:space="preserve">
     <value>Extract Contents</value>
   </data>
   <data name="OpenFolderAfterExtraction" xml:space="preserve">
-    <value>Open folder after extraction</value>
+    <value>Открыть папку после распаковки</value>
   </data>
   <data name="ExtractingStatus" xml:space="preserve">
-    <value>(Extracting)</value>
+    <value>(Извлечение)</value>
   </data>
   <data name="ExtractFilesMenu" xml:space="preserve">
-    <value>Extract Contents...</value>
+    <value>Извлечь содержимое</value>
   </data>
   <data name="Extract" xml:space="preserve">
-    <value>Extract</value>
+    <value>Извлечь</value>
   </data>
   <data name="HideFiltered" xml:space="preserve">
-    <value>Hide filtered</value>
+    <value>Скрыть фильтрованные</value>
   </data>
   <data name="Events" xml:space="preserve">
-    <value>Events</value>
+    <value>События</value>
   </data>
   <data name="Tiebreak" xml:space="preserve">
-    <value>* denotes a tie break.</value>
+    <value>* обозначает тай-брейк.</value>
   </data>
   <data name="DoYouWantToHideLivingPeople" xml:space="preserve">
-    <value>Do you want to hide living people?</value>
+    <value>Вы хотите скрыть живых людей?</value>
   </data>
   <data name="ExportPlaces" xml:space="preserve">
-    <value>Export Places</value>
+    <value>Экспортировать места</value>
   </data>
   <data name="ChooseWhatToExportColon" xml:space="preserve">
-    <value>Choose what to export:</value>
+    <value>Выберите что экспортировать:</value>
   </data>
   <data name="EnableUTF8" xml:space="preserve">
-    <value>Enable UTF-8</value>
+    <value>Включить UTF-8</value>
   </data>
   <data name="AlignCenter" xml:space="preserve">
-    <value>Center (Ctrl+E)</value>
+    <value>Центр (Ctrl+E)</value>
   </data>
   <data name="AlignJustify" xml:space="preserve">
-    <value>Justify (Ctrl+J)</value>
+    <value>Выравнить (Ctrl+J)</value>
   </data>
   <data name="AlignLeft" xml:space="preserve">
-    <value>Align Text Left (Ctrl+L)</value>
+    <value>Выравнить налево (Ctrl+L)</value>
   </data>
   <data name="AlignRight" xml:space="preserve">
-    <value>Align Text Right (Ctrl+R)</value>
+    <value>Выравнить направо (Ctrl+R)</value>
   </data>
   <data name="Births" xml:space="preserve">
-    <value>Births</value>
+    <value>Рождении</value>
   </data>
   <data name="Bold" xml:space="preserve">
-    <value>Bold (Ctrl+B)</value>
+    <value>Жирный шрифт (Ctrl+B)</value>
   </data>
   <data name="Bullets" xml:space="preserve">
-    <value>Bullets</value>
+    <value>Пули(?)</value>
   </data>
   <data name="Burials" xml:space="preserve">
-    <value>Burials</value>
+    <value>Похороные</value>
   </data>
   <data name="Cremations" xml:space="preserve">
-    <value>Cremations</value>
+    <value>Кремации</value>
   </data>
   <data name="Deaths" xml:space="preserve">
-    <value>Deaths</value>
+    <value>Смертей</value>
   </data>
   <data name="DecreaseIndentation" xml:space="preserve">
-    <value>Decrease Indent</value>
+    <value>Уменьшить отступ</value>
   </data>
   <data name="GrowFont" xml:space="preserve">
-    <value>Grow Font (Ctrl+&gt;)</value>
+    <value>Увеличить шрифт (Ctrl+&gt;)</value>
   </data>
   <data name="IncreaseIndentation" xml:space="preserve">
-    <value>Increase Indent</value>
+    <value>Увеличить отступ</value>
   </data>
   <data name="Italic" xml:space="preserve">
-    <value>Italic (Ctrl+I)</value>
+    <value>Курсив (Ctrl+I)</value>
   </data>
   <data name="Lifetimes" xml:space="preserve">
-    <value>Lifetimes</value>
+    <value>Времена жизни</value>
   </data>
   <data name="Numbering" xml:space="preserve">
-    <value>Numbering</value>
+    <value>Нумерация</value>
   </data>
   <data name="Places" xml:space="preserve">
-    <value>Places</value>
+    <value>Места</value>
   </data>
   <data name="PlacesWithTimes" xml:space="preserve">
-    <value>Places with times</value>
+    <value>Места со временами</value>
+    <comment>?</comment>
   </data>
   <data name="ShrinkFont" xml:space="preserve">
-    <value>Shrink Font (Ctrl+&lt;)</value>
+    <value>Уменьшить шрифт (Ctrl+&lt;)</value>
   </data>
   <data name="Underline" xml:space="preserve">
-    <value>Underline (Ctrl+U)</value>
+    <value>Подчеркивание (Ctrl+U)</value>
   </data>
   <data name="ClearFilterText" xml:space="preserve">
-    <value>Clear filter text.</value>
+    <value>Очистить текст фильтра.</value>
   </data>
   <data name="Compatability" xml:space="preserve">
     <value>Compatability</value>
@@ -1360,34 +1361,34 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
     <value>*.family</value>
   </data>
   <data name="FamilyFiles" xml:space="preserve">
-    <value>Family.Show 2.0 Files (*.family)</value>
+    <value>Файлы Family.Show 2.0 (*.family)</value>
   </data>
   <data name="FamilyShowExtensions" xml:space="preserve">
     <value>*.family;*.familyx</value>
   </data>
   <data name="FamilyShowFiles" xml:space="preserve">
-    <value>Family.Show Files (*.familyx or *.family)</value>
+    <value>Файлы Family.Show (*.familyx or *.family)</value>
   </data>
   <data name="OldVersionMessage" xml:space="preserve">
-    <value>This file was created with an earlier version of Family.Show or FamilyLines. It will be saved in a new format for use with this version. The new file’s name will end with .familyx and will bundle all your family photos, stories and tree into this single file.</value>
+    <value>Этот файл был создан в более ранней версией Family.Show или FamilyLines. Он будет сохранен в новом формате для использования с этой версией. Имя нового файла закончится на .familyx и будет содержать все ваши семейные фотографии, рассказы и дерева в этом одном файле.</value>
   </data>
   <data name="FamilyxFilesAll" xml:space="preserve">
-    <value>Family.Show 3.0 - 4.0 Files (*.familyx)</value>
+    <value>Файлы Family.Show 3.0 - 4.0 (*.familyx)</value>
   </data>
   <data name="AgeGroupAdult" xml:space="preserve">
     <value>20-39</value>
     <comment>If these age groups are changed update AgeGroup in Person.cs</comment>
   </data>
   <data name="Prefix" xml:space="preserve">
-    <value>Prefix</value>
+    <value>Префикс</value>
   </data>
   <data name="TreeNum" xml:space="preserve">
-    <value>Tree #</value>
+    <value>Древо №</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>Family Lines</value>
   </data>
   <data name="FamilyListViewToolTip" xml:space="preserve">
-    <value>Hold shift and click on other columns to multi-sort</value>
+    <value>Удерживайте клавишу SHIFT и нажмите на другие столбцы для мульти-сортировки</value>
   </data>
 </root>
