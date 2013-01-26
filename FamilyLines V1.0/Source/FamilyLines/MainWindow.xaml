@@ -283,6 +283,7 @@
                 VerticalAlignment="Bottom" 
                 Margin="5,0,0,0"
                 Style="{DynamicResource MenuStyle}"
+                ItemContainerStyle="{DynamicResource MenuItemConStyle}"
                     >
 
                 <MenuItem
@@ -410,11 +411,11 @@
                             />
                 </MenuItem>
 
-                <!--<MenuItem
+                <MenuItem
                     Header="{x:Static properties:Resources.ThemesHeader}" 
                     x:Name="ThemesMenu" 
                     Style="{DynamicResource MenuItemStyle}"
-                        />-->
+                        />
                 <MenuItem
                     Header="{x:Static properties:Resources.Help}" 
                     x:Name="HelpMenu"
