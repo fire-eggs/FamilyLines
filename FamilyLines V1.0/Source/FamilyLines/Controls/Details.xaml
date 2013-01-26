@@ -6,26 +6,30 @@
    xmlns:local="clr-namespace:KBS.FamilyLines"
    xmlns:sys="clr-namespace:System;assembly=mscorlib"
    xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
-   x:Class="KBS.FamilyLines.Details" DataContextChanged="UserControl_DataContextChanged" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-   xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls" mc:Ignorable="d" Width="277" >
+   x:Class="KBS.FamilyLines.Details" DataContextChanged="UserControl_DataContextChanged" 
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+   xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+   mc:Ignorable="d"
+   Width="277"
+        >
     <UserControl.Resources>
 
         <ResourceDictionary>
 
             <!-- Converter for formatting dates to short date format -->
             <local:DateFormattingConverter x:Key="DateFormattingConverter"/>
-            
+
             <!-- Converter for coverting enum values to bool -->
             <local:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
 
             <local:EnumValueDescriptionConverter x:Key="EnumValueDescriptionConverter"/>
-           
+
             <!-- Converter for displaying the the first name with an apostrophe. -->
             <local:FirstNamePossessiveFormConverter x:Key="FirstNamePossessiveFormConverter"/>
 
             <!-- Converter for showing/hiding features based on boolean property -->
             <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-            
+
             <!-- Converter for showing/hiding features based on boolean property -->
             <local:NotBoolToVisibilityConverter x:Key="NotBoolToVisibilityConverter"/>
 
@@ -48,21 +52,21 @@
                     <x:Type TypeName="local:FamilyMemberComboBoxValue" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            
+
             <!-- Data provider for binding to the citation types enum values -->
             <ObjectDataProvider x:Key="CitationValuesEnumDS" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="local:CitationsComboBoxValue" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            
+
             <!-- Data provider for binding to the relationship citation types enum values -->
             <ObjectDataProvider x:Key="RCitationValuesEnumDS" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="local:RCitationsComboBoxValue" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            
+
             <!-- Data provider for binding to the existing relationship types enum values -->
             <ObjectDataProvider x:Key="ExistingRelationshipValuesEnumDS" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
                 <ObjectDataProvider.MethodParameters>
@@ -71,7 +75,7 @@
             </ObjectDataProvider>
 
             <!-- Data provider for binding to the spouse modifier enum values -->
-            <ObjectDataProvider x:Key="SpouseStatusEnumDS" ObjectType="{x:Type sys:Enum}" MethodName="GetValues"> 
+            <ObjectDataProvider x:Key="SpouseStatusEnumDS" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
                 <ObjectDataProvider.MethodParameters>
                     <x:Type TypeName="KBS.FamilyLinesLib:SpouseModifier"  />
                 </ObjectDataProvider.MethodParameters>
@@ -90,7 +94,7 @@
                     <x:Type TypeName="KBS.FamilyLinesLib:Gender" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
-            
+
             <!-- Data provider for binding to the restriction types enum values -->
             <ObjectDataProvider x:Key="RestrictionEnumDS" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
                 <ObjectDataProvider.MethodParameters>
@@ -102,15 +106,15 @@
             <DataTemplate x:Key="ParentSetTemplate">
                 <TextBlock Text="{Binding Path=Name, Mode=Default}"/>
             </DataTemplate>
-            
+
             <!-- Data Template for displaying the attachments -->
             <DataTemplate x:Key="AttachmentSetTemplate">
                 <TextBlock Text="{Binding Path=FileName, Mode=Default}"/>
             </DataTemplate>
-            
+
             <!-- Animation for expanding the Details Add section -->
             <Storyboard x:Key="ExpandDetailsAdd" Completed="ExpandDetailsAdd_StoryboardCompleted">
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsAdd" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="300"/>
@@ -154,20 +158,20 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyMemberAddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00.3000000" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
             </Storyboard>
 
             <!-- Animation for collapsing the Details Add section -->
             <Storyboard x:Key="CollapseDetailsAdd" Completed="CollapseDetailsAdd_StoryboardCompleted">
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00.3000000" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsAdd">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="315"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
@@ -176,12 +180,12 @@
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
                     <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Collapsed}"/>
                 </ObjectAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsInfo">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="315"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsInfo" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
@@ -212,12 +216,12 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyMemberAddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
             </Storyboard>
 
             <!-- Animation for expanding the Details Edit section -->
             <Storyboard x:Key="ExpandDetailsEdit" Completed="ExpandDetailsEdit_StoryboardCompleted">
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="555"/>
@@ -226,17 +230,17 @@
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
                     <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Visible}"/>
                 </ObjectAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsInfo" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="315"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
-                   
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0.2"/>
                 </DoubleAnimationUsingKeyFrames>
-               
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DoneEditButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00.3000000" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -270,24 +274,24 @@
 
             <!-- Animation for collapsing the Details Edit section -->
             <Storyboard x:Key="CollapseDetailsEdit" Completed="CollapseDetailsEdit_StoryboardCompleted">
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DoneEditButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="EditMoreButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsEdit">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsInfo">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="315"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
@@ -314,7 +318,7 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyMemberAddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
             </Storyboard>
 
             <!-- Animation for expanding the Details Edit More section -->
@@ -328,7 +332,7 @@
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
                 </ObjectAnimationUsingKeyFrames>
-               
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
@@ -342,24 +346,24 @@
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="315"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DoneEditButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="EditMoreButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
-                </BooleanAnimationUsingKeyFrames>       
-                
+                </BooleanAnimationUsingKeyFrames>
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DoneEditMoreButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
 
-                
+
             </Storyboard>
 
             <!-- Animation for collapsing the Details Edit More section -->
@@ -383,43 +387,43 @@
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
                 </DoubleAnimationUsingKeyFrames>
-                    
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="EditMoreButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DoneEditButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="DoneEditMoreButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
             </Storyboard>
 
             <!-- Animation for expanding the Details Edit Citations section -->
             <Storyboard x:Key="ExpandDetailsEditCitations" Completed="ExpandDetailsEditCitations_StoryboardCompleted">
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEditCitations" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="555"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEditCitations" Storyboard.TargetProperty="(UIElement.Visibility)">
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
                     <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Visible}"/>
                 </ObjectAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsInfo" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="315"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
-   
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0.2"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyDataButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -448,27 +452,27 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ExportCitationsButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00.3000000" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
             </Storyboard>
 
             <!-- Animation for collapsing the Details Edit Citations section -->
             <Storyboard x:Key="CollapseDetailsEditCitations" Completed="CollapseDetailsEditCitations_StoryboardCompleted">
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsEditCitations">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsInfo">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="315"/>
                 </DoubleAnimationUsingKeyFrames>
-                 
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyDataButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -490,7 +494,7 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="InfoButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="DoneEditCitationsButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -501,22 +505,22 @@
 
             <!-- Animation for expanding the Details Edit Attachments section -->
             <Storyboard x:Key="ExpandDetailsEditAttachments" Completed="ExpandDetailsEditAttachments_StoryboardCompleted">
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEditAttachments" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="400"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEditAttachments" Storyboard.TargetProperty="(UIElement.Visibility)">
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
                     <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Visible}"/>
                 </ObjectAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsInfo" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="315"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0.2"/>
@@ -543,8 +547,8 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyMemberAddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
-                
+
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AddAttachment" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00.3000000" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -569,7 +573,7 @@
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="400"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsInfo">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="315"/>
@@ -579,7 +583,7 @@
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyDataButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -601,7 +605,7 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="InfoButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
 
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="DoneEditAttachmentsButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
@@ -618,7 +622,7 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="LinkAttachment" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00.3000000" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
             </Storyboard>
 
             <!-- Animation for expanding the Details Edit Relationship section -->
@@ -658,7 +662,7 @@
                 </BooleanAnimationUsingKeyFrames>
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="EditAttachmentsButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
-                </BooleanAnimationUsingKeyFrames>   
+                </BooleanAnimationUsingKeyFrames>
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyMemberAddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -678,17 +682,17 @@
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
-    
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsInfo">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="315"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyDataButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -710,7 +714,7 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="InfoButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="DoneEditRelationshipButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -719,14 +723,14 @@
 
             <!-- Animation for expanding the Details Add Intermediate section -->
             <Storyboard x:Key="ExpandDetailsAddIntermediate" Completed="ExpandDetailsAddIntermediate_StoryboardCompleted">
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsInfo" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="00:00:00.0010000">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                 </DoubleAnimationUsingKeyFrames>
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="00:00:00.0010000">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="DetailsAddIntermediate" Storyboard.TargetProperty="(UIElement.Visibility)">
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
                 </ObjectAnimationUsingKeyFrames>
@@ -734,13 +738,13 @@
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="200"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsAdd" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="300"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
-                </DoubleAnimationUsingKeyFrames> 
-                
-               <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyDataButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+                </DoubleAnimationUsingKeyFrames>
+
+                <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyDataButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="EditButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
@@ -757,11 +761,11 @@
                 </BooleanAnimationUsingKeyFrames>
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyMemberAddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
-                </BooleanAnimationUsingKeyFrames> 
+                </BooleanAnimationUsingKeyFrames>
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="InfoButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="IntermediateAddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -774,11 +778,11 @@
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="315"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsInfo" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
-                </DoubleAnimationUsingKeyFrames>  
+                </DoubleAnimationUsingKeyFrames>
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="DetailsList">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
@@ -788,7 +792,7 @@
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="200"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="EditButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -814,28 +818,28 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="IntermediateAddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
             </Storyboard>
-            
+
             <!-- Animation for expanding the Add Existing section -->
             <Storyboard x:Key="ExpandAddExisting" Completed="ExpandAddExisting_StoryboardCompleted">
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AddExisting" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555" />
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AddExisting" Storyboard.TargetProperty="(UIElement.Visibility)">
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}" />
                 </ObjectAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsInfo" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.2" />
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyDataButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -857,19 +861,19 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyMemberAddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="AddExistingButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
-      
+
             </Storyboard>
-            
+
             <!-- Animation for collapsing the Add Existing section -->
             <Storyboard x:Key="CollapseAddExisting" Completed="CollapseAddExisting_StoryboardCompleted">
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="AddExisting">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsInfo">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="315" />
                 </DoubleAnimationUsingKeyFrames>
@@ -877,7 +881,7 @@
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
                 </DoubleAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyDataButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
@@ -899,13 +903,13 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="FamilyMemberAddButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="AddExistingButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
             </Storyboard>
-            
+
             <ControlTemplate x:Key="LabelControlTemplate" TargetType="{x:Type Label}">
                 <Border SnapsToDevicePixels="True" Margin="0,0,0,3" Background="{TemplateBinding Background}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Padding="{TemplateBinding Padding}">
                     <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" RecognizesAccessKey="True"/>
@@ -946,8 +950,8 @@
             <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#FFF" />
             <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
             <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
-            
-       
+
+
 
             <!-- This is the default style for all textboxes in this user control -->
             <Style TargetType="{x:Type TextBox}" BasedOn="{x:Null}">
@@ -1103,8 +1107,8 @@
                     <DataTrigger Binding="{Binding}" Value="Spouse">
                         <Setter Property="Text" Value="{x:Static properties:Resources.Spouse}" TargetName="text" />
                     </DataTrigger>
-                    
-                    
+
+
                 </DataTemplate.Triggers>
             </DataTemplate>
 
@@ -1142,7 +1146,7 @@
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
-            
+
             <DataTemplate x:Key="RelationshipCitationDataTemplate">
                 <StackPanel x:Name="panel" Margin="0,0,0,0">
                     <TextBlock x:Name="text" Text="{Binding}" TextWrapping="Wrap" />
@@ -1157,7 +1161,7 @@
                 </DataTemplate.Triggers>
             </DataTemplate>
 
-            
+
             <DataTemplate x:Key="CitationDataTemplate">
                 <StackPanel x:Name="panel" Margin="0,0,0,0">
                     <TextBlock x:Name="text" Text="{Binding}" TextWrapping="Wrap" />
@@ -1184,7 +1188,7 @@
                     <DataTrigger Binding="{Binding}" Value="Unrelated">
                         <Setter Property="Text" Value="{x:Static properties:Resources.Occupation}" TargetName="text" />
                     </DataTrigger>
-                   
+
                 </DataTemplate.Triggers>
             </DataTemplate>
 
@@ -1288,18 +1292,18 @@
         </EventTrigger>
 
     </UserControl.Triggers>
-        <DockPanel>
+    <DockPanel>
         <!-- Details Header -->
         <Border DockPanel.Dock="Top" Background="{DynamicResource BackgroundBrush}" BorderThickness="1,1,1,0" CornerRadius="10,10,0,0" BorderBrush="{DynamicResource BorderBrush}">
             <DockPanel Height="30">
                 <!-- Star -->
                 <Path StrokeThickness="1.500000" Stroke="#ffffffff" StrokeMiterLimit="1.000000" Fill="{DynamicResource PrimaryStarBrush}" Data="F1 M 9.816406,1.694336 L 12.351074,6.830078 L 18.018066,7.654297 L 13.918457,11.654297 L 14.886230,17.299805 L 9.816406,14.630859 L 4.746094,17.299805 L 5.713867,11.654297 L 1.611328,7.654297 L 7.281250,6.830078 L 9.816406,1.694336 Z" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
-              
+
                 <Button  Style="{DynamicResource NormalButtonStyle}"  x:Name="Next" Height="15"   Content=">" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,12,0" Width="18"  Click="Next_Click" FontSize="10"/>
                 <Button  Style="{DynamicResource NormalButtonStyle}"  x:Name="Previous" Height="15"   Content="&lt;" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,5,0" Width="18"  Click="Previous_Click" FontSize="10"/>
                 <Button MinWidth="45" Width="Auto" x:Name="DeleteButton" Content="{x:Static properties:Resources.Delete}" FontSize="10" Height="15" Click="DeleteButton_Click" HorizontalAlignment="Right" Margin="0,0,5,0" DockPanel.Dock="Right" Visibility="{Binding Path=IsDeletable, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" Style="{DynamicResource RedButtonStyle}" />
 
-                <TextBlock Text="{Binding Path=Name, Mode=Default, FallbackValue=Current Person}" Style="{DynamicResource HeaderStyle}" FontWeight="Bold" Height="23.94" Margin="5,1,10,0" DockPanel.Dock="Left" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource HeaderFontColor}"/> 
+                <TextBlock Text="{Binding Path=Name, Mode=Default, FallbackValue=Current Person}" Style="{DynamicResource HeaderStyle}" FontWeight="Bold" Height="23.94" Margin="5,1,10,0" DockPanel.Dock="Left" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource HeaderFontColor}"/>
             </DockPanel>
         </Border>
 
@@ -1318,32 +1322,32 @@
                                     <RowDefinition MaxHeight="122" Height="122" />
                                     <RowDefinition Height="20"/>
                                 </Grid.RowDefinitions>
-                   
+
                                 <Grid  Background="{x:Null}" Margin="0,0,0,0" AllowDrop="True" Drop="AvatarPhoto_Drop">
-                                    
+
                                     <Border BorderBrush="#02747474" Background="#02000000" HorizontalAlignment="Left" Margin="0,5,5,5" VerticalAlignment="Top" BorderThickness="1,1,1,1">
                                         <Border.BitmapEffect>
                                             <DropShadowBitmapEffect ShadowDepth="7" Softness="0.75"/>
                                         </Border.BitmapEffect>
                                         <Image Source="{Binding Path=Avatar, Converter={StaticResource ImageConverter}, Mode=OneWay}" Stretch="Uniform"  VerticalAlignment="Top" MaxWidth="110" MaxHeight="122" StretchDirection="Both"/>
                                     </Border>
-                                    
+
                                     <Border Visibility="{Binding Path=HasAvatar, Converter={StaticResource ComposingConverter}, Mode=Default}"  BorderBrush="#FFFFFFFF" Background="#02FFFFFF" Margin="0,5,5,5">
                                         <Grid>
                                             <Rectangle Fill="{DynamicResource NoPhotoBrush}" Stroke="{x:Null}" ToolTip="{x:Static properties:Resources.DropPhotosHere}">
                                                 <Rectangle.BitmapEffect>
-                                                        <DropShadowBitmapEffect ShadowDepth="7" Softness="0.75"/>
+                                                    <DropShadowBitmapEffect ShadowDepth="7" Softness="0.75"/>
                                                 </Rectangle.BitmapEffect>
                                             </Rectangle>
                                         </Grid>
                                     </Border>
-                                    
+
                                 </Grid>
-                                
+
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition/>    
+                                        <ColumnDefinition/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
@@ -1364,7 +1368,7 @@
                                     <Image Margin="4,0,0,0" HorizontalAlignment="Center" Visibility="{Binding Path=HasRestriction, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center"  Source="..\Images\SecurityLock.png" Grid.Column="0" Width="16" Height="16" ToolTip="{x:Static properties:Resources.HasRestrictions}" />
 
                                 </Grid>
-                               
+
                                 <StackPanel Margin="5,0,0,0" Grid.Column="1" Grid.RowSpan="2">
                                     <Label Content="{x:Static properties:Resources.NameAge}" Target="{Binding ElementName=NamesEditTextBox, Mode=OneWay}" Padding="5,5,5,0" DockPanel.Dock="Top" Margin="0,0,0,4"/>
                                     <TextBlock Text="{Binding Path=Name, Mode=OneWay, FallbackValue=Full name }" Foreground="{DynamicResource FontColor}" FontWeight="Bold" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Margin="5,0,0,4" DockPanel.Dock="Top" FontSize="12" />
@@ -1391,11 +1395,11 @@
                                         <TextBlock MaxWidth="114" Text="{Binding Path=BirthPlace, Mode=OneWay, FallbackValue=Place of Birth}" Foreground="{DynamicResource FontColor}" FontWeight="Bold"  HorizontalAlignment="Left" Margin="5,0,0,4" DockPanel.Dock="Top" TextTrimming="CharacterEllipsis"  FontSize="12"/>
                                         <Image Margin="2,0,0,0" x:Name="PlaceOfBirthSearch" HorizontalAlignment="Left" Visibility="{Binding Path=HasBirthPlace, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center"  Source="..\Images\Search.png" Grid.Column="3" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}"  Cursor="Hand" MouseLeftButtonUp="SearchMapBirthPlace" />
                                     </Grid>
-                                  
+
                                 </StackPanel>
                             </Grid>
                         </Border>
-                        
+
                         <TextBlock  Text="{x:Static properties:Resources.EditPerson}" Style="{DynamicResource SectionHeaderStyle}" Margin="15,5,0,5"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -1407,14 +1411,14 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            
+
                             <Button Margin="15,0,5,0" x:Name="EditButton" Content="{x:Static properties:Resources.Details}" Grid.Column="0" Grid.Row="0" FontSize="10" Height="20" Width="115" HorizontalAlignment="Left" Style="{DynamicResource BlackButtonStyle}"/>
                             <Button Margin="15,2,5,2" x:Name="EditRelationshipsButton" Grid.Column="0" Grid.Row="1" Height="20" Content="{x:Static properties:Resources.Relationships}" HorizontalAlignment="Left" Width="115" Style="{DynamicResource BlackButtonStyle}" FontSize="10" />
                             <Button Margin="15,2,5,7" x:Name="InfoButton" Height="20" Grid.Column="0" Grid.Row="2" Content="{x:Static properties:Resources.PhotoStory}" HorizontalAlignment="Left" Width="115" Style="{DynamicResource BlackButtonStyle}" FontSize="10" Click="InfoButton_Click"/>
                             <Button Margin="7,2,10,2" x:Name="EditCitationsButton" Height="20" Grid.Column="1" Grid.Row="0" Content="{x:Static properties:Resources.Citations}" HorizontalAlignment="Left" Width="115" Style="{DynamicResource BlackButtonStyle}" FontSize="10"/>
                             <Button Margin="7,2,10,2" x:Name="EditAttachmentsButton" Height="20" Grid.Column="1" Grid.Row="1" Content="{x:Static properties:Resources.Attachments}" HorizontalAlignment="Left" Width="115" Style="{DynamicResource BlackButtonStyle}" FontSize="10"/>
                             <!--<Button Margin="7,2,10,7" Height="20" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Width="115" Style="{DynamicResource BlackButtonStyle}" FontSize="10"/>-->
-                            
+
                         </Grid>
 
                         <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0" Height="52" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}">
@@ -1430,7 +1434,7 @@
                                 <TextBlock Text="{x:Static properties:Resources.CreateRelationship}" Style="{DynamicResource SectionHeaderStyle}" Margin="5,5,0,4"/>
                                 <ComboBox IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding Source={StaticResource RelationshipValuesEnumDS}}" x:Name="FamilyMemberComboBox" Height="20" Width="114" Grid.Row="1" HorizontalAlignment="Left" Margin="6,0,0,0" SelectionChanged="FamilyMemberComboBox_SelectionChanged" ItemTemplate="{DynamicResource FamilyMemberDataTemplate}" Style="{DynamicResource FamilyMemberComboBox}" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
                                 <Button x:Name="FamilyMemberAddButton" Content="{x:Static properties:Resources.AddFather}" Grid.Row="1" Click="FamilyMemberAddButton_Click" Margin="5,0,0,0" HorizontalAlignment="Left" Width="97" Height="20" FontSize="10" VerticalAlignment="Stretch" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
- 
+
                             </Grid>
                         </Border>
                         <Path Fill="#FFFFFFFF" Stretch="Fill" Stroke="#FF000000" Width="1" Height="1" Data="M64.5,146.06"/>
@@ -1442,7 +1446,7 @@
                     <StackPanel Margin="10,5,10,0" HorizontalAlignment="Stretch">
                         <DockPanel Margin="0,0,0,5" DockPanel.Dock="Top">
                             <TextBlock Text="{x:Static properties:Resources.EditDetails}" TextWrapping="Wrap" Style="{DynamicResource SectionHeaderStyle}" Width="122" Height="15.96" Margin="5,0,0,0" HorizontalAlignment="Left" Foreground="{DynamicResource InputFontColor}"/>
-<!-- KBR 03/18/2012 Apply patch 4859: two default buttons -->							
+                            <!-- KBR 03/18/2012 Apply patch 4859: two default buttons -->
                             <Button Margin="0,0,5,0" Content="{x:Static properties:Resources.More}" Height="15" FontSize="10" IsDefault="False"  x:Name="EditMoreButton" IsCancel="True" />
                             <Button HorizontalAlignment="Left" DockPanel.Dock="Top" Content="{x:Static properties:Resources.Done}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="DoneEditButton" Click="DoneEditButton_Click" IsCancel="True" />
                         </DockPanel>
@@ -1460,30 +1464,30 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    
 
-                                <Image Grid.Column="2" Grid.RowSpan="2" AllowDrop="True" Height="75" Width="80" Source="{Binding Path=Avatar, Converter={StaticResource ImageConverter}, Mode=OneWay}" />
-                                    
-                                <Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.Gender}" Padding="5,0,5,2" Foreground="{DynamicResource InputFontColor}"/>
-                                <StackPanel Grid.Row="1" Grid.Column="0" Margin="5,0,0,0">
-                                  <RadioButton IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"
+
+                                    <Image Grid.Column="2" Grid.RowSpan="2" AllowDrop="True" Height="75" Width="80" Source="{Binding Path=Avatar, Converter={StaticResource ImageConverter}, Mode=OneWay}" />
+
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.Gender}" Padding="5,0,5,2" Foreground="{DynamicResource InputFontColor}"/>
+                                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="5,0,0,0">
+                                        <RadioButton IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"
                                                GroupName="Gender1" Foreground="Black"
                                                IsChecked="{Binding Path=Gender, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Male}"
                                                >
-                                    <Label Padding="0,0,0,0" Foreground="{DynamicResource InputFontColor}" 
+                                            <Label Padding="0,0,0,0" Foreground="{DynamicResource InputFontColor}" 
                                            Content="{x:Static properties:Resources.Male}" />
-                                  </RadioButton>
+                                        </RadioButton>
 
-                                  <RadioButton IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"
+                                        <RadioButton IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"
                                                GroupName="Gender2" Foreground="Black"
                                                IsChecked="{Binding Path=Gender,Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Female}">
-                                    <Label Padding="0,0,0,0" Foreground="{DynamicResource InputFontColor}"
+                                            <Label Padding="0,0,0,0" Foreground="{DynamicResource InputFontColor}"
                                            Content="{x:Static properties:Resources.Female}"/>
-                                  </RadioButton>
-                                </StackPanel>
+                                        </RadioButton>
+                                    </StackPanel>
 
 
-                                  <Label Grid.Row="0" Grid.Column="1" Content="{x:Static properties:Resources.Restriction}" Padding="5,0,5,2" Foreground="{DynamicResource InputFontColor}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Content="{x:Static properties:Resources.Restriction}" Padding="5,0,5,2" Foreground="{DynamicResource InputFontColor}"/>
                                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
                                         <RadioButton GroupName="Privacy1" Foreground="Black"
                                                      IsChecked="{Binding Path=Restriction, Mode=TwoWay, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=None}">
@@ -1503,9 +1507,9 @@
                                 </Grid>
                             </StackPanel>
                         </StackPanel>
-                      
+
                         <Label Content="{x:Static properties:Resources.Names}" Target="{Binding ElementName=NamesEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
-                        <TextBox TextWrapping="NoWrap" x:Name="NamesEditTextBox" HorizontalAlignment="Left" Width="250" Margin="5,0,0,0" Text="{Binding Path=FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>                      
+                        <TextBox TextWrapping="NoWrap" x:Name="NamesEditTextBox" HorizontalAlignment="Left" Width="250" Margin="5,0,0,0" Text="{Binding Path=FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="145"/>
@@ -1521,20 +1525,20 @@
                             <TextBox TextWrapping="NoWrap" x:Name="SuffixEditTextBox" Text="{Binding Path=Suffix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22" Margin="0,25,0,3" Width="110" Grid.Column="1" Grid.RowSpan="2" SnapsToDevicePixels="True" ClipToBounds="True" MinWidth="110" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
                         </Grid>
 
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="Auto"/>
-							</Grid.ColumnDefinitions>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto"/>
-								<RowDefinition Height="Auto"/>
-							</Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-							<Label Grid.Column="0" x:Name="BirthDateLabel" MouseEnter="Label_MouseEnter" MouseLeave="Label_MouseLeave" Content="{x:Static properties:Resources.DateOfBirth}" MouseLeftButtonUp="ChangeBirthDescriptorForward" MouseRightButtonUp="ChangeBirthDescriptorBackward" Target="{Binding ElementName=BirthDateEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}"  IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
-							<Label Grid.Column="1" Margin="-6,0,0,0" Content="{Binding Path=BirthDateDescriptor}" Foreground="{DynamicResource InputFontColor}" />
-							
-						</Grid>
+                            <Label Grid.Column="0" x:Name="BirthDateLabel" MouseEnter="Label_MouseEnter" MouseLeave="Label_MouseLeave" Content="{x:Static properties:Resources.DateOfBirth}" MouseLeftButtonUp="ChangeBirthDescriptorForward" MouseRightButtonUp="ChangeBirthDescriptorBackward" Target="{Binding ElementName=BirthDateEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}"  IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
+                            <Label Grid.Column="1" Margin="-6,0,0,0" Content="{Binding Path=BirthDateDescriptor}" Foreground="{DynamicResource InputFontColor}" />
+
+                        </Grid>
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -1546,9 +1550,9 @@
                             </Grid.RowDefinitions>
 
                             <TextBox TextWrapping="NoWrap" x:Name="BirthDateEditTextBox" Width="135" VerticalAlignment="Top" Grid.Row="1" Margin="5,0,0,0" Text="{Binding Path=BirthDate, Converter={StaticResource DateFormattingConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="" ToolTipOpening="ToolTip_All" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
-                          <CheckBox Margin="10,0,0,0" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=IsLiving, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=True}" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}">
-                            <Label Padding="0,0,0,0" Content="{x:Static properties:Resources.Living}" Foreground="{DynamicResource InputFontColor}" />
-                          </CheckBox>
+                            <CheckBox Margin="10,0,0,0" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=IsLiving, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=True}" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}">
+                                <Label Padding="0,0,0,0" Content="{x:Static properties:Resources.Living}" Foreground="{DynamicResource InputFontColor}" />
+                            </CheckBox>
 
                         </Grid>
 
@@ -1585,7 +1589,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <TextBox TextWrapping="NoWrap" x:Name="DeathPlaceEditTextBox" Text="{Binding Path=DeathPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="230" Margin="5,0,0,0" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" Grid.Column="0" Height="21.96" ToolTip="" ToolTipOpening="ToolTip_All"/>
-                            
+
                             <Image Margin="4,0,0,0" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" />
                             <Image Margin="4,0,0,0" Cursor="Hand" x:Name="PlaceOfDeathSearch" MouseLeftButtonUp="SearchMapDeathPlace" HorizontalAlignment="Center" Visibility="{Binding Path=HasDeathPlace, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />
                         </Grid>
@@ -1659,14 +1663,14 @@
                             </Grid.RowDefinitions>
                             <TextBox TextWrapping="NoWrap" x:Name="CremationPlaceEditTextBox" Text="{Binding Path=CremationPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="230" Margin="5,0,0,0" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" Grid.Column="0" Height="21.96" ToolTip="" ToolTipOpening="ToolTip_All"/>
                             <Image Margin="4,0,0,0" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" />
-                            <Image Margin="4,0,0,0" Cursor="Hand" x:Name="PlaceOfCremationSearch" MouseLeftButtonUp="SearchMapCremationPlace" HorizontalAlignment="Center" Visibility="{Binding Path=HasCremationPlace, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />     
+                            <Image Margin="4,0,0,0" Cursor="Hand" x:Name="PlaceOfCremationSearch" MouseLeftButtonUp="SearchMapCremationPlace" HorizontalAlignment="Center" Visibility="{Binding Path=HasCremationPlace, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />
                         </Grid>
 
                     </StackPanel>
                 </Border>
 
-                
-                
+
+
                 <!-- Details Edit Citations is used for modifying the person's information sources -->
 
                 <Border x:Name="DetailsEditCitations" DockPanel.Dock="Top" Style="{DynamicResource DetailsBorderStyle}"  Margin="0,0,0,0" Background="{DynamicResource InputBackgroundBrush}" BorderThickness="0,1,0,1" CornerRadius="0,0,0,0" Padding="0,0,0,0" Height="Auto" Width="Auto"  Visibility="Visible">
@@ -1677,9 +1681,9 @@
                             <Button Margin="20,0,5,0" Content="{x:Static properties:Resources.Export}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="ExportCitationsButton" Click="ExportCitations_Click" IsCancel="True" Style="{DynamicResource RedButtonStyle}" Visibility="{Binding Path=IsPrivate, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}"/>
                             <Button HorizontalAlignment="Right" DockPanel.Dock="Top" Content="{x:Static properties:Resources.Done}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="DoneEditCitationsButton" Click="DoneEditCitationsButton_Click" IsCancel="True" />
                         </DockPanel>
-                        
+
                         <ComboBox x:Name="CitationsComboBox" ItemTemplate="{DynamicResource CitationDataTemplate}" SelectedIndex="0"  ItemsSource="{Binding Source={StaticResource CitationValuesEnumDS}}" Width="250" Margin="5,0,0,0" SelectionChanged="CitationsComboBox_SelectionChanged"/>
-                        
+
                         <Grid Margin="0,-8,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="175"/>
@@ -1687,8 +1691,8 @@
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" MinHeight="25" />
-                                
-                                
+
+
                                 <RowDefinition Height="Auto" MinHeight="25" />
                                 <RowDefinition Height="Auto" MinHeight="25" />
                                 <RowDefinition Height="Auto" MinHeight="25" />
@@ -1698,12 +1702,12 @@
                                 <RowDefinition Height="Auto" MinHeight="25" />
 
                             </Grid.RowDefinitions>
-    
+
                             <Label Content="{x:Static properties:Resources.Details}" Margin="0,0,0,0" Foreground="{DynamicResource InputFontColor}" />
                             <TextBox TextWrapping="NoWrap" x:Name="CitationDetailsEditTextBox" LostFocus="CitationTextBox_LostFocus" Grid.Row="1" Margin="0,0,0,0" Height="22" VerticalAlignment="Top" Width="165" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
                             <Label Content="{x:Static properties:Resources.Source}"  Grid.Column="1" Foreground="{DynamicResource InputFontColor}" Margin="0,0,0,0" />
                             <TextBox TextWrapping="NoWrap" x:Name="SourceEditTextBox" Height="22" LostFocus="CitationTextBox_LostFocus"  Margin="-15,25,-13,3" Width="80" Grid.Column="1" Grid.RowSpan="2" SnapsToDevicePixels="True" ClipToBounds="True" MinWidth="80" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
-                            
+
                             <Label Content="{x:Static properties:Resources.Note}" Grid.Row="2" Grid.Column="0" Foreground="{DynamicResource InputFontColor}" Margin="0,0,0,0" />
                             <TextBox TextWrapping="NoWrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.ColumnSpan="2" LostFocus="CitationTextBox_LostFocus"  x:Name="CitationNoteEditTextBox" Margin="0,0,-4,0" Height="66" VerticalAlignment="Top" Width="250" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
 
@@ -1712,7 +1716,7 @@
 
                             <Label Content="{x:Static properties:Resources.Link}"  Grid.Row="6"  Foreground="{DynamicResource InputFontColor}" Margin="0,0,0,0" />
                             <TextBox TextWrapping="NoWrap" x:Name="CitationLinkEditTextBox" LostFocus="CitationTextBox_LostFocus" Height="22" Margin="5,0,-60,3" Width="130" Grid.Column="0" Grid.Row="7"  Grid.ColumnSpan="1"  SnapsToDevicePixels="True" ClipToBounds="True" MinWidth="230" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
-                            
+
                             <Image Margin="0,0,0,2" Grid.Row="7" Cursor="Hand" x:Name="CitationLinkSearch" MouseLeftButtonUp="CitationLinkSearchClick" HorizontalAlignment="Right" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="Load this citation in the default browser." />
 
                         </Grid>
@@ -1727,7 +1731,7 @@
                     <StackPanel Margin="10,5,10,0">
                         <DockPanel Margin="0,0,0,5" DockPanel.Dock="Top">
                             <TextBlock Text="{x:Static properties:Resources.EditAttachments}" TextWrapping="Wrap" Style="{DynamicResource SectionHeaderStyle}" Width="103" Height="15.96" Margin="5,0,0,0" HorizontalAlignment="Left" Foreground="{DynamicResource InputFontColor}"/>
-                            
+
                             <Button Margin="0,0,3,0" HorizontalAlignment="Right" DockPanel.Dock="Top" Content="{x:Static properties:Resources.Done}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="DoneEditAttachmentsButton" IsCancel="True" />
                         </DockPanel>
 
@@ -1742,11 +1746,11 @@
                             </Grid.RowDefinitions>
                             <Label Content="{x:Static properties:Resources.Attachments}" Margin="0,0,0,0" Foreground="{DynamicResource InputFontColor}" />
                             <ListBox KeyDown="AttachmentsListBox_KeyDown" Drop="AttachmentsListBox_Drop" Grid.Row="1" Grid.ColumnSpan="2" MinHeight="320" Height="320" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource AttachmentSetTemplate}" ItemsSource="{Binding Path=Attachments, Mode=OneWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="AttachmentsListBox"  MouseDoubleClick="LoadSelectedAttachment" Margin="5,0,5,0" />
-                                                      
 
-                           
+
+
                         </Grid>
-                        
+
                         <Grid Margin="5,5,5,0" >
 
                             <Grid.ColumnDefinitions>
@@ -1755,10 +1759,10 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                        <Button Grid.Column="1" Content="{x:Static properties:Resources.Add}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="AddAttachment" Click="AddAttachmentsButton_Click" IsCancel="True" Style="{DynamicResource RedButtonStyle}" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}"/>
-                        <Button Grid.Column="2" Content="{x:Static properties:Resources.Delete}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="DeleteAttachment" Click="DeleteAttachmentsButton_Click" IsCancel="True" Style="{DynamicResource RedButtonStyle}" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}"/>
-                        <Button  Grid.Column="0"  Content="{x:Static properties:Resources.Open}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="OpenAttachment" Click="LoadSelectedAttachment" IsCancel="True" Style="{DynamicResource RedButtonStyle}"/>
-                        <Button Grid.Column="3"  Content="{x:Static properties:Resources.Link}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="LinkAttachment" Click="LinkAttachmentsButton_Click" IsCancel="True" Style="{DynamicResource RedButtonStyle}" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}"/>
+                            <Button Grid.Column="1" Content="{x:Static properties:Resources.Add}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="AddAttachment" Click="AddAttachmentsButton_Click" IsCancel="True" Style="{DynamicResource RedButtonStyle}" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}"/>
+                            <Button Grid.Column="2" Content="{x:Static properties:Resources.Delete}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="DeleteAttachment" Click="DeleteAttachmentsButton_Click" IsCancel="True" Style="{DynamicResource RedButtonStyle}" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}"/>
+                            <Button  Grid.Column="0"  Content="{x:Static properties:Resources.Open}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="OpenAttachment" Click="LoadSelectedAttachment" IsCancel="True" Style="{DynamicResource RedButtonStyle}"/>
+                            <Button Grid.Column="3"  Content="{x:Static properties:Resources.Link}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="LinkAttachment" Click="LinkAttachmentsButton_Click" IsCancel="True" Style="{DynamicResource RedButtonStyle}" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}"/>
 
                         </Grid>
 
@@ -1808,11 +1812,11 @@
                             <ListBox x:Name="ParentChildListbox" ItemTemplate="{DynamicResource ParentChildModifierDataTemplate}" KeyboardNavigation.DirectionalNavigation="Cycle" BorderBrush="Transparent" Foreground="{DynamicResource InputFontColor}" Background="{x:Null}" Padding="10,10,0,0" SelectionChanged="ParentChildListbox_SelectionChanged" Margin="0,-15,0,0" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}">
                                 <ListBox.Resources>
                                     <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}" >
-                                            <Setter Property="Margin" Value="2, 2, 2, 0" />
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate>
-                                                        <Border Background="Transparent">
+                                        <Setter Property="Margin" Value="2, 2, 2, 0" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <Border Background="Transparent">
                                                         <RadioButton IsHitTestVisible="False" Focusable="False" Foreground="Black"
                                                                      IsChecked="{Binding Path=IsSelected, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
                                                             <Label Padding="0"
@@ -1821,10 +1825,10 @@
                                                                    />
                                                         </RadioButton>
                                                     </Border>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
                                 </ListBox.Resources>
                                 <ListBox.ItemsSource>
                                     <Binding Mode="OneWay" Source="{StaticResource ParentChildEnumDS}" />
@@ -1838,15 +1842,15 @@
                                 <TextBlock DockPanel.Dock="Top" Text="{x:Static properties:Resources.SpousePartner}" TextWrapping="Wrap" Style="{DynamicResource SectionHeaderStyle}" Width="198.067" Height="18" Margin="5,0,0,0" HorizontalAlignment="Left" Foreground="{DynamicResource InputFontColor}" />
                             </DockPanel>
                             <TextBlock DockPanel.Dock="Top" Text="{x:Static properties:Resources.None}" Margin="10,0,0,0" Foreground="{DynamicResource InputFontColor}" Visibility="{Binding Path=HasSpouse, Converter={StaticResource ComposingConverter}, Mode=Default}"/>
-                         
+
                             <StackPanel DockPanel.Dock="Top" Margin="0,0,0,0" Visibility="{Binding Path=HasSpouse, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" >
                                 <DockPanel Margin="0,0,0,0" DockPanel.Dock="Top">
                                     <ComboBox x:Name="SpousesCombobox" IsSynchronizedWithCurrentItem="True" ItemTemplate="{DynamicResource ParentSetTemplate}" ItemsSource="{Binding Path=Spouses, Mode=OneWay}" SelectionChanged="SpousesCombobox_SelectionChanged" HorizontalAlignment="Left" Margin="10,0,0,0" Width="150"/>
                                     <Button Margin="0,4,3,0"  HorizontalAlignment="Right" DockPanel.Dock="Top" Content="{x:Static properties:Resources.RemoveSpouse}" Height="15" FontSize="10" Width="80" x:Name="RemoveSpouseButton" Click="RemoveSpouseButton_Click" IsCancel="True" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}" Style="{DynamicResource RedButtonStyle}" />
                                 </DockPanel>
-                               
+
                                 <RadioButton Margin="14,3,0,0" x:Name="SpouseModifer" Visibility="{Binding Path=IsLocked, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" Foreground="{DynamicResource InputFontColor}" IsChecked="True"/>
-                                
+
                                 <ListBox x:Name="SpouseStatusListbox" ItemTemplate="{DynamicResource SpouseModifierDataTemplate}" KeyboardNavigation.DirectionalNavigation="Cycle" BorderBrush="Transparent" Foreground="{DynamicResource InputFontColor}" Background="{x:Null}" Padding="10,10,0,0" SelectionChanged="SpouseStatusListbox_SelectionChanged" Margin="0,-10,0,0" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}">
                                     <ListBox.Resources>
                                         <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}" >
@@ -1855,14 +1859,14 @@
                                                 <Setter.Value>
                                                     <ControlTemplate>
                                                         <Border Background="Transparent">
-                                                          <RadioButton IsHitTestVisible="False"
+                                                            <RadioButton IsHitTestVisible="False"
                                                                        Focusable="False"
                                                                        Foreground="Black"
                                                                        IsChecked="{Binding Path=IsSelected, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
-                                                            <Label Content="{Binding Converter={StaticResource EnumValueDescriptionConverter}}"
+                                                                <Label Content="{Binding Converter={StaticResource EnumValueDescriptionConverter}}"
                                                                    Padding="0,0,0,0"
                                                                    Foreground="{Binding Path=Foreground, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                                                          </RadioButton>
+                                                            </RadioButton>
                                                         </Border>
                                                     </ControlTemplate>
                                                 </Setter.Value>
@@ -1873,7 +1877,7 @@
                                         <Binding Mode="OneWay" Source="{StaticResource SpouseStatusEnumDS}"/>
                                     </ListBox.ItemsSource>
                                 </ListBox>
-                                
+
                                 <Grid HorizontalAlignment="Left" Margin="10,0,0,0" Width="237.754">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -1885,7 +1889,7 @@
                                         <RowDefinition Height="24"/>
                                         <RowDefinition Height="24"/>
                                         <RowDefinition Height="24"/>
-                                       
+
                                     </Grid.RowDefinitions>
 
 
@@ -1897,7 +1901,7 @@
                                     <Label x:Name="ToDescriptor" Grid.Row="1" Grid.Column="1" Height="22" Margin="0,-10,0,0" Foreground="{DynamicResource InputFontColor}" />
                                     <TextBox Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" x:Name="ToEditTextBox" Width="140" LostFocus="ToEditTextBox_LostFocus" Height="22" Margin="0,0,0,0" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
 
-                                
+
 
                                     <Label Grid.Row="2" Margin="-5,-7,0,0" Content="{x:Static properties:Resources.Place}" Height="25" HorizontalAlignment="Left" Target="{Binding ElementName=ToEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
                                     <TextBox Grid.Row="2" Grid.Column="1" TextWrapping="NoWrap" x:Name="PlaceEditTextBox" Width="173" LostFocus="PlaceEditTextBox_LostFocus" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" Grid.ColumnSpan="3" Height="22" Margin="2,0,23,0" />
@@ -1942,11 +1946,11 @@
 
                                     <Label Content="{x:Static properties:Resources.Link}"  Grid.Row="7"  Foreground="{DynamicResource InputFontColor}" Margin="5,-27,0,0" />
                                     <TextBox TextWrapping="NoWrap" x:Name="RCitationLinkEditTextBox" LostFocus="RCitationLinkEditTextBox_LostFocus" Height="22" Margin="0,-55,-59,3" Width="80" Grid.Column="0" Grid.Row="8"   SnapsToDevicePixels="True" ClipToBounds="True" MinWidth="214" />
-                                    
+
                                     <Image Margin="4,-8,10,0" Grid.Row="7" Cursor="Hand" x:Name="RCitationSearch" MouseLeftButtonUp="RCitationLinkSearchClick" HorizontalAlignment="Right" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="Load this citation in your default browser." />
 
                                 </Grid>
-          
+
                             </StackPanel>
 
                         </StackPanel>
@@ -2101,18 +2105,18 @@
                         </Border>
                     </StackPanel>
                 </Border>
-                
+
                 <!-- Details List shows the current list of all people in the family -->
                 <Border x:Name="DetailsList" DockPanel.Dock="Top" Style="{DynamicResource DetailsBorderStyle}" Background="{x:Null}" BorderThickness="0,1,0,0" CornerRadius="0,0,0,0" Opacity="1" Margin="0,0,0,0" Padding="15,10,15,10">
                     <DockPanel>
                         <DockPanel Margin="0,0,0,8" DockPanel.Dock="Top">
                             <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{x:Static properties:Resources.FamilySpace}" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
-                            <TextBlock Text=" (" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
-                            <TextBlock Text="{Binding Path=Items.Count, ElementName=FamilyListView}" FontWeight="Normal" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
-                            <TextBlock Text=")" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
+                                <TextBlock Text="{x:Static properties:Resources.FamilySpace}" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
+                                <TextBlock Text=" (" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
+                                <TextBlock Text="{Binding Path=Items.Count, ElementName=FamilyListView}" FontWeight="Normal" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
+                                <TextBlock Text=")" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
                             </StackPanel>
-                            
+
                             <Button
                                 x:Name="FamilyDataButton" 
                                 Content="{x:Static properties:Resources.FamilyData}" 
@@ -2128,29 +2132,58 @@
                             <local:FilterText x:Name="FilterTextBox" TextBoxBase.TextChanged="FilterTextBox_TextChanged" VerticalAlignment="Center" Margin="0,0,0,0" />
                         </DockPanel>
 
-                      <DataGrid x:Name="FamilyListView"
-                                AllowDrop="False"
-                                CanUserAddRows="False"
-                                CanUserDeleteRows="False"
-                                IsReadOnly="True"
-                                AlternatingRowBackground="LightBlue"
-                                RowBackground="White"
-                                AlternationCount="2"
-                                SelectionMode="Single"
-                                AutoGenerateColumns="False"
-                                SelectionChanged="FamilyListView_SelectionChanged"
-                                ToolTip="{x:Static properties:Resources.FamilyListViewToolTip}"
-                                    >
-                        <DataGrid.Columns>
-                          <DataGridTextColumn Header="{x:Static properties:Resources.Names}"   Width="64" Binding="{Binding FirstName}"/>
-                          <DataGridTextColumn Header="{x:Static properties:Resources.Surname}" Width="64" Binding="{Binding LastName}"/>
-                          <DataGridTextColumn Header="{x:Static properties:Resources.TreeNum}" Width="30" Binding="{Binding Tree}"/>
-                          <DataGridTextColumn Header="{x:Static properties:Resources.Born}"    Width="35" Binding="{Binding YearOfBirth}" />
-                          <DataGridTextColumn Header="{x:Static properties:Resources.Died}"    Width="35" Binding="{Binding YearOfDeath}" />
-                          <DataGridTextColumn Header="{x:Static properties:Resources.Age}"     Width="30" Binding="{Binding Age}"/>
-                        </DataGrid.Columns>
-                      </DataGrid>
-                      
+                        <DataGrid 
+                            x:Name="FamilyListView"
+                            AllowDrop="False"
+                            HeadersVisibility="Column"
+                            CanUserAddRows="False"
+                            CanUserDeleteRows="False"
+                            AlternationCount="2"
+                            AlternatingRowBackground="LightGray"
+                            IsReadOnly="True"
+                            SelectionMode="Single"
+                            CanUserResizeRows="False"
+                            AutoGenerateColumns="False"
+                            SelectionChanged="FamilyListView_SelectionChanged"
+                            ToolTip="{x:Static properties:Resources.FamilyListViewToolTip}"
+                            Style="{DynamicResource FamilyListViewDataGridStyle}"
+                            ColumnHeaderStyle="{DynamicResource FamilyDataGridColumnHeader}"
+                            ItemContainerStyle="{DynamicResource FamilyListViewItemTemplate}"
+                                >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn 
+                                    Header="{x:Static properties:Resources.Names}"   
+                                    Width="64" 
+                                    Binding="{Binding FirstName}"
+                                        />
+                                <DataGridTextColumn
+                                    Header="{x:Static properties:Resources.Surname}" 
+                                    Width="64" 
+                                    Binding="{Binding LastName}"
+                                        />
+                                <DataGridTextColumn
+                                    Header="{x:Static properties:Resources.TreeNum}" 
+                                    Width="30" 
+                                    Binding="{Binding Tree}"
+                                        />
+                                <DataGridTextColumn 
+                                    Header="{x:Static properties:Resources.Born}"    
+                                    Width="35"
+                                    Binding="{Binding YearOfBirth}"
+                                        />
+                                <DataGridTextColumn 
+                                    Header="{x:Static properties:Resources.Died}"    
+                                    Width="35" 
+                                    Binding="{Binding YearOfDeath}"
+                                        />
+                                <DataGridTextColumn 
+                                    Header="{x:Static properties:Resources.Age}"     
+                                    Width="30" 
+                                    Binding="{Binding Age}"
+                                        />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
                         <!--<local:FamilyDisplayListView x:Name="FamilyListView" Background="{x:Null}" Margin="0,5,0,0" BorderBrush="{x:Null}"
           		SelectionMode="Single" SelectionChanged="FamilyListView_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
           		Style="{DynamicResource FamilyListViewStyle}" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -2173,7 +2206,9 @@
                                                             DisplayMemberBinding="{Binding Path=LastName}"
                                                             Width="64"
                                                             HeaderContainerStyle="{DynamicResource NameGridViewColumnHeader}"/>
-                                  --><!--<local:SortListViewColumn SortProperty="Name"  Header="{x:Static properties:Resources.Name}" DisplayMemberBinding="{Binding Path=Name}" Width="128" HeaderContainerStyle="{DynamicResource NameGridViewColumnHeader}"/>--><!--
+                                  -->
+                        <!--<local:SortListViewColumn SortProperty="Name"  Header="{x:Static properties:Resources.Name}" DisplayMemberBinding="{Binding Path=Name}" Width="128" HeaderContainerStyle="{DynamicResource NameGridViewColumnHeader}"/>-->
+                        <!--
                                   <local:SortListViewColumn SortProperty="BirthDate" Header="{x:Static properties:Resources.Born}" Width="35">
                                         <local:SortListViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -2202,6 +2237,6 @@
                 </Border>
             </DockPanel>
         </Border>
-       
+
     </DockPanel>
 </UserControl>
