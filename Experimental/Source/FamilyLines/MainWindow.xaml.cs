@@ -65,6 +65,13 @@ namespace KBS.FamilyLines
             ShowDetailsPane();
         }
 
+        private void NewUserControl_CancelButtonClick(object sender, RoutedEventArgs e)
+        {
+            HideNewUserControl();
+            //enableMenus();
+            ShowWelcomeScreen();
+        }
+
         private void DetailsControl_PersonInfoClick(object sender, RoutedEventArgs e)
         {
             PersonInfoControl.DataContext = family.Current;
@@ -74,6 +81,7 @@ namespace KBS.FamilyLines
 
         private void DetailsControl_FamilyDataClick(object sender, RoutedEventArgs e)
         {
+            FamilyDataControl.MakeVisible();
             FamilyDataControl.Refresh();
             // Uses an animation to show the Family Data Control
             ((Storyboard)this.Resources["ShowFamilyData"]).Begin(this);
@@ -226,6 +234,13 @@ namespace KBS.FamilyLines
             appSettings.EnableUTF8 = (bool)GedcomLocalizationControl.EnableUTF8CheckBox.IsChecked;
             appSettings.Save();
             ImportGedcom();
+        }
+
+        private void GedcomLocalizationControl_CancelButtonClick(object sender, RoutedEventArgs e)
+        {
+            GedcomLocalizationControl.Visibility = Visibility.Hidden;
+            removeControlFocus();
+            ShowWelcomeScreen();
         }
 
         private void SourcesControl_CancelButtonClick(object sender, RoutedEventArgs e)
@@ -1578,14 +1593,15 @@ namespace KBS.FamilyLines
         /// </summary>
         private void disableButtons()
         {
-            DetailsControl.EditButton.IsEnabled = false;
-            DetailsControl.InfoButton.IsEnabled = false;
-            DetailsControl.FamilyMemberAddButton.IsEnabled = false;
-            DetailsControl.FamilyDataButton.IsEnabled = false;
-            DetailsControl.EditAttachmentsButton.IsEnabled = false;
-            DetailsControl.EditRelationshipsButton.IsEnabled = false;
-            DetailsControl.EditCitationsButton.IsEnabled = false;
-            DetailsControl.EditMoreButton.IsEnabled = false;
+            DetailsControl.EditButton.IsEnabled =
+                DetailsControl.InfoButton.IsEnabled =
+                DetailsControl.FamilyMemberAddButton.IsEnabled =
+                DetailsControl.FamilyDataButton.IsEnabled =
+                DetailsControl.EditAttachmentsButton.IsEnabled =
+                DetailsControl.EditRelationshipsButton.IsEnabled =
+                DetailsControl.EditCitationsButton.IsEnabled =
+                DetailsControl.EditMoreButton.IsEnabled =
+                    false;
         }
 
         /// <summary>
@@ -1593,14 +1609,15 @@ namespace KBS.FamilyLines
         /// </summary>
         private void enableButtons()
         {
-            DetailsControl.InfoButton.IsEnabled = true;
-            DetailsControl.FamilyDataButton.IsEnabled = true;
-            DetailsControl.EditAttachmentsButton.IsEnabled = true;
-            DetailsControl.EditRelationshipsButton.IsEnabled = true;
-            DetailsControl.EditCitationsButton.IsEnabled = true;
-            DetailsControl.EditButton.IsEnabled = true;
-            DetailsControl.EditMoreButton.IsEnabled = true;
-            DetailsControl.FamilyMemberAddButton.IsEnabled = true;
+            DetailsControl.InfoButton.IsEnabled =
+                DetailsControl.FamilyDataButton.IsEnabled =
+                DetailsControl.EditAttachmentsButton.IsEnabled =
+                DetailsControl.EditRelationshipsButton.IsEnabled =
+                DetailsControl.EditCitationsButton.IsEnabled =
+                DetailsControl.EditButton.IsEnabled =
+                DetailsControl.EditMoreButton.IsEnabled =
+                DetailsControl.FamilyMemberAddButton.IsEnabled =
+                    true;
         }
 
         /// <summary>
@@ -1608,14 +1625,15 @@ namespace KBS.FamilyLines
         /// </summary>
         private void enableMenus()
         {
-            App.canExecuteJumpList = true;
-            NewMenu.IsEnabled = true;
-            OpenMenu.IsEnabled = true;
-            SaveMenu.IsEnabled = true;
-            PrintMenu.IsEnabled = true;
-            MediaMenu.IsEnabled = true;
-            ThemesMenu.IsEnabled = true;
-            HelpMenu.IsEnabled = true;
+            App.canExecuteJumpList =
+                NewMenu.IsEnabled =
+                OpenMenu.IsEnabled =
+                SaveMenu.IsEnabled =
+                PrintMenu.IsEnabled =
+                MediaMenu.IsEnabled =
+                ThemesMenu.IsEnabled =
+                HelpMenu.IsEnabled =
+                    true;
         }
 
         /// <summary>
@@ -1623,14 +1641,15 @@ namespace KBS.FamilyLines
         /// </summary>
         private void disableMenus()
         {
-            App.canExecuteJumpList = false;
-            NewMenu.IsEnabled = false;
-            OpenMenu.IsEnabled = false;
-            SaveMenu.IsEnabled = false;
-            MediaMenu.IsEnabled = false;
-            PrintMenu.IsEnabled = false;
-            ThemesMenu.IsEnabled = false;
-            HelpMenu.IsEnabled = false;
+            App.canExecuteJumpList =
+                NewMenu.IsEnabled =
+                OpenMenu.IsEnabled =
+                SaveMenu.IsEnabled =
+                MediaMenu.IsEnabled =
+                PrintMenu.IsEnabled =
+                ThemesMenu.IsEnabled =
+                HelpMenu.IsEnabled =
+                    false;
         }
 
         /// <summary>
@@ -1644,11 +1663,12 @@ namespace KBS.FamilyLines
             HidePersonInfoControl();
             HideDetailsPane();
             HideWelcomeScreen();
-            
-            PhotoViewerControl.Visibility = Visibility.Hidden;
-            StoryViewerControl.Visibility = Visibility.Hidden;
-            AttachmentViewerControl.Visibility = Visibility.Hidden;
-            DiagramControl.Visibility = Visibility.Hidden;
+
+            PhotoViewerControl.Visibility =
+                StoryViewerControl.Visibility =
+                AttachmentViewerControl.Visibility =
+                DiagramControl.Visibility =
+                    Visibility.Hidden;
 
         }
 
@@ -1866,8 +1886,14 @@ namespace KBS.FamilyLines
             theme2.CommandParameter = @"Themes\Silver\SilverResources.xaml";
             theme2.Click += new RoutedEventHandler(ChangeTheme);
 
+            MenuItem theme3 = new MenuItem();
+            theme3.Header = Properties.Resources.Metro;
+            theme3.CommandParameter = @"Themes\Metro\MetroResources.xaml";
+            theme3.Click += ChangeTheme;
+
             ThemesMenu.Items.Add(theme1);
             ThemesMenu.Items.Add(theme2);
+            ThemesMenu.Items.Add(theme3);
         }
 
         /// <summary>

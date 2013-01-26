@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+using GEDCOM.Net;
 using KBS.FamilyLinesLib.Properties;
 
 namespace KBS.FamilyLinesLib
@@ -204,7 +205,7 @@ namespace KBS.FamilyLinesLib
                 if (!string.IsNullOrEmpty(person.Suffix))
                     WriteLine(2, "NSFX", person.Suffix);
 
-                // Gender.
+                // GedcomSex.
                 ExportGender(person);
                 
                 // Birth and death info.
@@ -324,13 +325,13 @@ namespace KBS.FamilyLinesLib
 
                     ParentRelationship pRel = (ParentRelationship)rel;
 
-                    if(rel.PersonId==family.ParentLeft.Id && family.ParentLeft.Gender==Gender.Male)
+                    if(rel.PersonId==family.ParentLeft.Id && family.ParentLeft.Gender==GedcomSex.Male)
                         mrel = pRel.ParentChildModifier.ToString();
-                    if (rel.PersonId == family.ParentLeft.Id && family.ParentLeft.Gender == Gender.Female)
+                    if (rel.PersonId == family.ParentLeft.Id && family.ParentLeft.Gender == GedcomSex.Female)
                         frel = pRel.ParentChildModifier.ToString();
-                    if (rel.PersonId == family.ParentRight.Id && family.ParentRight.Gender == Gender.Female)
+                    if (rel.PersonId == family.ParentRight.Id && family.ParentRight.Gender == GedcomSex.Female)
                         frel = pRel.ParentChildModifier.ToString();
-                    if (rel.PersonId == family.ParentRight.Id && family.ParentRight.Gender == Gender.Male)
+                    if (rel.PersonId == family.ParentRight.Id && family.ParentRight.Gender == GedcomSex.Male)
                         mrel = pRel.ParentChildModifier.ToString();
                    }
                 }
@@ -350,11 +351,11 @@ namespace KBS.FamilyLinesLib
         {
 
             // PartnerLeft.
-            if (partnerLeft != null && partnerLeft.Gender == Gender.Male)
+            if (partnerLeft != null && partnerLeft.Gender == GedcomSex.Male)
                 WriteLine(1, "HUSB", string.Format(CultureInfo.InvariantCulture, 
                 "@{0}@", idMap.Get(partnerLeft.Id)));
                 
-            if (partnerLeft != null && partnerLeft.Gender == Gender.Female)
+            if (partnerLeft != null && partnerLeft.Gender == GedcomSex.Female)
                 WriteLine(1, "WIFE", string.Format(CultureInfo.InvariantCulture, 
                 "@{0}@", idMap.Get(partnerLeft.Id)));
 
@@ -362,11 +363,11 @@ namespace KBS.FamilyLinesLib
                 return;
 
             // PartnerRight.
-            if (partnerRight != null && partnerRight.Gender == Gender.Male)
+            if (partnerRight != null && partnerRight.Gender == GedcomSex.Male)
                 WriteLine(1, "HUSB", string.Format(CultureInfo.InvariantCulture, 
                 "@{0}@", idMap.Get(partnerRight.Id)));
 
-            if (partnerRight != null && partnerRight.Gender == Gender.Female)
+            if (partnerRight != null && partnerRight.Gender == GedcomSex.Female)
                 WriteLine(1, "WIFE", string.Format(CultureInfo.InvariantCulture, 
                 "@{0}@", idMap.Get(partnerRight.Id)));
 
@@ -641,7 +642,7 @@ namespace KBS.FamilyLinesLib
 
         private void ExportGender(Person person)
         {
-            WriteLine(1, "SEX", (person.Gender == Gender.Female) ? "F" : "M");
+            WriteLine(1, "SEX", (person.Gender == GedcomSex.Female) ? "F" : "M");
         }
 
         private void ExportRestriction(Person person)

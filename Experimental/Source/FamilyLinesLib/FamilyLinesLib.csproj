@@ -156,6 +156,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GEDCOM.Net\GEDCOM.Net.csproj">
+      <Project>{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}</Project>
+      <Name>GEDCOM.Net</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

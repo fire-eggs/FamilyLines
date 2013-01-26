@@ -11,11 +11,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FamilyLines")]
+[assembly: AssemblyTitle("Family Lines")]
 [assembly: AssemblyDescription("FamilyLines, an open source genealogy application")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FamilyLines")]
+[assembly: AssemblyProduct("Family Lines")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

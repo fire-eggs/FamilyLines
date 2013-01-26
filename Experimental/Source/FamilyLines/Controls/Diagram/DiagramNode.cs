@@ -17,11 +17,13 @@
 */
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using GEDCOM.Net;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines
@@ -417,10 +419,12 @@ namespace KBS.FamilyLines
             // Format string, the resource is in the XAML file.
             string resourceName = string.Format(
                 CultureInfo.InvariantCulture, "{0}{1}{2}{3}",
-                (person.Gender == Gender.Female) ? "Female" : "Male",
+                (person.Gender == GedcomSex.Female) ? "Female" : "Male",
                 this.type.ToString(),
                 (this.person.IsLiving) ? "Living" : "Deceased",
                 part);
+
+//        Debug.WriteLine(resourceName); // TODO performance?
 
             return (Brush)TryFindResource(resourceName);
         }
@@ -430,6 +434,8 @@ namespace KBS.FamilyLines
             // Format string, the resource is in the XAML file.
             string resourceName = string.Format(CultureInfo.InvariantCulture, 
                 "{0}{1}", this.type.ToString(), part);
+
+            //        Debug.WriteLine(resourceName); // TODO performance?
 
             return (Brush)TryFindResource(resourceName);
         }
@@ -442,7 +448,7 @@ namespace KBS.FamilyLines
             // Determine the node template based on node properties.
             string template = string.Format(
                 CultureInfo.InvariantCulture, "{0}{1}{2}NodeTemplate",
-                (person.Gender == Gender.Female) ? "Female" : "Male",
+                (person.Gender == GedcomSex.Female) ? "Female" : "Male",
                 (this.type == NodeType.Primary) ? "Primary" : "",
                 (person.Restriction != Restriction.Private && person.HasAvatar && Diagram.showPhotos) ? "Photo" : "");
 

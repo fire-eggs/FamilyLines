@@ -49,13 +49,13 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
     <TargetCulture>en-US</TargetCulture>
-    <ProductName>FamilyLines</ProductName>
-    <PublisherName>FamilyLines</PublisherName>
-    <MinimumRequiredVersion>4.0.0.0</MinimumRequiredVersion>
+    <ProductName>Family Lines</ProductName>
+    <PublisherName>Family Lines</PublisherName>
+    <MinimumRequiredVersion>0.1.0.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>familyshow.htm</WebPage>
+    <WebPage>familylines.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>4.2.0.%2a</ApplicationVersion>
+    <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -83,6 +83,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Page Include="Controls\EventDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\FamilyView\FamilyViewViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,6 +111,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Content Include="Themes\Metro\MetroResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -139,6 +148,9 @@
       <HintPath>..\..\..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\WindowsFormsIntegration\3.0.0.0__31bf3856ad364e35\WindowsFormsIntegration.dll</HintPath>
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Compile Include="Controls\EventDetails.xaml.cs">
+      <DependentUpon>EventDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FamilyView\FamilyView.cs" />
     <Compile Include="Controls\FamilyView\FamilyViewViewer.xaml.cs">
       <DependentUpon>FamilyViewViewer.xaml</DependentUpon>
@@ -617,6 +629,10 @@
     <ProjectReference Include="..\FamilyLinesLib\FamilyLinesLib.csproj">
       <Project>{2D6E56AB-7C1D-4129-858C-E319BF04E7C8}</Project>
       <Name>FamilyLinesLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GEDCOM.Net\GEDCOM.Net.csproj">
+      <Project>{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}</Project>
+      <Name>GEDCOM.Net</Name>
     </ProjectReference>
     <ProjectReference Include="..\SUT.PrintEngine\SUT.PrintEngine.csproj">
       <Project>{0B3D76D5-D9F4-4C0E-AFA9-143138EBC74D}</Project>

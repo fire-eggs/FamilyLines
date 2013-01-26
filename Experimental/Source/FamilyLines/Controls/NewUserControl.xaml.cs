@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using GEDCOM.Net;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines.Controls
@@ -21,12 +22,21 @@ namespace KBS.FamilyLines.Controls
 
         public static readonly RoutedEvent AddButtonClickEvent = EventManager.RegisterRoutedEvent(
             "AddButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NewUserControl));
+        
+        public static readonly RoutedEvent CancelButtonClickEvent = EventManager.RegisterRoutedEvent(
+            "CancelButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NewUserControl));
 
         // Expose this event for this control's container
         public event RoutedEventHandler AddButtonClick
         {
             add { AddHandler(AddButtonClickEvent, value); }
             remove { RemoveHandler(AddButtonClickEvent, value); }
+        }
+
+        public event RoutedEventHandler CancelButtonClick
+        {
+            add { AddHandler(CancelButtonClickEvent, value); }
+            remove { RemoveHandler(CancelButtonClickEvent, value); }
         }
 
         #endregion
@@ -38,8 +48,9 @@ namespace KBS.FamilyLines.Controls
             // Create a new person with the specified inputs
             Person newPerson = new Person(NamesInputTextBox.Text, SurnameInputTextBox.Text);
 
+            // TODO need a gender dropdown (?) - support other gender values
             // Setup the properties based on the input
-            newPerson.Gender = (MaleRadioButton.IsChecked == true) ? Gender.Male : Gender.Female;
+            newPerson.Gender = (MaleRadioButton.IsChecked == true) ? GedcomSex.Male : GedcomSex.Female;
             newPerson.BirthPlace = BirthPlaceInputTextBox.Text;
             newPerson.IsLiving = true;
 
@@ -52,6 +63,11 @@ namespace KBS.FamilyLines.Controls
             App.Family.OnContentChanged();
 
             RaiseEvent(new RoutedEventArgs(AddButtonClickEvent));
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(CancelButtonClickEvent));
         }
 
         #endregion
@@ -77,5 +93,6 @@ namespace KBS.FamilyLines.Controls
         }
 
         #endregion
+
     }
 }

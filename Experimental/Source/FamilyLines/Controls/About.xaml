@@ -21,7 +21,7 @@
         <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,1">
             <StackPanel Height="215" Background="{DynamicResource InputBackgroundBrush}">
                 <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
-                    <Image Margin="-3,2,3,0"  Source="..\FamilyShow.ico" Height="25"/>
+                    <Image Margin="-3,2,3,0"  Source="/FamilyLines;component/FamilyLines.ico" Height="25"/>
                     <Label FontWeight="Bold" FontSize="13" Foreground="{DynamicResource InputFontColor}" Content="{x:Static properties:Resources.FamilyShow}"/>
                 </StackPanel>
                 <Separator Margin="40,5,10,-3"/>
@@ -34,7 +34,7 @@
                 <Label Margin="10,0,0,0" Foreground="{DynamicResource InputFontColor}" FontWeight="Bold" Content="{x:Static properties:Resources.Discussion}" MouseLeftButtonUp="Discussion_MouseLeftButtonUp" Cursor="Hand"/>
                 </StackPanel>
                 <Separator Margin="40,5,10,-3"/>
-                <Label Margin="35,0,0,0" Foreground="{DynamicResource InputFontColor}" FontWeight="Bold" Content="Microsoft Permissive License (Ms-PL)"/>
+                <Label Margin="35,0,0,0" Foreground="{DynamicResource InputFontColor}" FontWeight="Bold" Content="Apache License 2.0 (Apache)"/>
                 <ScrollViewer Margin="40,5,5,0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Width="280" Height="70">
                     <TextBlock Foreground="{DynamicResource InputFontColor}" TextWrapping="Wrap" Text="{x:Static properties:Resources.EULA}"/>
                 </ScrollViewer>

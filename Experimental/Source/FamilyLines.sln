@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyLines", "FamilyLines\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SUT.PrintEngine", "SUT.PrintEngine\SUT.PrintEngine.csproj", "{0B3D76D5-D9F4-4C0E-AFA9-143138EBC74D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GEDCOM.Net", "GEDCOM.Net\GEDCOM.Net.csproj", "{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{0B3D76D5-D9F4-4C0E-AFA9-143138EBC74D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B3D76D5-D9F4-4C0E-AFA9-143138EBC74D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B3D76D5-D9F4-4C0E-AFA9-143138EBC74D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

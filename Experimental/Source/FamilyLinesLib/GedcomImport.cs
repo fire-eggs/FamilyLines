@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Xml;
+using GEDCOM.Net;
 
 namespace KBS.FamilyLinesLib
 {
@@ -46,6 +47,12 @@ namespace KBS.FamilyLinesLib
             peopleCollection.Clear();
             sourceCollection.Clear();
             repositoryCollection.Clear();
+
+            _reader = new BackgroundGedcomRecordReader();
+            _reader.Completed += reader_Completed;
+            _reader.ProgressChanged += reader_ProgressChanged;
+            _reader.ReadGedcom(gedcomFilePath);
+
 
             // First convert the GEDCOM file to an XML file so it's easier to parse,
             // the temp XML file is deleted when importing is complete.
@@ -85,6 +92,25 @@ namespace KBS.FamilyLinesLib
                File.Delete(xmlFilePath);
             }
             return true;
+        }
+
+        private BackgroundGedcomRecordReader _reader;
+        private GedcomDatabase _database;
+
+        void reader_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            // TODO
+        }
+
+        void reader_Completed(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            _database = _reader.Database;
+            // database.Individuals
+
+            for (int i = 0; i < _database.Individuals.Count; i++)
+            {
+                people[i].Individual = _database.Individuals[i];
+            }
         }
 
         /// <summary>
@@ -697,7 +723,7 @@ namespace KBS.FamilyLinesLib
             if (node.SelectSingleNode("DEAT") == null && node.SelectSingleNode("BURI") == null)  //if no deat tag and no buial tagcheck cremation tag
             person.IsLiving = (node.SelectSingleNode("CREM") == null) ? true : false;
 
-            if (person.Age > 90 && person.IsLiving == true)
+            if (person.Age > 120 && person.IsLiving) // KBR Gedcom.net assumes 120 years
                 person.IsLiving = false;  //make an assumption that anyone without a death date and over 90 is dead.  This leads to far less people imported as living when then are dead since GEDCOM does not have an IsLiving field.
             person.DeathDateDescriptor = GetValueDateDescriptor(node, "DEAT/DATE");
             person.DeathDate = GetValueDate(node, "DEAT/DATE");
@@ -933,12 +959,14 @@ namespace KBS.FamilyLinesLib
             return GetValueId(node, "WIFE");
         }
 
-        private static Gender GetGender(XmlNode node)
+        private static GedcomSex GetGender(XmlNode node)
         {
             string value = GetValue(node, "SEX");
             if (string.Compare(value, "f", true, CultureInfo.InvariantCulture) == 0)
-                return Gender.Female;
-            return Gender.Male;
+                return GedcomSex.Female;
+            if (string.Compare(value, "m", true, CultureInfo.InvariantCulture) == 0)
+                return GedcomSex.Male;
+            return GedcomSex.Undetermined;
         }
 
         private static Restriction GetRestriction(XmlNode node)
@@ -946,9 +974,8 @@ namespace KBS.FamilyLinesLib
             string value = GetValue(node, "RESN");
             if (string.Compare(value, "privacy", true, CultureInfo.InvariantCulture) == 0)
                 return Restriction.Private;
-            else if (string.Compare(value, "locked", true, CultureInfo.InvariantCulture) == 0)
+            if (string.Compare(value, "locked", true, CultureInfo.InvariantCulture) == 0)
                 return Restriction.Locked;
-            else
             return Restriction.None;
         }
 
@@ -959,7 +986,7 @@ namespace KBS.FamilyLinesLib
                 return false;
 
             // Divorced if the tag exists.
-            return node.SelectSingleNode("DIV") != null ? true : false;
+            return node.SelectSingleNode("DIV") != null;
         }
 
         private static string[] GetChildrenIDs(XmlNode node)
