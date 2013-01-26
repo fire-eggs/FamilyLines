@@ -583,9 +583,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FamilyLinesLib\FamilyLinesLib.csproj">
-      <Project>{2D6E56AB-7C1D-4129-858C-E319BF04E7C8}</Project>
+      <Project>{2d6e56ab-7c1d-4129-858c-e319bf04e7c8}</Project>
       <Name>FamilyLinesLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,7 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <!--The theme must be specified here to ensure all visual elements display in the designer-->
                 <!-- Use the Silver skin by default -->
-                <ResourceDictionary Source="Themes\Silver\SilverResources.xaml"/>
+                <ResourceDictionary Source="Themes\Black\BlackResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
