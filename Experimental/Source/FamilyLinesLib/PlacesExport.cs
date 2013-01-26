@@ -22,6 +22,7 @@
 //cremations
 
 using System.IO;
+using GEDCOM.Net;
 
 namespace KBS.FamilyLinesLib
 {
@@ -148,7 +149,8 @@ namespace KBS.FamilyLinesLib
                                             "	<address>" + p.BirthPlace + "</address>\n" +
                                             "	<description>" + p.BirthPlace + "</description>");
 
-                                if (p.Gender == Gender.Male)
+                                // TODO support other than m/f
+                                if (p.Gender == GedcomSex.Male)
                                     tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                                 else
                                     tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
@@ -180,7 +182,8 @@ namespace KBS.FamilyLinesLib
                                              "<address>" + p.DeathPlace + "</address>\n" +
                                              "<description>" + p.DeathPlace + "</description>");
 
-                                if (p.Gender == Gender.Male)
+                                // TODO support more than just m/f
+                                if (p.Gender == GedcomSex.Male)
                                     tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                                 else
                                     tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
@@ -211,7 +214,8 @@ namespace KBS.FamilyLinesLib
                                              "<address>" + p.BurialPlace + "</address>\n" +
                                              "<description>" + p.BurialPlace + "</description>");
 
-                                if (p.Gender == Gender.Male)
+                                // TODO support more than just m/f
+                                if (p.Gender == GedcomSex.Male)
                                     tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                                 else
                                     tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
@@ -243,7 +247,8 @@ namespace KBS.FamilyLinesLib
                                              "<address>" + p.CremationPlace + "</address>\n" +
                                              "<description>" + p.CremationPlace + "</description>");
 
-                                if (p.Gender == Gender.Male)
+                                // TODO support more than just m/f
+                                if (p.Gender == GedcomSex.Male)
                                     tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                                 else
                                     tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
@@ -285,8 +290,8 @@ namespace KBS.FamilyLinesLib
                                                          "<address>" + spouseRel.MarriagePlace + "</address>\n" +
                                                          "<description>" + spouseRel.MarriagePlace + "</description>");
 
-
-                                            if (p.Gender == Gender.Male)
+                                            // TODO support more than just m/f
+                                            if (p.Gender == GedcomSex.Male)
                                                 tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                                             else
                                                 tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
@@ -333,7 +338,8 @@ namespace KBS.FamilyLinesLib
                                             "	<description>" + p.BirthPlace + "</description>\n" +
                                             "   <TimeStamp>\n<when>" + p.YearOfBirth + "</when>\n</TimeStamp>");
 
-                                if (p.Gender == Gender.Male)
+                                // TODO support more than just m/f
+                                if (p.Gender == GedcomSex.Male)
                                     tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                                 else
                                     tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
@@ -367,7 +373,8 @@ namespace KBS.FamilyLinesLib
                                              "<description>" + p.DeathPlace + "</description>\n" +
                                              "<TimeStamp>\n<when>" + p.YearOfDeath + "</when>\n</TimeStamp>");
 
-                                if (p.Gender == Gender.Male)
+                                // TODO support more than just m/f
+                                if (p.Gender == GedcomSex.Male)
                                     tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                                 else
                                     tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
@@ -406,7 +413,8 @@ namespace KBS.FamilyLinesLib
                                              "<description>" + p.BurialPlace + "</description>\n" +
                                              "<TimeStamp>\n<when>" + year + "</when>\n</TimeStamp>");
 
-                                if (p.Gender == Gender.Male)
+                                // TODO support more than just m/f
+                                if (p.Gender == GedcomSex.Male)
                                     tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                                 else
                                     tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
@@ -445,7 +453,8 @@ namespace KBS.FamilyLinesLib
                                              "<description>" + p.CremationPlace + "</description>\n" +
                                              "<TimeStamp>\n<when>" + year + "</when>\n</TimeStamp>");
 
-                                if (p.Gender == Gender.Male)
+                                // TODO support more than just m/f
+                                if (p.Gender == GedcomSex.Male)
                                     tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                                 else
                                     tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
@@ -493,8 +502,8 @@ namespace KBS.FamilyLinesLib
                                                          "<description>" + spouseRel.MarriagePlace + "</description>\n" +
                                                          "<TimeStamp>\n<when>" + date + "</when>\n</TimeStamp>");
 
-
-                                            if (p.Gender == Gender.Male)
+                                            // TODO support more than just m/f
+                                            if (p.Gender == GedcomSex.Male)
                                                 tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                                             else
                                                 tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
@@ -545,7 +554,8 @@ namespace KBS.FamilyLinesLib
 
                             tw.WriteLine("</TimeSpan>");
 
-                            if (p.Gender == Gender.Male)
+                            // TODO support more than just m/f
+                            if (p.Gender == GedcomSex.Male)
                                 tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
                             else
                                 tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");

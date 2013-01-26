@@ -193,61 +193,168 @@
             </Grid>
 
             <!-- New User Control -->
-            <Controls:NewUserControl x:Name="NewUserControl" HorizontalAlignment="Center" VerticalAlignment="Center" AddButtonClick="NewUserControl_AddButtonClick"/>
+            <Controls:NewUserControl 
+                x:Name="NewUserControl"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                AddButtonClick="NewUserControl_AddButtonClick"
+                CancelButtonClick="NewUserControl_CancelButtonClick"
+                    />
             
             <!-- Welcome User Control -->
-            <local:Welcome x:Name="WelcomeUserControl" HorizontalAlignment="Center" VerticalAlignment="Center" ImportButtonClick="WelcomeUserControl_ImportButtonClick" NewButtonClick="WelcomeUserControl_NewButtonClick" OpenButtonClick="WelcomeUserControl_OpenButtonClick" OpenRecentFileButtonClick="WelcomeUserControl_OpenRecentFileButtonClick" />
+            <local:Welcome 
+                x:Name="WelcomeUserControl" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                ImportButtonClick="WelcomeUserControl_ImportButtonClick" 
+                NewButtonClick="WelcomeUserControl_NewButtonClick" 
+                OpenButtonClick="WelcomeUserControl_OpenButtonClick" 
+                OpenRecentFileButtonClick="WelcomeUserControl_OpenRecentFileButtonClick" 
+                    />
             
             <!-- About Control -->
-            <Controls:About x:Name="AboutControl" HorizontalAlignment="Center" Visibility="Hidden" VerticalAlignment="Center" CloseButtonClick="AboutControl_CloseButtonClick" />
+            <Controls:About 
+                x:Name="AboutControl" 
+                HorizontalAlignment="Center" 
+                Visibility="Hidden" 
+                VerticalAlignment="Center" 
+                CloseButtonClick="AboutControl_CloseButtonClick" 
+                    />
             
             <!-- Statistics Control -->
-            <local:Statistics x:Name="StatisticsControl" HorizontalAlignment="Center" Visibility="Hidden" VerticalAlignment="Center" CloseButtonClick="StatisticsControl_CloseButtonClick" />
+            <local:Statistics 
+                x:Name="StatisticsControl" 
+                HorizontalAlignment="Center" 
+                Visibility="Hidden" 
+                VerticalAlignment="Center" 
+                CloseButtonClick="StatisticsControl_CloseButtonClick" 
+                    />
             
             <!-- PhotoViewer Control -->
-            <local:PhotoViewer x:Name="PhotoViewerControl" Visibility="Hidden" CloseButtonClick="PhotoViewerControl_CloseButtonClick" />
+            <local:PhotoViewer 
+                x:Name="PhotoViewerControl"
+                Visibility="Hidden" 
+                CloseButtonClick="PhotoViewerControl_CloseButtonClick" 
+                    />
             
             <!-- AttachmentViewer Control -->
-            <local:AttachmentViewer x:Name="AttachmentViewerControl" Visibility="Hidden" CloseButtonClick="AttachmentViewerControl_CloseButtonClick" />
+            <local:AttachmentViewer 
+                x:Name="AttachmentViewerControl" 
+                Visibility="Hidden" 
+                CloseButtonClick="AttachmentViewerControl_CloseButtonClick" 
+                    />
             
             <!-- StoryViewer Control -->
-            <local:StoryViewer x:Name="StoryViewerControl" Visibility="Hidden" CloseButtonClick="StoryViewerControl_CloseButtonClick" />
+            <local:StoryViewer 
+                x:Name="StoryViewerControl" 
+                Visibility="Hidden" 
+                CloseButtonClick="StoryViewerControl_CloseButtonClick" 
+                    />
 
             <!-- Merge Control -->
-            <local:Merge x:Name="MergeControl" HorizontalAlignment="Center" Visibility="Hidden" VerticalAlignment="Center" DoneButtonClick="MergeControl_DoneButtonClick"/>
+            <local:Merge 
+                x:Name="MergeControl" 
+                HorizontalAlignment="Center" 
+                Visibility="Hidden" 
+                VerticalAlignment="Center" 
+                DoneButtonClick="MergeControl_DoneButtonClick"
+                    />
 
             <!-- Save Control -->
-            <local:Save x:Name="SaveControl" HorizontalAlignment="Center" Visibility="Hidden" VerticalAlignment="Center" SaveButtonClick="SaveControl_SaveButtonClick" CancelButtonClick="SaveControl_CancelButtonClick" />
+            <local:Save 
+                x:Name="SaveControl" 
+                HorizontalAlignment="Center" 
+                Visibility="Hidden" 
+                VerticalAlignment="Center" 
+                SaveButtonClick="SaveControl_SaveButtonClick" 
+                CancelButtonClick="SaveControl_CancelButtonClick"
+                    />
 
             <!-- Extract Control -->
-            <local:Extract x:Name="ExtractControl" HorizontalAlignment="Center" Visibility="Hidden" VerticalAlignment="Center" CancelButtonClick="ExtractControl_CancelButtonClick" />
+            <local:Extract 
+                x:Name="ExtractControl" 
+                HorizontalAlignment="Center" 
+                Visibility="Hidden" 
+                VerticalAlignment="Center" 
+                CancelButtonClick="ExtractControl_CancelButtonClick" 
+                    />
 
             <!-- PersonInfo Control -->
-            <local:PersonInfo x:Name="PersonInfoControl" Opacity="0" Visibility="Hidden" CloseButtonClick="PersonInfoControl_CloseButtonClick" />
+            <local:PersonInfo 
+                x:Name="PersonInfoControl" 
+                Opacity="0"
+                Visibility="Hidden" 
+                CloseButtonClick="PersonInfoControl_CloseButtonClick" 
+                    />
             
             <!-- Html Control -->
-            <local:Html x:Name="HtmlControl" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" CancelButtonClick="HtmlControl_CancelButtonClick"/>
+            <local:Html 
+                x:Name="HtmlControl" 
+                Visibility="Hidden" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                CancelButtonClick="HtmlControl_CancelButtonClick"
+                    />
 
             <!-- Places Control -->
-            <local:Places x:Name="PlacesControl" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" CancelButtonClick="PlacesControl_CancelButtonClick"/>
+            <local:Places 
+                x:Name="PlacesControl" 
+                Visibility="Hidden" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                CancelButtonClick="PlacesControl_CancelButtonClick"
+                    />
 
             <!-- GedcomLocalization Control -->
-            <local:GedcomLocalization x:Name="GedcomLocalizationControl" Visibility="Hidden" VerticalAlignment="Center" ContinueButtonClick="GedcomLocalizationControl_ContinueButtonClick"/>
+            <local:GedcomLocalization
+                x:Name="GedcomLocalizationControl" 
+                Visibility="Hidden" 
+                VerticalAlignment="Center" 
+                ContinueButtonClick="GedcomLocalizationControl_ContinueButtonClick"
+                CancelButtonClick="GedcomLocalizationControl_CancelButtonClick"
+                    />
             
             <!-- Sources Control -->
-            <local:Sources x:Name="SourcesControl" Visibility="Hidden" VerticalAlignment="Center"  CancelButtonClick="SourcesControl_CancelButtonClick" />
+            <local:Sources 
+                x:Name="SourcesControl" 
+                Visibility="Hidden"
+                VerticalAlignment="Center"  
+                CancelButtonClick="SourcesControl_CancelButtonClick"
+                    />
             
             <!-- Repositories Control -->
-            <local:Repositories x:Name="RepositoriesControl" Visibility="Hidden" VerticalAlignment="Center"  CancelButtonClick="RepositoriesControl_CancelButtonClick" />
+            <local:Repositories 
+                x:Name="RepositoriesControl" 
+                Visibility="Hidden" 
+                VerticalAlignment="Center"  
+                CancelButtonClick="RepositoriesControl_CancelButtonClick" 
+                    />
             
             <!-- FamilyData Control -->
-            <local:FamilyData x:Name="FamilyDataControl" Opacity="0" Visibility="Hidden" CloseButtonClick="FamilyDataControl_CloseButtonClick" />
+            <local:FamilyData 
+                x:Name="FamilyDataControl" 
+                Opacity="0"
+                Visibility="Hidden" 
+                CloseButtonClick="FamilyDataControl_CloseButtonClick" 
+                    />
 
             <!-- Language Control -->
-            <local:Language x:Name="LanguageControl" HorizontalAlignment="Center" Visibility="Hidden" VerticalAlignment="Center" CloseButtonClick="LanguageControl_CloseButtonClick" />
+            <local:Language 
+                x:Name="LanguageControl" 
+                HorizontalAlignment="Center" 
+                Visibility="Hidden"
+                VerticalAlignment="Center" 
+                CloseButtonClick="LanguageControl_CloseButtonClick" 
+                    />
             
             <!--Date Calculator Control-->
-            <local:DateCalculator x:Name="DateCalculatorControl" HorizontalAlignment="Center" Visibility="Hidden" VerticalAlignment="Center" CancelButtonClick="DateCalculatorControl_CancelButtonClick" />
+            <local:DateCalculator 
+                x:Name="DateCalculatorControl" 
+                HorizontalAlignment="Center" 
+                Visibility="Hidden" 
+                VerticalAlignment="Center" 
+                CancelButtonClick="DateCalculatorControl_CancelButtonClick" 
+                    />
 
         </Grid>
 

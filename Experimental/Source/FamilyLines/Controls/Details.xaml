@@ -8,7 +8,7 @@
    xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
    x:Class="KBS.FamilyLines.Details" DataContextChanged="UserControl_DataContextChanged" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    mc:Ignorable="d" Width="277" >
+   xmlns:Controls="clr-namespace:KBS.FamilyLines.Controls" mc:Ignorable="d" Width="277" >
     <UserControl.Resources>
 
         <ResourceDictionary>
@@ -1610,6 +1610,7 @@
                             <Button Margin="0,0,0,0" HorizontalAlignment="Left" DockPanel.Dock="Top" Content="{x:Static properties:Resources.Back}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="DoneEditMoreButton" Click="DoneEditMoreButton_Click" IsCancel="True" />
                         </DockPanel>
 
+                        <!-- Burial date -->
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1626,6 +1627,8 @@
                             <TextBox Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="NoWrap" x:Name="BurialDateEditTextBox" Width="135" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" Text="{Binding Path=BurialDate, Converter={StaticResource DateFormattingConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="" ToolTipOpening="ToolTip_All"/>
 
                         </Grid>
+                        
+                        <!-- Burial Place -->
                         <Label Content="{x:Static properties:Resources.BurialPlace}"  Target="{Binding ElementName=BurialPlaceEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -1663,6 +1666,15 @@
                             <Image Margin="4,0,0,0" Cursor="Hand" x:Name="PlaceOfCremationSearch" MouseLeftButtonUp="SearchMapCremationPlace" HorizontalAlignment="Center" Visibility="{Binding Path=HasCremationPlace, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />     
                         </Grid>
 
+                        <Expander Name="expandCHR" ExpandDirection="Down" 
+                                  IsExpanded="False" Header="Christening">
+                            <Controls:EventDetails x:Name="ChristeningEvent"/>
+                        </Expander>
+                        <Expander Name="expandBAPM" ExpandDirection="Down" 
+                                  IsExpanded="False" Header="Baptism">
+                            <Controls:EventDetails x:Name="BaptismEvent"/>
+                        </Expander>
+                        
                     </StackPanel>
                 </Border>
 
@@ -2130,7 +2142,9 @@
                                 AlternationCount="2"
                                 SelectionMode="Single"
                                 AutoGenerateColumns="False"
-                                SelectionChanged="FamilyListView_SelectionChanged">
+                                SelectionChanged="FamilyListView_SelectionChanged"
+                                ToolTip="Hold shift and click on other columns to multi-sort"
+                                    >
                         <DataGrid.Columns>
                           <DataGridTextColumn Header="{x:Static properties:Resources.Names}"   Width="64" Binding="{Binding FirstName}"/>
                           <DataGridTextColumn Header="{x:Static properties:Resources.Surname}" Width="64" Binding="{Binding LastName}"/>

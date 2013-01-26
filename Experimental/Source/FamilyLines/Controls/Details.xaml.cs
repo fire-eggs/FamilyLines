@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using GEDCOM.Net;
 using KBS.FamilyLinesLib;
 
 
@@ -23,7 +24,7 @@ namespace KBS.FamilyLines
         PeopleCollection family = App.Family;
         SourceCollection sources = App.Sources;
 
-        Gender genderFilter = Gender.Male;
+        GedcomSex genderFilter = GedcomSex.Male;
 
         Boolean ResetFilter = false;     //When true, enables quick filter reset
         Boolean ExistingFilter = false;  //When true, enables automatic filtering on gender and relatives
@@ -61,6 +62,10 @@ namespace KBS.FamilyLines
             ICollectionView view = CollectionViewSource.GetDefaultView(family);
             view.SortDescriptions.Add(new SortDescription("LastName", ListSortDirection.Ascending));
             view.SortDescriptions.Add(new SortDescription("FirstName", ListSortDirection.Ascending));
+
+            // TODO can these be specified in XAML ???
+            ChristeningEvent.EventType = GedcomEvent.GedcomEventType.CHR;
+            BaptismEvent.EventType = GedcomEvent.GedcomEventType.BAPM;
 
             // Handle event when the selected person changes so can select 
             // the item in the list.
@@ -385,7 +390,7 @@ namespace KBS.FamilyLines
                     case FamilyMemberComboBoxValue.Son:
                         relationship = KBS.FamilyLines.Properties.Resources.Son;
                         // Assume that the new person has the same last name as the husband
-                        if ((family.Current.Gender == Gender.Female) && (family.Current.Spouses.Count > 0) && (family.Current.Spouses[0].Gender == Gender.Male))
+                        if ((family.Current.Gender == GedcomSex.Female) && (family.Current.Spouses.Count > 0) && (family.Current.Spouses[0].Gender == GedcomSex.Male))
                             surname = family.Current.Spouses[0].LastName;
                         else
                             surname = family.Current.LastName;
@@ -444,7 +449,7 @@ namespace KBS.FamilyLines
                 switch ((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue)
                 {
                     case FamilyMemberComboBoxValue.Father:
-                        newPerson.Gender = Gender.Male;
+                        newPerson.Gender = GedcomSex.Male;
 
                         RelationshipHelper.AddParent(family, family.Current, newPerson);
 
@@ -454,7 +459,7 @@ namespace KBS.FamilyLines
                         break;
 
                     case FamilyMemberComboBoxValue.Mother:
-                        newPerson.Gender = Gender.Female;
+                        newPerson.Gender = GedcomSex.Female;
 
                         RelationshipHelper.AddParent(family, family.Current, newPerson);
 
@@ -464,7 +469,7 @@ namespace KBS.FamilyLines
                         break;
 
                     case FamilyMemberComboBoxValue.Brother:
-                        newPerson.Gender = Gender.Male;
+                        newPerson.Gender = GedcomSex.Male;
 
                         // Check to see if there are multiple parents
                         if (possibleParents.Count > 1)
@@ -474,7 +479,7 @@ namespace KBS.FamilyLines
                         break;
 
                     case FamilyMemberComboBoxValue.Sister:
-                        newPerson.Gender = Gender.Female;
+                        newPerson.Gender = GedcomSex.Female;
 
                         // Check to see if there are multiple parents
                         if (possibleParents.Count > 1)
@@ -489,7 +494,7 @@ namespace KBS.FamilyLines
                         break;
 
                     case FamilyMemberComboBoxValue.Son:
-                        newPerson.Gender = Gender.Male;
+                        newPerson.Gender = GedcomSex.Male;
 
                         if (family.Current.Spouses.Count > 1)
                         {
@@ -501,7 +506,7 @@ namespace KBS.FamilyLines
                         break;
 
                     case FamilyMemberComboBoxValue.Daughter:
-                        newPerson.Gender = Gender.Female;
+                        newPerson.Gender = GedcomSex.Female;
                         if (family.Current.Spouses.Count > 1)
                         {
                             possibleParents = family.Current.MakeParentSets();
@@ -554,21 +559,21 @@ namespace KBS.FamilyLines
                 switch ((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue)
                 {
                     case FamilyMemberComboBoxValue.Brother:
-                        newPerson.Gender = Gender.Male;
+                        newPerson.Gender = GedcomSex.Male;
                         RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
                         break;
 
                     case FamilyMemberComboBoxValue.Sister:
-                        newPerson.Gender = Gender.Female;
+                        newPerson.Gender = GedcomSex.Female;
                         RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
                         break;
                     case FamilyMemberComboBoxValue.Son:
-                        newPerson.Gender = Gender.Male;
+                        newPerson.Gender = GedcomSex.Male;
                         RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
                         break;
 
                     case FamilyMemberComboBoxValue.Daughter:
-                        newPerson.Gender = Gender.Female;
+                        newPerson.Gender = GedcomSex.Female;
                         RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
                         break;
                 }
@@ -577,7 +582,7 @@ namespace KBS.FamilyLines
                 FamilyMemberAddButton.Focus();
 
                 // Use animation to hide the Details Add Intermediate section
-                ((Storyboard)this.Resources["CollapseDetailsAddIntermediate"]).Begin(this);
+                ((Storyboard)Resources["CollapseDetailsAddIntermediate"]).Begin(this);
 
                 family.OnContentChanged(newPerson);
                 family.OnContentChanged(family.Current);
@@ -601,26 +606,26 @@ namespace KBS.FamilyLines
                     {
 
                         case ExistingFamilyMemberComboBoxValue.Father:
-                            if (existingPerson.Gender == Gender.Male)
+                            if (existingPerson.Gender == GedcomSex.Male)
                                 RelationshipHelper.AddExistingParent(family, family.Current, existingPerson, ParentChildModifier.Natural);
 
                             break;
 
                         case ExistingFamilyMemberComboBoxValue.Mother:
-                            if (existingPerson.Gender == Gender.Female)
+                            if (existingPerson.Gender == GedcomSex.Female)
                                 RelationshipHelper.AddExistingParent(family, family.Current, existingPerson, ParentChildModifier.Natural);
 
                             break;
 
                         case ExistingFamilyMemberComboBoxValue.Brother:
-                            if (existingPerson.Gender == Gender.Male)
+                            if (existingPerson.Gender == GedcomSex.Male)
                                 RelationshipHelper.AddExistingSibling(family, family.Current, existingPerson);
 
                             break;
 
                         case ExistingFamilyMemberComboBoxValue.Sister:
 
-                            if (existingPerson.Gender == Gender.Female)
+                            if (existingPerson.Gender == GedcomSex.Female)
                                 RelationshipHelper.AddExistingSibling(family, family.Current, existingPerson);
                             break;
 
@@ -632,13 +637,13 @@ namespace KBS.FamilyLines
 
                         case ExistingFamilyMemberComboBoxValue.Son:
 
-                            if (existingPerson.Gender == Gender.Male)
+                            if (existingPerson.Gender == GedcomSex.Male)
                                 RelationshipHelper.AddExistingChild(family, family.Current, existingPerson, ParentChildModifier.Natural);
                             break;
 
                         case ExistingFamilyMemberComboBoxValue.Daughter:
 
-                            if (existingPerson.Gender == Gender.Female)
+                            if (existingPerson.Gender == GedcomSex.Female)
                                 RelationshipHelper.AddExistingChild(family, family.Current, existingPerson, ParentChildModifier.Natural);
                             break;
                     }
@@ -697,25 +702,25 @@ namespace KBS.FamilyLines
                 switch ((ExistingFamilyMemberComboBoxValue)ExistingFamilyMemberComboBox.SelectedValue)
                 {
                     case ExistingFamilyMemberComboBoxValue.Father:
-                        genderFilter = Gender.Male;
+                        genderFilter = GedcomSex.Male;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Mother:
-                        genderFilter = Gender.Female;
+                        genderFilter = GedcomSex.Female;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Brother:
-                        genderFilter = Gender.Male;
+                        genderFilter = GedcomSex.Male;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Sister:
-                        genderFilter = Gender.Female;
+                        genderFilter = GedcomSex.Female;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Spouse:
                         ignoreGender = true;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Son:
-                        genderFilter = Gender.Male;
+                        genderFilter = GedcomSex.Male;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Daughter:
-                        genderFilter = Gender.Female;
+                        genderFilter = GedcomSex.Female;
                         break;
                 }
 
@@ -742,7 +747,7 @@ namespace KBS.FamilyLines
             if (!string.IsNullOrEmpty(dialog.FileName))
             {
 
-                Person p = this.family.Current;
+                Person p = family.Current;
                 string filename = dialog.FileName;
 
                 tw = new StreamWriter(filename);
@@ -807,7 +812,7 @@ namespace KBS.FamilyLines
                         string m8 = string.Empty;  //actual text
 
                         if (!string.IsNullOrEmpty(((SpouseRelationship)rel).MarriageDateDescriptor))
-                            m1 = ((SpouseRelationship)rel).MarriageDateDescriptor.ToString();
+                            m1 = ((SpouseRelationship)rel).MarriageDateDescriptor;
                         if (!string.IsNullOrEmpty(((SpouseRelationship)rel).MarriageDate.ToString()))
                             m2 = dateformat(((SpouseRelationship)rel).MarriageDate);
                         if (!string.IsNullOrEmpty(((SpouseRelationship)rel).MarriagePlace))
@@ -1059,7 +1064,7 @@ namespace KBS.FamilyLines
                     SourceEditTextBox.IsEnabled = true;
 
                     //Enable the correct fields
-                    if (p.IsLiving == true && p.Restriction != Restriction.Locked)
+                    if (p.IsLiving && p.Restriction != Restriction.Locked)
                     {
                         if ((CitationsComboBoxValue)CitationsComboBox.SelectedValue == CitationsComboBoxValue.Burial ||
                             (CitationsComboBoxValue)CitationsComboBox.SelectedValue == CitationsComboBoxValue.Death ||
@@ -1292,9 +1297,9 @@ namespace KBS.FamilyLines
         {
             try
             {
-                if (this.CitationLinkEditTextBox.Text.ToString() != null && this.CitationLinkEditTextBox.Text.ToString().Length > 0)
+                if (!string.IsNullOrEmpty(CitationLinkEditTextBox.Text))
                 {
-                    string searchText = this.CitationLinkEditTextBox.Text.ToString(); ;
+                    string searchText = CitationLinkEditTextBox.Text;
                     if (searchText.StartsWith(Properties.Resources.www) || searchText.StartsWith(Properties.Resources.http))
                         System.Diagnostics.Process.Start(searchText);
                     else
@@ -1373,6 +1378,9 @@ namespace KBS.FamilyLines
                 BurialDateEditTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             if (CremationDateEditTextBox.IsFocused)
                 CremationDateEditTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
+            ChristeningEvent.Leaving();
+            BaptismEvent.Leaving();
 
             // Let the collection know that it has been updated so that the diagram control will update.
             family.OnContentChanged();
@@ -2087,7 +2095,7 @@ namespace KBS.FamilyLines
             if (!ignoreSelection)
             {
                 // KBR 2012/03/26 DataGrid based list for multi-column sorting
-                var dg = sender as System.Windows.Controls.DataGrid;
+                var dg = sender as DataGrid;
                 if (dg == null)
                     return;
 
@@ -2098,6 +2106,10 @@ namespace KBS.FamilyLines
                 ignoreSelection = true;
                 family.Current = p;
                 DataContext = family.Current;
+
+                // TODO better way?
+                BaptismEvent.Individual = family.Current;
+                ChristeningEvent.Individual = family.Current;
 
                 //ignoreSelection = true;
                 //Person selected = (Person)((ListBox)sender).SelectedItem;
@@ -2222,6 +2234,10 @@ namespace KBS.FamilyLines
 
                 //update the RCitations screen when the person is changed
                 UpdateRCitationsComboBox();
+
+                // TODO consider subscribing to family_currentchanged ???
+                ChristeningEvent.Individual = family.Current;
+                BaptismEvent.Individual = family.Current;
             }
         }
 
@@ -2673,18 +2689,18 @@ namespace KBS.FamilyLines
         private void UpdateToolTip(TextBox box, string sourceId, string citation)
         {
             if (string.IsNullOrEmpty(box.Text))
-                box.ToolTip = KBS.FamilyLines.Properties.Resources.Unknown;  //Event is not known
+                box.ToolTip = Properties.Resources.Unknown;  //Event is not known
             else
             {
-                if (this.sources.Find(sourceId) != null)  //Event has citation
+                if (sources.Find(sourceId) != null)  //Event has citation
                 {
-                    box.ToolTip = this.sources.Find(sourceId).SourceNameAndId;  //Use friendly name
+                    box.ToolTip = sources.Find(sourceId).SourceNameAndId;  //Use friendly name
 
                     if (!string.IsNullOrEmpty(citation))
                         box.ToolTip += "\n" + citation;  //Only add the details if there is a valid source iD
                 }
                 else
-                    box.ToolTip = KBS.FamilyLines.Properties.Resources.Uncited;  //Event has no citation
+                    box.ToolTip = Properties.Resources.Uncited;  //Event has no citation
 
             }
         }

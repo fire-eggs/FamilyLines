@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GEDCOM.Net;
 
 namespace KBS.FamilyLinesLib
 {
@@ -76,7 +77,7 @@ namespace KBS.FamilyLinesLib
             // In this case, just add a simple child parent relationship and don't try to add
             // siblings etc, this should be done manually.
 
-            Gender parentGender = parent.Gender;
+            GedcomSex parentGender = parent.Gender;
 
             int i = 0;  // number of parents of same gender
 
@@ -208,11 +209,12 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public static void AddSpouse(PeopleCollection family, Person person, Person spouse, SpouseModifier modifier)
         {
+            // TODO unreasonable assumption - impact is how?
             // Assume the spouse's gender based on the counterpart of the person's gender
-            if (person.Gender == Gender.Male)
-                spouse.Gender = Gender.Female;
+            if (person.Gender == GedcomSex.Male)
+                spouse.Gender = GedcomSex.Female;
             else
-                spouse.Gender = Gender.Male;
+                spouse.Gender = GedcomSex.Male;
 
             if (person.Spouses != null)
             {
@@ -259,11 +261,12 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public static void AddExistingSpouse(PeopleCollection family, Person person, Person spouse, SpouseModifier modifier)
         {
+            // TODO unreasonable assumption - impact is how?
             // Assume the spouse's gender based on the counterpart of the person's gender
-            if (person.Gender == Gender.Male)
-                spouse.Gender = Gender.Female;
+            if (person.Gender == GedcomSex.Male)
+                spouse.Gender = GedcomSex.Female;
             else
-                spouse.Gender = Gender.Male;
+                spouse.Gender = GedcomSex.Male;
 
             if (person.Spouses != null)
             {

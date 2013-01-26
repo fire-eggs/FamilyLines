@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using GEDCOM.Net;
 using SharpKml.Base;
 using SharpKml.Dom;
 
@@ -325,7 +326,7 @@ namespace KBS.FamilyLinesLib
                         AddToSpan(spans, feat, person.DeathDate.GetValueOrDefault());
                     }
 
-                    if (person.Gender == Gender.Male)
+                    if (person.Gender == GedcomSex.Male)
                     {
                         var marrs = person.GetMarriages();
                         foreach (var relationship in marrs)
@@ -384,7 +385,7 @@ namespace KBS.FamilyLinesLib
                                                   person.DeathPlace);
             feat.Address = person.DeathPlace;
 
-            feat.StyleUrl = new Uri(person.Gender == Gender.Male ? "#boyIconD" : "#girlIconD", UriKind.Relative);
+            feat.StyleUrl = new Uri(person.Gender == GedcomSex.Male ? "#boyIconD" : "#girlIconD", UriKind.Relative);
             return feat;
         }
 
@@ -398,7 +399,7 @@ namespace KBS.FamilyLinesLib
                                                   person.BirthPlace);
             feat.Address = person.BirthPlace;
 
-            feat.StyleUrl = new Uri(person.Gender == Gender.Male ? "#boyIcon" : "#girlIcon", UriKind.Relative);
+            feat.StyleUrl = new Uri(person.Gender == GedcomSex.Male ? "#boyIcon" : "#girlIcon", UriKind.Relative);
             return feat;
         }
 
@@ -421,7 +422,7 @@ namespace KBS.FamilyLinesLib
             pt.Coordinate = new Vector(latlong.Item1, latlong.Item2);
             feat.Geometry = pt;
 
-            feat.StyleUrl = new Uri(person.Gender == Gender.Male ? "#boyIcon" : "#girlIcon", UriKind.Relative);
+            feat.StyleUrl = new Uri(person.Gender == GedcomSex.Male ? "#boyIcon" : "#girlIcon", UriKind.Relative);
             return feat;
         }
     }

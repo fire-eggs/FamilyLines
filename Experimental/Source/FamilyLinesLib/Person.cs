@@ -1,9 +1,13 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Xml.Serialization;
+using GEDCOM.Net;
 
 namespace KBS.FamilyLinesLib
 {
@@ -18,7 +22,8 @@ namespace KBS.FamilyLinesLib
         #region Fields and Constants
 
         private string id;
-        private Gender gender;
+//        private Gender gender;
+        private GedcomSex gender;
         private bool isLiving;
 
         private Restriction restriction;
@@ -86,10 +91,10 @@ namespace KBS.FamilyLinesLib
         private string burialCitationActualText;
 
         private string note;
-        private PhotoCollection photos;
-        private AttachmentCollection attachments;
+        private readonly PhotoCollection photos;
+        private readonly AttachmentCollection attachments;
         private Story story;
-        private RelationshipCollection relationships;
+        private readonly RelationshipCollection relationships;
 
         private int tree; // Which tree does this person belong to?
 
@@ -117,9 +122,14 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Gets or sets the person's gender
         /// </summary>
-        public Gender Gender
+        public GedcomSex Gender
         {
-            get { return gender; }
+            get
+            {
+                if (Individual != null)
+                    Debug.Assert(Individual.Sex == gender);
+                return gender;
+            }
             set
             {
                 if (gender != value)
@@ -159,7 +169,13 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string FirstName
         {
-            get { return firstName; }
+            get
+            {
+                // TODO asserting with gl120366.ged (intl chars)
+                //if (Individual != null)
+                //    Debug.Assert(Individual.FirstName == firstName);
+                return firstName;
+            }
             set
             {
                 if (firstName != value)
@@ -196,7 +212,13 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string LastName
         {
-            get { return lastName; }
+            get
+            {
+                // TODO why asserting w/ gl120366.ged but not stopping?
+                //if (Individual != null)
+                //    Debug.Assert(Individual.LastName == lastName);
+                return lastName;
+            }
             set
             {
                 if (lastName != value)
@@ -221,6 +243,11 @@ namespace KBS.FamilyLinesLib
                     name += firstName;
                 if (!string.IsNullOrEmpty(LastName))
                     name += " " + lastName;
+
+                // 'Name' property has slashes
+                //if (Individual != null)
+                //    Debug.Assert(Individual.GetName().Name == name);
+
                 return name;
             }
         }
@@ -252,7 +279,12 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string Prefix
         {
-            get { return prefix; }
+            get
+            {
+                if (Individual != null)
+                    Debug.Assert(Individual.GetName().Prefix == prefix);
+                return prefix;
+            }
             set
             {
                 if (prefix != value)
@@ -269,7 +301,12 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string Suffix
         {
-            get { return suffix; }
+            get
+            {
+                if (Individual != null)
+                    Debug.Assert(Individual.GetName().Suffix == suffix);
+                return suffix;
+            }
             set
             {
                 if (suffix != value)
@@ -288,21 +325,20 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// The age of the person.
         /// </summary>
-
         public int? Age
         {
             get
             {
-                if (this.BirthDate == null)
+                if (BirthDate == null)
                     return null;
 
                 //Do not show  age  of dead person if no death date is entered.
-                if (!isLiving && this.DeathDate == null)
+                if (!isLiving && DeathDate == null)
                     return null;
 
                 // Determine the age of the person based on just the year.
-                DateTime startDate = this.BirthDate.Value;
-                DateTime endDate = (this.IsLiving || this.DeathDate == null) ? DateTime.Now : this.DeathDate.Value;
+                DateTime startDate = BirthDate.Value;
+                DateTime endDate = (IsLiving || DeathDate == null) ? DateTime.Now : DeathDate.Value;
                 int age = endDate.Year - startDate.Year;
 
                 // Compensate for the month and day of month (if they have not had a birthday this year).
@@ -312,11 +348,10 @@ namespace KBS.FamilyLinesLib
 
                 return Math.Max(0, age);
             }
-
         }
 
         /// <summary>
-        /// The age of the person.
+        /// The age group of the person.
         /// </summary>
         [XmlIgnore]
         public AgeGroup AgeGroup
@@ -325,15 +360,15 @@ namespace KBS.FamilyLinesLib
             {
                 AgeGroup ageGroup = AgeGroup.Unknown;
 
-                if (this.Age.HasValue)
+                if (Age.HasValue)
                 {
                     // The AgeGroup enumeration is defined later in this file. It is up to the Person
                     // class to define the ages that fall into the particular age groups  
-                    if (this.Age >= 0 && this.Age < 20)
+                    if (Age >= 0 && Age < 20)
                         ageGroup = AgeGroup.Youth;
-                    else if (this.Age >= 20 && this.Age < 40)
+                    else if (Age >= 20 && Age < 40)
                         ageGroup = AgeGroup.Adult;
-                    else if (this.Age >= 40 && this.Age < 70)
+                    else if (Age >= 40 && Age < 70)
                         ageGroup = AgeGroup.MiddleAge;
                     else
                         ageGroup = AgeGroup.Senior;
@@ -345,30 +380,26 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// The year the person was born
         /// </summary>
-
         public string YearOfBirth
         {
             get
             {
                 if (birthDate.HasValue)
                     return birthDate.Value.Year.ToString(CultureInfo.CurrentCulture);
-                else
-                    return "-";
+                return "-";
             }
         }
 
         /// <summary>
         /// The year the person died
         /// </summary>
-
         public string YearOfDeath
         {
             get
             {
                 if (deathDate.HasValue && !isLiving)
                     return deathDate.Value.Year.ToString(CultureInfo.CurrentCulture);
-                else
-                    return "-";
+                return "-";
             }
         }
 
@@ -377,7 +408,12 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public bool IsLiving
         {
-            get { return isLiving; }
+            get
+            {
+                if (Individual != null && Individual.Dead != !isLiving)
+                    Debug.WriteLine(Name + ": death mismatch");
+                return isLiving;
+            }
             set
             {
                 if (isLiving != value)
@@ -386,7 +422,6 @@ namespace KBS.FamilyLinesLib
                     OnPropertyChanged("IsLiving");
                     OnPropertyChanged("Age");
                     OnPropertyChanged("IsLockedIsLiving");
-
                 }
             }
         }
@@ -398,7 +433,6 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Gets or sets the person's birth date.  This property can be null.
         /// </summary>
-
         public DateTime? BirthDate
         {
             get { return birthDate; }
@@ -418,11 +452,14 @@ namespace KBS.FamilyLinesLib
         }
 
         /// <summary>
-        /// Gets or sets the person's birth date descriptor
+        /// Gets or sets the person's birth date descriptor [ABT, AFT, BEF]
         /// </summary>
         public string BirthDateDescriptor
         {
-            get { return birthDateDescriptor; }
+            get
+            {
+                return birthDateDescriptor;
+            }
             set
             {
                 if (birthDateDescriptor == null || birthDateDescriptor != value)
@@ -434,11 +471,19 @@ namespace KBS.FamilyLinesLib
         }
 
         /// <summary>
-        /// Gets or sets the person's place of birth
+        /// Gets or sets the person's place of birth [1 BIRT\2 PLAC]
         /// </summary>
         public string BirthPlace
         {
-            get { return birthPlace; }
+            get
+            {
+                // TODO asserting for gl120366.ged (intl chars)
+                //if (Individual != null && 
+                //    Individual.Birth != null &&
+                //    Individual.Birth.Place != null)
+                //    Debug.Assert(Individual.Birth.Place.Name == birthPlace);
+                return birthPlace;
+            }
             set
             {
                 if (birthPlace != value)
@@ -452,11 +497,18 @@ namespace KBS.FamilyLinesLib
         }
 
         /// <summary>
-        /// Gets or sets the person's birth citation
+        /// Gets or sets the person's birth citation [1 BIRT/2 SOUR/3 PAGE]
         /// </summary>
         public string BirthCitation
         {
-            get { return birthCitation; }
+            get
+            {
+                //if (Individual != null && 
+                //    Individual.Birth != null &&
+                //    Individual.Birth.Sources.Count > 0)
+                //    Debug.Assert(Individual.Birth.Sources[0].Page == birthCitation);
+                return birthCitation;
+            }
             set
             {
                 if (birthCitation != value)
@@ -469,11 +521,18 @@ namespace KBS.FamilyLinesLib
         }
 
         /// <summary>
-        /// Gets or sets the person's birth source
+        /// Gets or sets the person's birth source [1 BIRT\2 SOUR]
         /// </summary>
         public string BirthSource
         {
-            get { return birthSource; }
+            get
+            {
+                //if (Individual != null &&
+                //    Individual.Birth != null &&
+                //    Individual.Birth.Sources.Count > 0)
+                //    Debug.Assert(Individual.Birth.Sources[0].Source == birthSource);
+                return birthSource;
+            }
             set
             {
                 if (birthSource != value)
@@ -486,7 +545,8 @@ namespace KBS.FamilyLinesLib
         }
 
         /// <summary>
-        /// Gets or sets the person's birth link
+        /// Gets or sets the person's birth link [1 BIRT\2 SOUR\3 OBJE where type is URL,
+        /// or [URL from 1 BIRT\2 SOUR\3 NOTE]
         /// </summary>
         public string BirthLink
         {
@@ -502,7 +562,7 @@ namespace KBS.FamilyLinesLib
         }
 
         /// <summary>
-        /// Gets or sets the person's birth citation note
+        /// Gets or sets the person's birth citation note [1 BIRT/2 SOUR/3 NOTE]
         /// </summary>
         public string BirthCitationNote
         {
@@ -543,12 +603,9 @@ namespace KBS.FamilyLinesLib
             {
                 if (birthDate == null)
                     return null;
-                else
-                {
-                    return birthDate.Value.ToString(
-                        DateTimeFormatInfo.CurrentInfo.MonthDayPattern,
-                        CultureInfo.CurrentCulture);
-                }
+                return birthDate.Value.ToString(
+                    DateTimeFormatInfo.CurrentInfo.MonthDayPattern,
+                    CultureInfo.CurrentCulture);
             }
         }
 
@@ -562,23 +619,21 @@ namespace KBS.FamilyLinesLib
             {
                 if (birthDate == null)
                     return null;
-                else
+
+                var returnValue = new StringBuilder();
+                returnValue.Append("Born ");
+                returnValue.Append(
+                    birthDate.Value.ToString(
+                        DateTimeFormatInfo.CurrentInfo.ShortDatePattern,
+                        CultureInfo.CurrentCulture));
+
+                if (!string.IsNullOrEmpty(birthPlace))
                 {
-                    StringBuilder returnValue = new StringBuilder();
-                    returnValue.Append("Born ");
-                    returnValue.Append(
-                        birthDate.Value.ToString(
-                            DateTimeFormatInfo.CurrentInfo.ShortDatePattern,
-                            CultureInfo.CurrentCulture));
-
-                    if (!string.IsNullOrEmpty(birthPlace))
-                    {
-                        returnValue.Append(", ");
-                        returnValue.Append(birthPlace);
-                    }
-
-                    return returnValue.ToString();
+                    returnValue.Append(", ");
+                    returnValue.Append(birthPlace);
                 }
+
+                return returnValue.ToString();
             }
         }
 
@@ -625,7 +680,15 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string DeathPlace
         {
-            get { return deathPlace; }
+            get
+            {
+                // TODO asserting for gl120366.ged (intl chars)
+                //if (Individual != null && 
+                //    Individual.Death != null &&
+                //    Individual.Death.Place != null)
+                //    Debug.Assert(Individual.Death.Place.Name == deathPlace);
+                return deathPlace;
+            }
             set
             {
                 if (deathPlace != value)
@@ -1345,7 +1408,7 @@ namespace KBS.FamilyLinesLib
             }
         }
 
-        // <summary>
+        /// <summary>
         /// Gets or sets the attachments associated with the person
         /// </summary>
         public AttachmentCollection Attachments
@@ -1366,8 +1429,6 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                string avatar = "";
-
                 if (photos != null && photos.Count > 0)
                 {
                     foreach (Photo photo in photos)
@@ -1377,7 +1438,7 @@ namespace KBS.FamilyLinesLib
                     }
                 }
 
-                return avatar;
+                return "";
             }
             set
             {
@@ -1662,7 +1723,7 @@ namespace KBS.FamilyLinesLib
                 Collection<Person> halfSiblings = new Collection<Person>();
 
                 // Get list of full siblings (a full sibling cannot be a half sibling).
-                Collection<Person> siblings = this.Siblings;
+                Collection<Person> siblings = Siblings;
 
                 // Iterate through each parent, and determine if the parent's children
                 // are half siblings.
@@ -1696,7 +1757,7 @@ namespace KBS.FamilyLinesLib
                     ParentSet parentSet = new ParentSet(Parents[0], Parents[1]);
                     return parentSet;
                 }
-                else return null;
+                return null;
             }
         }
 
@@ -1889,13 +1950,7 @@ namespace KBS.FamilyLinesLib
         [XmlIgnore]
         public bool HasBirthPlace
         {
-            get
-            {
-                if (birthPlace == null || birthPlace.Length == 0)
-                    return false;
-                else
-                    return true;
-            }
+            get { return !(string.IsNullOrEmpty(birthPlace)); }
         }
 
         /// <summary>
@@ -1906,10 +1961,7 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                if (deathPlace == null || deathPlace.Length == 0)
-                    return false;
-                else
-                    return true;
+                return !(string.IsNullOrEmpty(deathPlace));
             }
         }
 
@@ -1921,10 +1973,7 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                if (cremationPlace == null || cremationPlace.Length == 0)
-                    return false;
-                else
-                    return true;
+                return !(string.IsNullOrEmpty(cremationPlace));
             }
         }
 
@@ -1955,10 +2004,8 @@ namespace KBS.FamilyLinesLib
                      ( string.IsNullOrEmpty(birthSource) || string.IsNullOrEmpty(birthCitation)) &&
                      ( string.IsNullOrEmpty(occupationSource) || string.IsNullOrEmpty(occupationCitation)) &&
                      ( string.IsNullOrEmpty(cremationSource) || string.IsNullOrEmpty(cremationCitation)) )                 
-                return false; 
-                else
-                    return true;
-
+                    return false;
+                return true;
             }
         }
 
@@ -1998,10 +2045,15 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                if (gender == KBS.FamilyLinesLib.Gender.Male)
-                    return Properties.Resources.Son;
-                else
-                    return Properties.Resources.Daughter;
+                switch (gender)
+                {
+                    case GedcomSex.Male:
+                        return Properties.Resources.Son;
+                    case GedcomSex.Female:
+                        return Properties.Resources.Daughter;
+                    default:
+                        return "Unknown"; // TODO embedded string
+                }
             }
         }
 
@@ -2035,8 +2087,7 @@ namespace KBS.FamilyLinesLib
                 }
                 if (!string.IsNullOrEmpty(parentsText))
                     return " " + Properties.Resources.Of + " " + parentsText;
-                else
-                    return parentsText;
+                return parentsText;
             }
         }
 
@@ -2048,10 +2099,15 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                if (gender == KBS.FamilyLinesLib.Gender.Male)
-                    return Properties.Resources.Brother;
-                else
-                    return Properties.Resources.Sister;
+                switch (gender)
+                {
+                    case GedcomSex.Male:
+                        return Properties.Resources.Brother;
+                    case GedcomSex.Female:
+                        return Properties.Resources.Sister;
+                    default:
+                        return "Unknown"; // TODO embedded string
+                }
             }
         }
 
@@ -2086,8 +2142,7 @@ namespace KBS.FamilyLinesLib
 
                 if(!string.IsNullOrEmpty(siblingsText))
                     return " " + Properties.Resources.To + " " + siblingsText;
-                else
-                    return siblingsText;
+                return siblingsText;
             }
         }
 
@@ -2099,10 +2154,16 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                if (gender == KBS.FamilyLinesLib.Gender.Male)
-                    return Properties.Resources.Husband;
-                else
-                    return Properties.Resources.Wife;
+                // TODO just use 'partner'?
+                switch (gender)
+                {
+                    case GedcomSex.Male:
+                        return Properties.Resources.Husband;
+                    case GedcomSex.Female:
+                        return Properties.Resources.Wife;
+                    default:
+                        return "Unknown"; // TODO embedded string
+                }
             }
         }
 
@@ -2136,8 +2197,7 @@ namespace KBS.FamilyLinesLib
                 }
                 if (!string.IsNullOrEmpty(spousesText))
                     return " " + Properties.Resources.To + " " + spousesText;
-                else
-                    return spousesText;
+                return spousesText;
             }
         }
 
@@ -2149,12 +2209,15 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-
-                if (gender == KBS.FamilyLinesLib.Gender.Male)
-                    return Properties.Resources.Father;
-                else
-                    return Properties.Resources.Mother;
-
+                switch (gender)
+                {
+                    case GedcomSex.Male:
+                        return Properties.Resources.Father;
+                    case GedcomSex.Female:
+                        return Properties.Resources.Mother;
+                    default:
+                        return "Unknown"; // TODO embedded string
+                }
             }
         }
 
@@ -2189,8 +2252,7 @@ namespace KBS.FamilyLinesLib
 
                 if (!string.IsNullOrEmpty(childrensText))
                     return " " + Properties.Resources.To + " " + childrensText;
-                else
-                    return childrensText;
+                return childrensText;
             }
 
         }
@@ -2221,20 +2283,21 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Creates a new instance of the person class with the firstname and the lastname.
         /// </summary>
-        public Person(string firstNames, string lastName)
+        public Person(string firstNames, string _lastName)
             : this()
         {
             //Use the first name if specified, if not, the default first name is used.
             if (!string.IsNullOrEmpty(firstNames))
-                this.firstName = firstNames;
+                firstName = firstNames;
 
-            this.lastName = lastName;
+            lastName = _lastName;
         }
 
         /// <summary>
         /// Creates a new instance of the person class with the firstname, the lastname, and gender
         /// </summary>
-        public Person(string firstName, string lastName, Gender gender)
+//        public Person(string firstName, string lastName, Gender gender)
+        public Person(string firstName, string lastName, GedcomSex gender)
             : this(firstName, lastName)
         {
             this.gender = gender;
@@ -2267,7 +2330,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public bool Equals(Person other)
         {
-            return (this.Id == other.Id);
+            return (Id == other.Id);
         }
 
         #endregion
@@ -2279,7 +2342,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public SpouseRelationship GetSpouseRelationship(Person spouse)
         {
-            foreach (Relationship relationship in this.relationships)
+            foreach (Relationship relationship in relationships)
             {
                 SpouseRelationship spouseRelationship = relationship as SpouseRelationship;
                 if (spouseRelationship != null)
@@ -2294,7 +2357,7 @@ namespace KBS.FamilyLinesLib
 
         public ChildRelationship GetParentChildRelationship(Person child)
         {
-            foreach (Relationship relationship in this.relationships)
+            foreach (Relationship relationship in relationships)
             {
                 ChildRelationship childRelationship = relationship as ChildRelationship;
                 if (childRelationship != null)
@@ -2332,10 +2395,10 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public void DeleteStory()
         {
-            if (this.story != null)
+            if (story != null)
             {
-                this.story.Delete();
-                this.story = null;
+                story.Delete();
+                story = null;
             }
         }
 
@@ -2404,14 +2467,16 @@ namespace KBS.FamilyLinesLib
         }
 
         #endregion
-    }
 
-    /// <summary>
-    /// Enumeration of the person's gender
-    /// </summary>
-    public enum Gender
-    {
-        Male, Female
+        [XmlIgnore]
+        public GedcomIndividualRecord Individual { get; set; }
+
+        public IList<GedcomIndividualEvent> GetEvents(GedcomEvent.GedcomEventType evType)
+        {
+            if (Individual == null)
+                return new List<GedcomIndividualEvent>();
+            return Individual.Events.FindAll(e => e.EventType == evType);
+        }
     }
 
     /// <summary>
@@ -2479,10 +2544,10 @@ namespace KBS.FamilyLinesLib
         {
             if (other != null)
             {
-                if (this.firstParent.Equals(other.firstParent) && this.secondParent.Equals(other.secondParent))
+                if (firstParent.Equals(other.firstParent) && secondParent.Equals(other.secondParent))
                     return true;
 
-                if (this.firstParent.Equals(other.secondParent) && this.secondParent.Equals(other.firstParent))
+                if (firstParent.Equals(other.secondParent) && secondParent.Equals(other.firstParent))
                     return true;
             }
 

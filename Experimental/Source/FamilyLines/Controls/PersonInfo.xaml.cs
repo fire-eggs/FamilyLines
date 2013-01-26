@@ -412,6 +412,11 @@ namespace KBS.FamilyLines
 
             person.OnPropertyChanged("HasPhoto");
 
+            if (PhotosListBox.Items.Count == 1)
+                PhotosListBox.SelectedItem = PhotosListBox.Items[0];
+            
+            PrimaryButton_Click(null, null);
+
         }
 
         /// <summary>

@@ -5,8 +5,8 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Media;
+using GEDCOM.Net;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines
@@ -14,7 +14,7 @@ namespace KBS.FamilyLines
     /// <summary>
     /// Interaction logic for Statistics.xaml
     /// </summary>
-    public partial class Statistics : System.Windows.Controls.UserControl
+    public partial class Statistics
     {
         public Statistics()
         {
@@ -114,7 +114,7 @@ namespace KBS.FamilyLines
 
                 #region top names
 
-                if (p.Gender == Gender.Male)
+                if (p.Gender == GedcomSex.Male)
                     maleNames[i] = p.FirstName.Split()[0];
                 else
                     femaleNames[i] = p.FirstName.Split()[0];
@@ -143,7 +143,7 @@ namespace KBS.FamilyLines
                             }
 
                         }
-                        if (add == true)
+                        if (add)
                             allPhotos.Add(photo);
                     }
 
@@ -169,7 +169,7 @@ namespace KBS.FamilyLines
                             }
 
                         }
-                        if (add == true)
+                        if (add)
                             allAttachments.Add(attachment);
                     }
 
@@ -482,8 +482,8 @@ namespace KBS.FamilyLines
             ListCollectionView histogramView = CreateView("Gender", "Gender");
             GenderDistributionControl.View = histogramView;
             GenderDistributionControl.CategoryLabels.Clear();
-            GenderDistributionControl.CategoryLabels.Add(Gender.Male, Properties.Resources.Male);
-            GenderDistributionControl.CategoryLabels.Add(Gender.Female, Properties.Resources.Female);
+            GenderDistributionControl.CategoryLabels.Add(GedcomSex.Male, Properties.Resources.Male);
+            GenderDistributionControl.CategoryLabels.Add(GedcomSex.Female, Properties.Resources.Female);
 
             //Living bar chart
 
@@ -525,7 +525,7 @@ namespace KBS.FamilyLines
                //Animated progress bar does not render well on print
                FileProgressBar.Visibility = Visibility.Collapsed;
 
-               if ((bool)dlg.ShowDialog().GetValueOrDefault())
+               if (dlg.ShowDialog().GetValueOrDefault())
                    Print(dlg, StatisticsPanel);
 
                //Animated progress bar does not render well on print
@@ -567,7 +567,7 @@ namespace KBS.FamilyLines
             Rect container = new Rect(0, 0, border.ActualWidth, border.ActualHeight+titlepadding);
             pageArea.Arrange(container);
 
-            string title = System.IO.Path.GetFileName(App.FamilyCollection.FullyQualifiedFilename) + " " +Properties.Resources.StatisticsReport;
+            string title = Path.GetFileName(App.FamilyCollection.FullyQualifiedFilename) + " " +Properties.Resources.StatisticsReport;
 
             // Print
             pd.PrintVisual(pageArea, title);
@@ -648,21 +648,15 @@ namespace KBS.FamilyLines
                     dates.Sort();
                     return dates[0];
                 }
-                else
-                    return DateTime.MaxValue;
+                return DateTime.MaxValue;
             }
-            else
+
+            if (dates.Count > 0)
             {
-                if (dates.Count > 0)
-                {
-                    dates.Sort();
-                    return dates[dates.Count-1];
-                }
-                else
-                    return DateTime.MinValue;
+                dates.Sort();
+                return dates[dates.Count-1];
             }
-
-
+            return DateTime.MinValue;
         }
 
         /// <summary>

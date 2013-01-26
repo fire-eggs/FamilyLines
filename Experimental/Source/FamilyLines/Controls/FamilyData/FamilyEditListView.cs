@@ -2,6 +2,7 @@
  * Derived class that filters data in the family data view.
 */
 
+using GEDCOM.Net;
 using KBS.FamilyLinesLib;
 namespace KBS.FamilyLines
 {
@@ -55,13 +56,14 @@ namespace KBS.FamilyLines
                 this.Filter.MatchesAttachments(person.HasAttachments))
                 return true;
 
+            // TODO support other gender values
             //filter for gender
-            if (person.Gender == Gender.Male)
+            if (person.Gender == GedcomSex.Male)
             {
                 if(this.Filter.MatchesGender(Properties.Resources.Male.ToLower()))
                     return true;
             }
-            if(person.Gender == Gender.Female)
+            if(person.Gender == GedcomSex.Female)
             {
                 if(this.Filter.MatchesGender(Properties.Resources.Female.ToLower()))
                     return true;
