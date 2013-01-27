@@ -8,7 +8,10 @@
    xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
    x:Class="KBS.FamilyLines.Details" DataContextChanged="UserControl_DataContextChanged" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-   xmlns:Controls="clr-namespace:KBS.FamilyLines.Controls" mc:Ignorable="d" Width="277" >
+   xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+   xmlns:Controls1="clr-namespace:KBS.FamilyLines.Controls" mc:Ignorable="d"
+   Width="277"
+        >
     <UserControl.Resources>
 
         <ResourceDictionary>
@@ -1668,11 +1671,11 @@
 
                         <Expander Name="expandCHR" ExpandDirection="Down" 
                                   IsExpanded="False" Header="Christening">
-                            <Controls:EventDetails x:Name="ChristeningEvent"/>
+                            <Controls1:EventDetails x:Name="ChristeningEvent"/>
                         </Expander>
                         <Expander Name="expandBAPM" ExpandDirection="Down" 
                                   IsExpanded="False" Header="Baptism">
-                            <Controls:EventDetails x:Name="BaptismEvent"/>
+                            <Controls1:EventDetails x:Name="BaptismEvent"/>
                         </Expander>
                         
                     </StackPanel>
@@ -2125,33 +2128,71 @@
                             <TextBlock Text="{Binding Path=Items.Count, ElementName=FamilyListView}" FontWeight="Normal" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
                             <TextBlock Text=")" Style="{DynamicResource SectionHeaderStyle}" Height="15" />
                             </StackPanel>
-                            <Button x:Name="FamilyDataButton" Content="{x:Static properties:Resources.FamilyData}" Style="{DynamicResource BlackButtonStyle}" Click="FamiliyDataButton_Click" HorizontalAlignment="Right" Width="Auto" MinWidth="80"/>
+
+                            <Button
+                                x:Name="FamilyDataButton" 
+                                Content="{x:Static properties:Resources.FamilyData}" 
+                                Style="{DynamicResource BlackButtonStyle}" 
+                                Click="FamiliyDataButton_Click" 
+                                HorizontalAlignment="Right" 
+                                Width="Auto" 
+                                MinWidth="80"
+                                    />
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Top">
                             <Label Margin="0,0,5,5" Content="{x:Static properties:Resources.Filter}" VerticalAlignment="Center"/>
                             <local:FilterText x:Name="FilterTextBox" TextBoxBase.TextChanged="FilterTextBox_TextChanged" VerticalAlignment="Center" Margin="0,0,0,0" />
                         </DockPanel>
 
-                      <DataGrid x:Name="FamilyListView"
+                        <DataGrid 
+                            x:Name="FamilyListView"
                                 AllowDrop="False"
+                            HeadersVisibility="Column"
                                 CanUserAddRows="False"
                                 CanUserDeleteRows="False"
+                            AlternationCount="2"
+                            AlternatingRowBackground="LightGray"
                                 IsReadOnly="True"
-                                AlternatingRowBackground="LightBlue"
-                                RowBackground="White"
-                                AlternationCount="2"
                                 SelectionMode="Single"
+                            CanUserResizeRows="False"
                                 AutoGenerateColumns="False"
                                 SelectionChanged="FamilyListView_SelectionChanged"
-                                ToolTip="Hold shift and click on other columns to multi-sort"
+                            ToolTip="{x:Static properties:Resources.FamilyListViewToolTip}"
+                            Style="{DynamicResource FamilyListViewDataGridStyle}"
+                            ColumnHeaderStyle="{DynamicResource FamilyDataGridColumnHeader}"
+                            ItemContainerStyle="{DynamicResource FamilyListViewItemTemplate}"
                                     >
                         <DataGrid.Columns>
-                          <DataGridTextColumn Header="{x:Static properties:Resources.Names}"   Width="64" Binding="{Binding FirstName}"/>
-                          <DataGridTextColumn Header="{x:Static properties:Resources.Surname}" Width="64" Binding="{Binding LastName}"/>
-                          <DataGridTextColumn Header="{x:Static properties:Resources.TreeNum}" Width="30" Binding="{Binding Tree}"/>
-                          <DataGridTextColumn Header="{x:Static properties:Resources.Born}"    Width="35" Binding="{Binding YearOfBirth}" />
-                          <DataGridTextColumn Header="{x:Static properties:Resources.Died}"    Width="35" Binding="{Binding YearOfDeath}" />
-                          <DataGridTextColumn Header="{x:Static properties:Resources.Age}"     Width="30" Binding="{Binding Age}"/>
+                                <DataGridTextColumn 
+                                    Header="{x:Static properties:Resources.Names}"   
+                                    Width="64" 
+                                    Binding="{Binding FirstName}"
+                                        />
+                                <DataGridTextColumn
+                                    Header="{x:Static properties:Resources.Surname}" 
+                                    Width="64" 
+                                    Binding="{Binding LastName}"
+                                        />
+                                <DataGridTextColumn
+                                    Header="{x:Static properties:Resources.TreeNum}" 
+                                    Width="30" 
+                                    Binding="{Binding Tree}"
+                                        />
+                                <DataGridTextColumn 
+                                    Header="{x:Static properties:Resources.Born}"    
+                                    Width="35"
+                                    Binding="{Binding YearOfBirth}"
+                                        />
+                                <DataGridTextColumn 
+                                    Header="{x:Static properties:Resources.Died}"    
+                                    Width="35" 
+                                    Binding="{Binding YearOfDeath}"
+                                        />
+                                <DataGridTextColumn 
+                                    Header="{x:Static properties:Resources.Age}"     
+                                    Width="30" 
+                                    Binding="{Binding Age}"
+                                        />
                         </DataGrid.Columns>
                       </DataGrid>
                       
@@ -2177,7 +2218,9 @@
                                                             DisplayMemberBinding="{Binding Path=LastName}"
                                                             Width="64"
                                                             HeaderContainerStyle="{DynamicResource NameGridViewColumnHeader}"/>
-                                  --><!--<local:SortListViewColumn SortProperty="Name"  Header="{x:Static properties:Resources.Name}" DisplayMemberBinding="{Binding Path=Name}" Width="128" HeaderContainerStyle="{DynamicResource NameGridViewColumnHeader}"/>--><!--
+                                  -->
+                        <!--<local:SortListViewColumn SortProperty="Name"  Header="{x:Static properties:Resources.Name}" DisplayMemberBinding="{Binding Path=Name}" Width="128" HeaderContainerStyle="{DynamicResource NameGridViewColumnHeader}"/>-->
+                        <!--
                                   <local:SortListViewColumn SortProperty="BirthDate" Header="{x:Static properties:Resources.Born}" Width="35">
                                         <local:SortListViewColumn.CellTemplate>
                                             <DataTemplate>
