@@ -410,6 +410,15 @@ namespace GEDCOM.Net
 		
 		public static int CompareByDate(GedcomDate datea, GedcomDate dateb)
 		{
+            if (datea == null)
+            {
+                if (dateb == null)
+                    return 0;
+                return -1;
+            }
+		    if (dateb == null)
+                return 1;
+
 			int ret = CompareNullableDateTime(datea.DateTime1, dateb.DateTime1);
 			
 			if (ret == 0)

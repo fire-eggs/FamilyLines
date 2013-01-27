@@ -2549,15 +2549,16 @@ namespace KBS.FamilyLinesLib
             if (id == null)
                 return null;
 
+// TODO May be broken (hash search ID has not been updated to GUIDs)?
 			// KBR 03/??/2012 search by hash is faster
-            return lookup[id] as Person;
-            //foreach (Person person in this)
-            //{
-            //    if (person.Id == id)
-            //        return person;
-            //}
+//            return lookup[id] as Person;
+            foreach (Person person in this)
+            {
+                if (person.Id == id)
+                    return person;
+            }
 
-            //return null;
+            return null;
         }
 
         /// <summary>
