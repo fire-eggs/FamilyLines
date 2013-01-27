@@ -1387,7 +1387,7 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   <data name="ApplicationName" xml:space="preserve">
     <value>Family Lines</value>
   </data>
-  <data name="Metro" xml:space="preserve">
-    <value>Metro</value>
+  <data name="FamilyListViewToolTip" xml:space="preserve">
+    <value>Hold shift and click on other columns to multi-sort</value>
   </data>
 </root>

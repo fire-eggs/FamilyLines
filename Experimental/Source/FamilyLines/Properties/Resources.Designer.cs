@@ -1450,6 +1450,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hold shift and click on other columns to multi-sort.
+        /// </summary>
+        public static string FamilyListViewToolTip {
+            get {
+                return ResourceManager.GetString("FamilyListViewToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Family Lines.
         /// </summary>
         public static string FamilyShow {

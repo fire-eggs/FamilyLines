@@ -335,7 +335,7 @@
         </Setter>
     </Style>
 
-    <ControlTemplate x:Key="FamilyListViewItemTemplate" TargetType='{x:Type ListViewItem}'>
+    <ControlTemplate x:Key="oldFamilyListViewItemTemplate" TargetType='{x:Type ListViewItem}'>
         <Grid SnapsToDevicePixels="True" Margin="0,0,0,0">
             <Border x:Name="Border" CornerRadius="3,3,3,3" Background="{TemplateBinding Background}" />
             <GridViewRowPresenter TextBlock.Foreground="{DynamicResource ListViewFontColor}" TextBlock.FontSize="11" Content="{TemplateBinding Content}" Columns="{TemplateBinding GridView.ColumnCollection}" />
@@ -347,6 +347,36 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
+    <!-- START Controls.Details.xaml -->
+
+    <Style 
+        x:Key="FamilyListViewDataGridStyle" 
+        TargetType="{x:Type DataGrid}"
+            >
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="Background" Value="#8F8F8F" />
+    </Style>
+
+    <Style
+        x:Key="FamilyListViewItemTemplate" 
+        TargetType="{x:Type DataGridRow}"
+            >
+        <Setter Property="Background" Value="Gray" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    <Style x:Key="FamilyDataGridColumnHeader"
+           TargetType="DataGridColumnHeader"
+           >
+        <Setter Property="Background" Value="#252525" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="WhiteSmoke" />
+    </Style>
+
+    <!-- END Controls.Details.xaml -->
 
     <Style x:Key="MediaStyleTemplate" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Template">
@@ -702,9 +732,20 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!-- START MainWindow.xaml Menu -->
+    <Style x:Key="MenuItemConStyle" TargetType="{x:Type Menu}">
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    <Style x:Key="MenuItemStyle" TargetType="MenuItem" >
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+    
+    <!-- END MainWindow.xaml Menu -->
 
     <!-- MenuItem - The template uses triggers to provide four different arrangements of menu item which are set via the Role property -->
-    <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
+    <Style x:Key="oldMenuItemStyle" TargetType="{x:Type MenuItem}">
         <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="Background" Value="Transparent" />
