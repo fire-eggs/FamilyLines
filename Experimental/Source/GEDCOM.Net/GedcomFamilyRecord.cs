@@ -193,6 +193,32 @@ namespace GEDCOM.Net
 			}
 		}
 		
+        // Util property to get "best" divorce event
+	    public GedcomFamilyEvent Divorce
+	    {
+	        get 
+            { 
+                GedcomFamilyEvent div = null;
+	            foreach (var familyEvent in _Events)
+	            {
+                    // TODO: ANUL, DIVF, ???
+	                if (familyEvent.EventType == GedcomEvent.GedcomEventType.DIV)
+	                {
+                        if (div == null)
+                        {
+                            div = familyEvent;
+                        }
+                        else
+                        {
+                            if (div.Date < familyEvent.Date)
+                                div = familyEvent;
+                        }
+	                }
+	            }
+                return div;
+            }
+	    }
+
 		// Util properties to get marriage event
 		public GedcomFamilyEvent Marriage
 		{

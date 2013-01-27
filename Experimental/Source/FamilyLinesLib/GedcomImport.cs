@@ -12,11 +12,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Xml;
 using GEDCOM.Net;
+
+// ReSharper disable SpecifyACultureInStringConversionExplicitly
 
 namespace KBS.FamilyLinesLib
 {
@@ -111,6 +112,8 @@ namespace KBS.FamilyLinesLib
             {
                 people[i].Individual = _database.Individuals[i];
             }
+
+            ImportFamiliesGN();
         }
 
         /// <summary>
@@ -503,6 +506,295 @@ namespace KBS.FamilyLinesLib
 
                     i++;
                 }
+            }
+        }
+
+        private void ImportChildGN(GedcomIndividualRecord child, GedcomIndividualRecord daddy, GedcomIndividualRecord mommy, GedcomFamilyRecord fambly)
+        {
+            var daddyP = HackFind(daddy.XRefID);
+            var mommyP = HackFind(mommy.XRefID);
+            var childP = HackFind(child.XRefID);
+
+            ParentChildModifier dadMod = ParentChildModifier.Natural;
+            ParentChildModifier momMod = ParentChildModifier.Natural;
+
+            // TODO FOST event?
+
+            foreach (GedcomIndividualEvent indiEv in child.Events)
+            {
+                // if (indiEv.Famc == fambly.XRefID) TODO this is not working with PAF import, why???
+                {
+                    switch (indiEv.EventType)
+                    {
+                        case GedcomEvent.GedcomEventType.ADOP:
+                            switch (indiEv.AdoptedBy)
+                            {
+                                case GedcomAdoptionType.Husband:
+                                    dadMod = ParentChildModifier.Adopted;
+                                    break;
+                                case GedcomAdoptionType.Wife:
+                                    momMod = ParentChildModifier.Adopted;
+                                    break;
+                                default:
+                                    // default is both as well, has to be adopted by someone if
+                                    // there is an event on the family.
+                                    dadMod = momMod = ParentChildModifier.Adopted;
+                                    break;
+                            }
+                            break;
+                    }
+                }
+            }
+
+
+            people.AddChild(daddyP, childP, dadMod);
+            people.AddChild(mommyP, childP, momMod);
+
+            // TODO natural siblings
+            List<Person> firstParentChildren = new List<Person>(daddyP.NaturalChildren);
+            List<Person> secondParentChildren = new List<Person>(mommyP.NaturalChildren);
+
+            // Combined children list that is returned.
+            List<Person> naturalChildren = new List<Person>();
+
+            // Go through and add the children that have both parents.            
+            foreach (Person child1 in firstParentChildren)
+            {
+                if (secondParentChildren.Contains(child1))
+                    naturalChildren.Add(child1);
+            }
+
+            // Go through and add natural siblings
+            foreach (Person s in naturalChildren)
+            {
+                if (s != childP && momMod == ParentChildModifier.Natural && dadMod == ParentChildModifier.Natural)
+                    people.AddSibling(childP, s);
+            }
+
+        }
+
+        // families from Gedcom.NET
+        private void ImportFamiliesGN()
+        {
+            foreach (var fambly in _database.Families)
+            {
+                // TODO husband or wife null
+
+                var hubby = _database[fambly.Husband] as GedcomIndividualRecord;
+                var daddyP = HackFind(hubby.XRefID);
+                daddyP.Relationships.Clear(); // TODO Hack - remove when stop importing families from XML
+
+                var wifey = _database[fambly.Wife] as GedcomIndividualRecord;
+                var mommyP = HackFind(wifey.XRefID);
+                mommyP.Relationships.Clear(); // TODO Hack - remove when stop importing families from XML
+
+                ImportMarriageGN(fambly, hubby, wifey);
+
+                foreach (var childId in fambly.Children)
+                {
+                    var child = _database[childId] as GedcomIndividualRecord;
+
+                    var childP = HackFind(child.XRefID);
+
+                    childP.Relationships.Clear(); // TODO Hack - remove when stop importing families from XML
+
+                    ImportChildGN(child, hubby, wifey, fambly);
+                }
+            }
+
+            // TODO diagram doesn't show child as adopted initially but changes on refresh
+
+            return;
+
+            // Get list of families.
+            XmlNodeList list = doc.SelectNodes("/root/FAM");
+
+            foreach (XmlNode node in list)
+            {
+                // Get family (husband, wife and children) IDs from the GEDCOM file.
+                string husband = GetHusbandID(node);
+                string wife = GetWifeID(node);
+                string[] children = GetChildrenIDs(node);
+
+                //get the child modifier if present
+                string[,] children1 = GetChildrenIDsAndModifiers(node);
+
+                // Get the Person objects for the husband and wife,
+                // required for marriage info and adding children.
+                Person husbandPerson = people.Find(husband);
+                Person wifePerson = people.Find(wife);
+
+                // Add any marriage / divorce details.
+                ImportMarriage(husbandPerson, wifePerson, node, doc);
+
+                int i = 0;
+
+                // Import the children.
+                foreach (string child in children)
+                {
+                    // Get the Person object for the child.
+                    Person childPerson = people.Find(child);
+
+                    string husbandChildModifier = children1[1, i];
+                    string wifeChildModifier = children1[2, i];
+
+                    ParentChildModifier husbandModifier = ParentChildModifier.Natural;
+                    ParentChildModifier wifeModifier = ParentChildModifier.Natural;
+
+                    if (husbandChildModifier == "Adopted")
+                        husbandModifier = ParentChildModifier.Adopted;
+                    if (husbandChildModifier == "Foster")
+                        husbandModifier = ParentChildModifier.Foster;
+                    if (wifeChildModifier == "Adopted")
+                        wifeModifier = ParentChildModifier.Adopted;
+                    if (wifeChildModifier == "Foster")
+                        wifeModifier = ParentChildModifier.Foster;
+
+                    if (husbandPerson != null && wifePerson != null & childPerson != null)
+                    {
+                        people.AddChild(husbandPerson, childPerson, husbandModifier);
+                        people.AddChild(wifePerson, childPerson, wifeModifier);
+
+                        List<Person> firstParentChildren = new List<Person>(husbandPerson.NaturalChildren);
+                        List<Person> secondParentChildren = new List<Person>(wifePerson.NaturalChildren);
+
+                        // Combined children list that is returned.
+                        List<Person> naturalChildren = new List<Person>();
+
+                        // Go through and add the children that have both parents.            
+                        foreach (Person child1 in firstParentChildren)
+                        {
+                            if (secondParentChildren.Contains(child1))
+                                naturalChildren.Add(child1);
+                        }
+
+                        // Go through and add natural siblings
+                        foreach (Person s in naturalChildren)
+                        {
+                            if (s != childPerson && wifeModifier == ParentChildModifier.Natural && husbandModifier == ParentChildModifier.Natural)
+                                people.AddSibling(childPerson, s);
+                        }
+
+                    }
+
+                    if (husbandPerson == null && wifePerson != null & childPerson != null)
+                    {
+                        people.AddChild(wifePerson, childPerson, wifeModifier);
+
+                        // Go through and add natural siblings
+                        foreach (Person s in wifePerson.NaturalChildren)
+                        {
+                            if (s != childPerson && wifeModifier == ParentChildModifier.Natural)
+                                people.AddSibling(childPerson, s);
+                        }
+                    }
+
+                    if (husbandPerson != null && wifePerson == null & childPerson != null)
+                    {
+                        people.AddChild(husbandPerson, childPerson, husbandModifier);
+
+                        // Go through and add natural siblings
+                        foreach (Person s in husbandPerson.NaturalChildren)
+                        {
+                            if (s != childPerson && husbandModifier == ParentChildModifier.Natural)
+                                people.AddSibling(childPerson, s);
+                        }
+                    }
+
+                    i++;
+                }
+            }
+        }
+
+        private Person HackFind(string XRefID)
+        {
+            foreach (var aperson in people)
+            {
+                if (aperson.Individual != null && aperson.Individual.XRefID == XRefID)
+                    return aperson;
+            }
+            return null;
+        }
+
+        private void ImportMarriageGN(GedcomFamilyRecord fambly, GedcomIndividualRecord hubby, GedcomIndividualRecord wifey)
+        {
+            if (hubby == null || wifey == null)
+                return;
+
+            // TODO hubby or wifey null
+
+            var hubbyP = HackFind(hubby.XRefID);
+            var wifeyP = HackFind(wifey.XRefID);
+
+            // TODO: assuming only one marriage/divorce for a couple, i.e. MARR+DIV+MARR would be possible?
+
+            if (fambly.Marriage == null && fambly.Divorce == null)
+            {
+                // TODO how would we get here?
+                SpouseRelationship wifeMarriage = new SpouseRelationship(hubbyP, SpouseModifier.Current);
+                SpouseRelationship husbandMarriage = new SpouseRelationship(wifeyP, SpouseModifier.Current);
+
+                wifeyP.Relationships.Add(wifeMarriage);
+                hubbyP.Relationships.Add(husbandMarriage);
+                return;
+            }
+
+            string marrPlace = null;
+            string marrSrc = null;
+            DateTime? marrDate = null;
+            string divPlace = null;
+            string divSrc = null;
+            DateTime? divDate = null;
+
+            SpouseModifier status = SpouseModifier.Current;
+            if (fambly.Marriage != null)
+            {
+                marrPlace = fambly.Marriage.Place == null ? null : fambly.Marriage.Place.Name; // TODO smart property
+                marrSrc = (fambly.Marriage.Sources.Count > 1) ? fambly.Marriage.Sources[0].Text : ""; // TODO smart property
+                marrDate = fambly.Marriage.Date == null ? null : fambly.Marriage.Date.DateTime1; // TODO smart property
+            }
+            if (fambly.Divorce != null)
+            {
+                divPlace = fambly.Divorce.Place == null ? null : fambly.Divorce.Place.Name; // TODO smart property
+                divSrc = (fambly.Divorce.Sources.Count > 1) ? fambly.Divorce.Sources[0].Text : ""; // TODO smart property
+                divDate = fambly.Divorce.Date == null ? null : fambly.Divorce.Date.DateTime1; // TODO smart property
+                status = SpouseModifier.Former;
+            }
+
+            // TODO Citation
+            // TODO Citationtext
+            // TODO Link/media
+            // TODO Note
+
+            // TODO incorporate the event into the SpouseRelationship
+
+            var existH = hubbyP.GetSpouseRelationship(wifeyP);
+            if (existH != null)
+                hubbyP.Relationships.Remove(existH);
+            {
+                SpouseRelationship marriage = new SpouseRelationship(wifeyP, status);
+                marriage.MarriageDate = marrDate;
+                marriage.MarriagePlace = marrPlace;
+                marriage.MarriageSource = marrSrc;
+
+                marriage.DivorceDate = divDate;
+                marriage.DivorceSource = divSrc;
+                //marriage.DivorcePlace = divPlace;  // TODO no Divorce location!!!
+                hubbyP.Relationships.Add(marriage);
+            }
+            var existW = wifeyP.GetSpouseRelationship(hubbyP);
+            if (existW != null)
+                wifeyP.Relationships.Remove(existW);
+            {
+                SpouseRelationship marriage = new SpouseRelationship(hubbyP, status);
+                marriage.MarriageDate = marrDate;
+                marriage.MarriagePlace = marrPlace;
+                marriage.MarriageSource = marrSrc;
+
+                marriage.DivorceDate = divDate;
+                marriage.DivorceSource = divSrc;
+                //marriage.DivorcePlace = divPlace;  // TODO no Divorce location!!!
+                wifeyP.Relationships.Add(marriage);
             }
         }
 
@@ -1219,3 +1511,5 @@ namespace KBS.FamilyLinesLib
     }
 
 }
+
+// ReSharper restore SpecifyACultureInStringConversionExplicitly

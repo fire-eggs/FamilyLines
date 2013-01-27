@@ -135,6 +135,8 @@ namespace KBS.FamilyLinesLib
                 if (gender != value)
                 {
                     gender = value;
+                    if (Individual != null)
+                        Individual.Sex = value;
                     OnPropertyChanged("Gender");
                 }
             }
