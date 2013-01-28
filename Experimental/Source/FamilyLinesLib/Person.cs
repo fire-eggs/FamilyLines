@@ -305,8 +305,8 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                if (Individual != null)
-                    Debug.Assert(Individual.GetName().Suffix == suffix);
+                //if (Individual != null)
+                //    Debug.Assert(Individual.GetName().Suffix == suffix);
                 return suffix;
             }
             set
@@ -529,6 +529,12 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
+                if (Individual != null && Individual.Birth != null && Individual.Birth.Sources.Count > 0)
+                {
+                    var src = Individual.Birth.Sources[0];
+                    var rec = Individual.Database[src.Source] as GedcomSourceRecord;
+                    return rec == null ? "" : rec.Title;
+                }
                 //if (Individual != null &&
                 //    Individual.Birth != null &&
                 //    Individual.Birth.Sources.Count > 0)
@@ -724,7 +730,16 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string DeathSource
         {
-            get { return deathSource; }
+            get
+            {
+                if (Individual != null && Individual.Death != null && Individual.Death.Sources.Count > 0)
+                {
+                    var src = Individual.Death.Sources[0]; // TODO more than 1
+                    var rec = Individual.Database[src.Source] as GedcomSourceRecord;
+                    return rec == null ? "" : rec.Title;
+                }
+                return deathSource;
+            }
             set
             {
                 if (deathSource != value)
