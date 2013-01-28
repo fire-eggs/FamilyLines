@@ -416,8 +416,8 @@
                     x:Name="ThemesMenu" 
                     Style="{DynamicResource MenuItemStyle}"
                         />
-			
-                <MenuItem Header="Test">
+
+                <MenuItem Header="Test" Style="{DynamicResource MenuItemStyle}">
                     <MenuItem Header="Family View Test" Click="MenuItem_Click"/>
                     <MenuItem Header="Print Preview - Full Chart" Click="PrintKBR"/>
                     <MenuItem Header="Print Preview - Current View" Click="PrintKBR2"/>
