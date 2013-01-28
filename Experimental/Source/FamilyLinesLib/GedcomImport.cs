@@ -76,16 +76,19 @@ namespace KBS.FamilyLinesLib
 
                 // Import data from the temp XML file to the people collection.
                 ImportPeople(list);
+
+                startLog(@"c:\kbrlog_fs.txt");
                 ImportFamilies();
-                ImportSources();
+
+//                ImportSources();
                 ImportRepositories();
 	
                 // Update IDs to match Family.Show standards
                 UpdatePeopleIDs();
-                UpdateSourceIDs();
+//                UpdateSourceIDs();
                 UpdateRepositoryIDs();
 
-                people.RebuildTrees(); // set up the initial state of trees
+//                people.RebuildTrees(); // set up the initial state of trees
             }
             finally
             {
@@ -113,7 +116,15 @@ namespace KBS.FamilyLinesLib
                 people[i].Individual = _database.Individuals[i];
             }
 
+            startLog(@"c:\kbrlog_gn.txt");
             ImportFamiliesGN();
+            ImportSourcesGN();
+
+            // TODO ImportRepositoriesGN();
+
+            people.RebuildTrees(); // set up the initial state of trees
+
+            // TODO force diagram rebuild
         }
 
         /// <summary>
@@ -155,29 +166,6 @@ namespace KBS.FamilyLinesLib
             }
         }
 
-        //private void BuildTree(int tree, Person p)
-        //{
-        //    p.Tree = tree;
-        //    foreach (var r1 in p.Relationships)
-        //    {
-        //        if (r1.RelationTo.Tree == -1)
-        //            BuildTree(tree, r1.RelationTo);
-        //    }
-        //}
-
-        //private void BuildTrees()
-        //{
-        //    int nextTree = 1;
-        //    foreach (var p in people)
-        //    {
-        //        if (p.Tree == -1)
-        //        {
-        //            BuildTree(nextTree, p);
-        //            nextTree += 1;
-        //        }
-        //    }
-        //}
-
         private void UpdatePeopleIDs()
         {
             foreach (Person p in people)
@@ -203,6 +191,27 @@ namespace KBS.FamilyLinesLib
                 //    p.Story.Save(p.Note, FileName);
                 //}
 
+            }
+        }
+
+        private void ImportSourcesGN()
+        {
+            foreach (var sauce in _database.Sources)
+            {
+                Source source = new Source();
+
+                source.Id = sauce.XRefID;
+                source.SourceName = sauce.Title;
+
+                source.SourceAuthor = sauce.Originator;
+                source.SourcePublisher = sauce.PublicationFacts;
+                source.SourceNote = ""; // TODO sauce.Notes is an array
+                source.SourceRepository = ""; // TODO sauce.RepositoryCitations is an array
+
+                // TODO sauce.text
+                // TODO anything else???
+
+                sources.Add(source);
             }
         }
 
@@ -455,53 +464,59 @@ namespace KBS.FamilyLinesLib
 
                     if (husbandPerson != null && wifePerson != null & childPerson != null)
                     {
-                        people.AddChild(husbandPerson, childPerson, husbandModifier);
-                        people.AddChild(wifePerson, childPerson, wifeModifier);
+                        kbrLog("AddChild", husbandPerson, childPerson, husbandModifier);
+                        kbrLog("AddChild", wifePerson, childPerson, wifeModifier);
 
-                        List<Person> firstParentChildren = new List<Person>(husbandPerson.NaturalChildren);
-                        List<Person> secondParentChildren = new List<Person>(wifePerson.NaturalChildren);
+                        //people.AddChild(husbandPerson, childPerson, husbandModifier);
+                        //people.AddChild(wifePerson, childPerson, wifeModifier);
 
-                        // Combined children list that is returned.
-                        List<Person> naturalChildren = new List<Person>();
+                        //List<Person> firstParentChildren = new List<Person>(husbandPerson.NaturalChildren);
+                        //List<Person> secondParentChildren = new List<Person>(wifePerson.NaturalChildren);
 
-                        // Go through and add the children that have both parents.            
-                        foreach (Person child1 in firstParentChildren)
-                        {
-                            if (secondParentChildren.Contains(child1))
-                                naturalChildren.Add(child1);
-                        }
+                        //// Combined children list that is returned.
+                        //List<Person> naturalChildren = new List<Person>();
 
-                        // Go through and add natural siblings
-                        foreach (Person s in naturalChildren)
-                        {
-                            if (s != childPerson && wifeModifier == ParentChildModifier.Natural && husbandModifier == ParentChildModifier.Natural)
-                                people.AddSibling(childPerson, s);
-                        }
+                        //// Go through and add the children that have both parents.            
+                        //foreach (Person child1 in firstParentChildren)
+                        //{
+                        //    if (secondParentChildren.Contains(child1))
+                        //        naturalChildren.Add(child1);
+                        //}
+
+                        //// Go through and add natural siblings
+                        //foreach (Person s in naturalChildren)
+                        //{
+                        //    if (s != childPerson && wifeModifier == ParentChildModifier.Natural && husbandModifier == ParentChildModifier.Natural)
+                        //        people.AddSibling(childPerson, s);
+                        //}
 
                     }
 
                     if (husbandPerson == null && wifePerson != null & childPerson != null)
                     {
-                        people.AddChild(wifePerson, childPerson, wifeModifier);
+                        kbrLog("AddChild", wifePerson, childPerson, wifeModifier);
+
+//                        people.AddChild(wifePerson, childPerson, wifeModifier);
 
                         // Go through and add natural siblings
-                        foreach (Person s in wifePerson.NaturalChildren)
-                        {
-                            if (s != childPerson && wifeModifier == ParentChildModifier.Natural)
-                                people.AddSibling(childPerson,s);
-                        }
+                        //foreach (Person s in wifePerson.NaturalChildren)
+                        //{
+                        //    if (s != childPerson && wifeModifier == ParentChildModifier.Natural)
+                        //        people.AddSibling(childPerson,s);
+                        //}
                     }
 
                     if (husbandPerson != null && wifePerson == null & childPerson != null)
                     {
-                        people.AddChild(husbandPerson, childPerson, husbandModifier);
+                        kbrLog("AddChild", husbandPerson, childPerson, husbandModifier);
+                        //people.AddChild(husbandPerson, childPerson, husbandModifier);
 
-                        // Go through and add natural siblings
-                        foreach (Person s in husbandPerson.NaturalChildren)
-                        {
-                            if (s != childPerson && husbandModifier == ParentChildModifier.Natural)
-                                people.AddSibling(childPerson, s);
-                        }
+                        //// Go through and add natural siblings
+                        //foreach (Person s in husbandPerson.NaturalChildren)
+                        //{
+                        //    if (s != childPerson && husbandModifier == ParentChildModifier.Natural)
+                        //        people.AddSibling(childPerson, s);
+                        //}
                     }
 
                     i++;
@@ -509,10 +524,25 @@ namespace KBS.FamilyLinesLib
             }
         }
 
+        private string logName;
+        private void startLog(string logname)
+        {
+            logName = logname;
+            StreamWriter log = new StreamWriter(logName, false);
+            log.WriteLine(DateTime.Now);
+            log.WriteLine("=========================");
+            log.Close();
+        }
+
+        private void kbrLog(string text, Person husbandPerson, Person childPerson, object husbandModifier)
+        {
+            StreamWriter log = new StreamWriter(logName,true);
+            log.WriteLine("{0} : '{2}' to '{1}' as {3}", text, husbandPerson.Name, childPerson.Name, husbandModifier);
+            log.Close();
+        }
+
         private void ImportChildGN(GedcomIndividualRecord child, GedcomIndividualRecord daddy, GedcomIndividualRecord mommy, GedcomFamilyRecord fambly)
         {
-            var daddyP = HackFind(daddy.XRefID);
-            var mommyP = HackFind(mommy.XRefID);
             var childP = HackFind(child.XRefID);
 
             ParentChildModifier dadMod = ParentChildModifier.Natural;
@@ -546,13 +576,25 @@ namespace KBS.FamilyLinesLib
                 }
             }
 
+            List<Person> firstParentChildren = new List<Person>();
+            if (daddy != null)
+            {
+                var daddyP = HackFind(daddy.XRefID);
+                kbrLog("AddChild", daddyP, childP, dadMod);
+                people.AddChild(daddyP, childP, dadMod);
+                firstParentChildren = new List<Person>(daddyP.NaturalChildren);
+            }
 
-            people.AddChild(daddyP, childP, dadMod);
-            people.AddChild(mommyP, childP, momMod);
+            List<Person> secondParentChildren = new List<Person>();
+            if (mommy != null)
+            {
+                var mommyP = HackFind(mommy.XRefID);
+                kbrLog("AddChild", mommyP, childP, momMod);
+                people.AddChild(mommyP, childP, momMod);
+                secondParentChildren = new List<Person>(mommyP.NaturalChildren);
+            }
 
-            // TODO natural siblings
-            List<Person> firstParentChildren = new List<Person>(daddyP.NaturalChildren);
-            List<Person> secondParentChildren = new List<Person>(mommyP.NaturalChildren);
+            // Determine natural siblings
 
             // Combined children list that is returned.
             List<Person> naturalChildren = new List<Person>();
@@ -576,17 +618,28 @@ namespace KBS.FamilyLinesLib
         // families from Gedcom.NET
         private void ImportFamiliesGN()
         {
+
             foreach (var fambly in _database.Families)
             {
-                // TODO husband or wife null
+                GedcomIndividualRecord hubby = fambly.Husband == null ? null : _database[fambly.Husband] as GedcomIndividualRecord;
+                GedcomIndividualRecord wifey = fambly.Wife == null ? null : _database[fambly.Wife] as GedcomIndividualRecord;
+                //GedcomIndividualRecord wifey = null;
 
-                var hubby = _database[fambly.Husband] as GedcomIndividualRecord;
-                var daddyP = HackFind(hubby.XRefID);
-                daddyP.Relationships.Clear(); // TODO Hack - remove when stop importing families from XML
+                //if (fambly.Husband != null)
+                //{
+                //    hubby = _database[fambly.Husband] as GedcomIndividualRecord;
 
-                var wifey = _database[fambly.Wife] as GedcomIndividualRecord;
-                var mommyP = HackFind(wifey.XRefID);
-                mommyP.Relationships.Clear(); // TODO Hack - remove when stop importing families from XML
+                //    //var daddyP = HackFind(hubby.XRefID);
+                //    //daddyP.Relationships.Clear(); // TODO Hack - remove when stop importing families from XML
+                //}
+
+                //if (fambly.Wife != null)
+                //{
+                //    wifey = _database[fambly.Wife] as GedcomIndividualRecord;
+
+                //    //var mommyP = HackFind(wifey.XRefID);
+                //    //mommyP.Relationships.Clear(); // TODO Hack - remove when stop importing families from XML
+                //}
 
                 ImportMarriageGN(fambly, hubby, wifey);
 
@@ -594,9 +647,9 @@ namespace KBS.FamilyLinesLib
                 {
                     var child = _database[childId] as GedcomIndividualRecord;
 
-                    var childP = HackFind(child.XRefID);
+                    //var childP = HackFind(child.XRefID);
 
-                    childP.Relationships.Clear(); // TODO Hack - remove when stop importing families from XML
+                    //childP.Relationships.Clear(); // TODO Hack - remove when stop importing families from XML
 
                     ImportChildGN(child, hubby, wifey, fambly);
                 }
@@ -736,6 +789,9 @@ namespace KBS.FamilyLinesLib
 
                 wifeyP.Relationships.Add(wifeMarriage);
                 hubbyP.Relationships.Add(husbandMarriage);
+
+                kbrLog("Weird Add Spouse", hubbyP, wifeyP, SpouseModifier.Current);
+                kbrLog("Weird Add Spouse", wifeyP, hubbyP, SpouseModifier.Current);
                 return;
             }
 
@@ -770,7 +826,11 @@ namespace KBS.FamilyLinesLib
 
             var existH = hubbyP.GetSpouseRelationship(wifeyP);
             if (existH != null)
+            {
+                kbrLog("relationship exists", hubbyP, wifeyP, "");
                 hubbyP.Relationships.Remove(existH);
+            }
+
             {
                 SpouseRelationship marriage = new SpouseRelationship(wifeyP, status);
                 marriage.MarriageDate = marrDate;
@@ -781,10 +841,14 @@ namespace KBS.FamilyLinesLib
                 marriage.DivorceSource = divSrc;
                 //marriage.DivorcePlace = divPlace;  // TODO no Divorce location!!!
                 hubbyP.Relationships.Add(marriage);
+                kbrLog("AddSpouse", hubbyP, wifeyP, status);
             }
             var existW = wifeyP.GetSpouseRelationship(hubbyP);
             if (existW != null)
+            {
+                kbrLog("relationship exists", wifeyP, hubbyP, "");
                 wifeyP.Relationships.Remove(existW);
+            }
             {
                 SpouseRelationship marriage = new SpouseRelationship(hubbyP, status);
                 marriage.MarriageDate = marrDate;
@@ -795,13 +859,14 @@ namespace KBS.FamilyLinesLib
                 marriage.DivorceSource = divSrc;
                 //marriage.DivorcePlace = divPlace;  // TODO no Divorce location!!!
                 wifeyP.Relationships.Add(marriage);
+                kbrLog("AddSpouse", wifeyP, hubbyP, status);
             }
         }
 
         /// <summary>
         /// Update the marriage / divorce information for the two people.
         /// </summary>
-        private static void ImportMarriage(Person husband, Person wife, XmlNode node, XmlDocument doc)
+        private void ImportMarriage(Person husband, Person wife, XmlNode node, XmlDocument doc)
         {
             // Return right away if there are not two people.
             if (husband == null || wife == null)
@@ -846,6 +911,8 @@ namespace KBS.FamilyLinesLib
                 // Add info to husband.
                 if (husband.GetSpouseRelationship(wife) == null)
                 {
+                    kbrLog("AddSpouse", husband, wife, modifier);
+
                     SpouseRelationship husbandMarriage = new SpouseRelationship(wife, modifier);
 
                     husbandMarriage.MarriageDate = marriageDate;
@@ -867,13 +934,15 @@ namespace KBS.FamilyLinesLib
                     husbandMarriage.DivorceCitationNote = divorceCitationNote;
                     husbandMarriage.DivorceCitationActualText = divorceCitationActualText;
 
-                    husband.Relationships.Add(husbandMarriage);
+                    //husband.Relationships.Add(husbandMarriage);
 
                 }
 
                 // Add info to wife.
                 if (wife.GetSpouseRelationship(husband) == null)
                 {
+                    kbrLog("AddSpouse", wife, husband, modifier);
+
                     SpouseRelationship wifeMarriage = new SpouseRelationship(husband, modifier);
                     wifeMarriage.MarriageDate = marriageDate;
                     wifeMarriage.MarriageDateDescriptor = marriageDateDescriptor;
@@ -894,7 +963,7 @@ namespace KBS.FamilyLinesLib
                     wifeMarriage.DivorceCitationNote = divorceCitationNote;
                     wifeMarriage.DivorceCitationActualText = divorceCitationActualText;
 
-                    wife.Relationships.Add(wifeMarriage);
+//                    wife.Relationships.Add(wifeMarriage);
                 }
             }
             else
@@ -902,8 +971,11 @@ namespace KBS.FamilyLinesLib
                 SpouseRelationship wifeMarriage = new SpouseRelationship(husband, SpouseModifier.Current);
                 SpouseRelationship husbandMarriage = new SpouseRelationship(wife, SpouseModifier.Current);
 
-                wife.Relationships.Add(wifeMarriage);
-                husband.Relationships.Add(husbandMarriage);
+                //wife.Relationships.Add(wifeMarriage);
+                //husband.Relationships.Add(husbandMarriage);
+
+                kbrLog("Weird Add Spouse", husband, wife, SpouseModifier.Current);
+                kbrLog("Weird Add Spouse", wife, husband, SpouseModifier.Current);
             }
         }
 
