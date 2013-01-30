@@ -99,7 +99,20 @@
                             <TextBlock  Visibility="{Binding Path=HasPhoto, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}" HorizontalAlignment="Left" Foreground="{DynamicResource FontColor}" FontSize="10"><Run Text="{x:Static properties:Resources.DropPhotosIntoThisBox}"/></TextBlock>
                             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
 
-                                <ListBox KeyDown="PhotosListBox_KeyDown" AllowDrop="True"  ScrollViewer.CanContentScroll="True" x:Name="PhotosListBox" Background="{x:Null}" ItemsSource="{Binding Path=Photos, Mode=Default}" IsSynchronizedWithCurrentItem="True" Drop="PhotosListBox_Drop" Style="{DynamicResource PhotosListStyle}" ItemContainerStyle="{DynamicResource PhotosListItemStyle}" SelectionChanged="PhotosListBox_SelectionChanged" Margin="0,0,0,0"/>
+                                <ListBox 
+                                    KeyDown="PhotosListBox_KeyDown" 
+                                    AllowDrop="True"  
+                                    ScrollViewer.CanContentScroll="True" 
+                                    x:Name="PhotosListBox" 
+                                    Background="{x:Null}" 
+                                    ItemsSource="{Binding Path=Photos, Mode=Default}" 
+                                    IsSynchronizedWithCurrentItem="True" 
+                                    Drop="PhotosListBox_Drop" 
+                                    Style="{DynamicResource PhotosListStyle}" 
+                                    ItemContainerStyle="{DynamicResource PhotosListItemStyle}"
+                                    SelectionChanged="PhotosListBox_SelectionChanged" 
+                                    Margin="0,0,0,0"
+                                        />
                             </ScrollViewer>
                         </Grid>
                     </Border>

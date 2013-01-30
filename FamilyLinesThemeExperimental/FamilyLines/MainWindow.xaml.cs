@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Packaging;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Xps;
@@ -675,7 +676,8 @@ namespace KBS.FamilyLines
                     System.Windows.Shapes.Rectangle diagram = new System.Windows.Shapes.Rectangle();
 
                     //Print background when black theme is used because diagram has white text
-                    if (appSettings.Theme == @"Themes\Black\BlackResources.xaml")
+                    //if (appSettings.Theme == @"Themes\Black\BlackResources.xaml")
+                    if (appSettings.Theme == @"Themes\Metro\MetroResources.xaml")
                     {
                         heightActual = this.DiagramBorder.ActualHeight;
                         widthActual = this.DiagramBorder.ActualWidth;
@@ -775,23 +777,25 @@ namespace KBS.FamilyLines
 
         private void ChangeTheme(object sender, RoutedEventArgs e)
         {
-
+            
             MenuItem item = (MenuItem)sender;
             string theme = item.CommandParameter as string;
 
-            ResourceDictionary rd = new ResourceDictionary();
-            rd.MergedDictionaries.Add(Application.LoadComponent(new Uri(theme, UriKind.Relative)) as ResourceDictionary);
-            Application.Current.Resources = rd;
+            if (appSettings.Theme != theme)
+            {
+                ResourceDictionary rd = new ResourceDictionary();
+                rd.MergedDictionaries.Add(Application.LoadComponent(new Uri(theme, UriKind.Relative)) as ResourceDictionary);
+                Application.Current.Resources = rd;
 
-            // Save the theme setting
-            appSettings.Theme = theme;
-            appSettings.Save();
+                // Save the theme setting
+                appSettings.Theme = theme;
+                appSettings.Save();
 
-            family.OnContentChanged();
-            PersonInfoControl.OnThemeChange();
-            UpdateStatus();
-            this.DiagramControl.TimeSlider.Value = DateTime.Now.Year;
-
+                family.OnContentChanged();
+                PersonInfoControl.OnThemeChange();
+                UpdateStatus();
+                this.DiagramControl.TimeSlider.Value = DateTime.Now.Year;
+            }
         }
 
         #endregion
@@ -1728,24 +1732,24 @@ namespace KBS.FamilyLines
         private void BuildThemesMenu()
         {
             MenuItem theme1 = new MenuItem();
-            MenuItem theme2 = new MenuItem();
-            MenuItem theme3 = new MenuItem();
+            //MenuItem theme2 = new MenuItem();
+            //MenuItem theme3 = new MenuItem();
 
-            theme1.Header = Properties.Resources.Black;
-            theme1.CommandParameter = @"Themes\Black\BlackResources.xaml";
+            //theme1.Header = Properties.Resources.Black;
+            //theme1.CommandParameter = @"Themes\Black\BlackResources.xaml";
+            //theme1.Click += new RoutedEventHandler(ChangeTheme);
+
+            //theme2.Header = Properties.Resources.Silver;
+            //theme2.CommandParameter = @"Themes\Silver\SilverResources.xaml";
+            //theme2.Click += new RoutedEventHandler(ChangeTheme);
+
+            theme1.Header = Properties.Resources.Metro;
+            theme1.CommandParameter = @"Themes\Metro\MetroResources.xaml";
             theme1.Click += new RoutedEventHandler(ChangeTheme);
 
-            theme2.Header = Properties.Resources.Silver;
-            theme2.CommandParameter = @"Themes\Silver\SilverResources.xaml";
-            theme2.Click += new RoutedEventHandler(ChangeTheme);
-
-            theme3.Header = Properties.Resources.Metro;
-            theme3.CommandParameter = @"Themes\Metro\MetroResources.xaml";
-            theme3.Click += new RoutedEventHandler(ChangeTheme);
-
             ThemesMenu.Items.Add(theme1);
-            ThemesMenu.Items.Add(theme2);
-            ThemesMenu.Items.Add(theme3);
+            //ThemesMenu.Items.Add(theme2);
+            //ThemesMenu.Items.Add(theme3);
         }
 
         /// <summary>
@@ -1876,6 +1880,5 @@ namespace KBS.FamilyLines
             // TODO this is my brute-force mechanism to rebuild the diagram - make it better
             DiagramControl.Diagram.OnFamilyContentChanged(null, new ContentChangedEventArgs(null));
         }
-
     }
 }

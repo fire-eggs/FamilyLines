@@ -1393,4 +1393,7 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   <data name="Metro" xml:space="preserve">
     <value>Metro</value>
   </data>
+  <data name="DeletePersonToolTip" xml:space="preserve">
+    <value>Delete this person. (Can't be deleted if person has more than 3 relationships.)</value>
+  </data>
 </root>
