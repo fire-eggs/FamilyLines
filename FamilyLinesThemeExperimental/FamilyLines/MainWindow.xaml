@@ -12,7 +12,7 @@
       Height="728"  
       Background="{DynamicResource MainBackgroundBrush}" 
       ResizeMode="CanResizeWithGrip"
-      WindowStartupLocation="CenterScreen"
+      WindowStartupLocation="CenterScreen" 
         >
 
     <Window.Resources>

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Theme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Themes\Black\BlackResources.xaml</Value>
+      <Value Profile="(Default)">Themes\Metro\MetroResources.xaml</Value>
     </Setting>
     <Setting Name="ShowPhotos" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

@@ -127,23 +127,23 @@
             <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Path=Suffix}" IsReadOnly="{Binding Path=IsLocked, Converter={StaticResource BoolConverter}, Mode=Default}"/>
         </DataTemplate>
 
-      <!-- Prefix column -->
-      <DataTemplate x:Key="PrefixColumnTemplate">
-        <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Path=Prefix}" IsReadOnly="{Binding Path=IsLocked, Converter={StaticResource BoolConverter}, Mode=Default}"/>
-      </DataTemplate>
+        <!-- Prefix column -->
+        <DataTemplate x:Key="PrefixColumnTemplate">
+            <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Path=Prefix}" IsReadOnly="{Binding Path=IsLocked, Converter={StaticResource BoolConverter}, Mode=Default}"/>
+        </DataTemplate>
 
-      <!-- age column -->
+        <!-- age column -->
         <DataTemplate x:Key="AgeColumnTemplate">
             <TextBlock Style="{StaticResource AgeTextBlockStyle}" Text="{Binding Path=Age}"/>
         </DataTemplate>
 
-      <!-- Tree number column -->
-      <!-- TODO style should be renamed to "readonlystyle" or something -->
-      <DataTemplate x:Key="TreeNumColumnTemplate">
-        <TextBlock Style="{StaticResource AgeTextBlockStyle}" Text="{Binding Path=Tree}"/>
-      </DataTemplate>
+        <!-- Tree number column -->
+        <!-- TODO style should be renamed to "readonlystyle" or something -->
+        <DataTemplate x:Key="TreeNumColumnTemplate">
+            <TextBlock Style="{StaticResource AgeTextBlockStyle}" Text="{Binding Path=Tree}"/>
+        </DataTemplate>
 
-      <!-- birth date column -->
+        <!-- birth date column -->
         <DataTemplate x:Key="BirthDateColumnTemplate">
             <TextBox Style="{StaticResource TextBoxStyle}"
         Text="{Binding Path=BirthDate, Converter={StaticResource DateFormattingConverter}}" IsReadOnly="{Binding Path=IsLocked, Converter={StaticResource BoolConverter}, Mode=Default}"/>
@@ -241,30 +241,30 @@
         </Style>
 
         <!-- style applied to column headers -->
-        <Style x:Key="ColumnHeaderStyle" TargetType="{x:Type Border}">
+        <!--<Style x:Key="ColumnHeaderStyle" TargetType="{x:Type Border}">
             <Setter Property="BorderBrush" Value="{DynamicResource HeaderBorderBrush}"/>
             <Setter Property="Background" Value="{DynamicResource HeaderBackgroundBrush}"/>
             <Setter Property="BorderThickness" Value="0,1,0,1"/>
-        </Style>
+        </Style>-->
 
         <!-- style applied to selected column headers -->
-        <Style x:Key="ColumnSelectedHeaderStyle" BasedOn="{StaticResource ColumnHeaderStyle}"  TargetType="{x:Type Border}">
+        <!--<Style x:Key="ColumnSelectedHeaderStyle" BasedOn="{StaticResource ColumnHeaderStyle}"  TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{DynamicResource SelectedHeaderBackgroundBrush}"/>
-        </Style>
+        </Style>-->
 
         <!-- style applied to column headers -->
-        <Style x:Key="FirstColumnHeaderStyle" BasedOn="{StaticResource ColumnHeaderStyle}" TargetType="{x:Type Border}">
+        <!--<Style x:Key="FirstColumnHeaderStyle" BasedOn="{StaticResource ColumnHeaderStyle}" TargetType="{x:Type Border}">
             <Setter Property="BorderThickness" Value="1,1,0,1"/>
             <Setter Property="Padding" Value="15,5,5,5"/>
             <Setter Property="CornerRadius" Value="5,0,0,5"/>
-        </Style>
+        </Style>-->
 
         <!-- style applied to column headers -->
-        <Style x:Key="LastColumnHeaderStyle" BasedOn="{StaticResource ColumnHeaderStyle}" TargetType="{x:Type Border}">
+        <!--<Style x:Key="LastColumnHeaderStyle" BasedOn="{StaticResource ColumnHeaderStyle}" TargetType="{x:Type Border}">
             <Setter Property="BorderThickness" Value="0,1,1,1"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="CornerRadius" Value="0,5,5,0"/>
-        </Style>
+        </Style>-->
 
         <!-- header used when no sorting -->
         <Style x:Key="FamilyDataGridViewColumnHeader" TargetType="{x:Type GridViewColumnHeader}">
@@ -276,8 +276,8 @@
                                 <TextBlock Text="{TemplateBinding ContentControl.Content}"
                   TextAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="5,0,0,0"
                   Foreground="{DynamicResource FamilyDataGridHeaderFontColor}" />
-                <Thumb x:Name="PART_HeaderGripper" Style="{StaticResource ColumnGrip}" />
-              </DockPanel>
+                                <Thumb x:Name="PART_HeaderGripper" Style="{StaticResource ColumnGrip}" />
+                            </DockPanel>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -317,11 +317,11 @@
         <DataTemplate x:Key="RestrictionFamilyDataGridColumnHeader">
             <Image Source="..\..\Images\SecurityLock.png" Height="12" Margin="3,0,0,0" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="CitationFamilyDataGridColumnHeader">
             <Image Source="..\..\Images\Citation.png" Height="12" Margin="3,0,0,0" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="PhotoFamilyDataGridColumnHeader">
             <Image Source="..\..\Images\Photo.png" Height="12" Margin="3,0,0,0" />
         </DataTemplate>
@@ -332,7 +332,7 @@
 
         <DataTemplate x:Key="AttachmentFamilyDataGridColumnHeader">
             <Image Source="..\..\Images\Paperclip.png" Height="12" Margin="3,0,0,0"/>
-        </DataTemplate>             
+        </DataTemplate>
 
         <Style x:Key="CitationFamilyDataGridViewColumnHeader" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Template">
@@ -406,8 +406,8 @@
                                     <TextBlock Text="{TemplateBinding ContentControl.Content}" TextAlignment="Left"
                     VerticalAlignment="Center" FontWeight="Bold" Margin="5,0,0,0"
                     Foreground="{DynamicResource FamilyDataGridSelectedHeaderFontColor}" />
-                  <Path StrokeThickness="1" Fill="{DynamicResource FamilyDataGridSelectedHeaderFontColor}" Data="M 5,10 L 15,10 L 10,5 L 5,10" />
-                </StackPanel>
+                                    <Path StrokeThickness="1" Fill="{DynamicResource FamilyDataGridSelectedHeaderFontColor}" Data="M 5,10 L 15,10 L 10,5 L 5,10" />
+                                </StackPanel>
                                 <Thumb x:Name="PART_HeaderGripper" Style="{StaticResource ColumnGrip}" />
                             </DockPanel>
                         </Border>
@@ -427,8 +427,8 @@
                                     <TextBlock Text="{TemplateBinding ContentControl.Content}" TextAlignment="Left" 
                     VerticalAlignment="Center" FontWeight="Bold" Margin="5,0,0,0"
                     Foreground="{DynamicResource FamilyDataGridSelectedHeaderFontColor}" />
-                  <Path StrokeThickness="1" Fill="{DynamicResource FamilyDataGridSelectedHeaderFontColor}" Data="M 5,5 L 10,10 L 15,5 L 5,5" />
-                </StackPanel>
+                                    <Path StrokeThickness="1" Fill="{DynamicResource FamilyDataGridSelectedHeaderFontColor}" Data="M 5,5 L 10,10 L 15,5 L 5,5" />
+                                </StackPanel>
                                 <Thumb x:Name="PART_HeaderGripper" Style="{StaticResource ColumnGrip}" />
                             </DockPanel>
                         </Border>
@@ -448,7 +448,7 @@
                 VerticalAlignment="Center"
                 Foreground="{DynamicResource FamilyDataGridHeaderFontColor}"
                 FontWeight="Bold"/>
-            </Border>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -494,7 +494,7 @@
             <!-- header area -->
             <DockPanel Margin="10,0,10,0" DockPanel.Dock="Top" Height="30">
                 <TextBlock Text="{x:Static properties:Resources.FamilyData}" Style="{DynamicResource HeaderStyle}" FontWeight="Bold" Margin="5,0,0,0" VerticalAlignment="Center" Foreground="{DynamicResource HeaderFontColor}"/>
-            <Button Margin="0,0,3,0" Width="Auto" MinWidth="40" Content="{x:Static properties:Resources.Back}" Click="CloseButton_Click" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right" Height="15" x:Name="CloseButton" FontSize="10"/>
+                <Button Margin="0,0,3,0" Width="Auto" MinWidth="40" Content="{x:Static properties:Resources.Back}" Click="CloseButton_Click" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right" Height="15" x:Name="CloseButton" FontSize="10"/>
             </DockPanel>
 
             <!-- filter, list and chart area -->
@@ -514,7 +514,13 @@
                     <Border Grid.Row="0" Grid.Column="0" Background="#90ffffff" Margin="5,5,0,5" Padding="6" CornerRadius="4">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Label Foreground="#FF1F3066" Content="{x:Static properties:Resources.Filter}" Margin="0,-3,10,0"/>
-                            <local:FilterText x:Name="FilterTextBox" TextBoxBase.TextChanged="FilterTextBox_TextChanged" ResetFilter="FilterTextBox_ResetFilter" Width="250" VerticalAlignment="Center" />
+                            <local:FilterText 
+                                x:Name="FilterTextBox" 
+                                TextBoxBase.TextChanged="FilterTextBox_TextChanged" 
+                                ResetFilter="FilterTextBox_ResetFilter" 
+                                Width="250" 
+                                VerticalAlignment="Center" 
+                                    />
                             <Label Margin="10,-6,0,0" Foreground="#FFCCCCCC" FontSize="16" VerticalAlignment="Center"
               Content="{Binding Path=Items.Count, ElementName=FamilyEditor}"  />
                         </StackPanel>
@@ -525,89 +531,93 @@
                     <Border Grid.Row="2" Grid.Column="0" Margin="5,0,0,5">
 
                         <UniformGrid Columns="1">
-                            <DataGrid x:Name="FamilyEditorGrid"
-                                     Background="{x:Null}"                                         
-                                     Margin="-2,0,0,0"
-                                     BorderBrush="{x:Null}"
-                                     AutoGenerateColumns="False"
-                                     SelectionMode="Single"
-                                     GridLinesVisibility="None"
-                                     LostFocus="FamilyEditor_LostFocus">
-                                
+
+                            <DataGrid 
+                                x:Name="FamilyEditorGrid"
+                                Background="{x:Null}"                                         
+                                Margin="-2,0,0,0"
+                                BorderBrush="{x:Null}"
+                                AutoGenerateColumns="False"
+                                SelectionMode="Single"
+                                ColumnHeaderStyle="{DynamicResource FamilyDataGridColumnHeader}"
+                                ItemContainerStyle="{DynamicResource FamilyEditListViewItemStyle}"
+                                GridLinesVisibility="All"
+                                LostFocus="FamilyEditor_LostFocus">
+
                                 <DataGrid.CellStyle>
                                     <Style TargetType="{x:Type DataGridCell}">
                                         <Setter Property="VerticalContentAlignment" Value="Center" />
                                     </Style>
                                 </DataGrid.CellStyle>
-                                
+
                                 <DataGrid.RowStyle>
                                     <Style TargetType="{x:Type DataGridRow}">
                                         <Setter Property="Height" Value="32" />
                                     </Style>
                                 </DataGrid.RowStyle>
-                                
+
 
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn HeaderTemplate="{StaticResource RestrictionFamilyDataGridColumnHeader}"
-                                                               SortMemberPath="HasRestriction"
-                                                               CellTemplate="{StaticResource RestrictionColumnTemplate}" />
-                                    
+                                		SortMemberPath="HasRestriction"
+                                		CellTemplate="{StaticResource RestrictionColumnTemplate}" />
+
                                     <DataGridTemplateColumn HeaderTemplate="{StaticResource CitationFamilyDataGridColumnHeader}"
-                                                               SortMemberPath="HasCitations"
-                                                               CellTemplate="{StaticResource SourcesColumnTemplate}" />
-                                    
+                                		SortMemberPath="HasCitations"
+                                		CellTemplate="{StaticResource SourcesColumnTemplate}" />
+
                                     <DataGridTemplateColumn HeaderTemplate="{StaticResource PhotoFamilyDataGridColumnHeader}"
-                                                               SortMemberPath="HasPhoto"
-                                                               CellTemplate="{StaticResource PhotosColumnTemplate}" />
-                                    
+                                		SortMemberPath="HasPhoto"
+                                		CellTemplate="{StaticResource PhotosColumnTemplate}" />
+
                                     <DataGridTemplateColumn HeaderTemplate="{StaticResource NoteFamilyDataGridColumnHeader}"
-                                                               SortMemberPath="HasNote"                                                              
-                                                               CellTemplate="{StaticResource NotesColumnTemplate}" />
-                                    
+                                		SortMemberPath="HasNote"                                                              
+                                		CellTemplate="{StaticResource NotesColumnTemplate}" />
+
                                     <DataGridTemplateColumn HeaderTemplate="{StaticResource AttachmentFamilyDataGridColumnHeader}"
-                                                               SortMemberPath="HasAttachment"
-                                                               CellTemplate="{StaticResource AttachmentsColumnTemplate}" />
-                                    
+                                		SortMemberPath="HasAttachment"
+                                		CellTemplate="{StaticResource AttachmentsColumnTemplate}" />
+
                                     <DataGridTemplateColumn SortMemberPath="HasAvatar"
-                                                               CellTemplate="{StaticResource ImagesColumnTemplate}" />
+                                		CellTemplate="{StaticResource ImagesColumnTemplate}" />
 
-                                  <DataGridTextColumn Header="{x:Static properties:Resources.Prefix}"
-                                                         Binding="{Binding Prefix}"
-                                                         SortMemberPath="Prefix" />
+                                    <DataGridTextColumn Header="{x:Static properties:Resources.Prefix}"
+                                		Binding="{Binding Prefix}"
+                                		SortMemberPath="Prefix" />
 
-                                  <DataGridTextColumn Header="{x:Static properties:Resources.Names}"
-                                                           Binding="{Binding FirstName}"
-                                                           SortMemberPath="FirstName" />
-                                    
+                                    <DataGridTextColumn Header="{x:Static properties:Resources.Names}"
+                                		Binding="{Binding FirstName}"
+                                		SortMemberPath="FirstName" />
+
                                     <DataGridTextColumn Header="{x:Static properties:Resources.Surname}"                                                           
-                                                           Binding="{Binding LastName}"
-                                                           SortMemberPath="LastName" />
-                                    
+                                		Binding="{Binding LastName}"
+                                		SortMemberPath="LastName" />
+
                                     <DataGridTextColumn Header="{x:Static properties:Resources.Suffix}"
-                                                           Binding="{Binding Suffix}"
-                                                           SortMemberPath="Suffix" />
+                                		Binding="{Binding Suffix}"
+                                		SortMemberPath="Suffix" />
 
-                                  <DataGridTextColumn Header="{x:Static properties:Resources.TreeNum}"
-                                                         Binding="{Binding Tree}"
-                                                         SortMemberPath="Tree"
-                                                         IsReadOnly="True" />
+                                    <DataGridTextColumn Header="{x:Static properties:Resources.TreeNum}"
+                                		Binding="{Binding Tree}"
+                                		SortMemberPath="Tree"
+                                		IsReadOnly="True" />
 
-                                  <DataGridTextColumn Header="{x:Static properties:Resources.Age}"
-                                                           Binding="{Binding Age}"
-                                                           SortMemberPath="Age"
-                                                           IsReadOnly="True" />
-                                    
+                                    <DataGridTextColumn Header="{x:Static properties:Resources.Age}"
+                                		Binding="{Binding Age}"
+                                		SortMemberPath="Age"
+                                		IsReadOnly="True" />
+
                                     <DataGridTemplateColumn Header="{x:Static properties:Resources.BirthDate}"
-                                                               SortMemberPath="BirthDate"                                                               
-                                                               CellTemplate="{StaticResource BirthDateColumnTemplate}" />
-                                    
+                                		SortMemberPath="BirthDate"                                                               
+                                		CellTemplate="{StaticResource BirthDateColumnTemplate}" />
+
                                     <DataGridTemplateColumn Header="{x:Static properties:Resources.BirthPlace}"
-                                                               SortMemberPath="BirthPlace" CellTemplate="{StaticResource BirthPlaceColumnTemplate}" />
-                                                               
+                                		SortMemberPath="BirthPlace" CellTemplate="{StaticResource BirthPlaceColumnTemplate}" />
+
                                     <DataGridTemplateColumn Header="{x:Static properties:Resources.DeathDate}"
-                                                               SortMemberPath="DeathDate"
-                                                               CellTemplate="{StaticResource DeathDateColumnTemplate}" />
-                                        
+                                		SortMemberPath="DeathDate"
+                                		CellTemplate="{StaticResource DeathDateColumnTemplate}" />
+
                                     <DataGridTemplateColumn Header="{x:Static properties:Resources.DeathPlace}" SortMemberPath="DeathPlace" CellTemplate="{StaticResource DeathPlaceColumnTemplate}" />
                                     <DataGridTemplateColumn Header="{x:Static properties:Resources.IsLivingQuestion}" SortMemberPath="IsLiving" CellTemplate="{StaticResource IsLivingColumnTemplate}" />
                                     <DataGridTemplateColumn Header="{x:Static properties:Resources.Occupation}" SortMemberPath="Occupation" CellTemplate="{StaticResource OccupationColumnTemplate}" />
@@ -622,12 +632,23 @@
 
                             </DataGrid>
 
-                            <local:FamilyEditListView x:Name="FamilyEditor" Background="{x:Null}" Margin="-2,0,0,0" BorderBrush="{x:Null}"
-            ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"
-            VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" ScrollViewer.CanContentScroll="True"
-            SelectionMode="Single" Style="{DynamicResource FamilyEditListViewStyle}"
-            ItemContainerStyle="{DynamicResource FamilyEditListViewItemStyle}"
-            LostFocus="FamilyEditor_LostFocus" d:IsHidden="True">
+                            <local:FamilyEditListView
+                                x:Name="FamilyEditor" 
+                                Background="{x:Null}" 
+                                Margin="-2,0,0,0" 
+                                BorderBrush="{x:Null}"
+                                FontWeight="UltraLight"
+                                ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                VirtualizingStackPanel.IsVirtualizing="True" 
+                                VirtualizingStackPanel.VirtualizationMode="Recycling" 
+                                ScrollViewer.CanContentScroll="True"
+                                SelectionMode="Single" 
+                                Style="{DynamicResource FamilyEditListViewStyle}"
+                                ItemContainerStyle="{DynamicResource FamilyEditListViewItemStyle}"
+                                LostFocus="FamilyEditor_LostFocus" 
+                                d:IsHidden="False"
+                                    >
                                 <local:FamilyEditListView.ContextMenu>
                                     <!--Columns in the details edit more panel are minimized by default along with most icon symbols-->
                                     <ContextMenu x:Name="ColumnMenu" Closed="UpdateColumnsVisible" StaysOpen="True" >
@@ -642,8 +663,8 @@
                                         <MenuItem Foreground="Black" x:Name="SurnameMenu" Header="{x:Static properties:Resources.Surname}" IsCheckable="True" />
                                         <MenuItem Foreground="Black" x:Name="SuffixMenu" Header="{x:Static properties:Resources.Suffix}" IsCheckable="True" />
                                         <MenuItem Foreground="Black" x:Name="AgeMenu" Header="{x:Static properties:Resources.Age}" IsCheckable="True" />
-                                      <MenuItem Foreground="Black" x:Name="TreeMenu" Header="{x:Static properties:Resources.TreeNum}" IsCheckable="True" />
-                                      <MenuItem Foreground="Black" x:Name="BirthDateMenu" Header="{x:Static properties:Resources.BirthDate}" IsCheckable="True" />
+                                        <MenuItem Foreground="Black" x:Name="TreeMenu" Header="{x:Static properties:Resources.TreeNum}" IsCheckable="True" />
+                                        <MenuItem Foreground="Black" x:Name="BirthDateMenu" Header="{x:Static properties:Resources.BirthDate}" IsCheckable="True" />
                                         <MenuItem Foreground="Black" x:Name="BirthPlaceMenu" Header="{x:Static properties:Resources.BirthPlace}" IsCheckable="True" />
                                         <MenuItem Foreground="Black" x:Name="DeathDateMenu" Header="{x:Static properties:Resources.DeathDate}" IsCheckable="True" />
                                         <MenuItem Foreground="Black" x:Name="DeathPlaceMenu" Header="{x:Static properties:Resources.DeathPlace}" IsCheckable="True" />
@@ -695,12 +716,12 @@
                   HeaderContainerStyle="{DynamicResource ImageFamilyDataGridViewColumnHeader}"
                   CellTemplate="{StaticResource ImagesColumnTemplate}" />
 
-                                      <local:SortListViewColumn x:Name="Prefix" Header="{x:Static properties:Resources.Prefix}"
+                                        <local:SortListViewColumn x:Name="Prefix" Header="{x:Static properties:Resources.Prefix}"
                 SortProperty="Prefix" SortStyle="FamilyDataGridViewColumnHeader"
                 HeaderContainerStyle="{DynamicResource FamilyDataGridViewColumnHeader}"
                 CellTemplate="{StaticResource PrefixColumnTemplate}" />
 
-                                      <local:SortListViewColumn x:Name="Names" Header="{x:Static properties:Resources.Names}"
+                                        <local:SortListViewColumn x:Name="Names" Header="{x:Static properties:Resources.Names}"
                   SortProperty="FirstName" SortStyle="FamilyDataGridViewColumnHeader"
                   HeaderContainerStyle="{DynamicResource FamilyDataGridViewColumnHeader}"
                   CellTemplate="{StaticResource NamesColumnTemplate}" />
@@ -720,12 +741,12 @@
                   HeaderContainerStyle="{DynamicResource FamilyDataGridViewColumnHeader}"
                   CellTemplate="{StaticResource AgeColumnTemplate}" />
 
-                                      <local:SortListViewColumn x:Name="TreeNum" Header="{x:Static properties:Resources.TreeNum}"
+                                        <local:SortListViewColumn x:Name="TreeNum" Header="{x:Static properties:Resources.TreeNum}"
                 SortProperty="Tree"  SortStyle="FamilyDataGridViewColumnHeader"
                 HeaderContainerStyle="{DynamicResource FamilyDataGridViewColumnHeader}"
                 CellTemplate="{StaticResource TreeNumColumnTemplate}" />
 
-                                      <local:SortListViewColumn x:Name="BirthDate" Header="{x:Static properties:Resources.BirthDate}" 
+                                        <local:SortListViewColumn x:Name="BirthDate" Header="{x:Static properties:Resources.BirthDate}" 
                   SortProperty="BirthDate" SortStyle="FamilyDataGridViewColumnHeader" 
                   HeaderContainerStyle="{DynamicResource FamilyDataGridViewColumnHeader}"                   
                   CellTemplate="{StaticResource BirthDateColumnTemplate}" />
@@ -800,7 +821,7 @@
                                 </local:FamilyEditListView.View>
                             </local:FamilyEditListView>
 
-                        </UniformGrid>                        
+                        </UniformGrid>
                     </Border>
 
                     <!-- chart area -->
@@ -853,7 +874,7 @@
                                 <!-- gender chart -->
                                 <Border Style="{DynamicResource StatisticsHeaderStyle}">
                                     <TextBlock Text="{x:Static properties:Resources.GenderDistributions}" Foreground="{DynamicResource FontColor}"/>
-                                 </Border>
+                                </Border>
 
                                 <Border Style="{DynamicResource StatisticsControlStyle}" MaxHeight="115" >
                                     <local:Histogram x:Name="GenderDistributionControl1"
@@ -869,7 +890,7 @@
                                 <!-- living chart -->
                                 <Border Style="{DynamicResource StatisticsHeaderStyle}">
                                     <TextBlock Text="{x:Static properties:Resources.LivingStatus}" Foreground="{DynamicResource FontColor}"/>
-                                 </Border>
+                                </Border>
                                 <Border Style="{DynamicResource StatisticsControlStyle}" MaxHeight="115" >
                                     <local:Histogram x:Name="LivingDistributionControl1"
 				                    Foreground="{DynamicResource FontColor}"

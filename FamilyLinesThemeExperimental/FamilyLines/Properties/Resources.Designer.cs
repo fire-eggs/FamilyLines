@@ -1060,6 +1060,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete this person. (Can&apos;t be deleted if person has more than 3 relationships.).
+        /// </summary>
+        public static string DeletePersonToolTip {
+            get {
+                return ResourceManager.GetString("DeletePersonToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to descendant generations.
         /// </summary>
         public static string DescendantGenerations {
