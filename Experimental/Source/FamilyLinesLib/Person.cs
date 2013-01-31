@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Text;
 using System.Xml.Serialization;
 using GEDCOM.Net;
+using KBS.FamilyLinesLib.Properties;
 
 namespace KBS.FamilyLinesLib
 {
@@ -124,19 +125,12 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public GedcomSex Gender
         {
-            get
-            {
-                if (Individual != null)
-                    Debug.Assert(Individual.Sex == gender);
-                return gender;
-            }
+            get { return gender; }
             set
             {
                 if (gender != value)
                 {
                     gender = value;
-                    if (Individual != null)
-                        Individual.Sex = value;
                     OnPropertyChanged("Gender");
                 }
             }
@@ -529,16 +523,16 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                if (Individual != null && Individual.Birth != null && Individual.Birth.Sources.Count > 0)
-                {
-                    var src = Individual.Birth.Sources[0];
-                    var rec = Individual.Database[src.Source] as GedcomSourceRecord;
-                    return rec == null ? "" : rec.Title;
-                }
-                //if (Individual != null &&
-                //    Individual.Birth != null &&
-                //    Individual.Birth.Sources.Count > 0)
-                //    Debug.Assert(Individual.Birth.Sources[0].Source == birthSource);
+                //if (Individual != null && Individual.Birth != null && Individual.Birth.Sources.Count > 0)
+                //{
+                //    var src = Individual.Birth.Sources[0];
+                //    var rec = Individual.Database[src.Source] as GedcomSourceRecord;
+                //    return rec == null ? "" : rec.Title;
+                //}
+                ////if (Individual != null &&
+                ////    Individual.Birth != null &&
+                ////    Individual.Birth.Sources.Count > 0)
+                ////    Debug.Assert(Individual.Birth.Sources[0].Source == birthSource);
                 return birthSource;
             }
             set
@@ -2291,7 +2285,7 @@ namespace KBS.FamilyLinesLib
             relationships = new RelationshipCollection();
             photos = new PhotoCollection();
             attachments = new AttachmentCollection();
-            firstName = Properties.Resources.Unknown;
+            firstName = Resources.Unknown;
             isLiving = true;
             restriction = Restriction.None;
             tree = -1;
@@ -2314,10 +2308,35 @@ namespace KBS.FamilyLinesLib
         /// Creates a new instance of the person class with the firstname, the lastname, and gender
         /// </summary>
 //        public Person(string firstName, string lastName, Gender gender)
-        public Person(string firstName, string lastName, GedcomSex gender)
+        public Person(string firstName, string lastName, GedcomSex _gender)
             : this(firstName, lastName)
         {
-            this.gender = gender;
+            gender = _gender;
+        }
+
+        // KBR 01/30/2013 A ctor which builds an internal class from the Gedcom.Net instance
+        // At this time, the Gedcom.Net instance is "read-only".
+        public Person(GedcomIndividualRecord indiv)
+            : this()
+        {
+            Individual = indiv;
+
+            gender = indiv.Sex;
+
+            var names = indiv.GetName();
+            if (names != null)
+            {
+                firstName = indiv.FirstName;
+                lastName = indiv.LastName;
+
+                prefix = indiv.GetName().Prefix;
+                suffix = indiv.GetName().Suffix;
+            }
+
+            id = indiv.XRefID;
+            // TODO Restriction = indiv.RestrictionNotice
+
+            isLiving = !indiv.Dead;
         }
 
         #endregion
