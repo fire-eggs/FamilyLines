@@ -500,6 +500,8 @@ namespace GEDCOM.Net
 	        get 
             { 
                 GedcomName name = GetName();
+                if (name == null)
+                    return UnknownNamePart;
 	            return name.Given;
 	        }
 	    }
@@ -509,6 +511,8 @@ namespace GEDCOM.Net
 	        get
 	        {
                 GedcomName name = GetName();
+                if (name == null)
+                    return UnknownNamePart;
                 return name.Surname;
             }
 	    }
@@ -812,7 +816,6 @@ namespace GEDCOM.Net
 		
 		public bool MatchFirstname(string prefix, bool soundex)
 		{
-			bool ret = false;
 			string checkName;
 
 			GedcomName name = GetName();
@@ -840,7 +843,8 @@ namespace GEDCOM.Net
 					checkName = UnknownSoundex;
 				}
 			}
-				
+
+		    bool ret;	
 			if (!soundex)
 			{
 				ret = checkName.StartsWith(prefix, true, CultureInfo.CurrentCulture); 

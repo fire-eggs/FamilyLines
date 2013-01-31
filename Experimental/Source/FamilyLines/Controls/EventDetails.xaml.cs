@@ -115,7 +115,7 @@ namespace KBS.FamilyLines.Controls
         {
             get
             {
-                if (Event == null || Event.Place == null)
+                if (Event == null || Event.Date == null)
                     return null;
                 return Event.Date.DateTime1;
             }

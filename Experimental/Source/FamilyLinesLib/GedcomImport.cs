@@ -49,10 +49,19 @@ namespace KBS.FamilyLinesLib
             sourceCollection.Clear();
             repositoryCollection.Clear();
 
-            _reader = new BackgroundGedcomRecordReader();
-            _reader.Completed += reader_Completed;
-            _reader.ProgressChanged += reader_ProgressChanged;
-            _reader.ReadGedcom(gedcomFilePath);
+            people = peopleCollection;
+            sources = sourceCollection;
+            repositories = repositoryCollection;
+
+            //_reader = new BackgroundGedcomRecordReader();
+            //_reader.Completed += reader_Completed;
+            //_reader.ProgressChanged += reader_ProgressChanged;
+            _reader = new GedcomRecordReader();
+            if (!_reader.ReadGedcom(gedcomFilePath))
+                return false;
+            reader_Completed(null, null);
+            return true;
+            
 
 
             // First convert the GEDCOM file to an XML file so it's easier to parse,
@@ -75,7 +84,7 @@ namespace KBS.FamilyLinesLib
                 XmlNodeList list = doc.SelectNodes("/root/INDI");
 
                 // Import data from the temp XML file to the people collection.
-                ImportPeople(list);
+//                ImportPeople(list);
 
                 startLog(@"c:\kbrlog_fs.txt");
                 ImportFamilies();
@@ -84,7 +93,7 @@ namespace KBS.FamilyLinesLib
                 ImportRepositories();
 	
                 // Update IDs to match Family.Show standards
-                UpdatePeopleIDs();
+//                UpdatePeopleIDs();
 //                UpdateSourceIDs();
                 UpdateRepositoryIDs();
 
@@ -98,7 +107,7 @@ namespace KBS.FamilyLinesLib
             return true;
         }
 
-        private BackgroundGedcomRecordReader _reader;
+        private GedcomRecordReader _reader;
         private GedcomDatabase _database;
 
         void reader_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -113,7 +122,9 @@ namespace KBS.FamilyLinesLib
 
             for (int i = 0; i < _database.Individuals.Count; i++)
             {
-                people[i].Individual = _database.Individuals[i];
+                Person aPerson = new Person(_database.Individuals[i]);
+                people.Add(aPerson);
+//                people[i].Individual = _database.Individuals[i];
             }
 
             startLog(@"c:\kbrlog_gn.txt");
@@ -541,7 +552,7 @@ namespace KBS.FamilyLinesLib
             log.Close();
         }
 
-        private void ImportChildGN(GedcomIndividualRecord child, GedcomIndividualRecord daddy, GedcomIndividualRecord mommy, GedcomFamilyRecord fambly)
+        private void ImportChildGN(GedcomIndividualRecord child, GedcomIndividualRecord daddy, GedcomIndividualRecord mommy)
         {
             var childP = HackFind(child.XRefID);
 
@@ -651,7 +662,7 @@ namespace KBS.FamilyLinesLib
 
                     //childP.Relationships.Clear(); // TODO Hack - remove when stop importing families from XML
 
-                    ImportChildGN(child, hubby, wifey, fambly);
+                    ImportChildGN(child, hubby, wifey);
                 }
             }
 
