@@ -23,6 +23,11 @@
         Interdependent nodes should be kept as close to one another as humanely possible.
     
         4. The old Region is there to indicate that these were forked (verbatim) from the old theme version.
+    
+        5. If you need any help or if you have any questions feel free to contact me using the above email.
+    
+        6. If you have any suggestions, or if you think I'm wrong in any way, please let me know.
+        
     -->
     <!-- #EndRegion NOTES -->
 
@@ -51,6 +56,9 @@
 
     <!-- #Region    common.Styles -->
 
+    <Style TargetType="{x:Type Window}">
+        <Setter Property="FontWeight" Value="ExtraLight" />
+    </Style>
     <!-- #EndRegion common.Styles -->
 
 
@@ -448,24 +456,139 @@
 
     <!-- #Region    MainWindow -->
 
-    <!-- #Region old -->
-    <!-- The Background Brush is used as the background for the Main Window -->
-    <SolidColorBrush x:Key="MainBackgroundBrush" Color="#FF202020" />
-    <!-- #EndRegion old -->
+    <Style x:Key="MainWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="Background" Value="#FF202020" />
+        <Setter Property="Width" Value="960" />
+        <Setter Property="Height" Value="728" />
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+    </Style>
+
+    <!-- #Region Images -->
+    <!--Links to image files-->
+    <Image 
+            x:Key="saveico" 
+            Source="..\..\Images\Save.png" 
+            Height="16" 
+            Width="16"
+                />
+
+    <Image 
+            x:Key="printico" 
+            Source="..\..\Images\Print.png" 
+            Height="16" 
+            Width="16" 
+                />
+    <Image 
+            x:Key="folderico" 
+            Source="..\..\Images\Folder.png" 
+            Height="16"
+            Width="16"
+                />
+    <Image 
+            x:Key="sourceico" 
+            Source="..\..\Images\Source.png"
+            Height="16"
+            Width="16"
+                />
+    <Image 
+            x:Key="repositoryico" 
+            Source="..\..\Images\Repository.png" 
+            Height="16" 
+            Width="16"
+                />
+    <Image 
+            x:Key="photosico" 
+            Source="..\..\Images\Photo.png" 
+            Height="16" 
+            Width="16"
+                />
+    <Image 
+            x:Key="storiesico" 
+            Source="..\..\Images\Note.png"
+            Height="16" 
+            Width="16"
+                />
+    <Image 
+            x:Key="attachmentsico" 
+            Source="..\..\Images\Paperclip.png" 
+            Height="16" 
+            Width="16" 
+                />
+    <Image
+            x:Key="statsico" 
+            Source="..\..\Images\Statistics.png" 
+            Height="16" 
+            Width="16" 
+                />
+    <Image
+            x:Key="dateico" 
+            Source="..\..\Images\Calculator.png" 
+            Height="16"
+            Width="16"
+                />
+    <Image 
+            x:Key="mergeico" 
+            Source="..\..\Images\Merge.png" 
+            Height="16" 
+            Width="16"
+                />
+    <Image 
+            x:Key="languageico" 
+            Source="..\..\Images\Globe.png" 
+            Height="16"
+            Width="16"
+                />
+    <Image
+            x:Key="extractico" 
+            Source="..\..\Images\ZippedFile.png"
+            Height="16" 
+            Width="16"
+                />
+    <!-- #EndRegion Images -->
 
     <!-- #Region    MainWindow.Menu -->
 
-    <!-- #Region MainWindow.Menu.old -->
+    <!-- #Region innerResources -->
+
     <!-- User for styling the foreground color, applied to all MenuItems  -->
     <Style TargetType="{x:Type MenuItem}">
         <Setter Property="Foreground" Value="#FFFFFFFF" />
     </Style>
 
+    <!-- This BitmapEffect is used by the Simple MenuItem -->
+    <DropShadowBitmapEffect x:Key="PopupDropShadow" ShadowDepth="1.5" Softness="0.15" />
+
+    <SolidColorBrush x:Key="PopupMenuBackgroundBrush" Color="#FF202020" />
+
+    <LinearGradientBrush x:Key="MenuIsHighlightedBrush" StartPoint="0.5,0.999996" EndPoint="0.5,4.37507e-006">
+        <GradientStop Color="#FF4C4D4F" Offset="0" />
+        <GradientStop Color="#FF4C4D4F" Offset="0.0280899" />
+        <GradientStop Color="#FF221E1F" Offset="0.775281" />
+        <GradientStop Color="#FF221E1F" Offset="1" />
+    </LinearGradientBrush>
+
+    <!-- MenuBorderBrush is used as the Border for MenuItems -->
+    <LinearGradientBrush x:Key="MenuBorderBrush" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#CCC" Offset="0.0" />
+        <GradientStop Color="#666" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <!-- #EndRegion innerResources -->
+
+    <!-- #Region Menu -->
+    <Style x:Key="MainWindowBorderMenuStyle" TargetType="{x:Type Border}">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="DockPanel.Dock" Value="Top" />
+        <Setter Property="Margin" Value="0,5,0,5" />
+    </Style>
+
     <!-- Main Menu - This template uses a StackPanel to layout MenuItems -->
-    <Style x:Key="MenuStyle" TargetType="{x:Type Menu}">
+    <Style x:Key="MainWindowMenuStyle" TargetType="{x:Type Menu}">
         <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MenuBorderBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="5,0,0,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Menu}">
@@ -484,11 +607,8 @@
         </Setter>
     </Style>
 
-    <!-- This BitmapEffect is used by the Simple MenuItem -->
-    <DropShadowBitmapEffect x:Key="PopupDropShadow" ShadowDepth="1.5" Softness="0.15" />
-
     <!-- MenuItem - The template uses triggers to provide four different arrangements of menu item which are set via the Role property -->
-    <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
+    <Style x:Key="MainWindowMenuItemStyle" TargetType="{x:Type MenuItem}">
         <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="Background" Value="Transparent" />
@@ -574,11 +694,11 @@
                         </Trigger>
 
                         <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="Background" TargetName="Border" Value="{DynamicResource MenuPressedBrush}" />
+                            <Setter Property="Background" TargetName="Border" Value="{DynamicResource MainWindowMenuPressedBrush}" />
                         </Trigger>
 
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="Border" Value="{DynamicResource MenuPressedBrush}" />
+                            <Setter Property="Background" TargetName="Border" Value="{DynamicResource MainWindowMenuPressedBrush}" />
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="false">
@@ -590,43 +710,208 @@
         </Setter>
     </Style>
 
-    <!-- MenuPressedBrush - This brush is used for the Main Menu pressed and focused state-->
-    <LinearGradientBrush x:Key="MenuPressedBrush" StartPoint="0.500023,0.999996" EndPoint="0.500023,4.37507e-006">
+    <!-- MainWindowMenuPressedBrush - This brush is used for the Main Menu pressed and focused state-->
+    <LinearGradientBrush x:Key="MainWindowMenuPressedBrush" StartPoint="0.500023,0.999996" EndPoint="0.500023,4.37507e-006">
         <GradientStop Color="#FF875225" Offset="0" />
         <GradientStop Color="#FF221E1F" Offset="0.960674" />
         <GradientStop Color="#FF221E1F" Offset="1" />
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="PopupMenuBackgroundBrush" Color="#FF202020" />
-
-    <LinearGradientBrush x:Key="MenuIsHighlightedBrush" StartPoint="0.5,0.999996" EndPoint="0.5,4.37507e-006">
-        <GradientStop Color="#FF4C4D4F" Offset="0" />
-        <GradientStop Color="#FF4C4D4F" Offset="0.0280899" />
-        <GradientStop Color="#FF221E1F" Offset="0.775281" />
-        <GradientStop Color="#FF221E1F" Offset="1" />
-    </LinearGradientBrush>
-
-    <!-- MenuBorderBrush is used as the Border for MenuItems -->
-    <LinearGradientBrush x:Key="MenuBorderBrush" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#CCC" Offset="0.0" />
-        <GradientStop Color="#666" Offset="1.0" />
-    </LinearGradientBrush>
-
-    <!-- #EndRegion MainWindow.Menu.old -->
+    <!-- #EndRegion Menu -->
+    
 
     <!-- #EndRegion MainWindow.Menu -->
+    
+    <!-- #Region MainWindow.Content -->
+    
+    <Style x:Key="MainWindowContentGrid" TargetType="{x:Type Grid}">
+        <Setter Property="Grid.IsSharedSizeScope" Value="False" />
+    </Style>
+
+    <!-- #Region ImmediatellyVisibleControls -->
+
+    <!-- #Region Diagram -->
+    <Style x:Key="MainWindowContentDiagram" TargetType="{x:Type Grid}">
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
+    <Style x:Key="MainWindowContentDiagramGrid_ContextMenu" TargetType="{x:Type ContextMenu}">
+        <Setter Property="StaysOpen" Value="False" />
+    </Style>
+
+    <Style x:Key="MainWindowContentDiagramContextMenuItem" TargetType="{x:Type MenuItem}">
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    <Style x:Key="MaintainContentDiagramGrid_RowDefinition1" TargetType="{x:Type RowDefinition}">
+        <Setter Property="Height" Value="567" />
+    </Style>
+
+    <Style x:Key="MaintainContentDiagramGrid_RowDefinition2" TargetType="{x:Type RowDefinition}">
+        <Setter Property="Height" Value="15.04*" />
+    </Style>
+
+    <Style x:Key="MaintainContentDiagramGridBorder" TargetType="{x:Type Border}" BasedOn="{StaticResource BorderStyle}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{DynamicResource DiagramGradientBrush}" />
+        <Setter Property="Grid.RowSpan" Value="2" />
+    </Style>
+
+    <!-- #EndRegion Diagram -->
+    
+    <Style x:Key="MainWindowContentDiagramGridSplitter" TargetType="{x:Type GridSplitter}">
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="ResizeBehavior" Value="PreviousAndNext" />
+        <Setter Property="Width" Value="3" />
+        <Setter Property="Background" Value="Gray" />
+        <Setter Property="ResizeDirection" Value="Columns" />
+        <Setter Property="DockPanel.Dock" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <!-- #Region Details -->
+
+    <Style x:Key="MainWindowContentGrid_Details" TargetType="{x:Type Grid}" >
+        <Setter Property="Grid.Column" Value="2" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Visibility" Value="Visible" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
+    <Style x:Key="MainWindowContentGridDetails" TargetType="{x:Type local:Details}">
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
+    <!-- #EndRegion Details -->
+
+    <!-- #EndRegion ImmediatellyVisibleControls -->
+
+    <!-- #Region InvisibleControls -->
+    
+    
+    
+    <Style x:Key="MainWindowGridContentNewUserControl" TargetType="Control">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentWelcomeUserControl" TargetType="Control">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentAboutControl" TargetType="Control">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentStatisticsControl" TargetType="Control">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentPhotoViewerControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentAttachmentViewerControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentStoryViewerControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentMergeControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentSaveControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentExtractControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentPersonInfoControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="Opacity" Value="0" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentHtmlControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentPlacesControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    
+    <Style x:Key="MainWindowGridContentGedcomLocalizationControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentSourcesControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentRepositoriesControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentFamilyDataControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="Opacity" Value="0" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentLanguageControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="MainWindowGridContentDateCalculatorControl" TargetType="Control">
+        <Setter Property="Visibility" Value="Hidden" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- #EndRegion InvisibleControls -->
+
+    <!-- #EndRegion MainWindow.Content -->
 
     <!-- #EndRegion MainWindow -->
 
 
     <!-- #Region    Controls.Diagram -->
-
-    <!-- #Region    old.Diagram -->
-
+    
     <LinearGradientBrush x:Key="DiagramGradientBrush" EndPoint="0.439,0.967" StartPoint="0.561,0.033">
         <GradientStop Color="#FF202020" Offset="0" />
         <GradientStop Color="#FF545454" Offset="1" />
     </LinearGradientBrush>
+
+
+    <!-- #Region    old.Diagram -->
+
+    
 
     <!-- Pens used to draw connector lines -->
     <Pen x:Key="ChildConnectionPen" Brush="#80808080" Thickness="0.75" StartLineCap="Round" EndLineCap="Round"/>
@@ -1320,6 +1605,10 @@
 
 
     <!-- #Region    Controls.Details -->
+    
+    <Style x:Key="Details" TargetType="UserControl">
+        <!--<Setter Property="Width" Value="277" />-->
+    </Style>
 
     <!-- #Region old.Details -->
 

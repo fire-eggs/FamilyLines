@@ -1,25 +1,20 @@
-﻿<Window x:Class="KBS.FamilyLines.MainWindow"        
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:KBS.FamilyLinesLib="clr-namespace:KBS.FamilyLinesLib;assembly=FamilyShowLib"
-      xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
-      xmlns:local="clr-namespace:KBS.FamilyLines" 
-      xmlns:Controls="clr-namespace:KBS.FamilyLines.Controls"
-      mc:Ignorable="d"
-      Width="960"
-      Height="728"  
-      Background="{DynamicResource MainBackgroundBrush}" 
-      ResizeMode="CanResizeWithGrip"
-      WindowStartupLocation="CenterScreen" 
+﻿<Window 
+    x:Class="KBS.FamilyLines.MainWindow"        
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:KBS.FamilyLinesLib="clr-namespace:KBS.FamilyLinesLib;assembly=FamilyShowLib"
+    xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
+    xmlns:local="clr-namespace:KBS.FamilyLines" 
+    xmlns:Controls="clr-namespace:KBS.FamilyLines.Controls"
+    mc:Ignorable="d"
+    WindowStartupLocation="CenterScreen" 
+    Style="{DynamicResource MainWindowStyle}"
         >
-
     <Window.Resources>
-
         <!-- Animation for showing the Person Info control -->
-
-        <Storyboard 
+        <Storyboard
             x:Key="ShowPersonInfo" 
             Completed="ShowPersonInfo_StoryboardCompleted"
                 >
@@ -157,87 +152,6 @@
                         />
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
-
-        <!--Links to image files-->
-        <Image 
-            x:Key="saveico" 
-            Source="Images\Save.png" 
-            Height="16" 
-            Width="16"
-                />
-        <Image 
-            x:Key="printico" 
-            Source="Images\Print.png" 
-            Height="16" 
-            Width="16" 
-                />
-        <Image 
-            x:Key="folderico" 
-            Source="Images\Folder.png" 
-            Height="16"
-            Width="16"
-                />
-        <Image 
-            x:Key="sourceico" 
-            Source="Images\Source.png"
-            Height="16"
-            Width="16"
-                />
-        <Image 
-            x:Key="repositoryico" 
-            Source="Images\Repository.png" 
-            Height="16" 
-            Width="16"
-                />
-        <Image 
-            x:Key="photosico" 
-            Source="Images\Photo.png" 
-            Height="16" 
-            Width="16"
-                />
-        <Image 
-            x:Key="storiesico" 
-            Source="Images\Note.png"
-            Height="16" 
-            Width="16"
-                />
-        <Image 
-            x:Key="attachmentsico" 
-            Source="Images\Paperclip.png" 
-            Height="16" 
-            Width="16" 
-                />
-        <Image
-            x:Key="statsico" 
-            Source="Images\Statistics.png" 
-            Height="16" 
-            Width="16" 
-                />
-        <Image
-            x:Key="dateico" 
-            Source="Images\Calculator.png" 
-            Height="16"
-            Width="16"
-                />
-        <Image 
-            x:Key="mergeico" 
-            Source="Images\Merge.png" 
-            Height="16" 
-            Width="16"
-                />
-        <Image 
-            x:Key="languageico" 
-            Source="Images\Globe.png" 
-            Height="16"
-            Width="16"
-                />
-        <Image
-            x:Key="extractico" 
-            Source="Images\ZippedFile.png"
-            Height="16" 
-            Width="16"
-                />
-
     </Window.Resources>
 
     <!--Setup menu command bindings-->
@@ -266,37 +180,24 @@
 
     <DockPanel>
 
-        <!-- Header Area-->
-        <!--<Border Height="35" DockPanel.Dock="Top" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Padding="10,0,10,0" >
-            <DockPanel Height="34" >
-                <TextBlock xml:space="preserve" Opacity="1" FontFamily="Segoe UI" FontSize="20" FontStretch="Normal" FontWeight="Light" TextWrapping="Wrap" Foreground="{DynamicResource HeaderFontColor}" VerticalAlignment="Bottom" Margin="0,0,0,5"><Run Foreground="#FFCFD3DA" Text=" "/><Run Foreground="#FFCFD3DA" Text="Family"/><Run FontWeight="Normal" Text="."/><Run FontWeight="Normal" Text="Show"/></TextBlock>
-            </DockPanel>
-        </Border>-->
-
-        <!-- Menu Area -->
-        <Border 
-            VerticalAlignment="Top" 
-            DockPanel.Dock="Top" 
-            Margin="0,5,0,5"
+        <!-- #Region Menu -->
+        <Border
+            Style="{DynamicResource MainWindowBorderMenuStyle}"
                 >
             <Menu 
-                VerticalAlignment="Bottom" 
-                Margin="5,0,0,0"
-                Style="{DynamicResource MenuStyle}"
-                ItemContainerStyle="{DynamicResource MenuItemConStyle}"
+                Style="{DynamicResource MainWindowMenuStyle}"
                     >
-
                 <MenuItem
+                    Style="{DynamicResource MainWindowMenuItemStyle}"
                     Header="{x:Static properties:Resources.NewMenu}" 
                     x:Name="NewMenu"
-                    Command="New" 
-                    Style="{DynamicResource MenuItemStyle}"
+                    Command="New"
                         />
                 <MenuItem 
                     Header="{x:Static properties:Resources.Open}" 
                     x:Name="OpenMenu"  
                     Command="Open" 
-                    Style="{DynamicResource MenuItemStyle}"
+                    Style="{DynamicResource MainWindowMenuItemStyle}"
                         >
                     <MenuItem
                         Header="{x:Static properties:Resources.OpenMenu}" 
@@ -317,7 +218,7 @@
                 <MenuItem 
                     Header="{x:Static properties:Resources.Save}"
                     x:Name="SaveMenu" 
-                    Style="{DynamicResource MenuItemStyle}" 
+                    Style="{DynamicResource MainWindowMenuItemStyle}" 
                     StaysOpenOnClick="True"
                         >
                     <MenuItem
@@ -351,7 +252,7 @@
                 <MenuItem 
                     Header="{x:Static properties:Resources.Tools}" 
                     x:Name="MediaMenu" 
-                    Style="{DynamicResource MenuItemStyle}"
+                    Style="{DynamicResource MainWindowMenuItemStyle}"
                         >
                     <MenuItem
                         Header="{x:Static properties:Resources.SourcesMenu}" 
@@ -393,7 +294,7 @@
                 <MenuItem 
                     Header="{x:Static properties:Resources.Print}" 
                     x:Name="PrintMenu"
-                    Style="{DynamicResource MenuItemStyle}"
+                    Style="{DynamicResource MainWindowMenuItemStyle}"
                         >
                     <MenuItem
                         x:Name="shadowMenu" 
@@ -414,12 +315,12 @@
                 <MenuItem
                     Header="{x:Static properties:Resources.ThemesHeader}" 
                     x:Name="ThemesMenu" 
-                    Style="{DynamicResource MenuItemStyle}"
+                    Style="{DynamicResource MainWindowMenuItemStyle}"
                         />
                 <MenuItem
                     Header="{x:Static properties:Resources.Help}" 
                     x:Name="HelpMenu"
-                    Style="{DynamicResource MenuItemStyle}"
+                    Style="{DynamicResource MainWindowMenuItemStyle}"
                         >
                     <MenuItem 
                         Header="{x:Static properties:Resources.LanguageMenu}" 
@@ -431,26 +332,33 @@
                         Click="About"
                             />
                 </MenuItem>
-
             </Menu>
         </Border>
+        <!-- #EndRegion Menu -->
 
-        <Grid 
-            Grid.IsSharedSizeScope="True"
-            DockPanel.Dock="Top" 
+        <!-- #Region Content -->
+        <Grid
+            Style="{DynamicResource MainWindowContentGrid}"
                 >
 
+            <!-- #Region ImmediatellyVisibleControls -->
+            <!-- TODO: Maybe Move ColDefs to Theme? -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
             <!-- Diagram Area -->
-            <Grid 
-                x:Name="DiagramPane" 
-                Margin="10,0,10,10"
+            <Grid
+                Style="{DynamicResource MainWindowContentDiagram}"
+                x:Name="DiagramPane"
                     >
                 <Grid.ContextMenu>
                     <ContextMenu
-                        StaysOpen="False"
+                        Style="{DynamicResource MainWindowContentDiagramGrid_ContextMenu}" 
                             >
                         <MenuItem 
-                            Foreground="Black" 
+                            Style="{DynamicResource MainWindowContentDiagramContextMenuItem}"
                             x:Name="FullScreen"  
                             Unchecked="FullScreen_Unchecked" 
                             Checked="FullScreen_Checked" 
@@ -459,7 +367,7 @@
                             IsChecked="False"
                                 />
                         <MenuItem 
-                            Foreground="Black" 
+                            Style="{DynamicResource MainWindowContentDiagramContextMenuItem}"
                             x:Name="HideDiagramControls"  
                             Unchecked="HideControls_Unchecked" 
                             Checked="HideControls_Checked" 
@@ -471,72 +379,58 @@
                 </Grid.ContextMenu>
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="567*"
+                        Style="{DynamicResource MaintainContentDiagramGrid_RowDefinition1}" 
                             />
                     <RowDefinition 
-                        Height="15.04*" 
+                        Style="{DynamicResource MaintainContentDiagramGrid_RowDefinition2}" 
                             />
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <!-- The column 1 clone is used when the details area is collapsed -->
-                    <ColumnDefinition 
-                        x:Name="column1CloneForLayer0" 
-                        SharedSizeGroup="column1"
-                            />
-                </Grid.ColumnDefinitions>
 
                 <Border 
-                    Background="{DynamicResource DiagramGradientBrush}" 
-                    Style="{DynamicResource BorderStyle}"
+                    Style="{DynamicResource MaintainContentDiagramGridBorder}"
                     x:Name="DiagramBorder" 
-                    Grid.RowSpan="2"
                         >
-                    <local:DiagramViewer 
+                    <local:DiagramViewer
                         x:Name="DiagramControl" 
                         Zoom="1.5"
                             />
                 </Border>
             </Grid>
 
+            <GridSplitter
+                Style="{DynamicResource MainWindowContentDiagramGridSplitter}"
+                    />
+            
             <!-- Details Area -->
-            <Grid 
-                x:Name="DetailsPane" 
-                Margin="0,0,7,10"
-                Visibility="Visible"
+            <Grid
+                Style="{DynamicResource MainWindowContentGrid_Details}"
+                x:Name="DetailsPane"
                     >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition 
-                        SharedSizeGroup="column1" 
-                        Width="282"
-                            />
-                </Grid.ColumnDefinitions>
                 <local:Details 
+                    Style="{DynamicResource MainWindowContentGridDetails}"
                     DataContext="{Binding}" 
-                    Grid.Column="1"
                     x:Name="DetailsControl" 
-                    Margin="0,0,0,0" 
                     PersonInfoClick="DetailsControl_PersonInfoClick" 
                     EveryoneDeleted="DetailsControl_EveryoneDeleted" 
                     FamilyDataClick="DetailsControl_FamilyDataClick" 
                         />
             </Grid>
+            <!-- #EndRegion ImmediatellyVisibleControls -->
+
+            <!-- #Region InvisibleControls -->
 
             <!-- New User Control -->
             <Controls:NewUserControl 
+                Style="{DynamicResource MainWindowGridContentNewUserControl}"
                 x:Name="NewUserControl"
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
                 AddButtonClick="NewUserControl_AddButtonClick"
                 CancelButtonClick="NewUserControl_CancelButtonClick"
                     />
 
             <!-- Welcome User Control -->
             <local:Welcome 
+                Style="{DynamicResource MainWindowGridContentWelcomeUserControl}"
                 x:Name="WelcomeUserControl" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
                 ImportButtonClick="WelcomeUserControl_ImportButtonClick" 
                 NewButtonClick="WelcomeUserControl_NewButtonClick" 
                 OpenButtonClick="WelcomeUserControl_OpenButtonClick" 
@@ -545,149 +439,129 @@
 
             <!-- About Control -->
             <Controls:About 
+                Style="{DynamicResource MainWindowGridContentAboutControl}"
                 x:Name="AboutControl" 
-                HorizontalAlignment="Center" 
-                Visibility="Hidden" 
-                VerticalAlignment="Center" 
                 CloseButtonClick="AboutControl_CloseButtonClick" 
                     />
 
             <!-- Statistics Control -->
             <local:Statistics 
+                Style="{DynamicResource MainWindowGridContentStatisticsControl}"
                 x:Name="StatisticsControl" 
-                HorizontalAlignment="Center" 
-                Visibility="Hidden" 
-                VerticalAlignment="Center" 
                 CloseButtonClick="StatisticsControl_CloseButtonClick" 
                     />
 
             <!-- PhotoViewer Control -->
             <local:PhotoViewer 
+                Style="{DynamicResource MainWindowGridContentPhotoViewerControl}"
                 x:Name="PhotoViewerControl"
-                Visibility="Hidden" 
                 CloseButtonClick="PhotoViewerControl_CloseButtonClick" 
                     />
 
             <!-- AttachmentViewer Control -->
             <local:AttachmentViewer 
+                Style="{DynamicResource MainWindowGridContentAttachmentViewerControl}"
                 x:Name="AttachmentViewerControl" 
-                Visibility="Hidden" 
                 CloseButtonClick="AttachmentViewerControl_CloseButtonClick" 
                     />
 
             <!-- StoryViewer Control -->
             <local:StoryViewer 
+                Style="{DynamicResource MainWindowGridContentStoryViewerControl}"
                 x:Name="StoryViewerControl" 
-                Visibility="Hidden" 
                 CloseButtonClick="StoryViewerControl_CloseButtonClick" 
                     />
 
             <!-- Merge Control -->
             <local:Merge 
+                Style="{DynamicResource MainWindowGridContentMergeControl}"
                 x:Name="MergeControl" 
-                HorizontalAlignment="Center" 
-                Visibility="Hidden" 
-                VerticalAlignment="Center" 
                 DoneButtonClick="MergeControl_DoneButtonClick"
                     />
 
             <!-- Save Control -->
             <local:Save 
+                Style="{DynamicResource MainWindowGridContentSaveControl}"
                 x:Name="SaveControl" 
-                HorizontalAlignment="Center" 
-                Visibility="Hidden" 
-                VerticalAlignment="Center" 
                 SaveButtonClick="SaveControl_SaveButtonClick" 
                 CancelButtonClick="SaveControl_CancelButtonClick"
                     />
 
             <!-- Extract Control -->
             <local:Extract 
-                x:Name="ExtractControl" 
-                HorizontalAlignment="Center" 
-                Visibility="Hidden" 
-                VerticalAlignment="Center" 
+                Style="{DynamicResource MainWindowGridContentExtractControl}"
+                x:Name="ExtractControl"
                 CancelButtonClick="ExtractControl_CancelButtonClick" 
                     />
 
             <!-- PersonInfo Control -->
             <local:PersonInfo 
+                Style="{DynamicResource MainWindowGridContentPersonInfoControl}"
                 x:Name="PersonInfoControl" 
-                Opacity="0"
-                Visibility="Hidden" 
                 CloseButtonClick="PersonInfoControl_CloseButtonClick" 
                     />
 
             <!-- Html Control -->
             <local:Html 
+                Style="{DynamicResource MainWindowGridContentHtmlControl}"
                 x:Name="HtmlControl" 
-                Visibility="Hidden" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
                 CancelButtonClick="HtmlControl_CancelButtonClick"
                     />
 
             <!-- Places Control -->
             <local:Places 
+                Style="{DynamicResource MainWindowGridContentPlacesControl}"
                 x:Name="PlacesControl" 
-                Visibility="Hidden" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
                 CancelButtonClick="PlacesControl_CancelButtonClick"
                     />
 
             <!-- GedcomLocalization Control -->
             <local:GedcomLocalization
-                x:Name="GedcomLocalizationControl" 
-                Visibility="Hidden" 
-                VerticalAlignment="Center" 
+                Style="{DynamicResource MainWindowGridContentGedcomLocalizationControl}"
+                x:Name="GedcomLocalizationControl"
                 ContinueButtonClick="GedcomLocalizationControl_ContinueButtonClick"
                 CancelButtonClick="GedcomLocalizationControl_CancelButtonClick"
                     />
 
             <!-- Sources Control -->
             <local:Sources 
+                Style="{DynamicResource MainWindowGridContentSourcesControl}"
                 x:Name="SourcesControl" 
-                Visibility="Hidden"
-                VerticalAlignment="Center"  
                 CancelButtonClick="SourcesControl_CancelButtonClick"
                     />
 
             <!-- Repositories Control -->
             <local:Repositories 
+                Style="{DynamicResource MainWindowGridContentRepositoriesControl}"
                 x:Name="RepositoriesControl" 
-                Visibility="Hidden" 
-                VerticalAlignment="Center"  
                 CancelButtonClick="RepositoriesControl_CancelButtonClick" 
                     />
 
             <!-- FamilyData Control -->
             <local:FamilyData 
+                Style="{DynamicResource MainWindowGridContentFamilyDataControl}"
                 x:Name="FamilyDataControl" 
-                Opacity="0"
-                Visibility="Hidden" 
                 CloseButtonClick="FamilyDataControl_CloseButtonClick" 
                     />
 
             <!-- Language Control -->
             <local:Language 
+                Style="{DynamicResource MainWindowGridContentLanguageControl}"
                 x:Name="LanguageControl" 
-                HorizontalAlignment="Center" 
-                Visibility="Hidden"
-                VerticalAlignment="Center" 
                 CloseButtonClick="LanguageControl_CloseButtonClick" 
                     />
 
             <!--Date Calculator Control-->
-            <local:DateCalculator 
+            <local:DateCalculator
+                Style="{DynamicResource MainWindowGridContentDateCalculatorControl}"
                 x:Name="DateCalculatorControl" 
-                HorizontalAlignment="Center" 
-                Visibility="Hidden" 
-                VerticalAlignment="Center" 
                 CancelButtonClick="DateCalculatorControl_CancelButtonClick" 
                     />
 
+            <!-- #EndRegion InvisibleControls -->
+
         </Grid>
+        <!-- #EndRegion Content -->
 
     </DockPanel>
 
