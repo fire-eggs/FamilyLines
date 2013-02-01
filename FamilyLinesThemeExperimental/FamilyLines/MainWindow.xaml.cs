@@ -1219,10 +1219,6 @@ namespace KBS.FamilyLines
         private void FullScreen_Checked(object sender, EventArgs e)
         {
             DetailsPane.Visibility = Visibility.Collapsed;
-
-            // Remove the cloned columns from layers 0
-            if (DiagramPane.ColumnDefinitions.Contains(column1CloneForLayer0))
-                DiagramPane.ColumnDefinitions.Remove(column1CloneForLayer0);
         }
 
         /// <summary>
@@ -1232,9 +1228,6 @@ namespace KBS.FamilyLines
         {
             if (WelcomeUserControl.Visibility != Visibility.Visible)
             {
-                if (!DiagramPane.ColumnDefinitions.Contains(column1CloneForLayer0))
-                    DiagramPane.ColumnDefinitions.Add(column1CloneForLayer0);
-
                 if (family.Current != null)
                     DetailsControl.DataContext = family.Current;
 
@@ -1394,9 +1387,6 @@ namespace KBS.FamilyLines
         /// </summary>
         private void ShowDetailsPane()
         {
-            // Add the cloned column to layer 0:
-            if (!DiagramPane.ColumnDefinitions.Contains(column1CloneForLayer0))
-                DiagramPane.ColumnDefinitions.Add(column1CloneForLayer0);
 
             if (family.Current != null)
                 DetailsControl.DataContext = family.Current;
@@ -1575,10 +1565,6 @@ namespace KBS.FamilyLines
         private void HideDetailsPane()
         {
             DetailsPane.Visibility = Visibility.Collapsed;
-
-            // Remove the cloned columns from layers 0
-            if (DiagramPane.ColumnDefinitions.Contains(column1CloneForLayer0))
-                DiagramPane.ColumnDefinitions.Remove(column1CloneForLayer0);
 
             disableMenus();
         }

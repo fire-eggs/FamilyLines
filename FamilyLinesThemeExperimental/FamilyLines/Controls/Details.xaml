@@ -1,16 +1,17 @@
 ﻿<UserControl
-   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   xmlns:KBS.FamilyLinesLib="clr-namespace:KBS.FamilyLinesLib;assembly=FamilyLinesLib"
-   xmlns:local="clr-namespace:KBS.FamilyLines"
-   xmlns:sys="clr-namespace:System;assembly=mscorlib"
-   xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
-   x:Class="KBS.FamilyLines.Details" DataContextChanged="UserControl_DataContextChanged" 
-   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-   xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
-   mc:Ignorable="d"
-   Width="277"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:KBS.FamilyLinesLib="clr-namespace:KBS.FamilyLinesLib;assembly=FamilyLinesLib"
+    xmlns:local="clr-namespace:KBS.FamilyLines"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
+    x:Class="KBS.FamilyLines.Details" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+    mc:Ignorable="d"
+    Style="{DynamicResource Details}"
+    DataContextChanged="UserControl_DataContextChanged"    
         >
     <UserControl.Resources>
 
@@ -934,7 +935,7 @@
 
             <KBS.FamilyLinesLib:Person x:Key="person"/>
 
-            
+
             <ControlTemplate x:Key="TextBoxErrorTemplate">
                 <!-- Visibility binding is used in this instance to hide the error adorner when the adorned element is not visible -->
                 <DockPanel Visibility="{Binding Path=AdornedElement.IsVisible, Converter={StaticResource BoolToVisibilityConverter}, ElementName=adornedElementPlaceholder}">
@@ -2345,7 +2346,7 @@
                                 Grid.Column="1"
                                     />
                             </Grid>
-                            
+
                         </DockPanel>
                         <DockPanel Margin="0,5,0,0" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
                             <Label 
