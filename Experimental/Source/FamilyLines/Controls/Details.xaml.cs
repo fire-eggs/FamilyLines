@@ -66,6 +66,8 @@ namespace KBS.FamilyLines
             // TODO can these be specified in XAML ???
             ChristeningEvent.EventType = GedcomEvent.GedcomEventType.CHR;
             BaptismEvent.EventType = GedcomEvent.GedcomEventType.BAPM;
+            BurialEvent.EventType = GedcomEvent.GedcomEventType.BURI;
+            CremationEvent.EventType = GedcomEvent.GedcomEventType.CREM;
 
             // Handle event when the selected person changes so can select 
             // the item in the list.
@@ -1374,13 +1376,15 @@ namespace KBS.FamilyLines
             // This is necessary since this method can be invoked when the Enter key is pressed,
             // but the text field has not lost focus yet, so it does not update binding. This
             // manually updates the binding for those fields.
-            if (BurialDateEditTextBox.IsFocused)
-                BurialDateEditTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            if (CremationDateEditTextBox.IsFocused)
-                CremationDateEditTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            //if (BurialDateEditTextBox.IsFocused)
+            //    BurialDateEditTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            //if (CremationDateEditTextBox.IsFocused)
+            //    CremationDateEditTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
             ChristeningEvent.Leaving();
             BaptismEvent.Leaving();
+            BurialEvent.Leaving();
+            CremationEvent.Leaving();
 
             // Let the collection know that it has been updated so that the diagram control will update.
             family.OnContentChanged();
@@ -2110,6 +2114,8 @@ namespace KBS.FamilyLines
                 // TODO better way?
                 BaptismEvent.Individual = family.Current;
                 ChristeningEvent.Individual = family.Current;
+                BurialEvent.Individual = family.Current;
+                CremationEvent.Individual = family.Current;
 
                 //ignoreSelection = true;
                 //Person selected = (Person)((ListBox)sender).SelectedItem;
@@ -2238,6 +2244,8 @@ namespace KBS.FamilyLines
                 // TODO consider subscribing to family_currentchanged ???
                 ChristeningEvent.Individual = family.Current;
                 BaptismEvent.Individual = family.Current;
+                BurialEvent.Individual = family.Current;
+                CremationEvent.Individual = family.Current;
             }
         }
 
@@ -2352,7 +2360,8 @@ namespace KBS.FamilyLines
         private void ExpandDetailsEditMore_StoryboardCompleted(object sender, EventArgs e)
         {
             disableButtons();
-            BurialDateEditTextBox.Focus();
+            // TODO: who gets focus?
+//            BurialDateEditTextBox.Focus();
         }
 
         private void CollapseDetailsEditMore_StoryboardCompleted(object sender, EventArgs e)
@@ -2712,18 +2721,19 @@ namespace KBS.FamilyLines
         /// <param name="e"></param>
         private void ToolTip_All(object sender, ToolTipEventArgs e)
         {
-
             UpdateToolTip(BirthDateEditTextBox, family.Current.BirthSource, family.Current.BirthCitation);
             UpdateToolTip(BirthPlaceEditTextBox, family.Current.BirthSource, family.Current.BirthCitation);
 
             UpdateToolTip(DeathDateEditTextBox, family.Current.DeathSource, family.Current.DeathCitation);
             UpdateToolTip(DeathPlaceEditTextBox, family.Current.DeathSource, family.Current.DeathCitation);
 
-            UpdateToolTip(CremationDateEditTextBox, family.Current.CremationSource, family.Current.CremationCitation);
-            UpdateToolTip(CremationPlaceEditTextBox, family.Current.CremationSource, family.Current.CremationCitation);
+            // TODO: what is this? how handle via EventDetails??
 
-            UpdateToolTip(BurialDateEditTextBox, family.Current.BurialSource, family.Current.BurialCitation);
-            UpdateToolTip(BurialPlaceEditTextBox, family.Current.BurialSource, family.Current.BurialCitation);
+            //UpdateToolTip(CremationDateEditTextBox, family.Current.CremationSource, family.Current.CremationCitation);
+            //UpdateToolTip(CremationPlaceEditTextBox, family.Current.CremationSource, family.Current.CremationCitation);
+
+            //UpdateToolTip(BurialDateEditTextBox, family.Current.BurialSource, family.Current.BurialCitation);
+            //UpdateToolTip(BurialPlaceEditTextBox, family.Current.BurialSource, family.Current.BurialCitation);
 
             UpdateToolTip(EducationEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);
             UpdateToolTip(OccupationEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);

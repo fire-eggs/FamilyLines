@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
 using GEDCOM.Net;
@@ -96,6 +98,8 @@ namespace KBS.FamilyLinesLib
         private readonly AttachmentCollection attachments;
         private Story story;
         private readonly RelationshipCollection relationships;
+
+        private readonly ObservableCollection<GEDEvent> m_events;
 
         private int tree; // Which tree does this person belong to?
 
@@ -473,11 +477,6 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                // TODO asserting for gl120366.ged (intl chars)
-                //if (Individual != null && 
-                //    Individual.Birth != null &&
-                //    Individual.Birth.Place != null)
-                //    Debug.Assert(Individual.Birth.Place.Name == birthPlace);
                 return birthPlace;
             }
             set
@@ -499,10 +498,6 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                //if (Individual != null && 
-                //    Individual.Birth != null &&
-                //    Individual.Birth.Sources.Count > 0)
-                //    Debug.Assert(Individual.Birth.Sources[0].Page == birthCitation);
                 return birthCitation;
             }
             set
@@ -523,16 +518,6 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                //if (Individual != null && Individual.Birth != null && Individual.Birth.Sources.Count > 0)
-                //{
-                //    var src = Individual.Birth.Sources[0];
-                //    var rec = Individual.Database[src.Source] as GedcomSourceRecord;
-                //    return rec == null ? "" : rec.Title;
-                //}
-                ////if (Individual != null &&
-                ////    Individual.Birth != null &&
-                ////    Individual.Birth.Sources.Count > 0)
-                ////    Debug.Assert(Individual.Birth.Sources[0].Source == birthSource);
                 return birthSource;
             }
             set
@@ -2270,6 +2255,14 @@ namespace KBS.FamilyLinesLib
 
         #endregion
 
+        #region Events and Attributes (Version 2)
+
+        public ObservableCollection<GEDEvent> Events
+        {
+            get { return m_events; }
+        }
+
+        #endregion
         #endregion
 
         #region Constructors
@@ -2289,6 +2282,8 @@ namespace KBS.FamilyLinesLib
             isLiving = true;
             restriction = Restriction.None;
             tree = -1;
+
+            m_events = new ObservableCollection<GEDEvent>();
         }
 
         /// <summary>
@@ -2337,6 +2332,51 @@ namespace KBS.FamilyLinesLib
             // TODO Restriction = indiv.RestrictionNotice
 
             isLiving = !indiv.Dead;
+
+            if (indiv.Notes != null && indiv.Notes.Count > 0)
+            {
+                note = indiv.Notes[0];
+            }
+
+            // TODO transfer to m_events
+
+            // TODO this should be turned into a generalized 'Event'
+            if (indiv.Birth != null)
+            {
+                // TODO use gedcomdate
+                if (indiv.Birth.Date != null)
+                {
+                    birthDate = indiv.Birth.Date.DateTime1;
+
+                    // TODO hack: need to convert to AFT, BEF, etc
+                    birthDateDescriptor = indiv.Birth.Date.DatePeriod.ToString();
+                }
+                else
+                {
+                    birthDate = null;
+                }
+
+                birthPlace = indiv.Birth.Place != null ? indiv.Birth.Place.Name : "";
+
+                if (indiv.Birth.Sources != null && indiv.Birth.Sources.Count > 0)
+                {
+                    var src = indiv.Birth.Sources[0];
+                    birthCitationActualText = src.Text; // TODO: src.Text or src2.TextText?
+                    var src2 = src.Database[src.Source] as GedcomSourceRecord;
+                    if (src2 != null)
+                    {
+                        birthSource = src2.Title;
+                    }
+                    if (src.Notes != null && src.Notes.Count > 0)
+                    {
+                        birthCitationNote = src.Notes[0];
+                    }
+                }
+
+                // TODO birthCitation : how get to appropriate citation record?
+                // TODO birthCitationActualText : how get to appropriate citation record?
+                // TODO birthCitationNote : how get to appropriate citation record?
+            }
         }
 
         #endregion
@@ -2507,11 +2547,12 @@ namespace KBS.FamilyLinesLib
         [XmlIgnore]
         public GedcomIndividualRecord Individual { get; set; }
 
-        public IList<GedcomIndividualEvent> GetEvents(GedcomEvent.GedcomEventType evType)
+        public IList<GEDEvent> GetEvents(GedcomEvent.GedcomEventType evType)
         {
-            if (Individual == null)
-                return new List<GedcomIndividualEvent>();
-            return Individual.Events.FindAll(e => e.EventType == evType);
+            return m_events.Where(gedEvent => gedEvent.Type == evType).ToList();
+            //if (Individual == null)
+            //    return res;
+            //return Individual.Events.FindAll(e => e.EventType == evType);
         }
     }
 
