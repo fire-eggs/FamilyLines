@@ -62,49 +62,47 @@ namespace KBS.FamilyLinesLib
             reader_Completed(null, null);
             return true;
             
-
-
             // First convert the GEDCOM file to an XML file so it's easier to parse,
             // the temp XML file is deleted when importing is complete.
-            string xmlFilePath = Path.GetTempFileName();
+//            string xmlFilePath = Path.GetTempFileName();
 
-            try
-            {
-                people = peopleCollection;
-                sources = sourceCollection;
-                repositories = repositoryCollection;
+//            try
+//            {
+//                people = peopleCollection;
+//                sources = sourceCollection;
+//                repositories = repositoryCollection;
 
-                // Convert the GEDCOM file to a temp XML file.
-                GedcomConverter.ConvertToXml(gedcomFilePath, xmlFilePath, true, disableCharacterCheck);
+//                // Convert the GEDCOM file to a temp XML file.
+//                GedcomConverter.ConvertToXml(gedcomFilePath, xmlFilePath, true, disableCharacterCheck);
 
-                doc = new XmlDocument();
-                doc.Load(xmlFilePath);
+//                doc = new XmlDocument();
+//                doc.Load(xmlFilePath);
 
-                // Get list of people.
-                XmlNodeList list = doc.SelectNodes("/root/INDI");
+//                // Get list of people.
+//                XmlNodeList list = doc.SelectNodes("/root/INDI");
 
-                // Import data from the temp XML file to the people collection.
-//                ImportPeople(list);
+//                // Import data from the temp XML file to the people collection.
+////                ImportPeople(list);
 
-                startLog(@"c:\kbrlog_fs.txt");
-                ImportFamilies();
+//                startLog(@"c:\kbrlog_fs.txt");
+//                ImportFamilies();
 
-//                ImportSources();
-                ImportRepositories();
+////                ImportSources();
+//                ImportRepositories();
 	
-                // Update IDs to match Family.Show standards
-//                UpdatePeopleIDs();
-//                UpdateSourceIDs();
-                UpdateRepositoryIDs();
+//                // Update IDs to match Family.Show standards
+////                UpdatePeopleIDs();
+////                UpdateSourceIDs();
+//                UpdateRepositoryIDs();
 
-//                people.RebuildTrees(); // set up the initial state of trees
-            }
-            finally
-            {
-               //Delete the temp XML file.
-               File.Delete(xmlFilePath);
-            }
-            return true;
+////                people.RebuildTrees(); // set up the initial state of trees
+//            }
+//            finally
+//            {
+//               //Delete the temp XML file.
+//               File.Delete(xmlFilePath);
+//            }
+//            return true;
         }
 
         private GedcomRecordReader _reader;
@@ -219,7 +217,7 @@ namespace KBS.FamilyLinesLib
                 source.SourceNote = ""; // TODO sauce.Notes is an array
                 source.SourceRepository = ""; // TODO sauce.RepositoryCitations is an array
 
-                // TODO sauce.text
+                // TODO sauce.text ???
                 // TODO anything else???
 
                 sources.Add(source);

@@ -3081,7 +3081,8 @@ namespace GEDCOM.Net
 						}
 						break;
 					case "TEXT":
-						if (_lineValueType == GedcomLineValueType.DataType)
+                        // KBR empty text preventing building using CONC/CONT
+						if (_lineValueType != GedcomLineValueType.PointerType)
 						{
 							int capacity = _lineValue.Length;
 							if (!string.IsNullOrEmpty(sourceRecord.Text))

@@ -44,7 +44,7 @@ namespace KBS.FamilyLines.Controls
                 _individual = value;
                 var events = _individual.GetEvents(EventType);
                 Event = events.Count == 0 
-                        ? new GedcomIndividualEvent { EventType = EventType } 
+                        ? null //new GEDEvent { Type = EventType } 
                         : events[0];
 
                 OnPropertyChanged("IsLocked");
@@ -53,9 +53,9 @@ namespace KBS.FamilyLines.Controls
 
         public GedcomEvent.GedcomEventType EventType { get; set; }
 
-        private GedcomIndividualEvent _event;
+        private GEDEvent _event;
 
-        private GedcomIndividualEvent Event
+        private GEDEvent Event
         {
             get { return _event; }
             set
@@ -79,6 +79,7 @@ namespace KBS.FamilyLines.Controls
         {
             get
             {
+                // TODO localization
                 return "Date of " + GedcomEvent.TypeToReadable(EventType);
             }
         }
@@ -87,6 +88,7 @@ namespace KBS.FamilyLines.Controls
         {
             get
             {
+                // TODO localization
                 return "Place of " + GedcomEvent.TypeToReadable(EventType);
             }
         }
@@ -97,18 +99,32 @@ namespace KBS.FamilyLines.Controls
             {
                 if (Event == null || Event.Place == null)
                     return "";
-                return Event.Place.Name;
+                return Event.Place; // TODO Event.Place.Name;
             }
             set
             {
-                Event.Place.Name = value;
+                insureEvent();
+                //if (Event.Place == null)
+                //    Event.Place = new GedcomPlace();
+                Event.Place = value; // TODO Event.Place.Name = value;
+                OnPropertyChanged("EventPlace");
+                OnPropertyChanged("HasEventPlace");
             }
         }
 
         public string DateDescriptor
         {
-            get { return ""; } // TBD the real descriptor AFT/BEF/ABT
-            set {}
+            get
+            {
+                if (Event == null)
+                    return "";
+                return Event.DateDescriptor;
+            }
+            set
+            {
+                insureEvent();
+                Event.DateDescriptor = value;
+            }
         }
 
         public DateTime? EventDate
@@ -117,11 +133,12 @@ namespace KBS.FamilyLines.Controls
             {
                 if (Event == null || Event.Date == null)
                     return null;
-                return Event.Date.DateTime1;
+                return Event.Date; // TODO Event.Date.DateTime1;
             }
             set
             {
-                Event.Date.ParseDateString(value.ToString());
+                insureEvent();
+                Event.Date = value; // TODO Event.Date.ParseDateString(value.ToString());
             }
         }
 
@@ -130,6 +147,19 @@ namespace KBS.FamilyLines.Controls
             get
             {
                 return !(string.IsNullOrEmpty(EventPlace));
+            }
+        }
+
+        private void insureEvent()
+        {
+            // The user has made a change to a property. The necessary instance
+            // might not actually exist: make sure it does exist and add it to
+            // the person's event list.
+            if (_event == null )
+            {
+                _event = new GEDEvent();
+                _event.Type = EventType;
+                _individual.Events.Add(_event);
             }
         }
 
@@ -178,7 +208,11 @@ namespace KBS.FamilyLines.Controls
         {
             // Make sure the data binding is updated for fields that update during LostFocus.
             if (DateEditTextBox.IsFocused)
-                DateEditTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            {
+                var res = DateEditTextBox.GetBindingExpression(TextBox.TextProperty);
+                if (res != null)
+                    res.UpdateSource();
+            }
         }
 
         #region INotifyPropertyChanged Members

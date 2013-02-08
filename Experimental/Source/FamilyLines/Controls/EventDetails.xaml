@@ -90,6 +90,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+<!-- TODO: should UpdateSourceTrigger be 'LostFocus'? The code was written with that assumption? -->
             <TextBox TextWrapping="NoWrap" 
                          x:Name="PlaceEditTextBox" 
                          Text="{Binding Path=EventPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 

@@ -14,6 +14,7 @@ using System.Xml.Serialization;
 using System.Text;
 using System.Reflection;
 using System.Windows;
+using GEDCOM.Net;
 
 namespace KBS.FamilyLinesLib
 {
@@ -451,6 +452,7 @@ namespace KBS.FamilyLinesLib
             CurrentPersonName = PeopleCollection.Current.Name;
             this.CurrentPersonId = this.PeopleCollection.Current.Id;
             this.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major.ToString();
+            Version = "FL2"; // KBR serialization test
             this.DateSaved = DateTime.Now.ToString();
            
             // Use the default path and filename if none was provided
@@ -873,6 +875,12 @@ namespace KBS.FamilyLinesLib
                     foreach (Person person in pc.PeopleCollection)
                         this.PeopleCollection.Add(person);
 
+                    if (pc.Version != "FL2")
+                    {
+                        // Need to translate from "Family.Show" version to "Family Lines" version.
+                        TranslateToFL2(pc);
+                    }
+
                     // To avoid circular references when serializing family data to xml, only the person Id
                     // is seralized to express relationships. When family data is loaded, the correct
                     // person object is found using the person Id and assigned to the appropriate relationship.
@@ -912,18 +920,21 @@ namespace KBS.FamilyLinesLib
                     Version = pc.Version;
                     PeopleCollection.IsDirty = false;
 
-					// KBR 03/18/2012 Apply patch 4860 from jbtibor
-//                    var majorVersion = double.Parse(this.Version);
-					var majorVersion = double.Parse(Version, System.Globalization.CultureInfo.CurrentUICulture);
-					
-                    var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
-                    // Prompt if old file major version has been opened.
-                    if (string.IsNullOrEmpty(Version) || majorVersion < assemblyVersion.Major)
+                    if (Version != "FL2")
                     {
-                        MessageBox.Show(Properties.Resources.CompatabilityMessage, Properties.Resources.Compatability, 
-                                        MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                        // KBR 03/18/2012 Apply patch 4860 from jbtibor
+                        //                    var majorVersion = double.Parse(this.Version);
+                        var majorVersion = double.Parse(Version, System.Globalization.CultureInfo.CurrentUICulture);
 
+                        var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                        // Prompt if old file major version has been opened.
+                        if (string.IsNullOrEmpty(Version) || majorVersion < assemblyVersion.Major)
+                        {
+                            MessageBox.Show(Properties.Resources.CompatabilityMessage,
+                                            Properties.Resources.Compatability,
+                                            MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
                     PeopleCollection.RebuildTrees(); // KBR 04/03/2012 Missing tree support for Load
                     return true;
                 }
@@ -938,6 +949,56 @@ namespace KBS.FamilyLinesLib
                 this.fullyQualifiedFilename = string.Empty;
                 // Warn user of problem with file.
                 return false;
+            }
+        }
+
+        private void TranslateToFL2(People pc)
+        {
+            foreach (var person in pc.PeopleCollection)
+            {
+                // TODO Birth and Death are "special" - how to handle?
+                // translate birth data to birth event
+                var @event = new GEDEvent();
+                @event.Type = GedcomEvent.GedcomEventType.BIRT;
+                @event.Date = person.BirthDate;
+                @event.Place = person.BirthPlace;
+                @event.DateDescriptor = person.BirthDateDescriptor;
+                @event.Citation = person.BirthCitation;
+                @event.Source = person.BirthSource;
+                @event.Link = person.BirthLink;
+                @event.CitationNote = person.BirthCitationNote;
+                @event.CitationActualText = person.BirthCitationActualText;
+
+                person.Events.Add(@event);
+
+                // translate death data to death event
+
+                // TODO ...
+
+                // Cremation
+                @event = new GEDEvent();
+                @event.Type = GedcomEvent.GedcomEventType.CREM;
+                @event.Date = person.CremationDate;
+                @event.Place = person.CremationPlace;
+                @event.DateDescriptor = person.CremationDateDescriptor;
+                @event.Citation = person.CremationCitation;
+                @event.Source = person.CremationSource;
+                @event.Link = person.CremationLink;
+                @event.CitationNote = person.CremationCitationNote;
+                @event.CitationActualText = person.CremationCitationActualText;
+
+                // Burial
+                @event = new GEDEvent();
+                @event.Type = GedcomEvent.GedcomEventType.BURI;
+                @event.Date = person.BurialDate;
+                @event.Place = person.BurialPlace;
+                @event.DateDescriptor = person.BurialDateDescriptor;
+                @event.Citation = person.BurialCitation;
+                @event.Source = person.BurialSource;
+                @event.Link = person.BurialLink;
+                @event.CitationNote = person.BurialCitationNote;
+                @event.CitationActualText = person.BurialCitationActualText;
+
             }
         }
 
@@ -1007,6 +1068,8 @@ namespace KBS.FamilyLinesLib
                         }
 
                     }
+
+                    // TODO translate to Family Lines version
 
                     foreach (Person p in this.PeopleCollection)
                     {
@@ -1113,6 +1176,7 @@ namespace KBS.FamilyLinesLib
                     this.CurrentPersonName = this.PeopleCollection[0].FullName;
                     this.PeopleCollection.Current = this.PeopleCollection.Find(this.CurrentPersonId);
                     this.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major.ToString();
+                    Version = "FL2"; // KBR serialization test
                     this.PeopleCollection.IsDirty = false;
 
                 }

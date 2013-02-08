@@ -6,8 +6,9 @@
    xmlns:local="clr-namespace:KBS.FamilyLines"
    xmlns:sys="clr-namespace:System;assembly=mscorlib"
    xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
-   x:Class="KBS.FamilyLines.Details" DataContextChanged="UserControl_DataContextChanged" 
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+   x:Class="KBS.FamilyLines.Details" 
+   DataContextChanged="UserControl_DataContextChanged" 
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
    xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
    xmlns:Controls1="clr-namespace:KBS.FamilyLines.Controls" mc:Ignorable="d"
    Width="277"
@@ -1614,7 +1615,7 @@
                         </DockPanel>
 
                         <!-- Burial date -->
-                        <Grid>
+                        <!--<Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -1629,10 +1630,10 @@
 
                             <TextBox Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="NoWrap" x:Name="BurialDateEditTextBox" Width="135" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" Text="{Binding Path=BurialDate, Converter={StaticResource DateFormattingConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="" ToolTipOpening="ToolTip_All"/>
 
-                        </Grid>
+                        </Grid>-->
                         
                         <!-- Burial Place -->
-                        <Label Content="{x:Static properties:Resources.BurialPlace}"  Target="{Binding ElementName=BurialPlaceEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
+                        <!--<Label Content="{x:Static properties:Resources.BurialPlace}"  Target="{Binding ElementName=BurialPlaceEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1667,17 +1668,27 @@
                             <TextBox TextWrapping="NoWrap" x:Name="CremationPlaceEditTextBox" Text="{Binding Path=CremationPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="230" Margin="5,0,0,0" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" Grid.Column="0" Height="21.96" ToolTip="" ToolTipOpening="ToolTip_All"/>
                             <Image Margin="4,0,0,0" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" />
                             <Image Margin="4,0,0,0" Cursor="Hand" x:Name="PlaceOfCremationSearch" MouseLeftButtonUp="SearchMapCremationPlace" HorizontalAlignment="Center" Visibility="{Binding Path=HasCremationPlace, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />     
-                        </Grid>
+                        </Grid>-->
 
-                        <Expander Name="expandCHR" ExpandDirection="Down" 
-                                  IsExpanded="False" Header="Christening">
-                            <Controls1:EventDetails x:Name="ChristeningEvent"/>
-                        </Expander>
                         <Expander Name="expandBAPM" ExpandDirection="Down" 
                                   IsExpanded="False" Header="Baptism">
                             <Controls1:EventDetails x:Name="BaptismEvent"/>
                         </Expander>
-                        
+                        <Expander Name="expandCHR" ExpandDirection="Down" 
+                                  IsExpanded="False" Header="Christening">
+                            <Controls1:EventDetails x:Name="ChristeningEvent"/>
+                        </Expander>
+
+                        <Expander Name="expandCRE" ExpandDirection="Down" 
+                                  IsExpanded="False" Header="Cremation">
+                            <Controls1:EventDetails x:Name="CremationEvent"/>
+                        </Expander>
+
+                        <Expander Name="expandBUR" ExpandDirection="Down" 
+                                  IsExpanded="False" Header="Burial">
+                            <Controls1:EventDetails x:Name="BurialEvent"/>
+                        </Expander>
+
                     </StackPanel>
                 </Border>
 
