@@ -22,6 +22,7 @@
 using System;
 using System.IO;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace GEDCOM.Net
 {
@@ -196,6 +197,8 @@ namespace GEDCOM.Net
 		
 		#endregion
 				
+        public GedcomRecord() {}
+
 		#region Properties
 		
 		public virtual GedcomRecordType RecordType
@@ -207,14 +210,16 @@ namespace GEDCOM.Net
 		{
 			get { return "_UNKN"; }	
 		}
-		
-		public int Level
+
+        [XmlIgnore]
+        public int Level
 		{
 			get { return _Level; }
 			set { _Level = value; _ParsingLevel = value; }
 		}
-		
-		public int ParsingLevel
+
+        [XmlIgnore]
+        public int ParsingLevel
 		{
 			get { return _ParsingLevel; }
 			set { _ParsingLevel = value; }
@@ -265,6 +270,7 @@ namespace GEDCOM.Net
 			}
 		}
 		
+        [XmlIgnore]
 		public virtual GedcomChangeDate ChangeDate
 		{
 			get 
@@ -275,7 +281,7 @@ namespace GEDCOM.Net
 								
 				if (_database == null)
 				{
-					throw new Exception("MISSING DATABASE: " + this.RecordType.ToString());
+					throw new Exception("MISSING DATABASE: " + RecordType.ToString());
 				}
 				
 				if (_Notes != null)
@@ -343,8 +349,9 @@ namespace GEDCOM.Net
 			}
 			set { _ChangeDate = value; }
 		}
-		
-		public GedcomRecordList<string> Notes
+
+        [XmlIgnore]
+        public GedcomRecordList<string> Notes
 		{
 			get 
 			{
@@ -356,8 +363,9 @@ namespace GEDCOM.Net
 				return _Notes; 
 			}
 		}
-		
-		public GedcomRecordList<string> Multimedia
+
+        [XmlIgnore]
+        public GedcomRecordList<string> Multimedia
 		{
 			get 
 			{
@@ -369,8 +377,9 @@ namespace GEDCOM.Net
 				return _Multimedia; 
 			}
 		}
-		
-		public GedcomRecordList<GedcomSourceCitation> Sources
+
+        [XmlIgnore]
+        public GedcomRecordList<GedcomSourceCitation> Sources
 		{
 			get 
 			{ 
@@ -383,19 +392,22 @@ namespace GEDCOM.Net
 			}
 		}
 		
+        [XmlIgnore]
 		public virtual GedcomDatabase Database
 		{
 			get { return _database; }
 			set { _database = value; }
 		}
-		
-		public int RefCount
+
+        [XmlIgnore]
+        public int RefCount
 		{
 			get { return _refCount; }
 			set { _refCount = value; }
 		}
-		
-		public GedcomRestrictionNotice RestrictionNotice
+
+        [XmlIgnore]
+        public GedcomRestrictionNotice RestrictionNotice
 		{
 			get { return _RestrictionNotice; }
 			set 
@@ -523,7 +535,7 @@ namespace GEDCOM.Net
 		{	
 			XmlDocument doc = recNode.OwnerDocument;
 			
-			if (Sources.Count > 0)
+			if (Sources.Count > 0 && doc != null)
 			{
 				XmlNode evidenceNode = doc.CreateElement("Evidence");
 				
@@ -545,7 +557,7 @@ namespace GEDCOM.Net
 		{
 			XmlDocument doc = recNode.OwnerDocument;
 			
-			if (ChangeDate != null)
+			if (ChangeDate != null && doc != null)
 			{
 				XmlNode changeNode = doc.CreateElement("Changed");
 				

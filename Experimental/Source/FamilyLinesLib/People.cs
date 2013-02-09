@@ -270,6 +270,8 @@ namespace KBS.FamilyLinesLib
 
         #endregion
 
+        private const string FAMILY_LINES_VERSION1 = "314";
+
         public People()
         {
             peopleCollection = new PeopleCollection();
@@ -452,7 +454,7 @@ namespace KBS.FamilyLinesLib
             CurrentPersonName = PeopleCollection.Current.Name;
             this.CurrentPersonId = this.PeopleCollection.Current.Id;
             this.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major.ToString();
-            Version = "FL2"; // KBR serialization test
+            Version = FAMILY_LINES_VERSION1; // KBR serialization test
             this.DateSaved = DateTime.Now.ToString();
            
             // Use the default path and filename if none was provided
@@ -875,7 +877,7 @@ namespace KBS.FamilyLinesLib
                     foreach (Person person in pc.PeopleCollection)
                         this.PeopleCollection.Add(person);
 
-                    if (pc.Version != "FL2")
+                    if (pc.Version != FAMILY_LINES_VERSION1) // TODO deal with new Family Lines version values
                     {
                         // Need to translate from "Family.Show" version to "Family Lines" version.
                         TranslateToFL2(pc);
@@ -920,21 +922,19 @@ namespace KBS.FamilyLinesLib
                     Version = pc.Version;
                     PeopleCollection.IsDirty = false;
 
-                    if (Version != "FL2")
-                    {
-                        // KBR 03/18/2012 Apply patch 4860 from jbtibor
-                        //                    var majorVersion = double.Parse(this.Version);
-                        var majorVersion = double.Parse(Version, System.Globalization.CultureInfo.CurrentUICulture);
+                    // KBR 03/18/2012 Apply patch 4860 from jbtibor
+                    //                    var majorVersion = double.Parse(this.Version);
+                    var majorVersion = double.Parse(Version, System.Globalization.CultureInfo.CurrentUICulture);
 
-                        var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
-                        // Prompt if old file major version has been opened.
-                        if (string.IsNullOrEmpty(Version) || majorVersion < assemblyVersion.Major)
-                        {
-                            MessageBox.Show(Properties.Resources.CompatabilityMessage,
-                                            Properties.Resources.Compatability,
-                                            MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
+                    var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                    // Prompt if old file major version has been opened.
+                    if (string.IsNullOrEmpty(Version) || majorVersion < assemblyVersion.Major)
+                    {
+                        MessageBox.Show(Properties.Resources.CompatabilityMessage,
+                                        Properties.Resources.Compatability,
+                                        MessageBoxButton.OK, MessageBoxImage.Information);
                     }
+
                     PeopleCollection.RebuildTrees(); // KBR 04/03/2012 Missing tree support for Load
                     return true;
                 }
@@ -957,10 +957,12 @@ namespace KBS.FamilyLinesLib
             foreach (var person in pc.PeopleCollection)
             {
                 // TODO Birth and Death are "special" - how to handle?
+
                 // translate birth data to birth event
                 var @event = new GEDEvent();
                 @event.Type = GedcomEvent.GedcomEventType.BIRT;
-                @event.Date = person.BirthDate;
+                if (person.BirthDate != null)
+                    @event.Date.ParseDateString(person.BirthDate.ToString());
                 @event.Place = person.BirthPlace;
                 @event.DateDescriptor = person.BirthDateDescriptor;
                 @event.Citation = person.BirthCitation;
@@ -972,33 +974,76 @@ namespace KBS.FamilyLinesLib
                 person.Events.Add(@event);
 
                 // translate death data to death event
+                @event = new GEDEvent();
+                @event.Type = GedcomEvent.GedcomEventType.DEAT;
+                if (person.DeathDate != null)
+                    @event.Date.ParseDateString(person.DeathDate.ToString());
+                @event.Place = person.DeathPlace;
+                @event.DateDescriptor = person.DeathDateDescriptor;
+                @event.Citation = person.DeathCitation;
+                @event.Source = person.DeathSource;
+                @event.Link = person.DeathLink;
+                @event.CitationNote = person.DeathCitationNote;
+                @event.CitationActualText = person.DeathCitationActualText;
 
-                // TODO ...
+                person.Events.Add(@event);
 
                 // Cremation
-                @event = new GEDEvent();
-                @event.Type = GedcomEvent.GedcomEventType.CREM;
-                @event.Date = person.CremationDate;
-                @event.Place = person.CremationPlace;
-                @event.DateDescriptor = person.CremationDateDescriptor;
-                @event.Citation = person.CremationCitation;
-                @event.Source = person.CremationSource;
-                @event.Link = person.CremationLink;
-                @event.CitationNote = person.CremationCitationNote;
-                @event.CitationActualText = person.CremationCitationActualText;
+                if (person.CremationDate != null ||
+                    !String.IsNullOrEmpty(person.CremationPlace))
+                {
+                    @event = new GEDEvent();
+                    @event.Type = GedcomEvent.GedcomEventType.CREM;
+                    if (person.CremationDate != null)
+                        @event.Date.ParseDateString(person.CremationDate.ToString());
+                    @event.Place = person.CremationPlace;
+                    @event.DateDescriptor = person.CremationDateDescriptor;
+                    @event.Citation = person.CremationCitation;
+                    @event.Source = person.CremationSource;
+                    @event.Link = person.CremationLink;
+                    @event.CitationNote = person.CremationCitationNote;
+                    @event.CitationActualText = person.CremationCitationActualText;
+
+                    person.Events.Add(@event);
+                }
 
                 // Burial
-                @event = new GEDEvent();
-                @event.Type = GedcomEvent.GedcomEventType.BURI;
-                @event.Date = person.BurialDate;
-                @event.Place = person.BurialPlace;
-                @event.DateDescriptor = person.BurialDateDescriptor;
-                @event.Citation = person.BurialCitation;
-                @event.Source = person.BurialSource;
-                @event.Link = person.BurialLink;
-                @event.CitationNote = person.BurialCitationNote;
-                @event.CitationActualText = person.BurialCitationActualText;
+                if (person.BurialDate != null ||
+                    !String.IsNullOrEmpty(person.BurialPlace))
+                {
+                    @event = new GEDEvent();
+                    @event.Type = GedcomEvent.GedcomEventType.BURI;
+                    if (person.BurialDate != null)
+                        @event.Date.ParseDateString(person.BurialDate.ToString());
+                    @event.Place = person.BurialPlace;
+                    @event.DateDescriptor = person.BurialDateDescriptor;
+                    @event.Citation = person.BurialCitation;
+                    @event.Source = person.BurialSource;
+                    @event.Link = person.BurialLink;
+                    @event.CitationNote = person.BurialCitationNote;
+                    @event.CitationActualText = person.BurialCitationActualText;
 
+                    person.Events.Add(@event);
+                }
+
+                // Wipe 'old' data
+                person.CremationPlace = null;
+                person.CremationDateDescriptor = null;
+                person.CremationLink = null;
+                person.CremationSource = null;
+                person.CremationCitationNote = null;
+                person.CremationCitationActualText = null;
+                person.CremationDate = null;
+
+                person.BurialPlace = null;
+                person.BurialDateDescriptor = null;
+                person.BurialLink = null;
+                person.BurialSource = null;
+                person.BurialCitationNote = null;
+                person.BurialCitationActualText = null;
+                person.BurialDate = null;
+
+                // TODO wipe old birth/death
             }
         }
 
@@ -1176,7 +1221,7 @@ namespace KBS.FamilyLinesLib
                     this.CurrentPersonName = this.PeopleCollection[0].FullName;
                     this.PeopleCollection.Current = this.PeopleCollection.Find(this.CurrentPersonId);
                     this.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major.ToString();
-                    Version = "FL2"; // KBR serialization test
+                    Version = FAMILY_LINES_VERSION1; // KBR serialization test
                     this.PeopleCollection.IsDirty = false;
 
                 }

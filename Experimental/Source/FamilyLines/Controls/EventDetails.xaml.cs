@@ -43,9 +43,7 @@ namespace KBS.FamilyLines.Controls
             { 
                 _individual = value;
                 var events = _individual.GetEvents(EventType);
-                Event = events.Count == 0 
-                        ? null //new GEDEvent { Type = EventType } 
-                        : events[0];
+                Event = events.Count == 0 ? null : events[0];
 
                 OnPropertyChanged("IsLocked");
             }
@@ -124,21 +122,24 @@ namespace KBS.FamilyLines.Controls
             {
                 insureEvent();
                 Event.DateDescriptor = value;
+                OnPropertyChanged("DateDescriptor");
             }
         }
 
-        public DateTime? EventDate
+        public string EventDate
         {
             get
             {
                 if (Event == null || Event.Date == null)
-                    return null;
-                return Event.Date; // TODO Event.Date.DateTime1;
+                    return "";
+                return Event.Date.DateString;
             }
             set
             {
                 insureEvent();
-                Event.Date = value; // TODO Event.Date.ParseDateString(value.ToString());
+                Event.Date.ParseDateString(value);
+                OnPropertyChanged("EventDate");
+                OnPropertyChanged("DateDescriptor");
             }
         }
 
@@ -160,6 +161,7 @@ namespace KBS.FamilyLines.Controls
                 _event = new GEDEvent();
                 _event.Type = EventType;
                 _individual.Events.Add(_event);
+                _event.Date = new GedcomDate();
             }
         }
 

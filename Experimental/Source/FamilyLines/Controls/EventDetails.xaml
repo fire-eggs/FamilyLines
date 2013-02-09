@@ -27,7 +27,6 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <local:DateFormattingConverter x:Key="DateFormattingConverter"/>
             <local:NotConverter x:Key="NotConverter"/>
             <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
@@ -71,7 +70,7 @@
                      HorizontalAlignment="Left" 
                      Margin="5,0,0,0" 
                      IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" 
-                     Text="{Binding Path=EventDate, Converter={StaticResource DateFormattingConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                     Text="{Binding Path=EventDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                      ToolTip="" 
                      ToolTipOpening="ToolTip_All"/>
 

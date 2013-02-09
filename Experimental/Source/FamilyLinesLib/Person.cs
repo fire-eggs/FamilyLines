@@ -2309,6 +2309,7 @@ namespace KBS.FamilyLinesLib
             gender = _gender;
         }
 
+        // TODO MOVE THIS TO GEDCOMIMPORT
         // KBR 01/30/2013 A ctor which builds an internal class from the Gedcom.Net instance
         // At this time, the Gedcom.Net instance is "read-only".
         public Person(GedcomIndividualRecord indiv)
