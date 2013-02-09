@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GEDCOM.Net;
 
 namespace KBS.FamilyLinesLib
@@ -9,20 +6,14 @@ namespace KBS.FamilyLinesLib
     [Serializable]
     public class GEDEvent
     {
-        //private string place;
-        //private DateTime? date;
-        //private string dateDescriptor;
-        //private string citation;
-        //private string source;
-        //private string link;
-        //private string citationNote;
-        //private string citationActualText;
-
-        public GEDEvent() {} // TODO needed for serialization?
+        public GEDEvent()
+        {
+            Date = new GedcomDate();
+        }
 
         public GedcomEvent.GedcomEventType Type { get; set; }
         public string Place { get; set; }
-        public DateTime? Date { get; set; }
+        public GedcomDate Date { get; set; }
         public string DateDescriptor { get; set; }
         public string Citation { get; set; }
         public string Source { get; set; }
@@ -30,6 +21,7 @@ namespace KBS.FamilyLinesLib
         public string CitationNote { get; set; }
         public string CitationActualText { get; set; }
 
+        // TODO additional GEDCOM event details/properties
         // Age
         // Famc
         // ChangeDate
@@ -41,9 +33,5 @@ namespace KBS.FamilyLinesLib
         // Sources
         // Notes
         // Multimedia
-
-
-
-
     }
 }
