@@ -100,6 +100,7 @@ namespace KBS.FamilyLinesLib
         private readonly RelationshipCollection relationships;
 
         private readonly ObservableCollection<GEDEvent> m_events;
+        private readonly ObservableCollection<GEDAttribute> m_facts;
 
         private int tree; // Which tree does this person belong to?
 
@@ -2262,6 +2263,11 @@ namespace KBS.FamilyLinesLib
             get { return m_events; }
         }
 
+        public ObservableCollection<GEDAttribute> Facts
+        {
+            get { return m_facts; }
+        }
+
         #endregion
         #endregion
 
@@ -2284,6 +2290,7 @@ namespace KBS.FamilyLinesLib
             tree = -1;
 
             m_events = new ObservableCollection<GEDEvent>();
+            m_facts = new ObservableCollection<GEDAttribute>();
         }
 
         /// <summary>
@@ -2344,13 +2351,15 @@ namespace KBS.FamilyLinesLib
             // TODO this should be turned into a generalized 'Event'
             if (indiv.Birth != null)
             {
+                // TODO this is a hack: code separates birth date/descriptor everywhere
                 // TODO use gedcomdate
                 if (indiv.Birth.Date != null)
                 {
                     birthDate = indiv.Birth.Date.DateTime1;
 
                     // TODO hack: need to convert to AFT, BEF, etc
-                    birthDateDescriptor = indiv.Birth.Date.DatePeriod.ToString();
+                    var temp = indiv.Birth.Date.DatePeriod.ToString();
+                    birthDateDescriptor = temp != "Exact" ? temp : "";
                 }
                 else
                 {
@@ -2378,6 +2387,13 @@ namespace KBS.FamilyLinesLib
                 // TODO birthCitationActualText : how get to appropriate citation record?
                 // TODO birthCitationNote : how get to appropriate citation record?
             }
+
+            foreach (var individualEvent in indiv.Attributes)
+                m_facts.Add(new GEDAttribute(individualEvent));
+
+            // TODO convert all events
+            //foreach (var individualEvent in indiv.Events)
+            //    m_events.Add(new GEDEvent(individualEvent));
         }
 
         #endregion
@@ -2550,10 +2566,14 @@ namespace KBS.FamilyLinesLib
 
         public IList<GEDEvent> GetEvents(GedcomEvent.GedcomEventType evType)
         {
+            // TODO custom events
             return m_events.Where(gedEvent => gedEvent.Type == evType).ToList();
-            //if (Individual == null)
-            //    return res;
-            //return Individual.Events.FindAll(e => e.EventType == evType);
+        }
+
+        public IList<GEDAttribute> GetFacts(GedcomEvent.GedcomEventType evType)
+        {
+            // TODO custom attributes
+            return m_facts.Where(gedEvent => gedEvent.Type == evType).ToList();
         }
     }
 

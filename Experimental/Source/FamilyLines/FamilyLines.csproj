@@ -87,6 +87,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\FactDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\FamilyView\FamilyViewViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -150,6 +154,9 @@
     </Reference>
     <Compile Include="Controls\EventDetails.xaml.cs">
       <DependentUpon>EventDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FactDetails.xaml.cs">
+      <DependentUpon>FactDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FamilyView\FamilyView.cs" />
     <Compile Include="Controls\FamilyView\FamilyViewViewer.xaml.cs">

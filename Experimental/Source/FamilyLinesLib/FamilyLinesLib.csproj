@@ -70,6 +70,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Attachment.cs" />
     <Compile Include="Experimental.cs" />
+    <Compile Include="GEDAttribute.cs" />
     <Compile Include="GEDEvent.cs" />
     <Compile Include="PlacesExport.cs" />
     <Compile Include="Properties\Resources.en-GB.Designer.cs">
