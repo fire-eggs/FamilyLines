@@ -69,6 +69,10 @@ namespace KBS.FamilyLines
             BurialEvent.EventType = GedcomEvent.GedcomEventType.BURI;
             CremationEvent.EventType = GedcomEvent.GedcomEventType.CREM;
 
+            TitleFact.EventType = GedcomEvent.GedcomEventType.TITLFact;
+            CasteFact.EventType = GedcomEvent.GedcomEventType.CASTFact;
+            OccupationFact.EventType = GedcomEvent.GedcomEventType.OCCUFact;
+
             // Handle event when the selected person changes so can select 
             // the item in the list.
             family.CurrentChanged += Family_CurrentChanged;
@@ -1362,8 +1366,6 @@ namespace KBS.FamilyLines
             //This must be called to ensure that if a person's restriction changes
             //the appropriate fields in the relationship citations panel become readonly/editable.
             UpdateRCitationsComboBox();
-
-
         }
 
         #endregion
@@ -1386,39 +1388,43 @@ namespace KBS.FamilyLines
             BurialEvent.Leaving();
             CremationEvent.Leaving();
 
+            TitleFact.Leaving();
+            CasteFact.Leaving();
+            OccupationFact.Leaving();
+
             // Let the collection know that it has been updated so that the diagram control will update.
             family.OnContentChanged();
         }
 
-        private void ChangeBurialDescriptorForward(object sender, RoutedEventArgs e)
-        {
-            this.family.Current.BurialDateDescriptor = forwardDateDescriptor(this.family.Current.BurialDateDescriptor);
-        }
+        //private void ChangeBurialDescriptorForward(object sender, RoutedEventArgs e)
+        //{
+        //    this.family.Current.BurialDateDescriptor = forwardDateDescriptor(this.family.Current.BurialDateDescriptor);
+        //}
 
-        private void ChangeBurialDescriptorBackward(object sender, RoutedEventArgs e)
-        {
-            this.family.Current.BurialDateDescriptor = backwardDateDescriptor(this.family.Current.BurialDateDescriptor);
-        }
+        //private void ChangeBurialDescriptorBackward(object sender, RoutedEventArgs e)
+        //{
+        //    this.family.Current.BurialDateDescriptor = backwardDateDescriptor(this.family.Current.BurialDateDescriptor);
+        //}
 
-        private void ChangeCremationDescriptorForward(object sender, RoutedEventArgs e)
-        {
-            this.family.Current.CremationDateDescriptor = forwardDateDescriptor(this.family.Current.CremationDateDescriptor);
-        }
+        //private void ChangeCremationDescriptorForward(object sender, RoutedEventArgs e)
+        //{
+        //    this.family.Current.CremationDateDescriptor = forwardDateDescriptor(this.family.Current.CremationDateDescriptor);
+        //}
 
-        private void ChangeCremationDescriptorBackward(object sender, RoutedEventArgs e)
-        {
-            this.family.Current.CremationDateDescriptor = backwardDateDescriptor(this.family.Current.CremationDateDescriptor);
-        }
+        //private void ChangeCremationDescriptorBackward(object sender, RoutedEventArgs e)
+        //{
+        //    this.family.Current.CremationDateDescriptor = backwardDateDescriptor(this.family.Current.CremationDateDescriptor);
+        //}
 
-        private void SearchMapBurialPlace(object sender, RoutedEventArgs e)
-        {
-            SearchMap(this.family.Current.BurialPlace.ToString());
-        }
+        //private void SearchMapBurialPlace(object sender, RoutedEventArgs e)
+        //{
+        //    SearchMap(this.family.Current.BurialPlace.ToString());
+        //}
 
-        private void SearchMapCremationPlace(object sender, RoutedEventArgs e)
-        {
-            SearchMap(this.family.Current.CremationPlace.ToString());
-        }
+        //private void SearchMapCremationPlace(object sender, RoutedEventArgs e)
+        //{
+        //    SearchMap(this.family.Current.CremationPlace.ToString());
+        //}
 
         #endregion
 
@@ -2096,37 +2102,33 @@ namespace KBS.FamilyLines
         /// </summary>
         private void FamilyListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!ignoreSelection)
-            {
-                // KBR 2012/03/26 DataGrid based list for multi-column sorting
-                var dg = sender as DataGrid;
-                if (dg == null)
-                    return;
+            if (ignoreSelection) 
+                return;
 
-                var p = dg.SelectedItem as Person;
-                if (p == null)
-                    return;
+            // KBR 2012/03/26 DataGrid based list for multi-column sorting
+            var dg = sender as DataGrid;
+            if (dg == null)
+                return;
 
-                ignoreSelection = true;
-                family.Current = p;
-                DataContext = family.Current;
+            var p = dg.SelectedItem as Person;
+            if (p == null)
+                return;
 
-                // TODO better way?
-                BaptismEvent.Individual = family.Current;
-                ChristeningEvent.Individual = family.Current;
-                BurialEvent.Individual = family.Current;
-                CremationEvent.Individual = family.Current;
+            ignoreSelection = true;
+            family.Current = p;
+            DataContext = family.Current;
 
-                //ignoreSelection = true;
-                //Person selected = (Person)((ListBox)sender).SelectedItem;
-                //if (selected != null)
-                //{
-                //    family.Current = selected;
-                //    DataContext = family.Current;
-                //}
+            // TODO better way? subscribe to family_current_changed?
+            BaptismEvent.Individual = family.Current;
+            ChristeningEvent.Individual = family.Current;
+            BurialEvent.Individual = family.Current;
+            CremationEvent.Individual = family.Current;
 
-                ignoreSelection = false;
-            }
+            TitleFact.Individual = family.Current;
+            CasteFact.Individual = family.Current;
+            OccupationFact.Individual = family.Current;
+
+            ignoreSelection = false;
         }
 
         private Filter FamilyListViewFilter = new Filter();
@@ -2223,30 +2225,34 @@ namespace KBS.FamilyLines
         /// </summary>
         void Family_CurrentChanged(object sender, EventArgs e)
         {
-            if (!ignoreSelection && family.Current != null)
-            {
-                ignoreSelection = true;
-                //reset the FamilyListView
-                FilterTextBox.Text = string.Empty;
-                FamilyListView.SelectedItem = family.Current;
-                FamilyListView.ScrollIntoView(family.Current);
-                ignoreSelection = false;
+            if (ignoreSelection || family.Current == null) 
+                return;
 
-                //Reset the existing people list 
-                UpdateExistingFilter();
+            ignoreSelection = true;
+            //reset the FamilyListView
+            FilterTextBox.Text = string.Empty;
+            FamilyListView.SelectedItem = family.Current;
+            FamilyListView.ScrollIntoView(family.Current);
+            ignoreSelection = false;
 
-                //update the Citations screen when the person is changed
-                UpdateCitationsCombobox();
+            //Reset the existing people list 
+            UpdateExistingFilter();
 
-                //update the RCitations screen when the person is changed
-                UpdateRCitationsComboBox();
+            //update the Citations screen when the person is changed
+            UpdateCitationsCombobox();
 
-                // TODO consider subscribing to family_currentchanged ???
-                ChristeningEvent.Individual = family.Current;
-                BaptismEvent.Individual = family.Current;
-                BurialEvent.Individual = family.Current;
-                CremationEvent.Individual = family.Current;
-            }
+            //update the RCitations screen when the person is changed
+            UpdateRCitationsComboBox();
+
+            // TODO consider subscribing to family_currentchanged ???
+            ChristeningEvent.Individual = family.Current;
+            BaptismEvent.Individual = family.Current;
+            BurialEvent.Individual = family.Current;
+            CremationEvent.Individual = family.Current;
+
+            TitleFact.Individual = family.Current;
+            CasteFact.Individual = family.Current;
+            OccupationFact.Individual = family.Current;
         }
 
         /// <summary>
@@ -2736,7 +2742,7 @@ namespace KBS.FamilyLines
             //UpdateToolTip(BurialPlaceEditTextBox, family.Current.BurialSource, family.Current.BurialCitation);
 
             UpdateToolTip(EducationEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);
-            UpdateToolTip(OccupationEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);
+//            UpdateToolTip(OccupationEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);
             UpdateToolTip(ReligionEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);
  
         }

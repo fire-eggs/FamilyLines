@@ -139,41 +139,41 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Imports the individuals (INDI tags) from the GEDCOM XML file.
         /// </summary>
-        private void ImportPeople(XmlNodeList list)
-        {
-            foreach (XmlNode node in list)
-            {
-                // Create a new person that will be added to the collection.
-                Person person = new Person();
+        //private void ImportPeople(XmlNodeList list)
+        //{
+        //    foreach (XmlNode node in list)
+        //    {
+        //        // Create a new person that will be added to the collection.
+        //        Person person = new Person();
 
-                // Import details about the person.
-                person.FirstName = GetNames(node);
-                person.LastName = GetSurname(node);
+        //        // Import details about the person.
+        //        person.FirstName = GetNames(node);
+        //        person.LastName = GetSurname(node);
 
-                // If no name or surname, call them unknown rather than an empty string
-                if (string.IsNullOrEmpty(person.FirstName) && string.IsNullOrEmpty(person.LastName))
-                    person.FirstName = Properties.Resources.Unknown;
+        //        // If no name or surname, call them unknown rather than an empty string
+        //        if (string.IsNullOrEmpty(person.FirstName) && string.IsNullOrEmpty(person.LastName))
+        //            person.FirstName = Properties.Resources.Unknown;
 
-                person.Prefix = GetPrefix(node);
-                person.Suffix = GetSuffix(node);
-                person.Id = GetId(node);
-                person.Gender = GetGender(node);
-                person.Restriction = GetRestriction(node);
+        //        person.Prefix = GetPrefix(node);
+        //        person.Suffix = GetSuffix(node);
+        //        person.Id = GetId(node);
+        //        person.Gender = GetGender(node);
+        //        person.Restriction = GetRestriction(node);
 
-                ImportBirth(person, node, doc);
-                ImportDeath(person, node, doc);
-                ImportBurial(person, node, doc);
-                ImportCremation(person, node, doc);
-                ImportOccupation(person, node, doc);
-                ImportReligion(person, node, doc);
-                ImportEducation(person, node, doc);
+        //        ImportBirth(person, node, doc);
+        //        ImportDeath(person, node, doc);
+        //        ImportBurial(person, node, doc);
+        //        ImportCremation(person, node, doc);
+        //        ImportOccupation(person, node, doc);
+        //        ImportReligion(person, node, doc);
+        //        ImportEducation(person, node, doc);
 
-                ImportPhotosAttachments(person, node);
-                ImportNote(person, node);
+        //        ImportPhotosAttachments(person, node);
+        //        ImportNote(person, node);
 
-                people.Add(person);
-            }
-        }
+        //        people.Add(person);
+        //    }
+        //}
 
         private void UpdatePeopleIDs()
         {
@@ -227,26 +227,26 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Imports the source (SOUR tags) from the GEDCOM XML file.
         /// </summary>
-        private void ImportSources()
-        {
-            // Get list of people.
-            XmlNodeList list = doc.SelectNodes("/root/SOUR");
+        //private void ImportSources()
+        //{
+        //    // Get list of people.
+        //    XmlNodeList list = doc.SelectNodes("/root/SOUR");
 
-            foreach (XmlNode node in list)
-            {
-                Source source = new Source();
+        //    foreach (XmlNode node in list)
+        //    {
+        //        Source source = new Source();
 
-                // Import details about the person.
-                source.Id = GetId(node);
-                source.SourceName = GetValue(node, "TITL");
-                source.SourceAuthor = GetValue(node, "AUTH");
-                source.SourcePublisher = GetValue(node, "PUBL");
-                source.SourceNote = ImportEventNote(node, "NOTE", doc);
-                source.SourceRepository = GetValueId(node, "REPO").Replace("@", string.Empty);
+        //        // Import details about the person.
+        //        source.Id = GetId(node);
+        //        source.SourceName = GetValue(node, "TITL");
+        //        source.SourceAuthor = GetValue(node, "AUTH");
+        //        source.SourcePublisher = GetValue(node, "PUBL");
+        //        source.SourceNote = ImportEventNote(node, "NOTE", doc);
+        //        source.SourceRepository = GetValueId(node, "REPO").Replace("@", string.Empty);
 
-                sources.Add(source);
-            }
-        }
+        //        sources.Add(source);
+        //    }
+        //}
 
         private void UpdateSourceIDs()
         {

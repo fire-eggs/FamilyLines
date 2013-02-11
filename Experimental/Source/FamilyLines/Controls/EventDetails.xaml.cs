@@ -14,7 +14,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
 
-using System;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -52,7 +51,6 @@ namespace KBS.FamilyLines.Controls
         public GedcomEvent.GedcomEventType EventType { get; set; }
 
         private GEDEvent _event;
-
         private GEDEvent Event
         {
             get { return _event; }
@@ -161,7 +159,6 @@ namespace KBS.FamilyLines.Controls
                 _event = new GEDEvent();
                 _event.Type = EventType;
                 _individual.Events.Add(_event);
-                _event.Date = new GedcomDate();
             }
         }
 

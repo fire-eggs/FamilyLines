@@ -270,6 +270,11 @@ namespace KBS.FamilyLinesLib
 
         #endregion
 
+        /// <summary>
+        /// This is a magic number to indicate a .familyx file is the 'Family Lines' variant.
+        /// Ideally this value should not crash Family.Show V4 if it attempts to load a
+        /// 'Family Lines' variant.
+        /// </summary>
         private const string FAMILY_LINES_VERSION1 = "314";
 
         public People()
@@ -508,6 +513,7 @@ namespace KBS.FamilyLinesLib
         /// Saves the list of people to disk using the specified filename, path and privacy option
         /// </summary>
         /// <param name="FQFileName">Fully qualified path and filename of family tree file to save</param>
+        /// <param name="privacy"> </param>
         public void SavePrivacy(string FQFileName, bool privacy)
         {
             fullyQualifiedFilename = FQFileName;
@@ -518,6 +524,7 @@ namespace KBS.FamilyLinesLib
         /// Saves people related directly to the current person to disk using the specified filename, path and privacy option
         /// </summary>
         /// <param name="FQFileName">Fully qualified path and filename of family tree file to save</param>
+        /// <param name="privacy"> </param>
         public void SaveDirect(string FQFileName, bool privacy)
         {
 
@@ -952,11 +959,16 @@ namespace KBS.FamilyLinesLib
             }
         }
 
+        // The Family.Show format contains only a limited number of GED events/attributes 
+        // and stores event/attribute information as explicit properties of the Person 
+        // class. For Family Lines I have extended the format to support an arbitrary 
+        // number of GED events/attributes. The Family.Show data is tranlsated to the
+        // Family Lines data here.
         private void TranslateToFL2(People pc)
         {
             foreach (var person in pc.PeopleCollection)
             {
-                // TODO Birth and Death are "special" - how to handle?
+                // TODO Birth and Death are "special" as they impact other Person properties such as Age. Do we need to do anything special in this case?
 
                 // translate birth data to birth event
                 var @event = new GEDEvent();
@@ -1044,6 +1056,73 @@ namespace KBS.FamilyLinesLib
                 person.BurialDate = null;
 
                 // TODO wipe old birth/death
+
+                // Translate and wipe old person attributes
+                if (!string.IsNullOrEmpty(person.Occupation))
+                {
+                    var @fact = new GEDAttribute();
+                    @fact.Type = GedcomEvent.GedcomEventType.OCCUFact;
+                    @fact.Text = person.Occupation;
+
+                    @fact.Citation = person.OccupationCitation;
+                    @fact.Source = person.OccupationSource;
+                    @fact.Link = person.OccupationLink;
+                    @fact.CitationNote = person.OccupationCitationNote;
+                    @fact.CitationActualText = person.OccupationCitationActualText;
+
+                    person.Facts.Add(@fact);
+                }
+
+                if (!string.IsNullOrEmpty(person.Education))
+                {
+                    var @fact = new GEDAttribute();
+                    @fact.Type = GedcomEvent.GedcomEventType.EDUCFact;
+                    @fact.Text = person.Education;
+
+                    @fact.Citation = person.EducationCitation;
+                    @fact.Source = person.EducationSource;
+                    @fact.Link = person.EducationLink;
+                    @fact.CitationNote = person.EducationCitationNote;
+                    @fact.CitationActualText = person.EducationCitationActualText;
+
+                    person.Facts.Add(@fact);
+                }
+
+                if (!string.IsNullOrEmpty(person.Religion))
+                {
+                    var @fact = new GEDAttribute();
+                    @fact.Type = GedcomEvent.GedcomEventType.RELIFact;
+                    @fact.Text = person.Religion;
+
+                    @fact.Citation = person.ReligionCitation;
+                    @fact.Source = person.ReligionSource;
+                    @fact.Link = person.ReligionLink;
+                    @fact.CitationNote = person.ReligionCitationNote;
+                    @fact.CitationActualText = person.ReligionCitationActualText;
+
+                    person.Facts.Add(@fact);
+                }
+
+                person.Education = null;
+                person.EducationCitation = null;
+                person.EducationSource = null;
+                person.EducationLink = null;
+                person.EducationCitationNote = null;
+                person.EducationCitationActualText = null;
+
+                person.Occupation = null;
+                person.OccupationCitation = null;
+                person.OccupationSource = null;
+                person.OccupationLink = null;
+                person.OccupationCitationNote = null;
+                person.OccupationCitationActualText = null;
+
+                person.Religion = null;
+                person.ReligionCitation = null;
+                person.ReligionSource = null;
+                person.ReligionLink = null;
+                person.ReligionCitationNote = null;
+                person.ReligionCitationActualText = null;
             }
         }
 
@@ -2400,7 +2479,7 @@ namespace KBS.FamilyLinesLib
     [Serializable]
     public class RepositoryCollection : ObservableCollection<Repository>, INotifyPropertyChanged
     {
-        public RepositoryCollection() { }
+        public RepositoryCollection() { } // Needed for serialization?
 
         private Repository current;
         private bool dirty;

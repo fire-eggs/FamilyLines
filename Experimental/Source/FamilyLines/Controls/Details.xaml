@@ -9,7 +9,6 @@
    x:Class="KBS.FamilyLines.Details" 
    DataContextChanged="UserControl_DataContextChanged" 
    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-   xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
    xmlns:Controls1="clr-namespace:KBS.FamilyLines.Controls" mc:Ignorable="d"
    Width="277"
         >
@@ -1594,8 +1593,11 @@
                             <Image Margin="4,0,0,0" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" />
                             <Image Margin="4,0,0,0" Cursor="Hand" x:Name="PlaceOfDeathSearch" MouseLeftButtonUp="SearchMapDeathPlace" HorizontalAlignment="Center" Visibility="{Binding Path=HasDeathPlace, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />
                         </Grid>
-                        <Label Content="{x:Static properties:Resources.Occupation}"  Target="{Binding ElementName=OccupationEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
-                        <TextBox TextWrapping="NoWrap" AcceptsReturn="True" x:Name="OccupationEditTextBox" Width="250" Height="22" Text="{Binding Path=Occupation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5,0,0,0" ToolTip="" ToolTipOpening="ToolTip_All" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
+
+                        <Controls1:FactDetails x:Name="OccupationFact"/>
+
+                        <!--<Label Content="{x:Static properties:Resources.Occupation}"  Target="{Binding ElementName=OccupationEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
+                        <TextBox TextWrapping="NoWrap" AcceptsReturn="True" x:Name="OccupationEditTextBox" Width="250" Height="22" Text="{Binding Path=Occupation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5,0,0,0" ToolTip="" ToolTipOpening="ToolTip_All" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>-->
 
                         <Label Content="{x:Static properties:Resources.Education}"  Target="{Binding ElementName=EducationEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
                         <TextBox TextWrapping="NoWrap" AcceptsReturn="True" x:Name="EducationEditTextBox" Width="250" Height="22" Text="{Binding Path=Education, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5,0,0,0" ToolTip="" ToolTipOpening="ToolTip_All" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
@@ -1670,24 +1672,36 @@
                             <Image Margin="4,0,0,0" Cursor="Hand" x:Name="PlaceOfCremationSearch" MouseLeftButtonUp="SearchMapCremationPlace" HorizontalAlignment="Center" Visibility="{Binding Path=HasCremationPlace, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />     
                         </Grid>-->
 
-                        <Expander Name="expandBAPM" ExpandDirection="Down" 
-                                  IsExpanded="False" Header="Baptism">
+                        <!-- TODO need to style the expander so that the header text color is different from the icon color -->
+                        <Expander Name="expandBAPM" 
+                                  ExpandDirection="Down" 
+                                  Foreground="{DynamicResource InputFontColor}"
+                                  IsExpanded="False" 
+                                  Header="Baptism">
                             <Controls1:EventDetails x:Name="BaptismEvent"/>
                         </Expander>
-                        <Expander Name="expandCHR" ExpandDirection="Down" 
-                                  IsExpanded="False" Header="Christening">
+                        <Expander Name="expandCHR" 
+                                  ExpandDirection="Down" 
+                                  Foreground="{DynamicResource InputFontColor}"
+                                  IsExpanded="False" 
+                                  Header="Christening">
                             <Controls1:EventDetails x:Name="ChristeningEvent"/>
                         </Expander>
 
                         <Expander Name="expandCRE" ExpandDirection="Down" 
+                                  Foreground="{DynamicResource InputFontColor}"
                                   IsExpanded="False" Header="Cremation">
                             <Controls1:EventDetails x:Name="CremationEvent"/>
                         </Expander>
 
                         <Expander Name="expandBUR" ExpandDirection="Down" 
+                                  Foreground="{DynamicResource InputFontColor}"
                                   IsExpanded="False" Header="Burial">
                             <Controls1:EventDetails x:Name="BurialEvent"/>
                         </Expander>
+
+                        <Controls1:FactDetails x:Name="TitleFact"/>
+                        <Controls1:FactDetails x:Name="CasteFact"/>
 
                     </StackPanel>
                 </Border>
