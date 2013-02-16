@@ -541,6 +541,9 @@ namespace GEDCOM.Net
 			// try to determine date period, let the fun begin
 			string period = dataString;
 			int len = 0;
+
+            // KBR need to reset on re-parse
+            DatePeriod = GedcomDatePeriod.Exact;
 						
 			CultureInfo culture = System.Globalization.CultureInfo.CurrentCulture;
 						

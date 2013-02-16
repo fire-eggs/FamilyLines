@@ -224,7 +224,7 @@
                 
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="555"/>
+                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="615"/>
                 </DoubleAnimationUsingKeyFrames>
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(UIElement.Visibility)">
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
@@ -283,7 +283,7 @@
                 </BooleanAnimationUsingKeyFrames>
                 
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsEdit">
-                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555"/>
+                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="615"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
                 
@@ -326,7 +326,7 @@
 
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEditMore" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555"/>
+                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="615"/>
                 </DoubleAnimationUsingKeyFrames>
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEditMore" Storyboard.TargetProperty="(UIElement.Visibility)">
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
@@ -334,7 +334,7 @@
                 </ObjectAnimationUsingKeyFrames>
                
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555"/>
+                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="615"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -369,13 +369,13 @@
             <!-- Animation for collapsing the Details Edit More section -->
             <Storyboard x:Key="CollapseDetailsEditMore" Completed="CollapseDetailsEditMore_StoryboardCompleted">
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsEditMore">
-                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555"/>
+                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="615"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
 
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555"/>
+                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="615"/>
                 </DoubleAnimationUsingKeyFrames>
 
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -1442,7 +1442,11 @@
                 </Border>
 
                 <!-- Details Edit is used for modifying the person's details -->
-                <Border x:Name="DetailsEdit" DockPanel.Dock="Top" Style="{DynamicResource DetailsBorderStyle}"  Margin="0,0,0,0" Background="{DynamicResource InputBackgroundBrush}" BorderThickness="0,1,0,1" CornerRadius="0,0,0,0" Padding="0,0,0,0" Height="555" Visibility="Visible">
+                <Border x:Name="DetailsEdit" DockPanel.Dock="Top" 
+                        Style="{DynamicResource DetailsBorderStyle}"  
+                        Margin="0,0,0,0" Background="{DynamicResource InputBackgroundBrush}" 
+                        BorderThickness="0,1,0,1" CornerRadius="0,0,0,0" Padding="0,0,0,0" 
+                        Height="615" Visibility="Visible">
                     <StackPanel Margin="10,5,10,0" HorizontalAlignment="Stretch">
                         <DockPanel Margin="0,0,0,5" DockPanel.Dock="Top">
                             <TextBlock Text="{x:Static properties:Resources.EditDetails}" TextWrapping="Wrap" Style="{DynamicResource SectionHeaderStyle}" Width="122" Height="15.96" Margin="5,0,0,0" HorizontalAlignment="Left" Foreground="{DynamicResource InputFontColor}"/>
@@ -1608,7 +1612,11 @@
                 </Border>
 
                 <!-- Details Edit More is used for modifying more of the person's details -->
-                <Border x:Name="DetailsEditMore" DockPanel.Dock="Top" Style="{DynamicResource DetailsBorderStyle}"  Margin="0,0,0,0" Background="{DynamicResource InputBackgroundBrush}" BorderThickness="0,1,0,1" CornerRadius="0,0,0,0" Padding="0,0,0,0" Height="555" Visibility="Visible">
+                <Border x:Name="DetailsEditMore" DockPanel.Dock="Top" 
+                        Style="{DynamicResource DetailsBorderStyle}"  
+                        Margin="0,0,0,0" Background="{DynamicResource InputBackgroundBrush}" 
+                        BorderThickness="0,1,0,1" CornerRadius="0,0,0,0" Padding="0,0,0,0" 
+                        Height="615" Visibility="Visible">
 
                     <StackPanel Margin="10,5,10,0" HorizontalAlignment="Stretch">
                         <DockPanel Margin="0,0,0,5" DockPanel.Dock="Top">
