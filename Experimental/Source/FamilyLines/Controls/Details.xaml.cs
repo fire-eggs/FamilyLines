@@ -72,6 +72,8 @@ namespace KBS.FamilyLines
             TitleFact.EventType = GedcomEvent.GedcomEventType.TITLFact;
             CasteFact.EventType = GedcomEvent.GedcomEventType.CASTFact;
             OccupationFact.EventType = GedcomEvent.GedcomEventType.OCCUFact;
+            EducationFact.EventType = GedcomEvent.GedcomEventType.EDUCFact;
+            ReligionFact.EventType = GedcomEvent.GedcomEventType.RELIFact;
 
             // Handle event when the selected person changes so can select 
             // the item in the list.
@@ -1391,6 +1393,8 @@ namespace KBS.FamilyLines
             TitleFact.Leaving();
             CasteFact.Leaving();
             OccupationFact.Leaving();
+            EducationFact.Leaving();
+            ReligionFact.Leaving();
 
             // Let the collection know that it has been updated so that the diagram control will update.
             family.OnContentChanged();
@@ -2127,6 +2131,8 @@ namespace KBS.FamilyLines
             TitleFact.Individual = family.Current;
             CasteFact.Individual = family.Current;
             OccupationFact.Individual = family.Current;
+            ReligionFact.Individual = family.Current;
+            EducationFact.Individual = family.Current;
 
             ignoreSelection = false;
         }
@@ -2253,6 +2259,8 @@ namespace KBS.FamilyLines
             TitleFact.Individual = family.Current;
             CasteFact.Individual = family.Current;
             OccupationFact.Individual = family.Current;
+            EducationFact.Individual = family.Current;
+            ReligionFact.Individual = family.Current;
         }
 
         /// <summary>
@@ -2733,7 +2741,7 @@ namespace KBS.FamilyLines
             UpdateToolTip(DeathDateEditTextBox, family.Current.DeathSource, family.Current.DeathCitation);
             UpdateToolTip(DeathPlaceEditTextBox, family.Current.DeathSource, family.Current.DeathCitation);
 
-            // TODO: what is this? how handle via EventDetails??
+            // TODO: what is this? how handle via EventDetails?? how handle via FactDetails??
 
             //UpdateToolTip(CremationDateEditTextBox, family.Current.CremationSource, family.Current.CremationCitation);
             //UpdateToolTip(CremationPlaceEditTextBox, family.Current.CremationSource, family.Current.CremationCitation);
@@ -2741,9 +2749,9 @@ namespace KBS.FamilyLines
             //UpdateToolTip(BurialDateEditTextBox, family.Current.BurialSource, family.Current.BurialCitation);
             //UpdateToolTip(BurialPlaceEditTextBox, family.Current.BurialSource, family.Current.BurialCitation);
 
-            UpdateToolTip(EducationEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);
+//            UpdateToolTip(EducationEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);
 //            UpdateToolTip(OccupationEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);
-            UpdateToolTip(ReligionEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);
+//            UpdateToolTip(ReligionEditTextBox, family.Current.EducationSource, family.Current.EducationCitation);
  
         }
 

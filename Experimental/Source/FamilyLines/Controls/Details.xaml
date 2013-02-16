@@ -1599,15 +1599,9 @@
                         </Grid>
 
                         <Controls1:FactDetails x:Name="OccupationFact"/>
+                        <Controls1:FactDetails x:Name="EducationFact"/>
+                        <Controls1:FactDetails x:Name="ReligionFact"/>
 
-                        <!--<Label Content="{x:Static properties:Resources.Occupation}"  Target="{Binding ElementName=OccupationEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
-                        <TextBox TextWrapping="NoWrap" AcceptsReturn="True" x:Name="OccupationEditTextBox" Width="250" Height="22" Text="{Binding Path=Occupation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5,0,0,0" ToolTip="" ToolTipOpening="ToolTip_All" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>-->
-
-                        <Label Content="{x:Static properties:Resources.Education}"  Target="{Binding ElementName=EducationEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
-                        <TextBox TextWrapping="NoWrap" AcceptsReturn="True" x:Name="EducationEditTextBox" Width="250" Height="22" Text="{Binding Path=Education, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5,0,0,0" ToolTip="" ToolTipOpening="ToolTip_All" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
-
-                        <Label Content="{x:Static properties:Resources.Religion}"  Target="{Binding ElementName=ReligionEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
-                        <TextBox TextWrapping="NoWrap" x:Name="ReligionEditTextBox" Width="250" Text="{Binding Path=Religion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5,0,0,0" ToolTip="" ToolTipOpening="ToolTip_All" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
                     </StackPanel>
                 </Border>
 
@@ -1624,63 +1618,8 @@
                             <Button Margin="0,0,0,0" HorizontalAlignment="Left" DockPanel.Dock="Top" Content="{x:Static properties:Resources.Back}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="DoneEditMoreButton" Click="DoneEditMoreButton_Click" IsCancel="True" />
                         </DockPanel>
 
-                        <!-- Burial date -->
-                        <!--<Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <Label MouseEnter="Label_MouseEnter" MouseLeave="Label_MouseLeave" Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.BurialDate}"  Target="{Binding ElementName=BurialDateEditTextBox, Mode=OneWay}" MouseLeftButtonUp="ChangeBurialDescriptorForward" MouseRightButtonUp="ChangeBurialDescriptorBackward" Foreground="{DynamicResource InputFontColor}" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" />
-                            <Label Grid.Row="0" Grid.Column="1" Margin="-6,0,0,0" Content="{Binding Path=BurialDateDescriptor}" Foreground="{DynamicResource InputFontColor}" />
-
-                            <TextBox Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="NoWrap" x:Name="BurialDateEditTextBox" Width="135" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" Text="{Binding Path=BurialDate, Converter={StaticResource DateFormattingConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="" ToolTipOpening="ToolTip_All"/>
-
-                        </Grid>-->
-                        
-                        <!-- Burial Place -->
-                        <!--<Label Content="{x:Static properties:Resources.BurialPlace}"  Target="{Binding ElementName=BurialPlaceEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <TextBox TextWrapping="NoWrap" x:Name="BurialPlaceEditTextBox" Text="{Binding Path=BurialPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="230" Margin="5,0,0,0" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" Grid.Column="0" Height="21.96" ToolTip="" ToolTipOpening="ToolTip_All"/>
-                            <Image Margin="4,0,0,0" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" />
-                            <Image Margin="4,0,0,0" Cursor="Hand" x:Name="PlaceOfBurialSearch" MouseLeftButtonUp="SearchMapBurialPlace" HorizontalAlignment="Center" Visibility="{Binding Path=HasBurialPlace, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />
-                        </Grid>
-
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Label MouseEnter="Label_MouseEnter" MouseLeave="Label_MouseLeave" Grid.Column="0" Content="{x:Static properties:Resources.CremationDate}"  Target="{Binding ElementName=CremationDateEditTextBox, Mode=OneWay}" MouseLeftButtonUp="ChangeCremationDescriptorForward" MouseRightButtonUp="ChangeCremationDescriptorBackward" Foreground="{DynamicResource InputFontColor}" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" />
-                            <Label Grid.Column="1" Margin="-6,0,0,0" Content="{Binding Path=CremationDateDescriptor}" Foreground="{DynamicResource InputFontColor}" />
-                        </Grid>
-                        <TextBox TextWrapping="NoWrap" x:Name="CremationDateEditTextBox" Width="135" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" Text="{Binding Path=CremationDate, Converter={StaticResource DateFormattingConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="" ToolTipOpening="ToolTip_All"/>
-                        <Label Content="{x:Static properties:Resources.CremationPlace}"  Target="{Binding ElementName=CremationPlaceEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <TextBox TextWrapping="NoWrap" x:Name="CremationPlaceEditTextBox" Text="{Binding Path=CremationPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="230" Margin="5,0,0,0" IsEnabled="{Binding Path=IsLockedIsLiving, Converter={StaticResource NotConverter}, Mode=Default}" Grid.Column="0" Height="21.96" ToolTip="" ToolTipOpening="ToolTip_All"/>
-                            <Image Margin="4,0,0,0" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" />
-                            <Image Margin="4,0,0,0" Cursor="Hand" x:Name="PlaceOfCremationSearch" MouseLeftButtonUp="SearchMapCremationPlace" HorizontalAlignment="Center" Visibility="{Binding Path=HasCremationPlace, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="1" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />     
-                        </Grid>-->
-
                         <!-- TODO need to style the expander so that the header text color is different from the icon color -->
+                        <!-- TODO need to style the expander for the text size -->
                         <Expander Name="expandBAPM" 
                                   ExpandDirection="Down" 
                                   Foreground="{DynamicResource InputFontColor}"
