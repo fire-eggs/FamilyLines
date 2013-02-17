@@ -15,6 +15,7 @@
  */
 
 using System.ComponentModel;
+//using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -26,7 +27,7 @@ using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines.Controls
 {
-    public partial class EventDetails : INotifyPropertyChanged
+    public partial class EventDetails : INotifyPropertyChanged, IDataErrorInfo
     {
         public EventDetails()
         {
@@ -41,6 +42,10 @@ namespace KBS.FamilyLines.Controls
             set 
             { 
                 _individual = value;
+                
+                _localDateString = "";
+                DateEditTextBox.Clear(); // TODO why is this necessary? i.e. for a null event-date when switching to new person.
+
                 var events = _individual.GetEvents(EventType);
                 Event = events.Count == 0 ? null : events[0];
 
@@ -124,18 +129,26 @@ namespace KBS.FamilyLines.Controls
             }
         }
 
+        private string _localDateString;
         public string EventDate
         {
             get
             {
                 if (Event == null || Event.Date == null)
-                    return "";
+                    return null;
                 return Event.Date.DateString;
             }
             set
             {
                 insureEvent();
-                Event.Date.ParseDateString(value);
+                _localDateString = value;
+//                Debug.WriteLine(value);
+                if (GedcomDate.TryParseDateString(value))
+                {
+                    Event.Date.ParseDateString(value);
+//                    Debug.WriteLine(":" + Event.Date.DateString);
+//                    Debug.WriteLine(":" + Event.Date.DateTime1);
+                }
                 OnPropertyChanged("EventDate");
                 OnPropertyChanged("DateDescriptor");
             }
@@ -228,6 +241,36 @@ namespace KBS.FamilyLines.Controls
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+        #region Implementation of IDataErrorInfo
+
+        public string this[string columnName]
+        {
+            get 
+            { 
+                string result = null;
+            
+                switch (columnName)
+                {
+                    case "EventDate":
+                        if (_localDateString != null &&
+                            _localDateString.Trim().Length != 0 &&
+                            !GedcomDate.TryParseDateString(_localDateString))
+                            result = "invalid date";
+                        break;
+                    default:
+                        break;
+                }
+                return result;
+            }
+        }
+
+        public string Error
+        {
+            get { return null; }
         }
 
         #endregion
