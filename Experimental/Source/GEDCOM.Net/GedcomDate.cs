@@ -349,6 +349,8 @@ namespace GEDCOM.Net
 		#endregion
 
 		#region Methods
+
+        // TODO test BC date handling
 		
 		public static bool operator < (GedcomDate a, GedcomDate b)
 		{
@@ -867,7 +869,7 @@ namespace GEDCOM.Net
 				{
 					// year only
 	           		year = dateSplit[start];
-	           		if (year.EndsWith("B.C.", true, culture))
+	           		if (year.EndsWith("B.C.", true, culture)) // TODO allow BC, B.C., AD, A.D.
 	           		{
 	           			year = year.Substring(0, year.Length - "B.C.".Length);
 	           		}
@@ -1020,5 +1022,15 @@ namespace GEDCOM.Net
 		}
 
 		#endregion
+
+	    public static bool TryParseDateString(string adateString)
+	    {
+            // TODO very brute-force. need a smarter 'try parse' w/o creating an object instance (?)
+            GedcomDate parser = new GedcomDate();
+            parser.ParseDateString(adateString);
+	        bool res = parser.DateTime1.HasValue;
+	        parser = null;
+	        return res;
+	    }
 	}
 }
