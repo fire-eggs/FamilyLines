@@ -1472,7 +1472,7 @@ namespace KBS.FamilyLines
         private void enableMenus()
         {
             App.canExecuteJumpList =
-                NewMenu.IsEnabled =
+                //NewMenu.IsEnabled =
                 OpenMenu.IsEnabled =
                 SaveMenu.IsEnabled =
                 PrintMenu.IsEnabled =
@@ -1488,7 +1488,7 @@ namespace KBS.FamilyLines
         private void disableMenus()
         {
             App.canExecuteJumpList =
-                NewMenu.IsEnabled =
+                //NewMenu.IsEnabled =
                 OpenMenu.IsEnabled =
                 SaveMenu.IsEnabled =
                 MediaMenu.IsEnabled =
