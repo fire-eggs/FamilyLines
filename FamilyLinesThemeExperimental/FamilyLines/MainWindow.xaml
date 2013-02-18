@@ -186,19 +186,18 @@
                 >
             <Menu 
                 Style="{DynamicResource MainWindowMenuStyle}"
+                IsMainMenu="True"
                     >
-                <MenuItem
-                    Style="{DynamicResource MainWindowMenuItemStyle}"
-                    Header="{x:Static properties:Resources.NewMenu}" 
-                    x:Name="NewMenu"
-                    Command="New"
-                        />
                 <MenuItem 
-                    Header="{x:Static properties:Resources.Open}" 
+                    Header="{x:Static properties:Resources.MenuHeaderFile}" 
                     x:Name="OpenMenu"  
-                    Command="Open" 
+                    Command="Open"
                     Style="{DynamicResource MainWindowMenuItemStyle}"
                         >
+                    <MenuItem
+                        Header="{x:Static properties:Resources.NewMenu}" 
+                        Command="New"
+                            />
                     <MenuItem
                         Header="{x:Static properties:Resources.OpenMenu}" 
                         Command="Open" 
@@ -216,7 +215,7 @@
                 </MenuItem>
 
                 <MenuItem 
-                    Header="{x:Static properties:Resources.Save}"
+                    Header="{x:Static properties:Resources.MenuHeaderSave}"
                     x:Name="SaveMenu" 
                     Style="{DynamicResource MainWindowMenuItemStyle}" 
                     StaysOpenOnClick="True"
@@ -250,7 +249,7 @@
                 </MenuItem>
 
                 <MenuItem 
-                    Header="{x:Static properties:Resources.Tools}" 
+                    Header="{x:Static properties:Resources.MenuHeaderTools}" 
                     x:Name="MediaMenu" 
                     Style="{DynamicResource MainWindowMenuItemStyle}"
                         >
@@ -292,7 +291,7 @@
                 </MenuItem>
 
                 <MenuItem 
-                    Header="{x:Static properties:Resources.Print}" 
+                    Header="{x:Static properties:Resources.MenuHeaderPrint}" 
                     x:Name="PrintMenu"
                     Style="{DynamicResource MainWindowMenuItemStyle}"
                         >
@@ -313,12 +312,12 @@
                 </MenuItem>
 
                 <MenuItem
-                    Header="{x:Static properties:Resources.ThemesHeader}" 
+                    Header="{x:Static properties:Resources.MenuHeaderThemes}" 
                     x:Name="ThemesMenu" 
                     Style="{DynamicResource MainWindowMenuItemStyle}"
                         />
                 <MenuItem
-                    Header="{x:Static properties:Resources.Help}" 
+                    Header="{x:Static properties:Resources.MenuHeaderHelp}" 
                     x:Name="HelpMenu"
                     Style="{DynamicResource MainWindowMenuItemStyle}"
                         >

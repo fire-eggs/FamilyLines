@@ -1774,15 +1774,6 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Help.
-        /// </summary>
-        public static string Help {
-            get {
-                return ResourceManager.GetString("Help", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to help.chm.
         /// </summary>
         public static string HelpFileName {
@@ -2252,6 +2243,60 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _FILE.
+        /// </summary>
+        public static string MenuHeaderFile {
+            get {
+                return ResourceManager.GetString("MenuHeaderFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _HELP.
+        /// </summary>
+        public static string MenuHeaderHelp {
+            get {
+                return ResourceManager.GetString("MenuHeaderHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _PRINT.
+        /// </summary>
+        public static string MenuHeaderPrint {
+            get {
+                return ResourceManager.GetString("MenuHeaderPrint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _SAVE.
+        /// </summary>
+        public static string MenuHeaderSave {
+            get {
+                return ResourceManager.GetString("MenuHeaderSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to THE_MES.
+        /// </summary>
+        public static string MenuHeaderThemes {
+            get {
+                return ResourceManager.GetString("MenuHeaderThemes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _TOOLS.
+        /// </summary>
+        public static string MenuHeaderTools {
+            get {
+                return ResourceManager.GetString("MenuHeaderTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Merge.
         /// </summary>
         public static string Merge {
@@ -2585,7 +2630,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open.
+        ///   Looks up a localized string similar to _Open.
         /// </summary>
         public static string Open {
             get {
@@ -2743,15 +2788,6 @@ namespace KBS.FamilyLines.Properties {
         public static string Prefix {
             get {
                 return ResourceManager.GetString("Prefix", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Print.
-        /// </summary>
-        public static string Print {
-            get {
-                return ResourceManager.GetString("Print", resourceCulture);
             }
         }
         
@@ -3350,15 +3386,6 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Themes.
-        /// </summary>
-        public static string ThemesHeader {
-            get {
-                return ResourceManager.GetString("ThemesHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to * denotes a tie break..
         /// </summary>
         public static string Tiebreak {
@@ -3382,15 +3409,6 @@ namespace KBS.FamilyLines.Properties {
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tools.
-        /// </summary>
-        public static string Tools {
-            get {
-                return ResourceManager.GetString("Tools", resourceCulture);
             }
         }
         

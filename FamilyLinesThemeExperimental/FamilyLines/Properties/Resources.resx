@@ -177,8 +177,8 @@
   <data name="NotImplemented" xml:space="preserve">
     <value>The method or operation is not implemented.</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="MenuHeaderSave" xml:space="preserve">
+    <value>_SAVE</value>
   </data>
   <data name="Person" xml:space="preserve">
     <value>Person</value>
@@ -190,7 +190,7 @@
     <value>Do you want to delete this person?</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Open</value>
+    <value>_Open</value>
   </data>
   <data name="SaveAs" xml:space="preserve">
     <value>Save As</value>
@@ -432,14 +432,14 @@
   <data name="FullScreen" xml:space="preserve">
     <value>Full screen</value>
   </data>
-  <data name="Help" xml:space="preserve">
-    <value>Help</value>
+  <data name="MenuHeaderHelp" xml:space="preserve">
+    <value>_HELP</value>
   </data>
   <data name="PhotosMenu" xml:space="preserve">
     <value>Photos</value>
   </data>
-  <data name="Print" xml:space="preserve">
-    <value>Print</value>
+  <data name="MenuHeaderPrint" xml:space="preserve">
+    <value>_PRINT</value>
   </data>
   <data name="PrintMenu" xml:space="preserve">
     <value>Print...</value>
@@ -648,8 +648,8 @@
   <data name="Surname" xml:space="preserve">
     <value>Last Name</value>
   </data>
-  <data name="ThemesHeader" xml:space="preserve">
-    <value>Themes</value>
+  <data name="MenuHeaderThemes" xml:space="preserve">
+    <value>THE_MES</value>
   </data>
   <data name="To" xml:space="preserve">
     <value>To</value>
@@ -840,8 +840,8 @@
   <data name="Story" xml:space="preserve">
     <value>Story</value>
   </data>
-  <data name="Tools" xml:space="preserve">
-    <value>Tools</value>
+  <data name="MenuHeaderTools" xml:space="preserve">
+    <value>_TOOLS</value>
   </data>
   <data name="AppendStar" xml:space="preserve">
     <value>Append * to imported people's names.</value>
@@ -1395,5 +1395,11 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   </data>
   <data name="DeletePersonToolTip" xml:space="preserve">
     <value>Delete this person. (Can't be deleted if person has more than 3 relationships.)</value>
+  </data>
+  <data name="MenuHeaderFile" xml:space="preserve">
+    <value>_FILE</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
 </root>
