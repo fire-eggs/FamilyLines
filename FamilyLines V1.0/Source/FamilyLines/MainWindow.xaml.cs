@@ -56,6 +56,7 @@ namespace KBS.FamilyLines
         private void NewUserControl_AddButtonClick(object sender, RoutedEventArgs e)
         {
             HideNewUserControl();
+            family.RebuildTrees(); // TODO better place/way to call this?
             ShowDetailsPane();
         }
 
@@ -428,6 +429,8 @@ namespace KBS.FamilyLines
                             MergeControl.summary = summary;
                             MergeControl.ShowSummary();
                         }
+
+                        family.RebuildTrees(); // tree data needs updating
                         family.OnContentChanged();
                     }
                     catch 
