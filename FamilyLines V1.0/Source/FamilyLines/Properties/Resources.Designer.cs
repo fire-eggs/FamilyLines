@@ -106,6 +106,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a New Person.
+        /// </summary>
+        public static string AddANewPerson {
+            get {
+                return ResourceManager.GetString("AddANewPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Father.
         /// </summary>
         public static string AddFather {
