@@ -117,7 +117,7 @@
 
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsAdd" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="300"/>
+                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="350"/>
                 </DoubleAnimationUsingKeyFrames>
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsAdd" Storyboard.TargetProperty="(UIElement.Visibility)">
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
@@ -1961,17 +1961,73 @@
                 </Border>
 
                 <!-- Details Add is used to add new people -->
-                <Border x:Name="DetailsAdd" DockPanel.Dock="Top" Style="{DynamicResource DetailsBorderStyle}" Margin="0,0,0,0" BorderThickness="0,1,0,0" CornerRadius="0,0,0,0" Padding="0,0,0,0" Height="300" Background="{DynamicResource InputBackgroundBrush}" Visibility="Visible" >
+                <Border x:Name="DetailsAdd" DockPanel.Dock="Top" 
+                        Style="{DynamicResource DetailsBorderStyle}" Margin="0,0,0,0" 
+                        BorderThickness="0,1,0,0" CornerRadius="0,0,0,0" 
+                        Padding="0,0,0,0" Height="350" 
+                        Background="{DynamicResource InputBackgroundBrush}" Visibility="Visible" >
                     <StackPanel>
-                        <TextBlock Text="{x:Static properties:Resources.AddAFamilyMember}" Margin="15,5,5,5" TextWrapping="Wrap" Style="{DynamicResource SectionHeaderStyle}" Foreground="{DynamicResource InputFontColor}"></TextBlock>
-                        <StackPanel Orientation="Horizontal" Margin="15,0,10,0" HorizontalAlignment="Left" >
-                            <TextBlock TextTrimming="CharacterEllipsis" MaxWidth="180" MaxHeight="30"  LineStackingStrategy="MaxHeight" Text="{Binding Path=FirstName, Converter={StaticResource FirstNamePossessiveFormConverter}, Mode=Default, FallbackValue=Name}" TextWrapping="Wrap" Style="{DynamicResource HeaderStyle}" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Margin="0,0,0,0" Foreground="{DynamicResource InputFontColor}"/>
+                        <TextBlock x:Name="AddFamilyMember"
+                                   Text="{x:Static properties:Resources.AddAFamilyMember}" 
+                                   Margin="15,5,5,5" TextWrapping="Wrap" 
+                                   Style="{DynamicResource SectionHeaderStyle}" 
+                                   Foreground="{DynamicResource InputFontColor}"/>
+                        <TextBlock x:Name="AddNewPerson"
+                                   Text="{x:Static properties:Resources.AddANewPerson}" 
+                                   Margin="15,5,5,5" TextWrapping="Wrap" 
+                                   Style="{DynamicResource SectionHeaderStyle}" 
+                                   Foreground="{DynamicResource InputFontColor}"
+                                   Visibility="Collapsed"
+                                   />
+                        <StackPanel x:Name="personSex" Orientation="Horizontal" Visibility="Collapsed">
+                            <StackPanel Margin="15,0,10,0" Width="250" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.Gender}" Padding="5,0,5,2" Foreground="{DynamicResource InputFontColor}"/>
+                                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="5,0,0,0">
+                                        <RadioButton x:Name="MaleCheck"
+                                               GroupName="Gender0" Foreground="Black"
+                                               IsChecked="True">
+                                            <Label Padding="0,0,0,0" Foreground="{DynamicResource InputFontColor}" 
+                                           Content="{x:Static properties:Resources.Male}" />
+                                        </RadioButton>
+                                        <RadioButton 
+                                               GroupName="Gender0" Foreground="Black"
+                                               IsChecked="False">
+                                            <Label Padding="0,0,0,0" Foreground="{DynamicResource InputFontColor}"
+                                           Content="{x:Static properties:Resources.Female}"/>
+                                        </RadioButton>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel x:Name="PersonName" Orientation="Horizontal" Margin="15,0,10,0" HorizontalAlignment="Left" >
+                            <TextBlock TextTrimming="CharacterEllipsis" MaxWidth="180" 
+                                       MaxHeight="30"  LineStackingStrategy="MaxHeight" 
+                                       Text="{Binding Path=FirstName, 
+                                                    Converter ={StaticResource FirstNamePossessiveFormConverter}, 
+                                                    Mode=Default, FallbackValue=Name}" 
+                                       TextWrapping="Wrap" Style="{DynamicResource HeaderStyle}" 
+                                       HorizontalAlignment="Left" FontSize="18" 
+                                       FontWeight="Bold" Margin="0,0,0,0" 
+                                       Foreground="{DynamicResource InputFontColor}"/>
                             <TextBlock x:Name="Relationship" TextWrapping="Wrap" Style="{DynamicResource HeaderStyle}" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Margin="0,0,0,0"/>
                         </StackPanel>
                         <Border Margin="10,5,10,0" BorderThickness="0,2,0,0">
                             <StackPanel Margin="0,0,0,0">
                                 <Label Content="{x:Static properties:Resources.Names}" Target="{Binding ElementName=NamesInputTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}"/>
-                                <TextBox TextWrapping="Wrap" x:Name="NamesInputTextBox" HorizontalAlignment="Left" Width="250" Margin="5,0,0,0"/>
+                                <TextBox TextWrapping="Wrap" 
+                                         x:Name="NamesInputTextBox" 
+                                         HorizontalAlignment="Left" 
+                                         Width="250" Margin="5,0,0,0"/>
 
                                 <Grid>
                                     <Grid.ColumnDefinitions>

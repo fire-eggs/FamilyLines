@@ -362,28 +362,29 @@ namespace KBS.FamilyLines
                 string surname = string.Empty;
                 string relationship = string.Empty;
                 bool isExisting = false;
+                bool showSex = false;
 
                 switch ((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue)
                 {
                     case FamilyMemberComboBoxValue.Father:
-                        relationship = KBS.FamilyLines.Properties.Resources.Father;
+                        relationship = Properties.Resources.Father;
                         break;
                     case FamilyMemberComboBoxValue.Mother:
-                        relationship = KBS.FamilyLines.Properties.Resources.Mother;
+                        relationship = Properties.Resources.Mother;
                         break;
                     case FamilyMemberComboBoxValue.Sister:
-                        relationship = KBS.FamilyLines.Properties.Resources.Sister;
+                        relationship = Properties.Resources.Sister;
                         break;
                     case FamilyMemberComboBoxValue.Brother:
-                        relationship = KBS.FamilyLines.Properties.Resources.Brother;
+                        relationship = Properties.Resources.Brother;
                         // Assume that the new person has the same last name.
                         surname = family.Current.LastName;
                         break;
                     case FamilyMemberComboBoxValue.Daughter:
-                        relationship = KBS.FamilyLines.Properties.Resources.Daughter;
+                        relationship = Properties.Resources.Daughter;
                         break;
                     case FamilyMemberComboBoxValue.Son:
-                        relationship = KBS.FamilyLines.Properties.Resources.Son;
+                        relationship = Properties.Resources.Son;
                         // Assume that the new person has the same last name as the husband
                         if ((family.Current.Gender == Gender.Female) && (family.Current.Spouses.Count > 0) && (family.Current.Spouses[0].Gender == Gender.Male))
                             surname = family.Current.Spouses[0].LastName;
@@ -391,24 +392,34 @@ namespace KBS.FamilyLines
                             surname = family.Current.LastName;
                         break;
                     case FamilyMemberComboBoxValue.Spouse:
-                        relationship = KBS.FamilyLines.Properties.Resources.Spouse;
+                        relationship = Properties.Resources.Spouse;
                         break;
                     case FamilyMemberComboBoxValue.Existing:
                         isExisting = true;
                         break;
-                    default:
+
+                    case FamilyMemberComboBoxValue.Unrelated:
+                        showSex = true;
+                        MaleCheck.IsChecked = true;
                         break;
                 }
+
+                Relationship.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
+                AddFamilyMember.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
+                PersonName.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
+                personSex.Visibility = !showSex ? Visibility.Collapsed : Visibility.Visible;
+                AddNewPerson.Visibility = !showSex ? Visibility.Collapsed : Visibility.Visible;
 
                 if (isExisting)
                 {
                     // Use animation to expand the Add Existing section
-                    ((Storyboard)this.Resources["ExpandAddExisting"]).Begin(this);
+                    ((Storyboard)Resources["ExpandAddExisting"]).Begin(this);
                 }
                 else
+                {
                     // Use animation to expand the Details Add section
-                    ((Storyboard)this.Resources["ExpandDetailsAdd"]).Begin(this);
-
+                    ((Storyboard) Resources["ExpandDetailsAdd"]).Begin(this);
+                }
 
                 Relationship.Text = relationship;
                 SurnameInputTextBox.Text = surname;
@@ -430,6 +441,8 @@ namespace KBS.FamilyLines
                 // The new person to be added
                 Person newPerson = new Person(NamesInputTextBox.Text, SurnameInputTextBox.Text);
                 newPerson.IsLiving = IsLivingInputCheckbox.IsChecked != false;
+
+                newPerson.Suffix = SuffixInputTextBox.Text.Trim();
 
                 DateTime birthdate = App.StringToDate(BirthDateInputTextBox.Text);
                 if (birthdate != DateTime.MinValue)
@@ -515,6 +528,8 @@ namespace KBS.FamilyLines
                         family.Current = newPerson;
                         family.OnContentChanged();
                         SetNextFamilyMemberAction(FamilyMemberComboBoxValue.Father);
+
+                        newPerson.Gender = MaleCheck.IsChecked == false ? Gender.Female : Gender.Male;
                         break;
                 }
 
