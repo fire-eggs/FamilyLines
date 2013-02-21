@@ -375,28 +375,29 @@ namespace KBS.FamilyLines
                 string surname = string.Empty;
                 string relationship = string.Empty;
                 bool isExisting = false;
+                bool showSex = false;
 
                 switch ((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue)
                 {
                     case FamilyMemberComboBoxValue.Father:
-                        relationship = KBS.FamilyLines.Properties.Resources.Father;
+                        relationship = Properties.Resources.Father;
                         break;
                     case FamilyMemberComboBoxValue.Mother:
-                        relationship = KBS.FamilyLines.Properties.Resources.Mother;
+                        relationship = Properties.Resources.Mother;
                         break;
                     case FamilyMemberComboBoxValue.Sister:
-                        relationship = KBS.FamilyLines.Properties.Resources.Sister;
+                        relationship = Properties.Resources.Sister;
                         break;
                     case FamilyMemberComboBoxValue.Brother:
-                        relationship = KBS.FamilyLines.Properties.Resources.Brother;
+                        relationship = Properties.Resources.Brother;
                         // Assume that the new person has the same last name.
                         surname = family.Current.LastName;
                         break;
                     case FamilyMemberComboBoxValue.Daughter:
-                        relationship = KBS.FamilyLines.Properties.Resources.Daughter;
+                        relationship = Properties.Resources.Daughter;
                         break;
                     case FamilyMemberComboBoxValue.Son:
-                        relationship = KBS.FamilyLines.Properties.Resources.Son;
+                        relationship = Properties.Resources.Son;
                         // Assume that the new person has the same last name as the husband
                         if ((family.Current.Gender == GedcomSex.Female) && (family.Current.Spouses.Count > 0) && (family.Current.Spouses[0].Gender == GedcomSex.Male))
                             surname = family.Current.Spouses[0].LastName;
@@ -404,24 +405,34 @@ namespace KBS.FamilyLines
                             surname = family.Current.LastName;
                         break;
                     case FamilyMemberComboBoxValue.Spouse:
-                        relationship = KBS.FamilyLines.Properties.Resources.Spouse;
+                        relationship = Properties.Resources.Spouse;
                         break;
                     case FamilyMemberComboBoxValue.Existing:
                         isExisting = true;
                         break;
-                    default:
+
+                    case FamilyMemberComboBoxValue.Unrelated:
+                        showSex = true;
+                        MaleCheck.IsChecked = true;
                         break;
                 }
+
+                Relationship.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
+                AddFamilyMember.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
+                PersonName.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
+                personSex.Visibility = !showSex ? Visibility.Collapsed : Visibility.Visible;
+                AddNewPerson.Visibility = !showSex ? Visibility.Collapsed : Visibility.Visible;
 
                 if (isExisting)
                 {
                     // Use animation to expand the Add Existing section
-                    ((Storyboard)this.Resources["ExpandAddExisting"]).Begin(this);
+                    ((Storyboard)Resources["ExpandAddExisting"]).Begin(this);
                 }
                 else
+                {
                     // Use animation to expand the Details Add section
-                    ((Storyboard)this.Resources["ExpandDetailsAdd"]).Begin(this);
-
+                    ((Storyboard) Resources["ExpandDetailsAdd"]).Begin(this);
+                }
 
                 Relationship.Text = relationship;
                 SurnameInputTextBox.Text = surname;
@@ -434,117 +445,119 @@ namespace KBS.FamilyLines
         /// </summary>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            if (FamilyMemberComboBox.SelectedItem == null) 
+                return;
 
-            if (FamilyMemberComboBox.SelectedItem != null)  //prevents program crashing when user presses enter more than one before add is completed.
+            // To make it a little more user friendly, set the next action for the family member button to be the same as the current relationship being added.
+            SetNextFamilyMemberAction((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue);
+            // The new person to be added
+            Person newPerson = new Person(NamesInputTextBox.Text.Trim(), SurnameInputTextBox.Text.Trim());
+            newPerson.IsLiving = IsLivingInputCheckbox.IsChecked != false;
+
+            newPerson.Suffix = SuffixInputTextBox.Text.Trim();
+
+            DateTime birthdate = App.StringToDate(BirthDateInputTextBox.Text);
+            if (birthdate != DateTime.MinValue)
+                newPerson.BirthDate = birthdate;
+
+            newPerson.BirthPlace = BirthPlaceInputTextBox.Text;
+
+            bool SelectParent = false;
+            ParentSetCollection possibleParents = family.Current.PossibleParentSets;
+
+            // Perform the action based on the selected relationship
+            switch ((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue)
             {
+                case FamilyMemberComboBoxValue.Father:
+                    newPerson.Gender = GedcomSex.Male;
 
-                // To make it a little more user friendly, set the next action for the family member button to be the same as the current relationship being added.
-                SetNextFamilyMemberAction((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue);
-                // The new person to be added
-                Person newPerson = new Person(NamesInputTextBox.Text, SurnameInputTextBox.Text);
-                newPerson.IsLiving = IsLivingInputCheckbox.IsChecked != false;
+                    RelationshipHelper.AddParent(family, family.Current, newPerson);
 
-                DateTime birthdate = App.StringToDate(BirthDateInputTextBox.Text);
-                if (birthdate != DateTime.MinValue)
-                    newPerson.BirthDate = birthdate;
+                    SetNextFamilyMemberAction(family.Current.Parents.Count == 2
+                                                  ? FamilyMemberComboBoxValue.Brother
+                                                  : FamilyMemberComboBoxValue.Mother);
+                    break;
 
-                newPerson.BirthPlace = BirthPlaceInputTextBox.Text;
+                case FamilyMemberComboBoxValue.Mother:
+                    newPerson.Gender = GedcomSex.Female;
 
-                bool SelectParent = false;
-                ParentSetCollection possibleParents = family.Current.PossibleParentSets;
+                    RelationshipHelper.AddParent(family, family.Current, newPerson);
 
-                // Perform the action based on the selected relationship
-                switch ((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue)
-                {
-                    case FamilyMemberComboBoxValue.Father:
-                        newPerson.Gender = GedcomSex.Male;
+                    SetNextFamilyMemberAction(family.Current.Parents.Count == 2
+                                                  ? FamilyMemberComboBoxValue.Brother
+                                                  : FamilyMemberComboBoxValue.Father);
+                    break;
 
-                        RelationshipHelper.AddParent(family, family.Current, newPerson);
+                case FamilyMemberComboBoxValue.Brother:
+                    newPerson.Gender = GedcomSex.Male;
 
-                        SetNextFamilyMemberAction(family.Current.Parents.Count == 2
-                                                      ? FamilyMemberComboBoxValue.Brother
-                                                      : FamilyMemberComboBoxValue.Mother);
-                        break;
+                    // Check to see if there are multiple parents
+                    if (possibleParents.Count > 1)
+                        SelectParent = true;
+                    else
+                        RelationshipHelper.AddSibling(family, family.Current, newPerson);
+                    break;
 
-                    case FamilyMemberComboBoxValue.Mother:
-                        newPerson.Gender = GedcomSex.Female;
+                case FamilyMemberComboBoxValue.Sister:
+                    newPerson.Gender = GedcomSex.Female;
 
-                        RelationshipHelper.AddParent(family, family.Current, newPerson);
+                    // Check to see if there are multiple parents
+                    if (possibleParents.Count > 1)
+                        SelectParent = true;
+                    else
+                        RelationshipHelper.AddSibling(family, family.Current, newPerson);
+                    break;
 
-                        SetNextFamilyMemberAction(family.Current.Parents.Count == 2
-                                                      ? FamilyMemberComboBoxValue.Brother
-                                                      : FamilyMemberComboBoxValue.Father);
-                        break;
+                case FamilyMemberComboBoxValue.Spouse:
+                    RelationshipHelper.AddSpouse(family, family.Current, newPerson, SpouseModifier.Current);
+                    SetNextFamilyMemberAction(FamilyMemberComboBoxValue.Son);
+                    break;
 
-                    case FamilyMemberComboBoxValue.Brother:
-                        newPerson.Gender = GedcomSex.Male;
+                case FamilyMemberComboBoxValue.Son:
+                    newPerson.Gender = GedcomSex.Male;
 
-                        // Check to see if there are multiple parents
-                        if (possibleParents.Count > 1)
-                            SelectParent = true;
-                        else
-                            RelationshipHelper.AddSibling(family, family.Current, newPerson);
-                        break;
+                    if (family.Current.Spouses.Count > 1)
+                    {
+                        possibleParents = family.Current.MakeParentSets();
+                        SelectParent = true;
+                    }
+                    else
+                        RelationshipHelper.AddChild(family, family.Current, newPerson, ParentChildModifier.Natural);
+                    break;
 
-                    case FamilyMemberComboBoxValue.Sister:
-                        newPerson.Gender = GedcomSex.Female;
+                case FamilyMemberComboBoxValue.Daughter:
+                    newPerson.Gender = GedcomSex.Female;
+                    if (family.Current.Spouses.Count > 1)
+                    {
+                        possibleParents = family.Current.MakeParentSets();
+                        SelectParent = true;
+                    }
+                    else
+                        RelationshipHelper.AddChild(family, family.Current, newPerson, ParentChildModifier.Natural);
+                    break;
+                case FamilyMemberComboBoxValue.Unrelated:
+                    family.Add(newPerson);
+                    family.Current = newPerson;
+                    family.OnContentChanged();
+                    SetNextFamilyMemberAction(FamilyMemberComboBoxValue.Father);
 
-                        // Check to see if there are multiple parents
-                        if (possibleParents.Count > 1)
-                            SelectParent = true;
-                        else
-                            RelationshipHelper.AddSibling(family, family.Current, newPerson);
-                        break;
-
-                    case FamilyMemberComboBoxValue.Spouse:
-                        RelationshipHelper.AddSpouse(family, family.Current, newPerson, SpouseModifier.Current);
-                        SetNextFamilyMemberAction(FamilyMemberComboBoxValue.Son);
-                        break;
-
-                    case FamilyMemberComboBoxValue.Son:
-                        newPerson.Gender = GedcomSex.Male;
-
-                        if (family.Current.Spouses.Count > 1)
-                        {
-                            possibleParents = family.Current.MakeParentSets();
-                            SelectParent = true;
-                        }
-                        else
-                            RelationshipHelper.AddChild(family, family.Current, newPerson, ParentChildModifier.Natural);
-                        break;
-
-                    case FamilyMemberComboBoxValue.Daughter:
-                        newPerson.Gender = GedcomSex.Female;
-                        if (family.Current.Spouses.Count > 1)
-                        {
-                            possibleParents = family.Current.MakeParentSets();
-                            SelectParent = true;
-                        }
-                        else
-                            RelationshipHelper.AddChild(family, family.Current, newPerson, ParentChildModifier.Natural);
-                        break;
-                    case FamilyMemberComboBoxValue.Unrelated:
-                        family.Add(newPerson);
-                        family.Current = newPerson;
-                        family.OnContentChanged();
-                        SetNextFamilyMemberAction(FamilyMemberComboBoxValue.Father);
-                        break;
-                }
-
-                if (SelectParent)
-                    ShowDetailsAddIntermediate(possibleParents);
-                else
-                {
-                    // Use animation to hide the Details Add section
-                    ((Storyboard)Resources["CollapseDetailsAdd"]).Begin(this);
-
-                    FamilyMemberComboBox.SelectedIndex = -1;
-                    FamilyMemberAddButton.Focus();
-                }
-                family.RebuildTrees(); // KBR a person/relationship has been added/changed. Update trees.
-                family.OnContentChanged(newPerson);
-                family.OnContentChanged(family.Current);
+                    newPerson.Gender = MaleCheck.IsChecked == false ? GedcomSex.Female : GedcomSex.Male;
+                    break;
             }
+
+            if (SelectParent)
+                ShowDetailsAddIntermediate(possibleParents);
+            else
+            {
+                // Use animation to hide the Details Add section
+                ((Storyboard)Resources["CollapseDetailsAdd"]).Begin(this);
+
+                FamilyMemberComboBox.SelectedIndex = -1;
+                FamilyMemberAddButton.Focus();
+            }
+            family.RebuildTrees(); // KBR a person/relationship has been added/changed. Update trees.
+            family.OnContentChanged(newPerson);
+            family.OnContentChanged(family.Current);
         }
 
         /// <summary>
