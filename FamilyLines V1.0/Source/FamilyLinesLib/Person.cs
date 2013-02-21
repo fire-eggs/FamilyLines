@@ -2343,7 +2343,45 @@ namespace KBS.FamilyLinesLib
         {
             return Name;
         }
+        /// <summary>
+        /// Called to validate the person's data
+        /// </summary>
+        public void Validate()
+        {
+            if (this.isLiving)
+            {
+                //1. If any of the current spouses died over 100 yrs ago, this person should not be living:
+                foreach (Person curSpouse in this.CurrentSpouses)
+                {
+                    if (curSpouse.deathDate != null)
+                    {
+                        if ((DateTime.Now.Year - curSpouse.deathDate.Value.Year) > 100)
+                        {
+                            this.isLiving = false;
+                            break;
+                        }
+                    }
 
+                    //2. If this person has a child who died over 100 years ago, this person should not be living:
+                    if (this.isLiving)
+                    {
+                        foreach (Person child in this.Children)
+                        {
+                            if (child.deathDate != null)
+                            {
+                                if ((DateTime.Now.Year - child.deathDate.Value.Year) > 100)
+                                {
+                                    this.isLiving = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+            }
+        }
         #endregion
 
         #region IDataErrorInfo Members
