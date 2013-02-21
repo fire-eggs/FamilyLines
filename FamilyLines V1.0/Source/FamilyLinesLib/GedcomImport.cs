@@ -77,6 +77,10 @@ namespace KBS.FamilyLinesLib
                 UpdateSourceIDs();
                 UpdateRepositoryIDs();
 
+                foreach (Person p in people)
+                {
+                    p.Validate();
+                }
                 people.RebuildTrees(); // set up the initial state of trees
             }
             finally
