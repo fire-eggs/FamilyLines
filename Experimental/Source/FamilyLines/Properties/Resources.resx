@@ -1390,4 +1390,10 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   <data name="FamilyListViewToolTip" xml:space="preserve">
     <value>Hold shift and click on other columns to multi-sort</value>
   </data>
+  <data name="AddANewPerson" xml:space="preserve">
+    <value>Add a New Person</value>
+  </data>
+  <data name="Metro" xml:space="preserve">
+    <value>Metro</value>
+  </data>
 </root>
