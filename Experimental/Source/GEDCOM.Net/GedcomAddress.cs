@@ -458,6 +458,8 @@ namespace GEDCOM.Net
 		public void GenerateXML(XmlNode root)
 		{
 			XmlDocument doc = root.OwnerDocument;
+            if (doc == null)
+                return;
 		
 			XmlNode node = doc.CreateElement("MailAddress");
 			
@@ -549,10 +551,7 @@ namespace GEDCOM.Net
 			
 			if (!string.IsNullOrEmpty(AddressLine1))
 			{
-				if (levelPlusOne == null)
-				{
-					levelPlusOne = Util.IntToString(level + 1);
-				}
+				levelPlusOne = Util.IntToString(level + 1);
 				
 				string line = AddressLine1.Replace("@", "@@");
 				
@@ -979,5 +978,11 @@ namespace GEDCOM.Net
 		}
 		
 		#endregion
+
+        // TODO a brute-force conversion to a simple string for translation to Family.Show
+        public override string ToString()
+        {
+            return _AddressLine + " " + _City + " " + _State + " " + _PostCode + " " + _Country;
+        }
 	}
 }
