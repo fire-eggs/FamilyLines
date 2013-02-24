@@ -1244,6 +1244,23 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <!-- TODO this gives us a header text of the "right" style but the expander button isn't the "right" color -->
+            <!-- TODO move to silver/black resources XAML ? -->
+            <Style x:Key="MainViewExpander" TargetType="Expander">
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" 
+                                       Foreground="{DynamicResource InputFontColor}"                                       
+                                       FontFamily="Calibri,Segoe UI"
+                                       FontSize="12"
+							/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -1618,31 +1635,30 @@
                             <Button Margin="0,0,0,0" HorizontalAlignment="Left" DockPanel.Dock="Top" Content="{x:Static properties:Resources.Back}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="DoneEditMoreButton" Click="DoneEditMoreButton_Click" IsCancel="True" />
                         </DockPanel>
 
-                        <!-- TODO need to style the expander so that the header text color is different from the icon color -->
-                        <!-- TODO need to style the expander for the text size -->
                         <Expander Name="expandBAPM" 
+				                  Style="{StaticResource MainViewExpander}"
                                   ExpandDirection="Down" 
-                                  Foreground="{DynamicResource InputFontColor}"
                                   IsExpanded="False" 
                                   Header="Baptism">
                             <Controls1:EventDetails x:Name="BaptismEvent"/>
                         </Expander>
+                        
                         <Expander Name="expandCHR" 
+				                  Style="{StaticResource MainViewExpander}"
                                   ExpandDirection="Down" 
-                                  Foreground="{DynamicResource InputFontColor}"
                                   IsExpanded="False" 
                                   Header="Christening">
                             <Controls1:EventDetails x:Name="ChristeningEvent"/>
                         </Expander>
 
                         <Expander Name="expandCRE" ExpandDirection="Down" 
-                                  Foreground="{DynamicResource InputFontColor}"
+				                  Style="{StaticResource MainViewExpander}"
                                   IsExpanded="False" Header="Cremation">
                             <Controls1:EventDetails x:Name="CremationEvent"/>
                         </Expander>
 
                         <Expander Name="expandBUR" ExpandDirection="Down" 
-                                  Foreground="{DynamicResource InputFontColor}"
+				                  Style="{StaticResource MainViewExpander}"
                                   IsExpanded="False" Header="Burial">
                             <Controls1:EventDetails x:Name="BurialEvent"/>
                         </Expander>
