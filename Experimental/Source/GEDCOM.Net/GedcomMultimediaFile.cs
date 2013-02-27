@@ -101,8 +101,12 @@ namespace GEDCOM.Net
 			get { return _ChangeDate; }
 			set { _ChangeDate = value; }
 		}
-			
-		
+
+        /// <summary>
+        /// The path to where the file (should) exist during GED import.
+        /// </summary>
+        public string Basepath { get; set; }
+
 		#endregion
 		
 		

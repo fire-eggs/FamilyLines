@@ -45,6 +45,7 @@ namespace GEDCOM.Net
 		private GedcomParser _Parser;
 		private GedcomParseState _ParseState;
 		private string _gedcomFile;
+	    private string _gedcomPath;
 		
 		private XRefIndexedKeyCollection _xrefCollection;
 		
@@ -122,7 +123,11 @@ namespace GEDCOM.Net
 		public string GedcomFile
 		{
 			get { return _gedcomFile; }
-			set { _gedcomFile = value; }
+			set
+			{
+			    _gedcomFile = value;
+                _gedcomPath = Directory.GetParent(_gedcomFile).FullName;
+            }
 		}
 
 		/// <value>
@@ -511,7 +516,7 @@ namespace GEDCOM.Net
 		/// <returns>bool indicating if the file was successfully read</returns>
 		public bool ReadGedcom(string gedcomFile)
 		{
-		    _gedcomFile = gedcomFile;
+		    GedcomFile = gedcomFile;
 			
 			_percent = 0;
 
@@ -2678,6 +2683,7 @@ namespace GEDCOM.Net
 							}
 							
 							file.Filename = _lineValue;
+						    file.Basepath = _gedcomPath;
 						}
 						break;
 					case "REFN":
