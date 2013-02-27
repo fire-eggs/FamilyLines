@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
 using GEDCOM.Net;
@@ -2076,14 +2075,14 @@ namespace KBS.FamilyLinesLib
                             if (i == 1)
                                 parentsText +=  parents.PersonFullName;
                             if (i != 1)
-                                parentsText += " " + Properties.Resources.And + " " + parents.PersonFullName;
+                                parentsText += " " + Resources.And + " " + parents.PersonFullName;
                             i += 1;
                         }
                     }
 
                 }
                 if (!string.IsNullOrEmpty(parentsText))
-                    return " " + Properties.Resources.Of + " " + parentsText;
+                    return " " + Resources.Of + " " + parentsText;
                 return parentsText;
             }
         }
@@ -2124,13 +2123,13 @@ namespace KBS.FamilyLinesLib
                     siblingsText = siblings[0].Name;
 
                     if (siblings.Count == 2)
-                        siblingsText += " " + Properties.Resources.And + " " + siblings[1].Name;
+                        siblingsText += " " + Resources.And + " " + siblings[1].Name;
                     else
                     {
                         for (int i = 1; i < siblings.Count; i++)
                         {
                             if (i == siblings.Count - 1)
-                                siblingsText += " " + Properties.Resources.And + " " + siblings[i].Name;
+                                siblingsText += " " + Resources.And + " " + siblings[i].Name;
                             else
                                 siblingsText += ", " + siblings[i].Name;
                         }
@@ -2138,7 +2137,7 @@ namespace KBS.FamilyLinesLib
                 }
 
                 if(!string.IsNullOrEmpty(siblingsText))
-                    return " " + Properties.Resources.To + " " + siblingsText;
+                    return " " + Resources.To + " " + siblingsText;
                 return siblingsText;
             }
         }
@@ -2180,20 +2179,20 @@ namespace KBS.FamilyLinesLib
                     spousesText = spouses[0].Name;
 
                     if (spouses.Count == 2)
-                        spousesText += " " + Properties.Resources.And + " " + spouses[1].Name;
+                        spousesText += " " + Resources.And + " " + spouses[1].Name;
                     else
                     {
                         for (int i = 1; i < spouses.Count; i++)
                         {
                             if (i == spouses.Count - 1)
-                                spousesText += ", " + Properties.Resources.And + " " + spouses[i].Name;
+                                spousesText += ", " + Resources.And + " " + spouses[i].Name;
                             else
                                 spousesText += ", " + spouses[i].Name;
                         }
                     }
                 }
                 if (!string.IsNullOrEmpty(spousesText))
-                    return " " + Properties.Resources.To + " " + spousesText;
+                    return " " + Resources.To + " " + spousesText;
                 return spousesText;
             }
         }
@@ -2240,7 +2239,7 @@ namespace KBS.FamilyLinesLib
                             if (i == 1)
                                 childrensText += children.PersonFullName;
                             if (i != 1)
-                                childrensText += " " + Properties.Resources.And + " " + children.PersonFullName;
+                                childrensText += " " + Resources.And + " " + children.PersonFullName;
                             i += 1;
                         }
                     }
@@ -2248,7 +2247,7 @@ namespace KBS.FamilyLinesLib
                 }
 
                 if (!string.IsNullOrEmpty(childrensText))
-                    return " " + Properties.Resources.To + " " + childrensText;
+                    return " " + Resources.To + " " + childrensText;
                 return childrensText;
             }
 
@@ -2316,7 +2315,7 @@ namespace KBS.FamilyLinesLib
             gender = _gender;
         }
 
-        // TODO MOVE THIS TO GEDCOMIMPORT
+        // TODO MOVE THIS TO GEDCOMIMPORT??
         // KBR 01/30/2013 A ctor which builds an internal class from the Gedcom.Net instance
         // At this time, the Gedcom.Net instance is "read-only".
         public Person(GedcomIndividualRecord indiv)
@@ -2344,6 +2343,46 @@ namespace KBS.FamilyLinesLib
             if (indiv.Notes != null && indiv.Notes.Count > 0)
             {
                 note = indiv.Notes[0];
+            }
+
+            // TODO replicate for events/facts/families/marriages?
+            // TODO no storage for URLs!
+            // Photos and attachments
+            bool firstPhoto = true;
+            foreach (var mmediaID in indiv.Multimedia)
+            {
+                var mmedia = indiv.Database[mmediaID];
+                var mmRec = mmedia as GedcomMultimediaRecord;
+                if (mmRec != null)
+                {
+                    foreach (var gnMMediaFile in mmRec.Files)
+                    {
+                        // TODO This'll be true for URLs
+                        if (gnMMediaFile.Basepath == null || gnMMediaFile.Filename == null)
+                            continue;
+
+                        var filePath = Path.Combine(gnMMediaFile.Basepath, gnMMediaFile.Filename);
+                        if ( File.Exists(filePath) )
+                        {
+                            // TODO extend supported photos
+                            if (App.IsPhotoFileSupported(filePath))
+                            {
+                                Photo photo = new Photo(filePath) {IsAvatar = firstPhoto};
+                                firstPhoto = false;
+                                Photos.Add(photo);
+                            }
+
+                            // TODO extend supported attachments
+                            else if (App.IsAttachmentFileSupported(filePath))
+                            {
+                                Attachment attachment = new Attachment(filePath);
+                                Attachments.Add(attachment);
+                            }
+
+                            // TODO store all other file types for later re-export
+                        }
+                    }
+                }
             }
 
             // TODO transfer to m_events
@@ -2534,25 +2573,25 @@ namespace KBS.FamilyLinesLib
                 if (columnName == "BirthDate")
                 {
                     if (BirthDate == DateTime.MinValue)
-                        result = Properties.Resources.InvalidDate;
+                        result = Resources.InvalidDate;
                 }
 
                 if (columnName == "DeathDate")
                 {
                     if (DeathDate == DateTime.MinValue)
-                        result = Properties.Resources.InvalidDate;
+                        result = Resources.InvalidDate;
                 }
 
                 if (columnName == "CremationDate")
                 {
                     if (CremationDate == DateTime.MinValue)
-                        result = Properties.Resources.InvalidDate;
+                        result = Resources.InvalidDate;
                 }
 
                 if (columnName == "BurialDate")
                 {
                     if (BurialDate == DateTime.MinValue)
-                        result = Properties.Resources.InvalidDate;
+                        result = Resources.InvalidDate;
                 }
 
                 return result;

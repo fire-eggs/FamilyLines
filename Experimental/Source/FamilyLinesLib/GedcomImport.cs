@@ -360,61 +360,7 @@ namespace KBS.FamilyLinesLib
                 kbrLog("AddSpouse", wifeyP, hubbyP, status);
             }
         }
-
-        /// <summary>
-        /// Import photo information from the GEDCOM XML file.
-        /// Adds the photo if the referenced file exists.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        private static void ImportPhotosAttachments(Person person, XmlNode node)
-        {
-            try
-            {
-                // Get list of photos and attachments for this person.
-                string[] files = GetFiles(node);
-                if (files== null || files.Length == 0)
-                    return;
-
-                // Import each photo/attachment. Make the first photo specified
-                // the default photo (avatar).
-                for (int i = 0; i < files.Length; i++)
-                {
-                    // Only import a photo if it actually exists and it is a supported format.
-                    if (File.Exists(files[i]) && App.IsPhotoFileSupported(files[i])) 
-                    {
-                        Photo photo = new Photo(files[i]);
-                        photo.IsAvatar = (i == 0) ? true : false;
-                        person.Photos.Add(photo);
-                    }
-                    else if(File.Exists(files[i]) && App.IsAttachmentFileSupported(files[i]))
-                    {
-                        Attachment attachment = new Attachment(files[i]);
-                        person.Attachments.Add(attachment);
-                    }
-                }
-            }
-            catch
-            {
-                // There was an error importing a photo, ignore 
-                // and continue processing the GEDCOM XML file.
-            }
-        }
 		
-        /// <summary>
-        /// Return a list of file paths specified in the GEDCOM XML file.
-        /// </summary>
-        private static string[] GetFiles(XmlNode node)
-        {
-            string[] files;
-            XmlNodeList list = node.SelectNodes("OBJE");
-            files = new string[list.Count];
-
-            for (int i = 0; i < list.Count; i++)
-                files[i] = GetValue(list[i], "FILE");
-				
-            return files;
-        }
-
         /// <summary>
         /// Often programs do not store links correctly.
         /// Method to extract the first url link out of citation note.
