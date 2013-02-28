@@ -2336,13 +2336,30 @@ namespace KBS.FamilyLinesLib
             }
 
             id = indiv.XRefID;
-            // TODO Restriction = indiv.RestrictionNotice
+
+            switch (indiv.RestrictionNotice)
+            {
+                case GedcomRestrictionNotice.Locked:
+                    Restriction = Restriction.Locked;
+                    break;
+                case GedcomRestrictionNotice.Privacy:
+                    Restriction = Restriction.Private; // TODO does 'private' mean 'not visible'?
+                    break;
+                default:
+                    Restriction = Restriction.None;
+                    break;
+            }
 
             isLiving = !indiv.Dead;
 
+            // TODO spacing/paragraph issues in displayed notes
+            // TODO more than one note!
             if (indiv.Notes != null && indiv.Notes.Count > 0)
             {
-                note = indiv.Notes[0];
+                var _note = indiv.Notes[0];
+
+                var gnNoteRec = indiv.Database[_note] as GedcomNoteRecord;
+                note = gnNoteRec != null ? gnNoteRec.Text : _note;
             }
 
             // TODO replicate for events/facts/families/marriages?
