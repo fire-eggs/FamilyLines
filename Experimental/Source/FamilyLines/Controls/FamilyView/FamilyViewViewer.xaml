@@ -3,8 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:KBS.FamilyLines.Controls.FamilyView" mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:local="clr-namespace:KBS.FamilyLines.Controls.FamilyView" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" 
+             d:DesignWidth="500"
+             >
+    
+    <UserControl.Resources>
+        <local:DateFormattingConverter x:Key="DateConvert"/>
+    </UserControl.Resources>
     
     <Grid>
         
@@ -14,16 +21,108 @@
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
-            <local:PersonView Grid.Column="0" x:Name="dad"/>
-            <local:PersonView Grid.Column="1" x:Name="mum"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="dadParents" Click="dadParents_Click" Content="Parents"/>
+                <Button x:Name="addDadParents" Click="addDadParents_Click" Content="Add" ToolTip="Add Parent"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="mumParents" Click="mumParents_Click" Content="Parents"/>
+                <Button x:Name="addMumParents" Click="addMumParents_Click" Content="Add" ToolTip="Add Parent"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="5">
+                <Button x:Name="dadSpouses" 
+                        Click="dadSpouses_Click"
+                        IsEnabled="{Binding Path=DadHasMoreSpouse}"
+                        ToolTipService.ShowOnDisabled="True" ToolTip=""
+                        ToolTipOpening="dadSpouses_ToolTipOpening"
+                        MinWidth="20" MinHeight="0" Height="Auto" Width="Auto">
+                    <ItemsControl ItemsSource="Spouses" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Button>
+
+                <Button x:Name="addDadSpouse" Click="addDadSpouse_Click" 
+                        ToolTipOpening="addDadSpouse_ToolTipOpening" ToolTip=""
+                        MinWidth="20" MinHeight="0" Height="Auto" Width="Auto">
+                    <ItemsControl ItemsSource="Add" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+                </Button>
+            </StackPanel>
+
+            <local:PersonView Grid.Row="1" Grid.Column="1" x:Name="dad" Child="False"/>
+            
+            <!-- Marriage details -->
+            <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Padding="0" Content="Married:"/>
+                    <Label Padding="0" Content="{Binding Path=MarrDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
+                </StackPanel>
+                <Label Padding="0" Content="{Binding Path=MarrPlace, Mode=OneWay}"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Padding="0" Content="Divorced:"/>
+                    <Label Padding="0" Content="{Binding Path=DivDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
+                </StackPanel>
+                <Label Padding="0" Content="{Binding Path=DivPlace, Mode=OneWay}"/>
+            </StackPanel>
+            
+            <local:PersonView Grid.Row="1" Grid.Column="3" x:Name="mum" Child="False"/>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="4" Margin="5">
+                <Button x:Name="mumSpouses" 
+                        Click="mumSpouses_Click"
+                        IsEnabled="{Binding Path=MumHasMoreSpouse}"
+                        ToolTipService.ShowOnDisabled="True" ToolTip=""
+                        ToolTipOpening="mumSpouses_ToolTipOpening"
+                        MinWidth="20" MinHeight="0" Height="Auto" Width="Auto">
+                    <ItemsControl ItemsSource="Spouses" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Button>
+
+                <Button x:Name="addMumSpouse" Click="addMumSpouse_Click" 
+                        ToolTipOpening="addMumSpouse_ToolTipOpening" ToolTip=""
+                        MinWidth="20" MinHeight="0" Height="Auto" Width="Auto">
+                    <ItemsControl ItemsSource="Add" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Button>
+            </StackPanel>
+
         </Grid>
         
-        <StackPanel Name="ChildRow" Grid.Row="1" Orientation="Horizontal"/>
+        <WrapPanel Name="ChildRow" Grid.Row="1" Orientation="Vertical"/>
         
     </Grid>
     

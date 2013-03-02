@@ -9,6 +9,8 @@
     <UserControl.Resources>
         <FamilyView:ImageConverter x:Key="ImageConvert" />
 
+        <FamilyView:BoolToVisibilityConverter x:Key="VisiConvert"/>
+        
         <FamilyView:ComposingConverter x:Key="ComposingConverter">
             <FamilyView:ComposingConverter.Converters>
                 <FamilyView:NotConverter />
@@ -16,30 +18,52 @@
             </FamilyView:ComposingConverter.Converters>
         </FamilyView:ComposingConverter>
 
+        <FamilyView:DateFormattingConverter x:Key="DateConvert"/>
+        
     </UserControl.Resources>
     
         <Grid>
 
-        <Border Name="Border" Background="{DynamicResource DiagramToolTipBackgroundBrush}" BorderBrush="#FFFFFFFF" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
-            <DockPanel>
-                <StackPanel Margin="0,0,5,10">
-                    <Border BorderBrush="#02747474" Background="#02000000" HorizontalAlignment="Center" Margin="10,5,10,0" VerticalAlignment="Top" BorderThickness="1,1,1,1" x:Name="AvatarPhotoBorder">
-                        <Border.BitmapEffect>
-                            <DropShadowBitmapEffect ShadowDepth="7" Softness="0.75" />
-                        </Border.BitmapEffect>
-                        <Image x:Name="Avatar" Source="{Binding Path=Avatar, Converter={StaticResource ImageConvert}, Mode=OneWay}" Stretch="Uniform" VerticalAlignment="Top" MaxWidth="90" MaxHeight="85" HorizontalAlignment="Left" StretchDirection="DownOnly" />
-                    </Border>
-                    <Border x:Name="NoPhotoBorder" Visibility="{Binding Path=HasAvatar, Converter={StaticResource ComposingConverter}, Mode=Default}" BorderBrush="#FFFFFFFF" Background="#02FFFFFF" Margin="10,5,10,0">
-                        <Rectangle Fill="{DynamicResource NoPhotoBrush}" Stroke="{x:Null}" Width="70" Height="85" x:Name="NoPhotoRectangle">
-                            <Rectangle.BitmapEffect>
+        <Border Name="Border" Background="Wheat" BorderBrush="#FFFFFFFF" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    
+                    <StackPanel Margin="0,0,5,10">
+                        <Border BorderBrush="#02747474" Background="#02000000" HorizontalAlignment="Center" Margin="10,5,10,0" VerticalAlignment="Top" BorderThickness="1,1,1,1" x:Name="AvatarPhotoBorder"
+                                Visibility="{Binding Path=HasAvatar, Converter={StaticResource VisiConvert}, Mode=Default}">
+                            <Border.BitmapEffect>
                                 <DropShadowBitmapEffect ShadowDepth="7" Softness="0.75" />
-                            </Rectangle.BitmapEffect>
-                        </Rectangle>
-                    </Border>
+                            </Border.BitmapEffect>
+                            <Image x:Name="Avatar" Source="{Binding Path=Avatar, Converter={StaticResource ImageConvert}, Mode=OneWay}" Stretch="Uniform" VerticalAlignment="Top" MaxWidth="90" 
+                                   Height="85" HorizontalAlignment="Left" StretchDirection="DownOnly" />
+                        </Border>
+                        <Border x:Name="NoPhotoBorder" Visibility="{Binding Path=HasAvatar, Converter={StaticResource ComposingConverter}, Mode=Default}" BorderBrush="#FFFFFFFF" 
+                                Background="#02FFFFFF" Margin="10,5,10,0">
+                            <Rectangle Fill="{DynamicResource NoPhotoBrush}" Stroke="{x:Null}" Width="70" Height="85" x:Name="NoPhotoRectangle" VerticalAlignment="Top">
+                                <Rectangle.BitmapEffect>
+                                    <DropShadowBitmapEffect ShadowDepth="7" Softness="0.75" />
+                                </Rectangle.BitmapEffect>
+                            </Rectangle>
+                        </Border>
+                    </StackPanel>
+                    
+                    <Button HorizontalAlignment="Right" VerticalAlignment="Top" Content="Go" MinWidth="0" x:Name="goBtn"
+                            Visibility="{Binding Path=Child, Mode=OneWay, Converter={StaticResource VisiConvert}}"/>
                 </StackPanel>
-                
-                <Label Content="{Binding Path=Name, Mode=OneWay}"/>
-            </DockPanel>
+
+                <Label Padding="0" Content="{Binding Path=Name, Mode=OneWay}"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Padding="0" Content="Born:"/>
+                    <Label Padding="0" Content="{Binding Path=BirthDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
+                </StackPanel>
+                <Label Padding="0" Content="{Binding Path=BirthPlace, Mode=OneWay}"/>
+                <StackPanel Orientation="Horizontal"  Margin="0,5,0,0"
+                            Visibility="{Binding Path=IsLiving, Converter={StaticResource ComposingConverter}, Mode=Default}">
+                    <Label Padding="0" Content="Died:"/>
+                    <Label Padding="0" Content="{Binding Path=DeathDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
+                </StackPanel>
+                <Label Padding="0" Content="{Binding Path=DeathPlace, Mode=OneWay}"/>
+            </StackPanel>
         </Border>
 
 

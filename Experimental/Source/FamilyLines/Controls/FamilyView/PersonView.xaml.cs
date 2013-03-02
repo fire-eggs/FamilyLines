@@ -137,6 +137,41 @@ namespace KBS.FamilyLines.Controls.FamilyView
         #endregion
     }
 
+    // KBR HACK!!!
+    public class DateFormattingConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+
+            if (value != null)
+                return ((DateTime)value).ToShortDateString();
+
+            return string.Empty;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+
+            if (string.IsNullOrEmpty((string)value))
+                return null;
+
+            string dateString = (string)value;
+
+            // Append first month and day if just the year was entered
+            if (dateString.Length == 4)
+                dateString = "1/1/" + dateString;
+
+
+            DateTime date;
+            DateTime.TryParse(dateString, out date);
+            return date;
+        }
+
+        #endregion
+    }
+    
     /// <summary>
     /// Interaction logic for PersonView.xaml
     /// </summary>
@@ -146,6 +181,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
         {
             InitializeComponent();
             DataContext = this;
+            goBtn.DataContext = this; // TODO there must be a nicer way? in XAML?
         }
 
         private Person _human;
@@ -159,11 +195,6 @@ namespace KBS.FamilyLines.Controls.FamilyView
             }
         }
 
-        public string HumanName
-        {
-            get { return Human == null ? "" : Human.Name; }
-        }
-
-
+        public bool Child { get; set; }
     }
 }
