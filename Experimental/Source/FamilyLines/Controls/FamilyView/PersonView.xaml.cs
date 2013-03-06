@@ -3,18 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using KBS.FamilyLines;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines.Controls.FamilyView
@@ -181,9 +173,10 @@ namespace KBS.FamilyLines.Controls.FamilyView
         public PersonView()
         {
             InitializeComponent();
-            DataContext = this;
 
-            goBtn.DataContext = this; // TODO there must be a nicer way? in XAML?
+            // TODO attempts to set datacontext in XAML have been spotty...
+            DataContext = this;
+            goBtn.DataContext = this;
 
             SpouseColumn = 0;
         }
@@ -241,12 +234,33 @@ namespace KBS.FamilyLines.Controls.FamilyView
             b.ToolTip = String.Format(format, param);
         }
 
+        private void go(Person aperson)
+        {
+            App.Family.Current = aperson;
+        }
+
+        #region Event Handlers
+
+        private void editbtn_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO editing feature?
+        }
+
+        private void gobtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (Human != null)
+                go(Human);
+        }
+
         private void parents_Click(object sender, RoutedEventArgs e)
         {
+            var parent = Human.Parents[0];
+            go(parent);
         }
 
         private void addParents_Click(object sender, RoutedEventArgs e)
         {
+            // TODO invoke "add relationship"?
         }
 
         private void Spouses_ToolTipOpening(object sender, ToolTipEventArgs e)
@@ -269,13 +283,17 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         private void addSpouse_Click(object sender, RoutedEventArgs e)
         {
-            
+            // TODO invoke "add relationship"?
         }
 
+        // TODO: which spouse is currently visible?
         private void Spouses_Click(object sender, RoutedEventArgs e)
         {
+            // 1 other spouse: go automatically
             
+            // more than 1 other spouse: show a picker
         }
+        #endregion
 
         #region Implementation of INotifyPropertyChanged
 
