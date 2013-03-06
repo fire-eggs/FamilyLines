@@ -103,11 +103,11 @@
 
                         </Grid>
 
-                        <Button Content="Edit" Margin="0,5,0,5"
+                        <Button Content="Edit" Margin="0,5,0,5" Click="editbtn_Click"
                                 Height="15" FontSize="9" Width="50"
                                 MinWidth="0" x:Name="editBtn"
                                 />
-                        <Button Content="Go" Height="15" Width="50"
+                        <Button Content="Go" Height="15" Width="50" Click="gobtn_Click"
                                 MinWidth="0" x:Name="goBtn" FontSize="9"
                                 Visibility="{Binding Path=Child, Mode=OneWay, Converter={StaticResource VisiConvert}}" 
                                 />
@@ -169,95 +169,5 @@
                 </ItemsControl>
             </Button>
         </StackPanel>
-
-        <!--
-        
-  <Style x:Key="DiagramToolTip" TargetType="ToolTip">
-    <Setter Property="OverridesDefaultStyle" Value="true" />
-    <Setter Property="HasDropShadow" Value="True" />
-    <Setter Property="Foreground" Value="#FFFFFFFF" />
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="ToolTip">
-          <Border Name="Border" Background="{DynamicResource DiagramToolTipBackgroundBrush}" BorderBrush="#FFFFFFFF" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
-            <DockPanel>
-              <StackPanel Margin="0,0,5,10">
-                <Border BorderBrush="#02747474" Background="#02000000" HorizontalAlignment="Center" Margin="10,5,10,0" VerticalAlignment="Top" BorderThickness="1,1,1,1" x:Name="AvatarPhotoBorder">
-                  <Border.BitmapEffect>
-                    <DropShadowBitmapEffect ShadowDepth="7" Softness="0.75" />
-                  </Border.BitmapEffect>
-                  <Image x:Name="Avatar" Source="{Binding Path=Person.Avatar, Converter={StaticResource ImageConverter}, Mode=OneWay}" Stretch="Uniform" VerticalAlignment="Top" MaxWidth="90" MaxHeight="85" HorizontalAlignment="Left" StretchDirection="DownOnly" />
-                </Border>
-                <Border x:Name="NoPhotoBorder" Visibility="{Binding Path=Person.HasAvatar, Converter={StaticResource ComposingConverter}, Mode=Default}" BorderBrush="#FFFFFFFF" Background="#02FFFFFF" Margin="10,5,10,0">
-                  <Rectangle Fill="{DynamicResource NoPhotoBrush}" Stroke="{x:Null}" Width="70" Height="85" x:Name="NoPhotoRectangle">
-                    <Rectangle.BitmapEffect>
-                      <DropShadowBitmapEffect ShadowDepth="7" Softness="0.75" />
-                    </Rectangle.BitmapEffect>
-                  </Rectangle>
-                </Border>
-              </StackPanel>
-        
-              <StackPanel MaxWidth="170" Margin="0,0,5,10">
-                <ContentPresenter Margin="0,10,10,5"/>
-                  <Grid Margin="0,5,0,5" HorizontalAlignment="Left" MaxWidth="100">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="15"/>
-                                        <ColumnDefinition Width="20"/>
-                                        <ColumnDefinition Width="20"/>
-                                        <ColumnDefinition Width="20"/>
-                                        <ColumnDefinition Width="20"/>
-                                    </Grid.ColumnDefinitions>
-
-        <Image Margin="-2,0,0,0"  x:Name="HasSourcesIndicator1" Opacity="0.4" HorizontalAlignment="Center"  VerticalAlignment="Center" Source="..\..\Images\Citation.png" Grid.Column="1" Width="16" Height="16" />
-        <Image Margin="-2,0,0,0" x:Name="HasPhotosIndicator1" Opacity="0.4" HorizontalAlignment="Center"  VerticalAlignment="Center" Source="..\..\Images\Photo.png" Grid.Column="2" Width="16" Height="16"  />
-        <Image Margin="-2,0,0,0" x:Name="HasNoteIndicator1"   Opacity="0.4" HorizontalAlignment="Center"  VerticalAlignment="Center" Source="..\..\Images\Note.png" Grid.Column="3" Width="16" Height="16" />
-        <Image Margin="-2,0,0,0" x:Name="HasAttachmentsIndictor1" Opacity="0.4" HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="..\..\Images\Paperclip.png" Grid.Column="4" Width="16" Height="16" />
-        <Image Margin="0,0,0,0" x:Name="HasRestrictionsIndicator1" Opacity="0.4" HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="..\..\Images\SecurityLock.png" Grid.Column="0" Width="16" Height="16" />
-        <Image Margin="-2,0,0,0" x:Name="HasSourcesIndicator"  HorizontalAlignment="Center" Visibility="{Binding Path=Person.HasCitations, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\..\Images\Citation.png" Grid.Column="1" Width="16" Height="16"  />
-        <Image Margin="-2,0,0,0" x:Name="HasPhotosIndicator"  HorizontalAlignment="Center" Visibility="{Binding Path=Person.HasPhoto, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\..\Images\Photo.png" Grid.Column="2" Width="16" Height="16"  />
-        <Image Margin="-2,0,0,0" x:Name="HasNoteIndicator"    HorizontalAlignment="Center" Visibility="{Binding Path=Person.HasNote, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center" Source="..\..\Images\Note.png" Grid.Column="3" Width="16" Height="16"/>
-        <Image Margin="-2,0,0,0" x:Name="HasAttachmentsIndictor"  HorizontalAlignment="Center" Visibility="{Binding Path=Person.HasAttachments, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center"  Source="..\..\Images\Paperclip.png" Grid.Column="4" Width="16" Height="16" />
-        <Image Margin="0,0,0,0" x:Name="HasRestrictionsIndicator"  HorizontalAlignment="Center" Visibility="{Binding Path=Person.HasRestriction, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center"  Source="..\..\Images\SecurityLock.png" Grid.Column="0" Width="16" Height="16" />
-    </Grid>
-    <TextBlock TextWrapping="Wrap" x:Name="ParentsDatePanel" Margin="0,0,0,5">
-                  <Run local:BindableExtender.BindableText="{Binding Path=Person.ParentRelationshipText}" /><Run local:BindableExtender.BindableText="{Binding Path=Person.ParentsText}" />
-    </TextBlock>
-    <TextBlock TextWrapping="Wrap" x:Name="SiblingsDatePanel" Margin="0,0,0,5">
-                  <Run local:BindableExtender.BindableText="{Binding Path=Person.SiblingRelationshipText}" /><Run local:BindableExtender.BindableText="{Binding Path=Person.SiblingsText}" />
-    </TextBlock>
-    <TextBlock TextWrapping="Wrap" x:Name="SpousesDatePanel" Margin="0,0,0,5">
-                  <Run local:BindableExtender.BindableText="{Binding Path=Person.SpouseRelationshipText}" /><Run local:BindableExtender.BindableText="{Binding Path=Person.SpousesText}" />
-    </TextBlock>
-    <TextBlock TextWrapping="Wrap" x:Name="ChildrenDatePanel" Margin="0,0,0,5">
-                  <Run local:BindableExtender.BindableText="{Binding Path=Person.ChildRelationshipText}" /><Run local:BindableExtender.BindableText="{Binding Path=Person.ChildrenText}" />
-    </TextBlock>
-    </StackPanel>
-    </DockPanel>
-    </Border>
-    <ControlTemplate.Triggers>
-        <Trigger Property="HasDropShadow" Value="true">
-            <Setter TargetName="Border" Property="CornerRadius" Value="4" />
-            <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true" />
-        </Trigger>
-        <DataTrigger Binding="{Binding Path=Person.NaturalParents.Count}" Value="0">
-            <Setter TargetName="ParentsDatePanel" Property="Visibility" Value="Collapsed" />
-        </DataTrigger>
-        <DataTrigger Binding="{Binding Path=Person.Siblings.Count}" Value="0">
-            <Setter TargetName="SiblingsDatePanel" Property="Visibility" Value="Collapsed" />
-        </DataTrigger>
-        <DataTrigger Binding="{Binding Path=Person.Spouses.Count}" Value="0">
-            <Setter TargetName="SpousesDatePanel" Property="Visibility" Value="Collapsed" />
-        </DataTrigger>
-        <DataTrigger Binding="{Binding Path=Person.NaturalChildren.Count}" Value="0">
-            <Setter TargetName="ChildrenDatePanel" Property="Visibility" Value="Collapsed" />
-        </DataTrigger>
-    </ControlTemplate.Triggers>
-    </ControlTemplate>
-    </Setter.Value>
-    </Setter>
-    </Style>
-
-    -->        
-        
     </Grid>
 </UserControl>
