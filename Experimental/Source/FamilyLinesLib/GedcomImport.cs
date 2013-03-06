@@ -144,18 +144,30 @@ namespace KBS.FamilyLinesLib
         private string logName;
         private void startLog(string logname)
         {
-            logName = logname;
-            StreamWriter log = new StreamWriter(logName, false);
-            log.WriteLine(DateTime.Now);
-            log.WriteLine("=========================");
-            log.Close();
+            try
+            {
+                logName = logname;
+                StreamWriter log = new StreamWriter(logName, false);
+                log.WriteLine(DateTime.Now);
+                log.WriteLine("=========================");
+                log.Close();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void kbrLog(string text, Person husbandPerson, Person childPerson, object husbandModifier)
         {
-            StreamWriter log = new StreamWriter(logName,true);
-            log.WriteLine("{0} : '{2}' to '{1}' as {3}", text, husbandPerson.Name, childPerson.Name, husbandModifier);
-            log.Close();
+            try
+            {
+                StreamWriter log = new StreamWriter(logName, true);
+                log.WriteLine("{0} : '{2}' to '{1}' as {3}", text, husbandPerson.Name, childPerson.Name, husbandModifier);
+                log.Close();
+            }
+            catch (Exception)
+            {
+            }
         }
 #else
         private void kbrLog(string text, Person husbandPerson, Person childPerson, object husbandModifier)
@@ -239,7 +251,6 @@ namespace KBS.FamilyLinesLib
         // families from Gedcom.NET
         private void ImportFamiliesGN()
         {
-
             foreach (var fambly in _database.Families)
             {
                 GedcomIndividualRecord hubby = fambly.Husband == null ? null : _database[fambly.Husband] as GedcomIndividualRecord;
@@ -254,9 +265,10 @@ namespace KBS.FamilyLinesLib
                 }
             }
 
-            // TODO diagram doesn't show child as adopted initially but changes on refresh
+            // TODO diagram doesn't show child as adopted initially but changes on refresh?
         }
 
+        // TODO slow with large family: turn into a HashMap?
         private Person HackFind(string XRefID)
         {
             foreach (var aperson in people)

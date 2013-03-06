@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -148,7 +149,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
             if (value != null)
                 return ((DateTime)value).ToShortDateString();
 
-            return string.Empty;
+            return "?";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -175,13 +176,16 @@ namespace KBS.FamilyLines.Controls.FamilyView
     /// <summary>
     /// Interaction logic for PersonView.xaml
     /// </summary>
-    public partial class PersonView : UserControl
+    public partial class PersonView : UserControl, INotifyPropertyChanged
     {
         public PersonView()
         {
             InitializeComponent();
             DataContext = this;
+
             goBtn.DataContext = this; // TODO there must be a nicer way? in XAML?
+
+            SpouseColumn = 0;
         }
 
         private Person _human;
@@ -191,10 +195,99 @@ namespace KBS.FamilyLines.Controls.FamilyView
             set
             {
                 _human = value;
-                DataContext = _human;
+                OnPropertyChanged("Human");
+                OnPropertyChanged("ShowParents");
+                OnPropertyChanged("ShowAddParents");
+                OnPropertyChanged("HasMoreSpouse");
             }
         }
 
         public bool Child { get; set; }
+
+        public int SpouseColumn { set; get; }
+
+        public bool ShowParents
+        {
+            get
+            {
+                return !Child && _human != null && _human.Parents.Count > 0;
+            }
+        }
+
+        public bool ShowAddParents
+        {
+            get
+            {
+                return !Child && _human != null && _human.Parents.Count < 1;
+            }
+        }
+
+        public bool HasMoreSpouse
+        {
+            get
+            {
+                return _human != null && _human.Spouses.Count > 1;
+            }
+        }
+
+        private void doTooltip(object sender, string format, string param)
+        {
+            var b = sender as FrameworkElement;
+            if (b == null)
+                return;
+            var t = b.ToolTip as string;
+            if (t == null)
+                return;
+            b.ToolTip = String.Format(format, param);
+        }
+
+        private void parents_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void addParents_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Spouses_ToolTipOpening(object sender, ToolTipEventArgs e)
+        {
+            if (HasMoreSpouse)
+            {
+                doTooltip(sender, "View other spouses for {0}", Human.FullName);
+            }
+            else
+            {
+                doTooltip(sender, "{0} has no other spouses", Human.FullName);
+            }
+        }
+
+        private void addSpouse_ToolTipOpening(object sender, ToolTipEventArgs e)
+        {
+            if (Human != null)
+                doTooltip(sender, "Add new spouse for {0}", Human.FullName);
+        }
+
+        private void addSpouse_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Spouses_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        #region Implementation of INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
     }
 }
