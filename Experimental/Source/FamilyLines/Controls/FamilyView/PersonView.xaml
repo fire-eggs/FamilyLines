@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:FamilyView="clr-namespace:KBS.FamilyLines.Controls.FamilyView" mc:Ignorable="d" 
+             xmlns:FamilyView="clr-namespace:KBS.FamilyLines.Controls.FamilyView"
+             xmlns:Properties="clr-namespace:KBS.FamilyLines.Properties" mc:Ignorable="d" 
+             x:Name="_this"
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
@@ -22,13 +24,39 @@
         
     </UserControl.Resources>
     
-        <Grid>
+    <Grid>
 
-        <Border Name="Border" Background="Wheat" BorderBrush="#FFFFFFFF" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    
-                    <StackPanel Margin="0,0,5,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" 
+                    Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="parents" Click="parents_Click" Content="Parents"
+                    ToolTip="View Parents"
+                    Visibility="{Binding Path=ShowParents, Converter={StaticResource VisiConvert}, Mode=Default}"
+                    />
+            <Button x:Name="addParents" Click="addParents_Click" Content="Add"
+                    Visibility="{Binding Path=ShowAddParents, Converter={StaticResource VisiConvert}, Mode=Default}"
+                    ToolTip="Add Parent"
+                    />
+        </StackPanel>
+
+        <Border Grid.Row="1" Grid.Column="1"
+                DataContext="{Binding Path=Human}"
+                Name="Border" Background="Wheat" 
+                BorderBrush="#FFFFFFFF" BorderThickness="1,1,1,1" 
+                CornerRadius="10,10,10,10">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <DockPanel>
+                    <StackPanel VerticalAlignment="Top" Margin="0,0,5,10" DockPanel.Dock="Left">
                         <Border BorderBrush="#02747474" Background="#02000000" HorizontalAlignment="Center" Margin="10,5,10,0" VerticalAlignment="Top" BorderThickness="1,1,1,1" x:Name="AvatarPhotoBorder"
                                 Visibility="{Binding Path=HasAvatar, Converter={StaticResource VisiConvert}, Mode=Default}">
                             <Border.BitmapEffect>
@@ -46,10 +74,46 @@
                             </Rectangle>
                         </Border>
                     </StackPanel>
-                    
-                    <Button HorizontalAlignment="Right" VerticalAlignment="Top" Content="Go" MinWidth="0" x:Name="goBtn"
-                            Visibility="{Binding Path=Child, Mode=OneWay, Converter={StaticResource VisiConvert}}"/>
-                </StackPanel>
+                    <StackPanel DockPanel.Dock="Right" 
+                                HorizontalAlignment="Right" 
+                                Orientation="Vertical" >
+
+                        <Grid Grid.Row="1" MinWidth="100">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--grayed out icons-->
+                            <Image Margin="-2,0,0,0" Opacity="0.4" HorizontalAlignment="Center"  VerticalAlignment="Center" Source="..\..\Images\Citation.png" Grid.Column="1" Width="16" Height="16" />
+                            <Image Margin="-2,0,0,0" Opacity="0.4" HorizontalAlignment="Center"  VerticalAlignment="Center" Source="..\..\Images\Photo.png" Grid.Column="2" Width="16" Height="16"  />
+                            <Image Margin="-2,0,0,0" Opacity="0.4" HorizontalAlignment="Center"  VerticalAlignment="Center" Source="..\..\Images\Note.png" Grid.Column="3" Width="16" Height="16" />
+                            <Image Margin="-2,0,0,0" Opacity="0.4" HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="..\..\Images\Paperclip.png" Grid.Column="4" Width="16" Height="16" />
+                            <Image Margin="4,0,0,0" Opacity="0.4" HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="..\..\Images\SecurityLock.png" Grid.Column="0" Width="16" Height="16" />
+
+                            <!--coloured icons if person has ... -->
+                            <Image Margin="-2,0,0,0" HorizontalAlignment="Center" Visibility="{Binding Path=HasCitations, Converter={StaticResource VisiConvert}, Mode=Default}" VerticalAlignment="Center" Source="..\..\Images\Citation.png" Grid.Column="1" Width="16" Height="16" ToolTip="{x:Static Properties:Resources.HasCitations}" />
+                            <Image Margin="-2,0,0,0" HorizontalAlignment="Center" Visibility="{Binding Path=HasPhoto, Converter={StaticResource VisiConvert}, Mode=Default}" VerticalAlignment="Center" Source="..\..\Images\Photo.png" Grid.Column="2" Width="16" Height="16" ToolTip="{x:Static Properties:Resources.HasPhotos}" />
+                            <Image Margin="-2,0,0,0" HorizontalAlignment="Center" Visibility="{Binding Path=HasNote, Converter={StaticResource VisiConvert}, Mode=Default}" VerticalAlignment="Center" Source="..\..\Images\Note.png" Grid.Column="3" Width="16" Height="16" ToolTip="{x:Static Properties:Resources.HasNotes}" />
+                            <Image Margin="-2,0,0,0" HorizontalAlignment="Center" Visibility="{Binding Path=HasAttachments, Converter={StaticResource VisiConvert}, Mode=Default}" VerticalAlignment="Center"  Source="..\..\Images\Paperclip.png" Grid.Column="4" Width="16" Height="16" ToolTip="{x:Static Properties:Resources.HasAttachments}" />
+                            <Image Margin="4,0,0,0" HorizontalAlignment="Center" Visibility="{Binding Path=HasRestriction, Converter={StaticResource VisiConvert}, Mode=Default}" VerticalAlignment="Center"  Source="..\..\Images\SecurityLock.png" Grid.Column="0" Width="16" Height="16" ToolTip="{x:Static Properties:Resources.HasRestrictions}" />
+
+                        </Grid>
+
+                        <Button Content="Edit" Margin="0,5,0,5"
+                                Height="15" FontSize="9" Width="50"
+                                MinWidth="0" x:Name="editBtn"
+                                />
+                        <Button Content="Go" Height="15" Width="50"
+                                MinWidth="0" x:Name="goBtn" FontSize="9"
+                                Visibility="{Binding Path=Child, Mode=OneWay, Converter={StaticResource VisiConvert}}" 
+                                />
+                    </StackPanel>
+
+                </DockPanel>
 
                 <Label Padding="0" Content="{Binding Path=Name, Mode=OneWay}"/>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
@@ -64,8 +128,47 @@
                 </StackPanel>
                 <Label Padding="0" Content="{Binding Path=DeathPlace, Mode=OneWay}"/>
             </StackPanel>
+            
         </Border>
 
+        <StackPanel Grid.Row="1" Grid.Column="{Binding Path=SpouseColumn}" x:Name="container" 
+                    Visibility="{Binding Path=Child, Converter={StaticResource ComposingConverter}, Mode=Default}"
+                    Orientation="Vertical" Margin="5">
+            <Button x:Name="Spouses" 
+                    Click="Spouses_Click"
+                    IsEnabled="{Binding Path=HasMoreSpouse}"
+                    ToolTipService.ShowOnDisabled="True" 
+                    ToolTip=""
+                    ToolTipOpening="Spouses_ToolTipOpening"
+                    Margin="0,5,0,5"
+                    MinWidth="20" MinHeight="0" Height="Auto" Width="Auto">
+                <ItemsControl ItemsSource="Spouses" HorizontalAlignment="Center" 
+                              Margin="0,5,0,5"
+                              VerticalAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Button>
+
+            <Button x:Name="addSpouse" Click="addSpouse_Click" 
+                    ToolTipOpening="addSpouse_ToolTipOpening" ToolTip=""
+                    Margin="0,5,0,5"
+                    MinWidth="20" MinHeight="0" Height="Auto" Width="Auto">
+                <ItemsControl ItemsSource="Add" HorizontalAlignment="Center" 
+                              Margin="0,5,0,5"
+                              VerticalAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+            </Button>
+        </StackPanel>
 
         <!--
         
