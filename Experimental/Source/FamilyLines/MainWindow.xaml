@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
       xmlns:local="clr-namespace:KBS.FamilyLines" 
       xmlns:Controls="clr-namespace:KBS.FamilyLines.Controls"
-      mc:Ignorable="d"
+        xmlns:FamilyView="clr-namespace:KBS.FamilyLines.Controls.FamilyView" mc:Ignorable="d"
       Width="960"
       Height="728"  
       Background="{DynamicResource MainBackgroundBrush}" 
@@ -418,7 +418,7 @@
                         />
 
                 <MenuItem Header="Test" Style="{DynamicResource MenuItemStyle}">
-                    <MenuItem Header="Family View Test" Click="MenuItem_Click"/>
+                    <MenuItem Header="Family View Test" Click="FamilyViewClick"/>
                     <MenuItem Header="Print Preview - Full Chart" Click="PrintKBR"/>
                     <MenuItem Header="Print Preview - Current View" Click="PrintKBR2"/>
                     <MenuItem Header="Print Preview - Full Chart (Variant)" Click="PrintKBR3"/>
@@ -447,11 +447,19 @@
             </Menu>
         </Border>
 
-        <Grid 
+        <Grid x:Name="ViewContainer"
             Grid.IsSharedSizeScope="True"
             DockPanel.Dock="Top" 
                 >
 
+            <Grid x:Name="FamilyViewPane" Margin="10,0,10,10" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition x:Name="column1CloneForLayer0_2" SharedSizeGroup="column1"/>
+                </Grid.ColumnDefinitions>
+                <FamilyView:FamilyViewViewer x:Name="TheFamilyView"/>
+            </Grid>
+            
             <!-- Diagram Area -->
             <Grid 
                 x:Name="DiagramPane" 
