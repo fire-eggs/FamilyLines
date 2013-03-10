@@ -22,9 +22,18 @@ namespace KBS.FamilyLines.Controls.FamilyView
             InitializeComponent();
 
             DataContext = this; // TODO set in XAML
+        }
 
+        public void Init()
+        {
             Family = App.Family;
             Family.CurrentChanged += Family_CurrentChanged;
+            Family_CurrentChanged(null, null);
+            Family.ContentChanged += OnFamilyContentChanged;
+        }
+
+        private void OnFamilyContentChanged(object sender, ContentChangedEventArgs e)
+        {
             Family_CurrentChanged(null, null);
         }
 
@@ -33,6 +42,9 @@ namespace KBS.FamilyLines.Controls.FamilyView
         void Family_CurrentChanged(object sender, EventArgs e)
         {
             dad.Human = Family.Current;
+            if (dad.Human == null)
+                return;
+
             spouse = null;
 
             // go for first spouse

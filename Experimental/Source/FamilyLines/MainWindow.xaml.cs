@@ -1256,6 +1256,7 @@ namespace KBS.FamilyLines
             CollapseDetailsPanels();
             ShowDetailsPane();
             family.OnContentChanged();
+            TheFamilyView.Init(); // TODO this is brute force (Family disconnect?)
 
             // The collection requires a primary-person, use the first
             // person added to the collection as the primary-person.
@@ -1302,6 +1303,8 @@ namespace KBS.FamilyLines
                 family.Current = family[0];
 
                 familyCollection.FullyQualifiedFilename = fileName;
+
+                TheFamilyView.Init(); // TODO this is brute force (Family disconnect?)
             }
             else
             {
@@ -1667,12 +1670,11 @@ namespace KBS.FamilyLines
             HideDetailsPane();
             HideWelcomeScreen();
 
-            PhotoViewerControl.Visibility =
-                StoryViewerControl.Visibility =
-                AttachmentViewerControl.Visibility =
-                DiagramControl.Visibility =
-                    Visibility.Hidden;
-
+            PhotoViewerControl.Visibility = Visibility.Hidden;
+            StoryViewerControl.Visibility = Visibility.Hidden;
+            AttachmentViewerControl.Visibility = Visibility.Hidden;
+            DiagramControl.Visibility = Visibility.Hidden;
+            TheFamilyView.Visibility = Visibility.Hidden;                    
         }
 
         /// <summary>
@@ -1683,7 +1685,9 @@ namespace KBS.FamilyLines
             enableMenus();
             enableButtons();
             ShowDetailsPane();
-            DiagramControl.Visibility = Visibility.Visible;
+
+            DiagramControl.Visibility = UsingFamilyView ? Visibility.Hidden : Visibility.Visible;
+            TheFamilyView.Visibility = UsingFamilyView ? Visibility.Visible : Visibility.Hidden;
 
             if (family.Current != null)
                 DetailsControl.DataContext = family.Current;
@@ -1756,7 +1760,10 @@ namespace KBS.FamilyLines
         private void HideNewUserControl()
         {
             NewUserControl.Visibility = Visibility.Hidden;
-            DiagramControl.Visibility = Visibility.Visible;
+
+            DiagramControl.Visibility = UsingFamilyView ? Visibility.Hidden : Visibility.Visible;
+            TheFamilyView.Visibility = UsingFamilyView ? Visibility.Visible : Visibility.Hidden;
+
             enableButtons();
 
             if (family.Current != null)
@@ -1771,10 +1778,11 @@ namespace KBS.FamilyLines
             HideFamilyDataControl();
             HideDetailsPane();
             DiagramControl.Visibility = Visibility.Collapsed;
+            TheFamilyView.Visibility = Visibility.Collapsed;
             WelcomeUserControl.Visibility = Visibility.Collapsed;
 
             if (PersonInfoControl.Visibility == Visibility.Visible)
-                ((Storyboard)this.Resources["HidePersonInfo"]).Begin(this);
+                ((Storyboard)Resources["HidePersonInfo"]).Begin(this);
 
             NewUserControl.Visibility = Visibility.Visible;
             NewUserControl.ClearInputFields();
@@ -1782,14 +1790,12 @@ namespace KBS.FamilyLines
 
             // Delete to clear existing files and re-create the necessary folders.
             string tempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), App.ApplicationFolderName);
-            tempFolder = Path.Combine(tempFolder, KBS.FamilyLinesLib.App.AppDataFolderName);
+            tempFolder = Path.Combine(tempFolder, FamilyLinesLib.App.AppDataFolderName);
 
             People.RecreateDirectory(tempFolder);
             People.RecreateDirectory(Path.Combine(tempFolder, Photo.PhotosFolderName));
             People.RecreateDirectory(Path.Combine(tempFolder, Story.StoriesFolderName));
             People.RecreateDirectory(Path.Combine(tempFolder, Attachment.AttachmentsFolderName));
-
-
         }
 
         /// <summary>
@@ -1800,6 +1806,7 @@ namespace KBS.FamilyLines
             HideDetailsPane();
             HideNewUserControl();
             DiagramControl.Visibility = Visibility.Hidden;
+            TheFamilyView.Visibility = Visibility.Hidden;
             WelcomeUserControl.Visibility = Visibility.Visible;
             App.canExecuteJumpList = true;
         }
@@ -1836,8 +1843,7 @@ namespace KBS.FamilyLines
                 }                
             }
 
-            // Clear existing menu item
-
+            // Clear existing menu items
             OpenMenu.Items.Clear();
 
             // Restore menu items with icons
@@ -1851,13 +1857,12 @@ namespace KBS.FamilyLines
                 OpenMenu.Items.Add(new Separator());
 
                 int i = 1;
-
                 foreach (string file in App.RecentFiles)
                 {
                     MenuItem item = new MenuItem();
-                    item.Header = i + ". " + System.IO.Path.GetFileName(file);
+                    item.Header = i + ". " + Path.GetFileName(file);
                     item.CommandParameter = file;
-                    item.Click += new RoutedEventHandler(OpenRecentFile);
+                    item.Click += OpenRecentFile;
                     OpenMenu.Items.Add(item);
                     i++;
                 }
@@ -1866,11 +1871,9 @@ namespace KBS.FamilyLines
 
                 MenuItem openMenuItem4 = new MenuItem();
                 openMenuItem4.Header = Properties.Resources.ClearRecentFilesMenu;
-                openMenuItem4.Click += new RoutedEventHandler(ClearRecentFiles);
+                openMenuItem4.Click += ClearRecentFiles;
                 OpenMenu.Items.Add(openMenuItem4);
-       
             }
-
         }
 
         /// <summary>
@@ -1883,11 +1886,11 @@ namespace KBS.FamilyLines
 
             theme1.Header = Properties.Resources.Black;
             theme1.CommandParameter = @"Themes\Black\BlackResources.xaml";
-            theme1.Click += new RoutedEventHandler(ChangeTheme);
+            theme1.Click += ChangeTheme;
 
             theme2.Header = Properties.Resources.Silver;
             theme2.CommandParameter = @"Themes\Silver\SilverResources.xaml";
-            theme2.Click += new RoutedEventHandler(ChangeTheme);
+            theme2.Click += ChangeTheme;
 
             MenuItem theme3 = new MenuItem();
             theme3.Header = Properties.Resources.Metro;
@@ -2028,11 +2031,16 @@ namespace KBS.FamilyLines
             DiagramControl.Diagram.OnFamilyContentChanged(null, new ContentChangedEventArgs(null));
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private bool UsingFamilyView;
+        private void FamilyViewClick(object sender, RoutedEventArgs e)
         {
-            Window test = new TestWindow();
-            test.Owner = this;
-            test.Show();
+            TheFamilyView.Init();
+
+            DiagramPane.Visibility = !UsingFamilyView ? Visibility.Collapsed : Visibility.Visible;
+            FamilyViewPane.Visibility = !UsingFamilyView ? Visibility.Visible : Visibility.Collapsed;
+            TheFamilyView.Visibility = !UsingFamilyView ? Visibility.Visible : Visibility.Collapsed;
+
+            UsingFamilyView = !UsingFamilyView;
         }
 
         private void LocationConcordance_Click(object sender, RoutedEventArgs e)
