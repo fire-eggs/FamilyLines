@@ -3,24 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:FamilyView="clr-namespace:KBS.FamilyLines.Controls.FamilyView"
-             xmlns:Properties="clr-namespace:KBS.FamilyLines.Properties" mc:Ignorable="d" 
+             xmlns:FL="clr-namespace:KBS.FamilyLines"
+             xmlns:Properties="clr-namespace:KBS.FamilyLines.Properties" 
+             mc:Ignorable="d" 
              x:Name="_this"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+>
 
     <UserControl.Resources>
-        <FamilyView:ImageConverter x:Key="ImageConvert" />
+        <FL:ImageConverter x:Key="ImageConvert" />
 
-        <FamilyView:BoolToVisibilityConverter x:Key="VisiConvert"/>
+        <FL:BoolToVisibilityConverter x:Key="VisiConvert"/>
         
-        <FamilyView:ComposingConverter x:Key="ComposingConverter">
-            <FamilyView:ComposingConverter.Converters>
-                <FamilyView:NotConverter />
-                <FamilyView:BoolToVisibilityConverter />
-            </FamilyView:ComposingConverter.Converters>
-        </FamilyView:ComposingConverter>
+        <FL:ComposingConverter x:Key="ComposingConverter">
+            <FL:ComposingConverter.Converters>
+                <FL:NotConverter />
+                <FL:BoolToVisibilityConverter />
+            </FL:ComposingConverter.Converters>
+        </FL:ComposingConverter>
 
-        <FamilyView:DateFormattingConverter x:Key="DateConvert"/>
+        <FL:DateFormattingConverter x:Key="DateConvert"/>
         
     </UserControl.Resources>
     
@@ -36,18 +38,6 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-
-        <StackPanel Grid.Row="0" Grid.Column="1" 
-                    Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="parents" Click="parents_Click" Content="Parents"
-                    ToolTip="View Parents"
-                    Visibility="{Binding Path=ShowParents, Converter={StaticResource VisiConvert}, Mode=Default}"
-                    />
-            <Button x:Name="addParents" Click="addParents_Click" Content="Add"
-                    Visibility="{Binding Path=ShowAddParents, Converter={StaticResource VisiConvert}, Mode=Default}"
-                    ToolTip="Add Parent"
-                    />
-        </StackPanel>
 
         <Border Grid.Row="1" Grid.Column="1"
                 DataContext="{Binding Path=Human}"

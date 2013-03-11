@@ -12,163 +12,163 @@ using KBS.FamilyLinesLib;
 namespace KBS.FamilyLines.Controls.FamilyView
 {
     // KBR HACK!!!!
-    public class ComposingConverter : IValueConverter
-    {
-        #region IValueCOnverter Members
+    //public class ComposingConverter : IValueConverter
+    //{
+    //    #region IValueCOnverter Members
 
-        private List<IValueConverter> converters = new List<IValueConverter>();
+    //    private List<IValueConverter> converters = new List<IValueConverter>();
 
-        public Collection<IValueConverter> Converters
-        {
-            get { return new Collection<IValueConverter>(this.converters); }
-        }
+    //    public Collection<IValueConverter> Converters
+    //    {
+    //        get { return new Collection<IValueConverter>(this.converters); }
+    //    }
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            for (int i = 0; i < this.converters.Count; i++)
-            {
-                value = converters[i].Convert(value, targetType, parameter, culture);
-            }
-            return value;
-        }
+    //    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    //    {
+    //        for (int i = 0; i < this.converters.Count; i++)
+    //        {
+    //            value = converters[i].Convert(value, targetType, parameter, culture);
+    //        }
+    //        return value;
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            for (int i = this.converters.Count - 1; i >= 0; i--)
-            {
-                value = converters[i].ConvertBack(value, targetType, parameter, culture);
-            }
-            return value;
-        }
+    //    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    //    {
+    //        for (int i = this.converters.Count - 1; i >= 0; i--)
+    //        {
+    //            value = converters[i].ConvertBack(value, targetType, parameter, culture);
+    //        }
+    //        return value;
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
 
-    // KBR HACK!!!!
-    public class ImageConverter : IValueConverter
-    {
-        #region IValueConverter Members
+    //// KBR HACK!!!!
+    //public class ImageConverter : IValueConverter
+    //{
+    //    #region IValueConverter Members
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            var filePath = value as string;
-            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
-            {
-                try
-                {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+    //    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    //    {
+    //        var filePath = value as string;
+    //        if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+    //        {
+    //            try
+    //            {
+    //                BitmapImage bitmap = new BitmapImage();
+    //                bitmap.BeginInit();
+    //                bitmap.CacheOption = BitmapCacheOption.OnLoad;
 
-                    // To save significant application memory, set the DecodePixelWidth or  
-                    // DecodePixelHeight of the BitmapImage value of the image source to the desired 
-                    // height or width of the rendered image. If you don't do this, the application will 
-                    // cache the image as though it were rendered as its normal size rather then just 
-                    // the size that is displayed.
-                    // Note: In order to preserve aspect ratio, set DecodePixelWidth
-                    // or DecodePixelHeight but not both.
-                    // See http://msdn.microsoft.com/en-us/library/ms748873.aspx
-                    bitmap.DecodePixelWidth = 200;
-                    bitmap.UriSource = new Uri(filePath);
-                    bitmap.EndInit();
+    //                // To save significant application memory, set the DecodePixelWidth or  
+    //                // DecodePixelHeight of the BitmapImage value of the image source to the desired 
+    //                // height or width of the rendered image. If you don't do this, the application will 
+    //                // cache the image as though it were rendered as its normal size rather then just 
+    //                // the size that is displayed.
+    //                // Note: In order to preserve aspect ratio, set DecodePixelWidth
+    //                // or DecodePixelHeight but not both.
+    //                // See http://msdn.microsoft.com/en-us/library/ms748873.aspx
+    //                bitmap.DecodePixelWidth = 200;
+    //                bitmap.UriSource = new Uri(filePath);
+    //                bitmap.EndInit();
 
-                    return bitmap;
-                }
-                catch
-                {
-                    return null;
-                }
-            }
+    //                return bitmap;
+    //            }
+    //            catch
+    //            {
+    //                return null;
+    //            }
+    //        }
 
-            return null;
-        }
+    //        return null;
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException(Properties.Resources.NotImplemented);
-        }
+    //    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException(Properties.Resources.NotImplemented);
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
 
-    // KBR HACK!!!
-    public class NotConverter : IValueConverter
-    {
-        #region IValueConverter Members
+    //// KBR HACK!!!
+    //public class NotConverter : IValueConverter
+    //{
+    //    #region IValueConverter Members
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return !(bool)value;
-        }
+    //    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    //    {
+    //        return !(bool)value;
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException(Properties.Resources.NotImplemented);
-        }
+    //    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException(Properties.Resources.NotImplemented);
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
 
-    // KBR HACK!!!
-    public class BoolToVisibilityConverter : IValueConverter
-    {
-        #region IValueConverter Members
+    //// KBR HACK!!!
+    //public class BoolToVisibilityConverter : IValueConverter
+    //{
+    //    #region IValueConverter Members
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if ((bool)value)
-                return Visibility.Visible;
-            else
-                return Visibility.Collapsed;
-        }
+    //    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    //    {
+    //        if ((bool)value)
+    //            return Visibility.Visible;
+    //        else
+    //            return Visibility.Collapsed;
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException(Properties.Resources.NotImplemented);
-        }
+    //    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException(Properties.Resources.NotImplemented);
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
 
-    // KBR HACK!!!
-    public class DateFormattingConverter : IValueConverter
-    {
-        #region IValueConverter Members
+    //// KBR HACK!!!
+    //public class DateFormattingConverter : IValueConverter
+    //{
+    //    #region IValueConverter Members
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
+    //    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    //    {
 
-            if (value != null)
-                return ((DateTime)value).ToShortDateString();
+    //        if (value != null)
+    //            return ((DateTime)value).ToShortDateString();
 
-            return "?";
-        }
+    //        return "?";
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
+    //    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    //    {
 
-            if (string.IsNullOrEmpty((string)value))
-                return null;
+    //        if (string.IsNullOrEmpty((string)value))
+    //            return null;
 
-            string dateString = (string)value;
+    //        string dateString = (string)value;
 
-            // Append first month and day if just the year was entered
-            if (dateString.Length == 4)
-                dateString = "1/1/" + dateString;
+    //        // Append first month and day if just the year was entered
+    //        if (dateString.Length == 4)
+    //            dateString = "1/1/" + dateString;
 
 
-            DateTime date;
-            DateTime.TryParse(dateString, out date);
-            return date;
-        }
+    //        DateTime date;
+    //        DateTime.TryParse(dateString, out date);
+    //        return date;
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
     
     /// <summary>
     /// Interaction logic for PersonView.xaml
     /// </summary>
-    public partial class PersonView : UserControl, INotifyPropertyChanged
+    public partial class PersonView : INotifyPropertyChanged
     {
         public PersonView()
         {
@@ -188,9 +188,8 @@ namespace KBS.FamilyLines.Controls.FamilyView
             set
             {
                 _human = value;
+
                 OnPropertyChanged("Human");
-                OnPropertyChanged("ShowParents");
-                OnPropertyChanged("ShowAddParents");
                 OnPropertyChanged("HasMoreSpouse");
             }
         }
@@ -198,22 +197,6 @@ namespace KBS.FamilyLines.Controls.FamilyView
         public bool Child { get; set; }
 
         public int SpouseColumn { set; get; }
-
-        public bool ShowParents
-        {
-            get
-            {
-                return !Child && _human != null && _human.Parents.Count > 0;
-            }
-        }
-
-        public bool ShowAddParents
-        {
-            get
-            {
-                return !Child && _human != null && _human.Parents.Count < 1;
-            }
-        }
 
         public bool HasMoreSpouse
         {
@@ -307,5 +290,24 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         #endregion
 
+        private void goParentDad(object sender, RoutedEventArgs e)
+        {
+            go(_human.Parents[0]);
+        }
+
+        private void addFather_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void goParentMum(object sender, RoutedEventArgs e)
+        {
+            go(_human.Parents[1]);
+        }
+
+        private void addMother_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

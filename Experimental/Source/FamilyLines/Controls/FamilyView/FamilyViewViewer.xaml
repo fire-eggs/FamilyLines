@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:KBS.FamilyLines.Controls.FamilyView" 
+             xmlns:local="clr-namespace:KBS.FamilyLines.Controls.FamilyView"
+             xmlns:FamilyLines="clr-namespace:KBS.FamilyLines" 
              mc:Ignorable="d" 
              d:DesignHeight="300" 
              d:DesignWidth="500"
              >
     
     <UserControl.Resources>
-        <local:DateFormattingConverter x:Key="DateConvert"/>
-        <local:BoolToVisibilityConverter x:Key="VisiConvert"/>
+        <FamilyLines:DateFormattingConverter x:Key="DateConvert"/>
+        <FamilyLines:BoolToVisibilityConverter x:Key="VisiConvert"/>
     </UserControl.Resources>
     
     <Grid>
@@ -19,10 +20,24 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Border Grid.Row="0" BorderBrush="White" BorderThickness="1" CornerRadius="10" Background="AntiqueWhite">
+
+        <!-- GrandParents buttons -->
+        <DockPanel Grid.Row="0">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <local:GParentView x:Name="GDad1" Father="true" Margin="5"/>
+                <local:GParentView x:Name="GMum1" Father="false" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                <local:GParentView x:Name="GDad2" Father="true" Margin="5"/>
+                <local:GParentView x:Name="GMum2" Father="false" Margin="5"/>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- Parents / Marriage -->
+        <Border Grid.Row="1" BorderBrush="White" BorderThickness="1" CornerRadius="10" Background="AntiqueWhite">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -61,7 +76,7 @@
         </Border>
 
         <!-- 'seperator' section between parents and children -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <Button Name="addChild" Content="Add Child" Click="addChild_Click" ToolTip="Add a child"/>
             <!-- TODO why isn't padding working for this button??? -->
             <Button Name="DelMarr" Content="Remove Marriage" Click="DelMarr_OnClick"
@@ -71,7 +86,8 @@
                     ToolTip="Remove this marriage"/>
         </StackPanel>
 
-        <Border Grid.Row="2" BorderBrush="White" BorderThickness="1" CornerRadius="10" Background="AntiqueWhite">
+        <!-- Children -->
+        <Border Grid.Row="3" BorderBrush="White" BorderThickness="1" CornerRadius="10" Background="AntiqueWhite">
             <WrapPanel Name="ChildRow" Grid.Row="2" Orientation="Vertical"/>
         </Border>
     </Grid>
