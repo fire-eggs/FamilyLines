@@ -95,6 +95,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\FamilyView\GParentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\FamilyView\PersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +165,9 @@
     <Compile Include="Controls\FamilyView\FamilyView.cs" />
     <Compile Include="Controls\FamilyView\FamilyViewViewer.xaml.cs">
       <DependentUpon>FamilyViewViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FamilyView\GParentView.xaml.cs">
+      <DependentUpon>GParentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FamilyView\PersonView.xaml.cs">
       <DependentUpon>PersonView.xaml</DependentUpon>

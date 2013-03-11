@@ -42,10 +42,15 @@ namespace KBS.FamilyLines.Controls.FamilyView
         void Family_CurrentChanged(object sender, EventArgs e)
         {
             dad.Human = Family.Current;
-            if (dad.Human == null)
-                return;
-
             spouse = null;
+            if (dad.Human == null)
+            {
+                GDad1.Human = null;
+                GMum1.Human = null;
+                GDad2.Human = null;
+                GMum2.Human = null;
+                return;
+            }
 
             // go for first spouse
             foreach (Relationship rel in dad.Human.Relationships)
@@ -65,6 +70,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
             mum.Visibility = IsMarried ? Visibility.Visible : Visibility.Collapsed;
 
             MakeBabies();
+            UpdateGParents();
 
             OnPropertyChanged("IsMarried");
             OnPropertyChanged("IsDivorced");
@@ -134,6 +140,26 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         private void DelMarr_OnClick(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void UpdateGParents()
+        {
+            GDad1.Human = dad.Human.Parents.Count > 0 ? dad.Human.Parents[0] : null;
+            GMum1.Human = dad.Human.Parents.Count > 1 ? dad.Human.Parents[1] : null;
+
+            GDad1.ChildName = GMum1.ChildName = dad.Human.FullName;
+
+            if (mum.Human != null)
+            {
+                GDad2.Human = mum.Human.Parents.Count > 0 ? mum.Human.Parents[0] : null;
+                GMum2.Human = mum.Human.Parents.Count > 1 ? mum.Human.Parents[1] : null;
+                GDad2.ChildName = GMum2.ChildName = mum.Human.FullName;
+            }
+            else
+            {
+                GDad2.Human = GMum2.Human = null;
+                GDad2.ChildName = GMum2.ChildName = "";
+            }
         }
 
         // TODO means to view children out of wedlock?
