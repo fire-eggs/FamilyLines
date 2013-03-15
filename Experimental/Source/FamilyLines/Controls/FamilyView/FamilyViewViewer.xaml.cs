@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines.Controls.FamilyView
@@ -85,8 +86,10 @@ namespace KBS.FamilyLines.Controls.FamilyView
         void MakeBabies()
         {
             // TODO children and multiple spouses [i.e. this code uses all children of person; need only those children from this marriage]
+            int num = ChildRow.Children.Count;
+            ChildRow.Children.RemoveRange(1,num-1);
 
-            ChildRow.Children.Clear();
+//            ChildRow.Children.Clear();
             childViews.Clear();
 
             var childs = Family.Current.Children;
@@ -100,17 +103,12 @@ namespace KBS.FamilyLines.Controls.FamilyView
             }
         }
 
-        private void addChild_Click(object sender, RoutedEventArgs e)
-        {
-            // Add a child to this marriage
-            // TODO: need a "add child out of wedlock" mechanism?
-        }
-
         public DateTime? MarrDate
         {
             get
             {
                 return spouse == null ? null : spouse.MarriageDate;
+                // TODO show '?' when null date?
             }
         }
 
@@ -138,10 +136,6 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         #endregion
 
-        private void DelMarr_OnClick(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void UpdateGParents()
         {
             GDad1.Human = dad.Human.Parents.Count > 0 ? dad.Human.Parents[0] : null;
@@ -162,6 +156,19 @@ namespace KBS.FamilyLines.Controls.FamilyView
             }
         }
 
-        // TODO means to view children out of wedlock?
+        private void Marriage_Click(object sender, MouseButtonEventArgs e)
+        {
+            // TODO Fire an 'edit marriage' event
+        }
+
+        private void AddSon_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO Fire an 'Add Child' event
+        }
+
+        private void AddDau_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO Fire an 'Add Child' event
+        }
     }
 }

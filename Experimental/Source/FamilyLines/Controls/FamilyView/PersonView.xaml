@@ -25,29 +25,24 @@
         <FL:DateFormattingConverter x:Key="DateConvert"/>
         
     </UserControl.Resources>
-    
+
     <Grid>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-
-        <Border Grid.Row="1" Grid.Column="1"
-                DataContext="{Binding Path=Human}"
-                Name="Border" Background="Wheat" 
-                BorderBrush="#FFFFFFFF" BorderThickness="1,1,1,1" 
+        <Border DataContext="{Binding Path=Human}"
+                Name="Border"
+                Background="{DynamicResource PanelGradientBrush}"
+                Style="{DynamicResource BorderStyle}"
+                BorderBrush="#FFFFFFFF" 
+                MouseUp="Border_MouseUp"
+                ToolTip=""
+                ToolTipOpening="Border_ToolTipOpening"
+                BorderThickness="1,1,1,1" 
                 CornerRadius="10,10,10,10">
             <StackPanel Orientation="Vertical" Margin="5">
                 <DockPanel>
                     <StackPanel VerticalAlignment="Top" Margin="0,0,5,10" DockPanel.Dock="Left">
-                        <Border BorderBrush="#02747474" Background="#02000000" HorizontalAlignment="Center" Margin="10,5,10,0" VerticalAlignment="Top" BorderThickness="1,1,1,1" x:Name="AvatarPhotoBorder"
+                        <Border BorderBrush="#02747474" Background="#02000000" HorizontalAlignment="Center" 
+                                Margin="5,5,5,0" VerticalAlignment="Top" BorderThickness="1,1,1,1" 
+                                x:Name="AvatarPhotoBorder"
                                 Visibility="{Binding Path=HasAvatar, Converter={StaticResource VisiConvert}, Mode=Default}">
                             <Border.BitmapEffect>
                                 <DropShadowBitmapEffect ShadowDepth="7" Softness="0.75" />
@@ -56,7 +51,7 @@
                                    Height="85" HorizontalAlignment="Left" StretchDirection="DownOnly" />
                         </Border>
                         <Border x:Name="NoPhotoBorder" Visibility="{Binding Path=HasAvatar, Converter={StaticResource ComposingConverter}, Mode=Default}" BorderBrush="#FFFFFFFF" 
-                                Background="#02FFFFFF" Margin="10,5,10,0">
+                                Background="#02FFFFFF" Margin="5,5,5,0">
                             <Rectangle Fill="{DynamicResource NoPhotoBrush}" Stroke="{x:Null}" Width="70" Height="85" x:Name="NoPhotoRectangle" VerticalAlignment="Top">
                                 <Rectangle.BitmapEffect>
                                     <DropShadowBitmapEffect ShadowDepth="7" Softness="0.75" />
@@ -93,14 +88,6 @@
 
                         </Grid>
 
-                        <Button Content="Edit" Margin="0,5,0,5" Click="editbtn_Click"
-                                Height="15" FontSize="9" Width="50"
-                                MinWidth="0" x:Name="editBtn"
-                                />
-                        <Button Content="Go" Height="15" Width="50" Click="gobtn_Click"
-                                MinWidth="0" x:Name="goBtn" FontSize="9"
-                                Visibility="{Binding Path=Child, Mode=OneWay, Converter={StaticResource VisiConvert}}" 
-                                />
                     </StackPanel>
 
                 </DockPanel>
@@ -117,47 +104,24 @@
                     <Label Padding="0" Content="{Binding Path=DeathDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
                 </StackPanel>
                 <Label Padding="0" Content="{Binding Path=DeathPlace, Mode=OneWay}"/>
+                
+                <StackPanel x:Name="SpouseNav"
+                            Margin="5,5,0,0"
+                            Orientation="Horizontal"
+                            Visibility="{Binding Path=Child, Converter={StaticResource ComposingConverter}, Mode=Default}">
+                    <TextBlock Text="Spouses:"
+                               Style="{DynamicResource SectionHeaderStyle}"
+                               Margin="5,0,5,0"
+                               />
+                    <ComboBox x:Name="SpouseList"
+                              IsSynchronizedWithCurrentItem="False"
+                              Style="{DynamicResource FamilyMemberComboBox}"
+                              ToolTip=""
+                              ToolTipOpening="SpouseList_ToolTipOpening"
+                              />
+                </StackPanel>
             </StackPanel>
             
         </Border>
-
-        <StackPanel Grid.Row="1" Grid.Column="{Binding Path=SpouseColumn}" x:Name="container" 
-                    Visibility="{Binding Path=Child, Converter={StaticResource ComposingConverter}, Mode=Default}"
-                    Orientation="Vertical" Margin="5">
-            <Button x:Name="Spouses" 
-                    Click="Spouses_Click"
-                    IsEnabled="{Binding Path=HasMoreSpouse}"
-                    ToolTipService.ShowOnDisabled="True" 
-                    ToolTip=""
-                    ToolTipOpening="Spouses_ToolTipOpening"
-                    Margin="0,5,0,5"
-                    MinWidth="20" MinHeight="0" Height="Auto" Width="Auto">
-                <ItemsControl ItemsSource="Spouses" HorizontalAlignment="Center" 
-                              Margin="0,5,0,5"
-                              VerticalAlignment="Center">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Button>
-
-            <Button x:Name="addSpouse" Click="addSpouse_Click" 
-                    ToolTipOpening="addSpouse_ToolTipOpening" ToolTip=""
-                    Margin="0,5,0,5"
-                    MinWidth="20" MinHeight="0" Height="Auto" Width="Auto">
-                <ItemsControl ItemsSource="Add" HorizontalAlignment="Center" 
-                              Margin="0,5,0,5"
-                              VerticalAlignment="Center">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-
-                </ItemsControl>
-            </Button>
-        </StackPanel>
     </Grid>
 </UserControl>
