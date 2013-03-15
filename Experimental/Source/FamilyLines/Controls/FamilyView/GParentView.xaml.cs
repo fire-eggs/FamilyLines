@@ -68,7 +68,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         private void add_click(object sender, RoutedEventArgs e)
         {
-            // TODO invoke 'Add person' with appropriate value
+            // TODO fire 'Add person' event
         }
 
         private void doTooltip(object sender, string format, string param)
@@ -90,7 +90,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         private void Button_ToolTipOpening_1(object sender, System.Windows.Controls.ToolTipEventArgs e)
         {
-            doTooltip(sender, "Goto {0}", Human.FullName);
+            doTooltip(sender, "Make {0} the current person", Human.FullName);
         }
 
     }

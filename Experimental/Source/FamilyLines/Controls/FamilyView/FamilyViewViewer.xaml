@@ -18,14 +18,22 @@
     <Grid>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/> <!-- label -->
+            <RowDefinition Height="Auto"/> <!-- grandparents buttons -->
+            <RowDefinition Height="Auto"/> <!-- married persons -->
+            <RowDefinition Height="Auto"/> <!-- label -->
+            <RowDefinition Height="*"/>    <!-- children -->
         </Grid.RowDefinitions>
 
+        <TextBlock Text="Parents" 
+                   Grid.Row="0" 
+                   Style="{DynamicResource SectionHeaderStyle}"
+                   HorizontalAlignment="Center" 
+                   Margin="0,5,0,5"
+                   />
+
         <!-- GrandParents buttons -->
-        <DockPanel Grid.Row="0">
+        <DockPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                 <local:GParentView x:Name="GDad1" Father="true" Margin="5"/>
                 <local:GParentView x:Name="GMum1" Father="false" Margin="5"/>
@@ -37,7 +45,11 @@
         </DockPanel>
 
         <!-- Parents / Marriage -->
-        <Border Grid.Row="1" BorderBrush="White" BorderThickness="1" CornerRadius="10" Background="AntiqueWhite">
+        <Border Grid.Row="2" 
+                BorderBrush="White" 
+                BorderThickness="1" 
+                CornerRadius="10" 
+                >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -47,13 +59,21 @@
             
                 <local:PersonView Grid.Column="0" x:Name="dad" Child="False" SpouseColumn="0"/>
 
+                <!-- Marriage details -->
                 <Border Grid.Column="1" 
                         Visibility="{Binding Path=IsMarried, Mode=OneWay, Converter={StaticResource VisiConvert}}"
-                        CornerRadius="10" BorderThickness="1" Background="Wheat"
-                        Height="{Binding ActualHeight, ElementName=MarrStack}">
+                        CornerRadius="10" 
+                        BorderThickness="1"
+                        ToolTip="Click to edit marriage details"
+                        MouseUp="Marriage_Click"
+                        Background="{DynamicResource PanelGradientBrush}"
+                        Height="{Binding ActualHeight, ElementName=MarrStack}"
+                        >
                     
-                    <!-- Marriage details -->
-                    <StackPanel VerticalAlignment="Center" x:Name="MarrStack" Margin="5">
+                    <StackPanel VerticalAlignment="Center" 
+                                x:Name="MarrStack" 
+                                Margin="5"
+                                >
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                             <Label Padding="0" Content="Married:"/>
                             <Label Padding="0" Content="{Binding Path=MarrDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
@@ -69,27 +89,53 @@
                     </StackPanel>
                 </Border>
 
-                <local:PersonView Grid.Column="2" x:Name="mum" Child="False" SpouseColumn="2"
+                <local:PersonView Grid.Column="2" x:Name="mum" Child="False" 
+                                  SpouseColumn="2"
                                   Visibility="{Binding Path=IsMarried, Mode=OneWay, Converter={StaticResource VisiConvert}}"
                                   />
             </Grid>
         </Border>
 
         <!-- 'seperator' section between parents and children -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+        <!--<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <Button Name="addChild" Content="Add Child" Click="addChild_Click" ToolTip="Add a child"/>
-            <!-- TODO why isn't padding working for this button??? -->
             <Button Name="DelMarr" Content="Remove Marriage" Click="DelMarr_OnClick"
                     Visibility="{Binding Path=IsMarried, Mode=OneWay, Converter={StaticResource VisiConvert}}"
                     MinWidth="100" 
                     Padding="10,0,10,0" Margin="5,0,5,0"
                     ToolTip="Remove this marriage"/>
-        </StackPanel>
+        </StackPanel>-->
+
+        <TextBlock Text="Children" 
+                   Grid.Row="3" 
+                   Style="{DynamicResource SectionHeaderStyle}"
+                   HorizontalAlignment="Center" 
+                   Margin="0,5,0,5"
+                   />
 
         <!-- Children -->
-        <Border Grid.Row="3" BorderBrush="White" BorderThickness="1" CornerRadius="10" Background="AntiqueWhite">
-            <WrapPanel Name="ChildRow" Grid.Row="2" Orientation="Vertical"/>
+        <Border Grid.Row="4" 
+                Style="{DynamicResource BorderStyle}"
+                BorderBrush="#FFFFFFFF" 
+                BorderThickness="1" CornerRadius="10" 
+                Background="{DynamicResource PanelGradientBrush}"
+                >
+            <WrapPanel Name="ChildRow" Grid.Row="2" Orientation="Vertical">
+                <Border x:Name="ChildOps">
+                    <StackPanel Orientation="Vertical">
+                        <Button x:Name="AddSon" 
+                                Content="Add Son"
+                                Click="AddSon_Click"
+                                />
+                        <Button x:Name="AddDau" 
+                                Click="AddDau_Click"
+                                Content="Add Daughter"
+                                />
+                    </StackPanel>
+                </Border>
+            </WrapPanel>
         </Border>
+
     </Grid>
     
 </UserControl>
