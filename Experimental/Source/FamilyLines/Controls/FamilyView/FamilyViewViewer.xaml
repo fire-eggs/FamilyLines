@@ -96,16 +96,7 @@
             </Grid>
         </Border>
 
-        <!-- 'seperator' section between parents and children -->
-        <!--<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-            <Button Name="addChild" Content="Add Child" Click="addChild_Click" ToolTip="Add a child"/>
-            <Button Name="DelMarr" Content="Remove Marriage" Click="DelMarr_OnClick"
-                    Visibility="{Binding Path=IsMarried, Mode=OneWay, Converter={StaticResource VisiConvert}}"
-                    MinWidth="100" 
-                    Padding="10,0,10,0" Margin="5,0,5,0"
-                    ToolTip="Remove this marriage"/>
-        </StackPanel>-->
-
+        <!-- Label -->
         <TextBlock Text="Children" 
                    Grid.Row="3" 
                    Style="{DynamicResource SectionHeaderStyle}"

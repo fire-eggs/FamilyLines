@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using KBS.FamilyLinesLib;
 
@@ -39,7 +40,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
             }
         }
 
-        public string ChildName { get; set; }
+        public Person Child { get; set; }
 
         #endregion
 
@@ -68,7 +69,12 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         private void add_click(object sender, RoutedEventArgs e)
         {
-            // TODO fire 'Add person' event
+            // Fire 'Add person' event
+            var parentProps = new Tuple<string, Person>(
+                Father ? Properties.Resources.Father : Properties.Resources.Mother,
+                Child);
+            var e2 = new RoutedEventArgs(Commands.AddParent, parentProps);
+            RaiseEvent(e2);
         }
 
         private void doTooltip(object sender, string format, string param)
@@ -85,7 +91,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
         private void Button_ToolTipOpening(object sender, System.Windows.Controls.ToolTipEventArgs e)
         {
             doTooltip(sender, Father ? "Add father for {0}" : 
-                                       "Add mother for {0}", ChildName);
+                                       "Add mother for {0}", Child.FullName);
         }
 
         private void Button_ToolTipOpening_1(object sender, System.Windows.Controls.ToolTipEventArgs e)

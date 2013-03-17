@@ -5,6 +5,7 @@ using System.Printing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Xps;
@@ -46,6 +47,11 @@ namespace KBS.FamilyLines
             BuildThemesMenu();
             family.CurrentChanged += People_CurrentChanged;
             ProcessCommandLines();
+
+            AddChildH += Execute_AddChild;
+            AddParentH += Execute_AddParent;
+            AddSpouseH += Execute_AddSpouse;
+            EditMarrH += Execute_EditMarriage;
         }        
 
         #region event handlers
@@ -313,6 +319,50 @@ namespace KBS.FamilyLines
             }
         }
 
+        public event RoutedEventHandler AddChildH
+        {
+            add
+            {
+                AddHandler(Commands.AddChild, value);
+            }
+            remove
+            {
+                RemoveHandler(Commands.AddChild, value);
+            }
+        }
+        public event RoutedEventHandler AddParentH
+        {
+            add
+            {
+                AddHandler(Commands.AddParent, value);
+            }
+            remove
+            {
+                RemoveHandler(Commands.AddParent, value);
+            }
+        }
+        public event RoutedEventHandler AddSpouseH
+        {
+            add
+            {
+                AddHandler(Commands.AddSpouse, value);
+            }
+            remove
+            {
+                RemoveHandler(Commands.AddSpouse, value);
+            }
+        }
+        public event RoutedEventHandler EditMarrH
+        {
+            add
+            {
+                AddHandler(Commands.EditMarriage, value);
+            }
+            remove
+            {
+                RemoveHandler(Commands.EditMarriage, value);
+            }
+        }
         #endregion
 
         #region menu command handlers
@@ -2076,5 +2126,36 @@ namespace KBS.FamilyLines
 
             Experimental.DumpKML(dialog.FileName, family);
         }
+
+        #region FamilyView to Details commands
+
+        private void Execute_AddChild(object sender, RoutedEventArgs routedEventArgs)
+        {
+            // TODO This isn't quite 'kosher': the OriginalSource property has been set up with the type of child to add
+            var childType = routedEventArgs.OriginalSource as string;
+            DetailsControl.AddChild(childType);
+        }
+
+        private void Execute_AddParent(object sender, RoutedEventArgs e)
+        {
+            // TODO This isn't quite 'kosher': the OriginalSource property has been set up with the type of person to add
+            var parentProps = e.OriginalSource as Tuple<string, Person>;
+            DetailsControl.AddParent(parentProps.Item1, parentProps.Item2);
+        }
+
+        private void Execute_AddSpouse(object sender, RoutedEventArgs args)
+        {
+            // TODO This isn't quite 'kosher': the OriginalSource property has been set up with the Human to add a spouse to
+            var p = args.OriginalSource as Person;
+            DetailsControl.AddSpouse(p);
+        }
+
+        private void Execute_EditMarriage(object sender, RoutedEventArgs e)
+        {
+            // TODO This isn't quite 'kosher': the OriginalSource property has been set up with the Human to view as the 'current' spouse
+            var p = e.OriginalSource as Person;
+            DetailsControl.EditMarriage(p);
+        }
+        #endregion
     }
 }
