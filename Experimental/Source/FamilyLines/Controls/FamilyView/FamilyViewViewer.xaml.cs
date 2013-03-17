@@ -141,34 +141,40 @@ namespace KBS.FamilyLines.Controls.FamilyView
             GDad1.Human = dad.Human.Parents.Count > 0 ? dad.Human.Parents[0] : null;
             GMum1.Human = dad.Human.Parents.Count > 1 ? dad.Human.Parents[1] : null;
 
-            GDad1.ChildName = GMum1.ChildName = dad.Human.FullName;
+            GDad1.Child = GMum1.Child = dad.Human;
 
             if (mum.Human != null)
             {
                 GDad2.Human = mum.Human.Parents.Count > 0 ? mum.Human.Parents[0] : null;
                 GMum2.Human = mum.Human.Parents.Count > 1 ? mum.Human.Parents[1] : null;
-                GDad2.ChildName = GMum2.ChildName = mum.Human.FullName;
+                GDad2.Child = GMum2.Child = mum.Human;
             }
             else
             {
                 GDad2.Human = GMum2.Human = null;
-                GDad2.ChildName = GMum2.ChildName = "";
+                GDad2.Child = GMum2.Child = null;
             }
         }
 
         private void Marriage_Click(object sender, MouseButtonEventArgs e)
         {
-            // TODO Fire an 'edit marriage' event
+            // Fire an 'edit marriage' event
+            var e2 = new RoutedEventArgs(Commands.EditMarriage, mum.Human);
+            RaiseEvent(e2);
         }
 
         private void AddSon_Click(object sender, RoutedEventArgs e)
         {
-            // TODO Fire an 'Add Child' event
+            // Fire an 'Add Child' event
+            var e2 = new RoutedEventArgs(Commands.AddChild, Properties.Resources.Son);
+            RaiseEvent(e2);
         }
 
         private void AddDau_Click(object sender, RoutedEventArgs e)
         {
-            // TODO Fire an 'Add Child' event
+            // Fire an 'Add Child' event
+            var e2 = new RoutedEventArgs(Commands.AddChild, Properties.Resources.Daughter);
+            RaiseEvent(e2);
         }
     }
 }

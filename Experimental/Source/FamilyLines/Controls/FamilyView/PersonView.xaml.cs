@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines.Controls.FamilyView
@@ -84,12 +85,15 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         private void addSpouse_Selected(object sender, RoutedEventArgs e)
         {
-            // TODO fire an 'add spouse' event
+            // Fire an 'add spouse' event
+            var e2 = new RoutedEventArgs(Commands.AddSpouse, Human);
+            RaiseEvent(e2);
         }
 
         private void gotoSpouse_Selected(object sender, RoutedEventArgs e)
         {
             // TODO invoke 'go' on sender.DataContext
+            // TODO how to view 'this' spouse?
         }
 
         private void doTooltip(object sender, string format, string param)
@@ -110,7 +114,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         #region Event Handlers
 
-        private void Border_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Border_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (Human != null)
                 go(Human);

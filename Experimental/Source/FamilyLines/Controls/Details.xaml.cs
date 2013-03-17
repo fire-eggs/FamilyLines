@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -367,77 +368,86 @@ namespace KBS.FamilyLines
         /// </summary>
         private void FamilyMemberComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (FamilyMemberComboBox.SelectedIndex == -1)
+                return;
             disableButtons();
-            if (FamilyMemberComboBox.SelectedIndex != -1)
+            ClearDetailsAddFields();
+
+            string surname = string.Empty;
+            string relationship = string.Empty;
+            bool isExisting = false;
+            bool showSex = false;
+
+            switch ((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue)
             {
-                ClearDetailsAddFields();
-
-                string surname = string.Empty;
-                string relationship = string.Empty;
-                bool isExisting = false;
-                bool showSex = false;
-
-                switch ((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue)
-                {
-                    case FamilyMemberComboBoxValue.Father:
-                        relationship = Properties.Resources.Father;
-                        break;
-                    case FamilyMemberComboBoxValue.Mother:
-                        relationship = Properties.Resources.Mother;
-                        break;
-                    case FamilyMemberComboBoxValue.Sister:
-                        relationship = Properties.Resources.Sister;
-                        break;
-                    case FamilyMemberComboBoxValue.Brother:
-                        relationship = Properties.Resources.Brother;
-                        // Assume that the new person has the same last name.
+                case FamilyMemberComboBoxValue.Father:
+                    relationship = Properties.Resources.Father;
+                    break;
+                case FamilyMemberComboBoxValue.Mother:
+                    relationship = Properties.Resources.Mother;
+                    break;
+                case FamilyMemberComboBoxValue.Sister:
+                    relationship = Properties.Resources.Sister;
+                    break;
+                case FamilyMemberComboBoxValue.Brother:
+                    relationship = Properties.Resources.Brother;
+                    // Assume that the new person has the same last name.
+                    surname = family.Current.LastName;
+                    break;
+                case FamilyMemberComboBoxValue.Daughter:
+                    relationship = Properties.Resources.Daughter;
+                    break;
+                case FamilyMemberComboBoxValue.Son:
+                    relationship = Properties.Resources.Son;
+                    // Assume that the new person has the same last name as the husband
+                    if ((family.Current.Gender == GedcomSex.Female) && (family.Current.Spouses.Count > 0) && (family.Current.Spouses[0].Gender == GedcomSex.Male))
+                        surname = family.Current.Spouses[0].LastName;
+                    else
                         surname = family.Current.LastName;
-                        break;
-                    case FamilyMemberComboBoxValue.Daughter:
-                        relationship = Properties.Resources.Daughter;
-                        break;
-                    case FamilyMemberComboBoxValue.Son:
-                        relationship = Properties.Resources.Son;
-                        // Assume that the new person has the same last name as the husband
-                        if ((family.Current.Gender == GedcomSex.Female) && (family.Current.Spouses.Count > 0) && (family.Current.Spouses[0].Gender == GedcomSex.Male))
-                            surname = family.Current.Spouses[0].LastName;
-                        else
-                            surname = family.Current.LastName;
-                        break;
-                    case FamilyMemberComboBoxValue.Spouse:
-                        relationship = Properties.Resources.Spouse;
-                        break;
-                    case FamilyMemberComboBoxValue.Existing:
-                        isExisting = true;
-                        break;
+                    break;
+                case FamilyMemberComboBoxValue.Spouse:
+                    relationship = Properties.Resources.Spouse;
+                    break;
+                case FamilyMemberComboBoxValue.Existing:
+                    isExisting = true;
+                    break;
 
-                    case FamilyMemberComboBoxValue.Unrelated:
-                        showSex = true;
-                        MaleCheck.IsChecked = true;
-                        break;
-                }
-
-                Relationship.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
-                AddFamilyMember.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
-                PersonName.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
-                personSex.Visibility = !showSex ? Visibility.Collapsed : Visibility.Visible;
-                AddNewPerson.Visibility = !showSex ? Visibility.Collapsed : Visibility.Visible;
-
-                if (isExisting)
-                {
-                    // Use animation to expand the Add Existing section
-                    ((Storyboard)Resources["ExpandAddExisting"]).Begin(this);
-                }
-                else
-                {
-                    // Use animation to expand the Details Add section
-                    ((Storyboard) Resources["ExpandDetailsAdd"]).Begin(this);
-                }
-
-                Relationship.Text = relationship;
-                SurnameInputTextBox.Text = surname;
-                NamesInputTextBox.Focus();
+                case FamilyMemberComboBoxValue.Unrelated:
+                    showSex = true;
+                    MaleCheck.IsChecked = true;
+                    break;
             }
+
+            AddRelationship(family.Current, relationship, surname, showSex, isExisting);
+        }
+
+        private void AddRelationship(Person addRelationshipTo,
+                                     string relationship, string surname, 
+                                     bool showSex, bool isExisting)
+        {
+            // Slightly brute-force mechanism when adding to the 'non-current' person
+            PersonName.DataContext = addRelationshipTo;
+
+            Relationship.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
+            AddFamilyMember.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
+            PersonName.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
+            personSex.Visibility = !showSex ? Visibility.Collapsed : Visibility.Visible;
+            AddNewPerson.Visibility = !showSex ? Visibility.Collapsed : Visibility.Visible;
+
+            if (isExisting)
+            {
+                // Use animation to expand the Add Existing section
+                ((Storyboard) Resources["ExpandAddExisting"]).Begin(this);
+            }
+            else
+            {
+                // Use animation to expand the Details Add section
+                ((Storyboard) Resources["ExpandDetailsAdd"]).Begin(this);
+            }
+
+            Relationship.Text = relationship;
+            SurnameInputTextBox.Text = surname;
+            NamesInputTextBox.Focus();
         }
 
         /// <summary>
@@ -1500,36 +1510,36 @@ namespace KBS.FamilyLines
             if (family.Current == null)
                 return;
 
-            if (SpousesCombobox.SelectedItem != null)
+            if (SpousesCombobox.SelectedItem == null) 
+                return;
+
+            RelationshipsCitationsComboBox.SelectedIndex = 0;
+
+            foreach (Relationship rel in family.Current.Relationships)
             {
-                RelationshipsCitationsComboBox.SelectedIndex = 0;
-
-                foreach (Relationship rel in family.Current.Relationships)
+                if (rel.RelationshipType == RelationshipType.Spouse && rel.RelationTo.Equals((Person)SpousesCombobox.SelectedItem))
                 {
-                    if (rel.RelationshipType == RelationshipType.Spouse && rel.RelationTo.Equals((Person)SpousesCombobox.SelectedItem))
-                    {
-                        SpouseRelationship spouseRel = ((SpouseRelationship)rel);
-                        SpouseStatusListbox.SelectedItem = spouseRel.SpouseModifier;
+                    SpouseRelationship spouseRel = ((SpouseRelationship)rel);
+                    SpouseStatusListbox.SelectedItem = spouseRel.SpouseModifier;
 
-                        FromEditTextBox.Text = string.Empty;
-                        ToEditTextBox.Text = string.Empty;
-                        PlaceEditTextBox.Text = string.Empty;
-                        ToDescriptor.Content = string.Empty;
-                        FromDescriptor.Content = string.Empty;
+                    FromEditTextBox.Text = string.Empty;
+                    ToEditTextBox.Text = string.Empty;
+                    PlaceEditTextBox.Text = string.Empty;
+                    ToDescriptor.Content = string.Empty;
+                    FromDescriptor.Content = string.Empty;
 
-                        if (spouseRel.MarriageDate.HasValue)
-                            FromEditTextBox.Text = ((DateTime)spouseRel.MarriageDate).ToShortDateString();
-                        if (spouseRel.DivorceDate.HasValue)
-                            ToEditTextBox.Text = ((DateTime)spouseRel.DivorceDate).ToShortDateString();
-                        if (spouseRel.MarriagePlace != null)
-                            PlaceEditTextBox.Text = spouseRel.MarriagePlace;
-                        if (spouseRel.MarriageDateDescriptor != null)
-                            FromDescriptor.Content = spouseRel.MarriageDateDescriptor;
-                        if (spouseRel.DivorceDateDescriptor != null)
-                            ToDescriptor.Content = spouseRel.DivorceDateDescriptor;
+                    if (spouseRel.MarriageDate.HasValue)
+                        FromEditTextBox.Text = ((DateTime)spouseRel.MarriageDate).ToShortDateString();
+                    if (spouseRel.DivorceDate.HasValue)
+                        ToEditTextBox.Text = ((DateTime)spouseRel.DivorceDate).ToShortDateString();
+                    if (spouseRel.MarriagePlace != null)
+                        PlaceEditTextBox.Text = spouseRel.MarriagePlace;
+                    if (spouseRel.MarriageDateDescriptor != null)
+                        FromDescriptor.Content = spouseRel.MarriageDateDescriptor;
+                    if (spouseRel.DivorceDateDescriptor != null)
+                        ToDescriptor.Content = spouseRel.DivorceDateDescriptor;
 
-                        UpdateRCitationsComboBox();
-                    }
+                    UpdateRCitationsComboBox();
                 }
             }
         }
@@ -2292,47 +2302,40 @@ namespace KBS.FamilyLines
             MessageBoxResult result = MessageBox.Show(Properties.Resources.ConfirmDeletePerson,
                 Properties.Resources.Person, MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            if (result == MessageBoxResult.Yes)
+            if (result != MessageBoxResult.Yes) 
+                return;
+
+            //Helper method to select a sensible next person other than family[0]
+
+            Person nextPerson = null;
+
+            if (family.Count > 0)
             {
-
-
-                //Helper method to select a sensible next person other than family[0]
-
-                Person nextPerson = null;
-
-                if (family.Count > 0)
-                {
-                    if (family.Current.HasSpouse)
-                        nextPerson = family.Current.Spouses[0];
-                    else if (family.Current.HasSiblings)
-                        nextPerson = family.Current.Siblings[0];
-                    else if (family.Current.HasParents)
-                        nextPerson = family.Current.Parents[0];
-                }
-
-                // Deleting a person requires deleting that person from their relations with other people
-                // Call the relationship helper to handle delete.
-                RelationshipHelper.DeletePerson(family, family.Current);
-
-                if (family.Count > 0)
-                {
-                    // Current person is deleted, choose someone else as the current person
-
-                    if (nextPerson != null)
-                        family.Current = nextPerson;
-                    else
-                        family.Current = family[0];
-
-                    family.OnContentChanged();
-                    SetDefaultFocus();
-                }
-                else
-                {
-                    // Let the container window know that everyone has been deleted
-                    RaiseEvent(new RoutedEventArgs(EveryoneDeletedEvent));
-                }
+                if (family.Current.HasSpouse)
+                    nextPerson = family.Current.Spouses[0];
+                else if (family.Current.HasSiblings)
+                    nextPerson = family.Current.Siblings[0];
+                else if (family.Current.HasParents)
+                    nextPerson = family.Current.Parents[0];
             }
 
+            // Deleting a person requires deleting that person from their relations with other people
+            // Call the relationship helper to handle delete.
+            RelationshipHelper.DeletePerson(family, family.Current);
+
+            if (family.Count > 0)
+            {
+                // Current person is deleted, choose someone else as the current person
+
+                family.Current = nextPerson ?? family[0];
+                family.OnContentChanged();
+                SetDefaultFocus();
+            }
+            else
+            {
+                // Let the container window know that everyone has been deleted
+                RaiseEvent(new RoutedEventArgs(EveryoneDeletedEvent));
+            }
         }
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -2792,6 +2795,34 @@ namespace KBS.FamilyLines
             s.Foreground = System.Windows.Media.Brushes.White;
         }
 
+        #region External Event support
+        public void AddSpouse(Person addSpouseTo)
+        {
+            // Another component has raised an 'AddSpouse' event
+            AddRelationship(addSpouseTo, Properties.Resources.Spouse, "", false, false);
+        }
+
+        public void AddChild(string childType)
+        {
+            // Another component has raised an 'AddChild' event
+            // TODO 'smarts' for surname?
+            AddRelationship(family.Current, childType, "", false, false);
+        }
+
+        public void AddParent(string parentType, Person addParentTo)
+        {
+            // Another component has raised an 'AddParent' event
+            // TODO 'smarts' for surname?
+            AddRelationship(addParentTo, parentType, "", false, false);
+        }
+
+        public void EditMarriage(Person spouseToView)
+        {
+            var sb = FindResource("ExpandDetailsEditRelationship") as Storyboard;
+            if (sb != null)
+                sb.Begin();
+        }
+        #endregion
     }
 
     /// <summary>

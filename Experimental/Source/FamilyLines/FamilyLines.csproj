@@ -156,6 +156,7 @@
       <HintPath>..\..\..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\WindowsFormsIntegration\3.0.0.0__31bf3856ad364e35\WindowsFormsIntegration.dll</HintPath>
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Compile Include="Commands.cs" />
     <Compile Include="Controls\EventDetails.xaml.cs">
       <DependentUpon>EventDetails.xaml</DependentUpon>
     </Compile>
