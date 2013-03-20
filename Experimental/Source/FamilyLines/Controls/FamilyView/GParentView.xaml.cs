@@ -36,7 +36,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
         {
             get
             {
-                return Father ? "Add Father" : "Add Mother";
+                return Father ? Properties.Resources.AddFather : Properties.Resources.GParentView_Add_Mother;
             }
         }
 
@@ -70,8 +70,8 @@ namespace KBS.FamilyLines.Controls.FamilyView
         private void add_click(object sender, RoutedEventArgs e)
         {
             // Fire 'Add person' event
-            var parentProps = new Tuple<string, Person>(
-                Father ? Properties.Resources.Father : Properties.Resources.Mother,
+            var parentProps = new Tuple<FamilyMemberComboBoxValue, Person>(
+                Father ? FamilyMemberComboBoxValue.Father : FamilyMemberComboBoxValue.Mother,
                 Child);
             var e2 = new RoutedEventArgs(Commands.AddParent, parentProps);
             RaiseEvent(e2);
@@ -90,13 +90,14 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         private void Button_ToolTipOpening(object sender, System.Windows.Controls.ToolTipEventArgs e)
         {
-            doTooltip(sender, Father ? "Add father for {0}" : 
-                                       "Add mother for {0}", Child.FullName);
+            doTooltip(sender, Father ? Properties.Resources.GParentView_Add_father_for_ : 
+                                       Properties.Resources.GParentView_Add_mother_for, 
+                                       Child.FullName);
         }
 
         private void Button_ToolTipOpening_1(object sender, System.Windows.Controls.ToolTipEventArgs e)
         {
-            doTooltip(sender, "Make {0} the current person", Human.FullName);
+            doTooltip(sender, Properties.Resources.GParentView_Change_the_current_person, Human.FullName);
         }
 
     }

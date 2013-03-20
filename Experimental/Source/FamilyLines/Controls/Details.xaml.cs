@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -353,14 +352,13 @@ namespace KBS.FamilyLines
         /// </summary>
         private void FamilyMemberAddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!(FamilyMemberAddButton.CommandParameter == null))
-            {
-                disableButtons();
-                
-                FamilyMemberComboBox.SelectedItem =
-                    (FamilyMemberComboBoxValue)(FamilyMemberAddButton.CommandParameter);
-            }
+            if (FamilyMemberAddButton.CommandParameter == null) 
+                return;
 
+            disableButtons();
+                
+            FamilyMemberComboBox.SelectedItem =
+                (FamilyMemberComboBoxValue)(FamilyMemberAddButton.CommandParameter);
         }
 
         /// <summary>
@@ -371,7 +369,6 @@ namespace KBS.FamilyLines
             if (FamilyMemberComboBox.SelectedIndex == -1)
                 return;
             disableButtons();
-            ClearDetailsAddFields();
 
             string surname = string.Empty;
             string relationship = string.Empty;
@@ -418,14 +415,26 @@ namespace KBS.FamilyLines
                     break;
             }
 
-            AddRelationship(family.Current, relationship, surname, showSex, isExisting);
+            AddRelationship(family.Current, (FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue,
+                            relationship, surname, showSex, isExisting);
         }
 
+        private Person destinationPerson;
+        private FamilyMemberComboBoxValue relationshipAdd;
+
         private void AddRelationship(Person addRelationshipTo,
-                                     string relationship, string surname, 
+                                     FamilyMemberComboBoxValue relationshipCode, 
+                                     string relationship,
+                                     string surname, 
                                      bool showSex, bool isExisting)
         {
-            // Slightly brute-force mechanism when adding to the 'non-current' person
+            ClearDetailsAddFields();
+
+            // brute-force data context for 'Add' button click, esp. when adding via FamilyView
+            destinationPerson = addRelationshipTo;
+            relationshipAdd = relationshipCode;
+
+            // get the right person name displayed when adding to the non-current person
             PersonName.DataContext = addRelationshipTo;
 
             Relationship.Visibility = showSex ? Visibility.Collapsed : Visibility.Visible;
@@ -455,13 +464,12 @@ namespace KBS.FamilyLines
         /// </summary>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (FamilyMemberComboBox.SelectedItem == null) 
-                return;
-
             // To make it a little more user friendly, set the next action for the family member button to be the same as the current relationship being added.
-            SetNextFamilyMemberAction((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue);
+            if (FamilyMemberComboBox.SelectedValue != null)
+                SetNextFamilyMemberAction((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue);
+
             // The new person to be added
-            Person newPerson = new Person(NamesInputTextBox.Text.Trim(), SurnameInputTextBox.Text.Trim());
+            var newPerson = new Person(NamesInputTextBox.Text.Trim(), SurnameInputTextBox.Text.Trim());
             newPerson.IsLiving = IsLivingInputCheckbox.IsChecked != false;
 
             newPerson.Suffix = SuffixInputTextBox.Text.Trim();
@@ -473,29 +481,31 @@ namespace KBS.FamilyLines
             newPerson.BirthPlace = BirthPlaceInputTextBox.Text;
 
             bool SelectParent = false;
-            ParentSetCollection possibleParents = family.Current.PossibleParentSets;
+            ParentSetCollection possibleParents = destinationPerson.PossibleParentSets;
 
             // Perform the action based on the selected relationship
-            switch ((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue)
+            switch (relationshipAdd)
             {
                 case FamilyMemberComboBoxValue.Father:
                     newPerson.Gender = GedcomSex.Male;
 
-                    RelationshipHelper.AddParent(family, family.Current, newPerson);
+                    RelationshipHelper.AddParent(family, destinationPerson, newPerson);
 
+                    // TODO not appropriate when adding to not-current-person
                     SetNextFamilyMemberAction(family.Current.Parents.Count == 2
-                                                  ? FamilyMemberComboBoxValue.Brother
-                                                  : FamilyMemberComboBoxValue.Mother);
+                                                    ? FamilyMemberComboBoxValue.Brother
+                                                    : FamilyMemberComboBoxValue.Mother);
                     break;
 
                 case FamilyMemberComboBoxValue.Mother:
                     newPerson.Gender = GedcomSex.Female;
 
-                    RelationshipHelper.AddParent(family, family.Current, newPerson);
+                    RelationshipHelper.AddParent(family, destinationPerson, newPerson);
 
+                    // TODO not appropriate when adding to not-current-person
                     SetNextFamilyMemberAction(family.Current.Parents.Count == 2
-                                                  ? FamilyMemberComboBoxValue.Brother
-                                                  : FamilyMemberComboBoxValue.Father);
+                                                    ? FamilyMemberComboBoxValue.Brother
+                                                    : FamilyMemberComboBoxValue.Father);
                     break;
 
                 case FamilyMemberComboBoxValue.Brother:
@@ -519,31 +529,32 @@ namespace KBS.FamilyLines
                     break;
 
                 case FamilyMemberComboBoxValue.Spouse:
-                    RelationshipHelper.AddSpouse(family, family.Current, newPerson, SpouseModifier.Current);
+                    RelationshipHelper.AddSpouse(family, destinationPerson, newPerson, SpouseModifier.Current);
+                    // TODO not appropriate when adding to not-current-person
                     SetNextFamilyMemberAction(FamilyMemberComboBoxValue.Son);
                     break;
 
                 case FamilyMemberComboBoxValue.Son:
                     newPerson.Gender = GedcomSex.Male;
 
-                    if (family.Current.Spouses.Count > 1)
+                    if (destinationPerson.Spouses.Count > 1)
                     {
-                        possibleParents = family.Current.MakeParentSets();
+                        possibleParents = destinationPerson.MakeParentSets();
                         SelectParent = true;
                     }
                     else
-                        RelationshipHelper.AddChild(family, family.Current, newPerson, ParentChildModifier.Natural);
+                        RelationshipHelper.AddChild(family, destinationPerson, newPerson, ParentChildModifier.Natural);
                     break;
 
                 case FamilyMemberComboBoxValue.Daughter:
                     newPerson.Gender = GedcomSex.Female;
-                    if (family.Current.Spouses.Count > 1)
+                    if (destinationPerson.Spouses.Count > 1)
                     {
-                        possibleParents = family.Current.MakeParentSets();
+                        possibleParents = destinationPerson.MakeParentSets();
                         SelectParent = true;
                     }
                     else
-                        RelationshipHelper.AddChild(family, family.Current, newPerson, ParentChildModifier.Natural);
+                        RelationshipHelper.AddChild(family, destinationPerson, newPerson, ParentChildModifier.Natural);
                     break;
                 case FamilyMemberComboBoxValue.Unrelated:
                     family.Add(newPerson);
@@ -567,7 +578,7 @@ namespace KBS.FamilyLines
             }
             family.RebuildTrees(); // KBR a person/relationship has been added/changed. Update trees.
             family.OnContentChanged(newPerson);
-            family.OnContentChanged(family.Current);
+            family.OnContentChanged(destinationPerson);
         }
 
         /// <summary>
@@ -579,7 +590,7 @@ namespace KBS.FamilyLines
             if (FamilyMemberComboBox.SelectedItem != null)  //prevents program crashing when user presses enter more than one before add is completed.
             {
                 Person newPerson = new Person(NamesInputTextBox.Text, SurnameInputTextBox.Text);
-                newPerson.IsLiving = (IsLivingInputCheckbox.IsChecked == null) ? true : (bool)IsLivingInputCheckbox.IsChecked;
+                newPerson.IsLiving = (IsLivingInputCheckbox.IsChecked == null) || (bool)IsLivingInputCheckbox.IsChecked;
 
                 DateTime birthdate = App.StringToDate(BirthDateInputTextBox.Text);
                 if (birthdate != DateTime.MinValue)
@@ -2799,21 +2810,26 @@ namespace KBS.FamilyLines
         public void AddSpouse(Person addSpouseTo)
         {
             // Another component has raised an 'AddSpouse' event
-            AddRelationship(addSpouseTo, Properties.Resources.Spouse, "", false, false);
+            AddRelationship(addSpouseTo, FamilyMemberComboBoxValue.Spouse,
+                Properties.Resources.Spouse, "", false, false);
         }
 
-        public void AddChild(string childType)
+        public void AddChild(FamilyMemberComboBoxValue childType)
         {
             // Another component has raised an 'AddChild' event
             // TODO 'smarts' for surname?
-            AddRelationship(family.Current, childType, "", false, false);
+            AddRelationship(family.Current, childType, 
+                childType == FamilyMemberComboBoxValue.Son ? Properties.Resources.Son : Properties.Resources.Daughter,
+                "", false, false);
         }
 
-        public void AddParent(string parentType, Person addParentTo)
+        public void AddParent(FamilyMemberComboBoxValue parentType, Person addParentTo)
         {
             // Another component has raised an 'AddParent' event
             // TODO 'smarts' for surname?
-            AddRelationship(addParentTo, parentType, "", false, false);
+            AddRelationship(addParentTo, parentType, 
+                parentType == FamilyMemberComboBoxValue.Father ? Properties.Resources.Father : Properties.Resources.Mother,
+                "", false, false);
         }
 
         public void EditMarriage(Person spouseToView)

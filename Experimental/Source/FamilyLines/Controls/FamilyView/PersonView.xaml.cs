@@ -61,7 +61,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
             // 1. Create 'Add new spouse' entry
             var cbi = new ComboBoxItem();
-            cbi.Content = "Add a new spouse";
+            cbi.Content = Properties.Resources.AddNewSpouse;
             cbi.Selected += addSpouse_Selected;
             SpouseList.Items.Add(cbi);
 
@@ -123,13 +123,13 @@ namespace KBS.FamilyLines.Controls.FamilyView
         private void Border_ToolTipOpening(object sender, ToolTipEventArgs e)
         {
             if (Human != null)
-                doTooltip(sender, "Click to make {0} the current person", Human.FullName);
+                doTooltip(sender, Properties.Resources.ClickToMakeCurrent, Human.FullName);
         }
 
         private void SpouseList_ToolTipOpening(object sender, ToolTipEventArgs e)
         {
-            if (Human != null)
-                doTooltip(sender, "View or add spouse for {0}", Human.FullName);
+            //if (Human != null)
+            //    doTooltip(sender, "View or add spouse for {0}", Human.FullName);
         }
 
         #endregion
