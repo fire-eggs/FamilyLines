@@ -2132,14 +2132,14 @@ namespace KBS.FamilyLines
         private void Execute_AddChild(object sender, RoutedEventArgs routedEventArgs)
         {
             // TODO This isn't quite 'kosher': the OriginalSource property has been set up with the type of child to add
-            var childType = routedEventArgs.OriginalSource as string;
+            var childType = (FamilyMemberComboBoxValue)routedEventArgs.OriginalSource;
             DetailsControl.AddChild(childType);
         }
 
         private void Execute_AddParent(object sender, RoutedEventArgs e)
         {
             // TODO This isn't quite 'kosher': the OriginalSource property has been set up with the type of person to add
-            var parentProps = e.OriginalSource as Tuple<string, Person>;
+            var parentProps = e.OriginalSource as Tuple<FamilyMemberComboBoxValue, Person>;
             DetailsControl.AddParent(parentProps.Item1, parentProps.Item2);
         }
 

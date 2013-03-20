@@ -148,11 +148,19 @@ namespace KBS.FamilyLines.Controls.FamilyView
                 GDad2.Human = mum.Human.Parents.Count > 0 ? mum.Human.Parents[0] : null;
                 GMum2.Human = mum.Human.Parents.Count > 1 ? mum.Human.Parents[1] : null;
                 GDad2.Child = GMum2.Child = mum.Human;
+
+                // TODO databinding in GParentView
+                GDad2.Visibility = Visibility.Visible;
+                GMum2.Visibility = Visibility.Visible;
             }
             else
             {
                 GDad2.Human = GMum2.Human = null;
                 GDad2.Child = GMum2.Child = null;
+
+                // TODO databinding in GParentView
+                GDad2.Visibility = Visibility.Collapsed;
+                GMum2.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -166,14 +174,14 @@ namespace KBS.FamilyLines.Controls.FamilyView
         private void AddSon_Click(object sender, RoutedEventArgs e)
         {
             // Fire an 'Add Child' event
-            var e2 = new RoutedEventArgs(Commands.AddChild, Properties.Resources.Son);
+            var e2 = new RoutedEventArgs(Commands.AddChild, FamilyMemberComboBoxValue.Son);
             RaiseEvent(e2);
         }
 
         private void AddDau_Click(object sender, RoutedEventArgs e)
         {
             // Fire an 'Add Child' event
-            var e2 = new RoutedEventArgs(Commands.AddChild, Properties.Resources.Daughter);
+            var e2 = new RoutedEventArgs(Commands.AddChild, FamilyMemberComboBoxValue.Daughter);
             RaiseEvent(e2);
         }
     }

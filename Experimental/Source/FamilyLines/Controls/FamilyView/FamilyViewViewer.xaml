@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:KBS.FamilyLines.Controls.FamilyView"
-             xmlns:FamilyLines="clr-namespace:KBS.FamilyLines" 
-             mc:Ignorable="d" 
+             xmlns:FamilyLines="clr-namespace:KBS.FamilyLines"
+             xmlns:Properties="clr-namespace:KBS.FamilyLines.Properties" mc:Ignorable="d" 
              d:DesignHeight="300" 
              d:DesignWidth="500"
              >
@@ -25,7 +25,7 @@
             <RowDefinition Height="*"/>    <!-- children -->
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Parents" 
+        <TextBlock Text="{x:Static Properties:Resources.Parents}"
                    Grid.Row="0" 
                    Style="{DynamicResource SectionHeaderStyle}"
                    HorizontalAlignment="Center" 
@@ -64,7 +64,7 @@
                         Visibility="{Binding Path=IsMarried, Mode=OneWay, Converter={StaticResource VisiConvert}}"
                         CornerRadius="10" 
                         BorderThickness="1"
-                        ToolTip="Click to edit marriage details"
+                        ToolTip="{x:Static Properties:Resources.ClickMarriageDetail}"
                         MouseUp="Marriage_Click"
                         Background="{DynamicResource PanelGradientBrush}"
                         Height="{Binding ActualHeight, ElementName=MarrStack}"
@@ -75,14 +75,22 @@
                                 Margin="5"
                                 >
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                            <Label Padding="0" Content="Married:"/>
-                            <Label Padding="0" Content="{Binding Path=MarrDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
+                            <Label Padding="0" 
+                                   Margin="2,0,5,0"
+                                   Content="{x:Static Properties:Resources.Marriage}"
+                                   />
+                            <Label Padding="0" 
+                                   Content="{Binding Path=MarrDate, Mode=OneWay, Converter={StaticResource DateConvert}}"
+                                   />
                         </StackPanel>
                         <Label Padding="0" Content="{Binding Path=MarrPlace, Mode=OneWay}"/>
                         <StackPanel Orientation="Horizontal"
                                     Visibility="{Binding Path=IsDivorced, Mode=OneWay, Converter={StaticResource VisiConvert}}"
                                     Margin="0,5,0,0">
-                            <Label Padding="0" Content="Divorced:"/>
+                            <Label Padding="0" 
+                                   Margin="2,0,5,0"
+                                   Content="{x:Static Properties:Resources.Divorce}"
+                                   />
                             <Label Padding="0" Content="{Binding Path=DivDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
                         </StackPanel>
                         <Label Padding="0" Content="{Binding Path=DivPlace, Mode=OneWay}"/>
@@ -97,7 +105,7 @@
         </Border>
 
         <!-- Label -->
-        <TextBlock Text="Children" 
+        <TextBlock Text="{x:Static Properties:Resources.Children}" 
                    Grid.Row="3" 
                    Style="{DynamicResource SectionHeaderStyle}"
                    HorizontalAlignment="Center" 
@@ -111,20 +119,33 @@
                 BorderThickness="1" CornerRadius="10" 
                 Background="{DynamicResource PanelGradientBrush}"
                 >
-            <WrapPanel Name="ChildRow" Grid.Row="2" Orientation="Vertical">
-                <Border x:Name="ChildOps">
-                    <StackPanel Orientation="Vertical">
-                        <Button x:Name="AddSon" 
-                                Content="Add Son"
-                                Click="AddSon_Click"
-                                />
-                        <Button x:Name="AddDau" 
-                                Click="AddDau_Click"
-                                Content="Add Daughter"
-                                />
-                    </StackPanel>
-                </Border>
-            </WrapPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" 
+                          VerticalScrollBarVisibility="Hidden">
+                <StackPanel Name="ChildRow" Orientation="Horizontal">
+                    <Border x:Name="ChildOps"
+                            Background="{DynamicResource PanelGradientBrush}"
+                            Style="{DynamicResource BorderStyle}"
+                            BorderBrush="#FFFFFFFF" 
+                            BorderThickness="1,1,1,1" 
+                            CornerRadius="10,10,10,10"
+                            >
+                            <StackPanel Orientation="Vertical"
+                                        MinHeight="100"
+                                        MinWidth="100"
+                                        >
+                                <Button x:Name="AddSon" 
+                                        Content="{x:Static Properties:Resources.AddSon}"
+                                        Click="AddSon_Click"
+                                        Margin="0,20,0,5"
+                                        />
+                                <Button x:Name="AddDau" 
+                                        Click="AddDau_Click"
+                                        Content="{x:Static Properties:Resources.AddDaughter}"
+                                        />
+                            </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
 
     </Grid>

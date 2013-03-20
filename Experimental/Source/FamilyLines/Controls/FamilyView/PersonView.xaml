@@ -94,14 +94,19 @@
 
                 <Label Padding="0" Content="{Binding Path=Name, Mode=OneWay}"/>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                    <Label Padding="0" Content="Born:"/>
+                    <Label Padding="0"
+                           Margin="0,0,5,0"
+                           Content="{x:Static Properties:Resources.Born}"/>
                     <Label Padding="0" Content="{Binding Path=BirthDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
                 </StackPanel>
                 <Label Padding="0" Content="{Binding Path=BirthPlace, Mode=OneWay}"/>
                 <StackPanel Orientation="Horizontal"  Margin="0,5,0,0"
                             Visibility="{Binding Path=IsLiving, Converter={StaticResource ComposingConverter}, Mode=Default}">
-                    <Label Padding="0" Content="Died:"/>
-                    <Label Padding="0" Content="{Binding Path=DeathDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
+                    <Label Padding="0"
+                           Margin="0,0,5,0"
+                           Content="{x:Static Properties:Resources.Died}"/>
+                    <Label Padding="0" 
+                           Content="{Binding Path=DeathDate, Mode=OneWay, Converter={StaticResource DateConvert}}"/>
                 </StackPanel>
                 <Label Padding="0" Content="{Binding Path=DeathPlace, Mode=OneWay}"/>
                 
@@ -109,15 +114,13 @@
                             Margin="5,5,0,0"
                             Orientation="Horizontal"
                             Visibility="{Binding Path=Child, Converter={StaticResource ComposingConverter}, Mode=Default}">
-                    <TextBlock Text="Spouses:"
+                    <TextBlock Text="{x:Static Properties:Resources.Spouse}"
                                Style="{DynamicResource SectionHeaderStyle}"
                                Margin="5,0,5,0"
                                />
                     <ComboBox x:Name="SpouseList"
                               IsSynchronizedWithCurrentItem="False"
                               Style="{DynamicResource FamilyMemberComboBox}"
-                              ToolTip=""
-                              ToolTipOpening="SpouseList_ToolTipOpening"
                               />
                 </StackPanel>
             </StackPanel>
