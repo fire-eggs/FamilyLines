@@ -193,7 +193,7 @@
           		VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
                                 <local:FamilyDisplayListView.ItemContainerStyle>
                                     <Style TargetType="{x:Type ListViewItem}" >
-                                        <Setter Property="Template" Value="{DynamicResource FamilyListViewItemTemplate}"/>
+                                        <Setter Property="Template" Value="{DynamicResource oldFamilyListViewItemTemplate}"/>
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                     </Style>
                                 </local:FamilyDisplayListView.ItemContainerStyle>
