@@ -1391,4 +1391,52 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   <data name="FamilyListViewToolTip" xml:space="preserve">
     <value>Удерживайте клавишу SHIFT и нажмите на другие столбцы для мульти-сортировки</value>
   </data>
+  <data name="AddANewPerson" xml:space="preserve">
+    <value>Add a New Person</value>
+  </data>
+  <data name="GParentView_Change_the_current_person" xml:space="preserve">
+    <value>Make {0} the current person</value>
+    <comment>
+      {0} is a person name - "first last"
+    </comment>
+  </data>
+  <data name="GParentView_Add_father_for_" xml:space="preserve">
+    <value>Add father for {0}</value>
+    <comment>
+      {0} is a person's full name
+    </comment>
+  </data>
+  <data name="GParentView_Add_mother_for" xml:space="preserve">
+    <value>Add mother for {0}</value>
+    <comment>
+      {0} is a person's full name
+    </comment>
+  </data>
+  <data name="GParentView_Add_Father" xml:space="preserve">
+    <value>Add Father</value>
+  </data>
+  <data name="GParentView_Add_Mother" xml:space="preserve">
+    <value>Add Mother</value>
+  </data>
+  <data name="AddDaughter" xml:space="preserve">
+    <value>Add Daughter</value>
+  </data>
+  <data name="AddSon" xml:space="preserve">
+    <value>Add Son</value>
+  </data>
+  <data name="Children" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="ClickMarriageDetail" xml:space="preserve">
+    <value>Click to Edit Marriage Details</value>
+  </data>
+  <data name="AddNewSpouse">
+    <value xml:space="preserve">Add a new spouse</value>
+  </data>
+  <data name="ClickToMakeCurrent">
+    <value xml:space="preserve">Click to make {0} the current person</value>
+    <comment>
+      {0} is a person's name
+    </comment>
+  </data>
 </root>

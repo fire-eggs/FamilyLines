@@ -103,10 +103,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\FamilyView\TestWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="PreviewWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -171,9 +167,6 @@
     </Compile>
     <Compile Include="Controls\FamilyView\PersonView.xaml.cs">
       <DependentUpon>PersonView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FamilyView\TestWindow.xaml.cs">
-      <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
