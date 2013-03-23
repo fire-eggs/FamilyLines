@@ -2140,9 +2140,15 @@
                                                     <Setter.Value>
                                                         <ControlTemplate>
                                                             <Border Background="Transparent">
-                                                                <RadioButton IsHitTestVisible="False" Focusable="False" Foreground="{Binding Path=Foreground, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                             Content="{Binding Path=Name}"
-                                             IsChecked="{Binding Path=IsSelected, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                                <RadioButton IsHitTestVisible="False" 
+                                                                             Focusable="False" 
+                                                                             Foreground="Black"
+                                                                             IsChecked="{Binding Path=IsSelected, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                                                    <Label Content="{Binding Path=Name}"
+                                                                           Padding="0"
+                                                                           Foreground="{DynamicResource InputFontColor}"
+                                                                           />
+                                                                </RadioButton>
                                                             </Border>
                                                         </ControlTemplate>
                                                     </Setter.Value>
