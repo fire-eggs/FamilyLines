@@ -163,7 +163,6 @@
     <Compile Include="Controls\FactDetails.xaml.cs">
       <DependentUpon>FactDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FamilyView\FamilyView.cs" />
     <Compile Include="Controls\FamilyView\FamilyViewViewer.xaml.cs">
       <DependentUpon>FamilyViewViewer.xaml</DependentUpon>
     </Compile>

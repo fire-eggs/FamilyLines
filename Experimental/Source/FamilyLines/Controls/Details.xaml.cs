@@ -586,50 +586,47 @@ namespace KBS.FamilyLines
         /// </summary>
         private void IntermediateAddButton_Click(object sender, RoutedEventArgs e)
         {
+            //if (FamilyMemberComboBox.SelectedItem == null) return;
 
-            if (FamilyMemberComboBox.SelectedItem != null)  //prevents program crashing when user presses enter more than one before add is completed.
+            Person newPerson = new Person(NamesInputTextBox.Text, SurnameInputTextBox.Text);
+            newPerson.IsLiving = (IsLivingInputCheckbox.IsChecked == null) || (bool)IsLivingInputCheckbox.IsChecked;
+
+            DateTime birthdate = App.StringToDate(BirthDateInputTextBox.Text);
+            if (birthdate != DateTime.MinValue)
+                newPerson.BirthDate = birthdate;
+
+            newPerson.BirthPlace = BirthPlaceInputTextBox.Text;
+
+            switch (relationshipAdd)
             {
-                Person newPerson = new Person(NamesInputTextBox.Text, SurnameInputTextBox.Text);
-                newPerson.IsLiving = (IsLivingInputCheckbox.IsChecked == null) || (bool)IsLivingInputCheckbox.IsChecked;
+                case FamilyMemberComboBoxValue.Brother:
+                    newPerson.Gender = GedcomSex.Male;
+                    RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
+                    break;
 
-                DateTime birthdate = App.StringToDate(BirthDateInputTextBox.Text);
-                if (birthdate != DateTime.MinValue)
-                    newPerson.BirthDate = birthdate;
+                case FamilyMemberComboBoxValue.Sister:
+                    newPerson.Gender = GedcomSex.Female;
+                    RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
+                    break;
+                case FamilyMemberComboBoxValue.Son:
+                    newPerson.Gender = GedcomSex.Male;
+                    RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
+                    break;
 
-                newPerson.BirthPlace = BirthPlaceInputTextBox.Text;
-
-                switch ((FamilyMemberComboBoxValue)FamilyMemberComboBox.SelectedValue)
-                {
-                    case FamilyMemberComboBoxValue.Brother:
-                        newPerson.Gender = GedcomSex.Male;
-                        RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
-                        break;
-
-                    case FamilyMemberComboBoxValue.Sister:
-                        newPerson.Gender = GedcomSex.Female;
-                        RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
-                        break;
-                    case FamilyMemberComboBoxValue.Son:
-                        newPerson.Gender = GedcomSex.Male;
-                        RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
-                        break;
-
-                    case FamilyMemberComboBoxValue.Daughter:
-                        newPerson.Gender = GedcomSex.Female;
-                        RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
-                        break;
-                }
-
-                FamilyMemberComboBox.SelectedIndex = -1;
-                FamilyMemberAddButton.Focus();
-
-                // Use animation to hide the Details Add Intermediate section
-                ((Storyboard)Resources["CollapseDetailsAddIntermediate"]).Begin(this);
-
-                family.OnContentChanged(newPerson);
-                family.OnContentChanged(family.Current);
-
+                case FamilyMemberComboBoxValue.Daughter:
+                    newPerson.Gender = GedcomSex.Female;
+                    RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
+                    break;
             }
+
+            FamilyMemberComboBox.SelectedIndex = -1;
+            FamilyMemberAddButton.Focus();
+
+            // Use animation to hide the Details Add Intermediate section
+            ((Storyboard)Resources["CollapseDetailsAddIntermediate"]).Begin(this);
+
+            family.OnContentChanged(newPerson);
+            family.OnContentChanged(family.Current);
         }
 
         private void AddExistingButton_Click(object sender, RoutedEventArgs e)
@@ -2814,11 +2811,11 @@ namespace KBS.FamilyLines
                 Properties.Resources.Spouse, "", false, false);
         }
 
-        public void AddChild(FamilyMemberComboBoxValue childType)
+        public void AddChild(Person addChildTo, FamilyMemberComboBoxValue childType)
         {
             // Another component has raised an 'AddChild' event
             // TODO 'smarts' for surname?
-            AddRelationship(family.Current, childType, 
+            AddRelationship(addChildTo, childType, 
                 childType == FamilyMemberComboBoxValue.Son ? Properties.Resources.Son : Properties.Resources.Daughter,
                 "", false, false);
         }

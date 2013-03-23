@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using KBS.FamilyLinesLib;
 
@@ -11,8 +10,11 @@ namespace KBS.FamilyLines.Controls.FamilyView
     /// <summary>
     /// Interaction logic for FamilyViewViewer.xaml
     /// </summary>
-    public partial class FamilyViewViewer : UserControl, INotifyPropertyChanged
+    public partial class FamilyViewViewer : INotifyPropertyChanged
     {
+        private SpouseRelationship spouse;
+        private readonly List<PersonView> childViews = new List<PersonView>();
+
         public PeopleCollection Family { get; set; }
 
         public bool IsMarried { get; set; }
@@ -23,6 +25,20 @@ namespace KBS.FamilyLines.Controls.FamilyView
             InitializeComponent();
 
             DataContext = this; // TODO set in XAML
+
+            AddViewSpouseH += FamilyViewViewer_AddViewSpouseH;
+        }
+
+        public event RoutedEventHandler AddViewSpouseH
+        {
+            add
+            {
+                AddHandler(Commands.ViewSpouse, value);
+            }
+            remove
+            {
+                RemoveHandler(Commands.ViewSpouse, value);
+            }
         }
 
         public void Init()
@@ -37,8 +53,6 @@ namespace KBS.FamilyLines.Controls.FamilyView
         {
             Family_CurrentChanged(null, null);
         }
-
-        private SpouseRelationship spouse;
 
         void Family_CurrentChanged(object sender, EventArgs e)
         {
@@ -81,21 +95,29 @@ namespace KBS.FamilyLines.Controls.FamilyView
             OnPropertyChanged("DivPlace");
         }
 
-        private List<PersonView> childViews = new List<PersonView>();
-
         void MakeBabies()
         {
             // TODO children and multiple spouses [i.e. this code uses all children of person; need only those children from this marriage]
+
+            // Wipe previous family's children. Relying on the first entry being the "add child" placeholder.
             int num = ChildRow.Children.Count;
             ChildRow.Children.RemoveRange(1,num-1);
-
-//            ChildRow.Children.Clear();
             childViews.Clear();
 
-            var childs = Family.Current.Children;
+            // Get children of the current marriage TODO should this be a method on Person?
+            var childs = dad.Human.Children;
             foreach (var person in childs)
             {
-                PersonView aChildView = new PersonView();
+                // "first" parent could be mum or dad
+                if (person.Parents[0] != dad.Human &&
+                    person.Parents[0] != mum.Human)
+                    continue;
+                if (person.Parents.Count > 1 &&
+                    person.Parents[1] != mum.Human &&
+                    person.Parents[1] != dad.Human)
+                    continue;
+
+                var aChildView = new PersonView();
                 aChildView.Human = person;
                 aChildView.Child = true;
 
@@ -174,15 +196,70 @@ namespace KBS.FamilyLines.Controls.FamilyView
         private void AddSon_Click(object sender, RoutedEventArgs e)
         {
             // Fire an 'Add Child' event
-            var e2 = new RoutedEventArgs(Commands.AddChild, FamilyMemberComboBoxValue.Son);
+            var childProps = new Tuple<Person, FamilyMemberComboBoxValue>(dad.Human, FamilyMemberComboBoxValue.Son);
+            var e2 = new RoutedEventArgs(Commands.AddChild, childProps);
             RaiseEvent(e2);
         }
 
         private void AddDau_Click(object sender, RoutedEventArgs e)
         {
             // Fire an 'Add Child' event
-            var e2 = new RoutedEventArgs(Commands.AddChild, FamilyMemberComboBoxValue.Daughter);
+            var childProps = new Tuple<Person, FamilyMemberComboBoxValue>(dad.Human, FamilyMemberComboBoxValue.Daughter);
+            var e2 = new RoutedEventArgs(Commands.AddChild, childProps);
             RaiseEvent(e2);
         }
+
+        private void FamilyViewViewer_AddViewSpouseH(object sender, RoutedEventArgs e)
+        {
+            // User has requested to view a different spouse for one of the 'parents'
+            // TODO This isn't quite 'kosher': the OriginalSource property has been set up with the event properties
+            var spouseProps = e.OriginalSource as Tuple<Person, Person>;
+
+            // Determine which person to change
+            var pView = mum; // assume we're asking to see a different spouse of 'dad'
+            var sView = dad;
+            if (spouseProps.Item1 == mum.Human) // see if the requester is 'mom'
+            {
+                pView = dad;
+                // TODO: should we make this new person the 'current' person?                
+                sView = mum;
+            }
+
+            // TODO very much brute force can this be improved? DRY
+
+            // Update the 'spouse' pointer
+            pView.Human = spouseProps.Item2;
+            foreach (Relationship rel in sView.Human.Relationships)
+            {
+                if (rel.RelationshipType == RelationshipType.Spouse &&
+                    rel.RelationTo == pView.Human)
+                {
+                    spouse = rel as SpouseRelationship;
+                    break;
+                }
+            }
+
+            IsMarried = spouse != null;
+            IsDivorced = spouse != null && spouse.DivorceDate != null;
+
+            MakeBabies();
+            UpdateGParents();
+
+            OnPropertyChanged("IsMarried");
+            OnPropertyChanged("IsDivorced");
+            OnPropertyChanged("MarrDate");
+            OnPropertyChanged("MarrPlace");
+            OnPropertyChanged("DivDate");
+            OnPropertyChanged("DivPlace");
+
+        }
+
+        private void AddSpouse_Click(object sender, RoutedEventArgs e)
+        {
+            // Fire an 'add spouse' event
+            var e2 = new RoutedEventArgs(Commands.AddSpouse, dad.Human);
+            RaiseEvent(e2);
+        }
+
     }
 }
