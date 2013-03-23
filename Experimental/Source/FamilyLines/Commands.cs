@@ -27,6 +27,11 @@ namespace KBS.FamilyLines
         /// </summary>
         public static readonly RoutedEvent EditMarriage;
 
+        /// <summary>
+        /// View a different spouse.
+        /// </summary>
+        public static readonly RoutedEvent ViewSpouse;
+
         static Commands()
         {
             AddChild = EventManager.RegisterRoutedEvent("AddChild", RoutingStrategy.Bubble,
@@ -36,6 +41,8 @@ namespace KBS.FamilyLines
             AddSpouse = EventManager.RegisterRoutedEvent("AddSpouse", RoutingStrategy.Bubble,
                                                          typeof (RoutedEventHandler), typeof (Commands));
             EditMarriage = EventManager.RegisterRoutedEvent("EditMarriage", RoutingStrategy.Bubble,
+                                                        typeof(RoutedEventHandler), typeof(Commands));
+            ViewSpouse = EventManager.RegisterRoutedEvent("ViewSpouse", RoutingStrategy.Bubble,
                                                         typeof(RoutedEventHandler), typeof(Commands));
         }
     }

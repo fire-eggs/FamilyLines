@@ -13,6 +13,12 @@
     <UserControl.Resources>
         <FamilyLines:DateFormattingConverter x:Key="DateConvert"/>
         <FamilyLines:BoolToVisibilityConverter x:Key="VisiConvert"/>
+        <FamilyLines:ComposingConverter x:Key="ComposingConverter">
+            <FamilyLines:ComposingConverter.Converters>
+                <FamilyLines:NotConverter />
+                <FamilyLines:BoolToVisibilityConverter />
+            </FamilyLines:ComposingConverter.Converters>
+        </FamilyLines:ComposingConverter>
     </UserControl.Resources>
     
     <Grid>
@@ -101,6 +107,14 @@
                                   SpouseColumn="2"
                                   Visibility="{Binding Path=IsMarried, Mode=OneWay, Converter={StaticResource VisiConvert}}"
                                   />
+                <Button x:Name="AddSpouse"
+                        Grid.Column="2"
+                        MinWidth="120"
+                        Click="AddSpouse_Click"
+                        Content="{x:Static Properties:Resources.AddNewSpouse}"
+                        Visibility="{Binding Path=IsMarried, Mode=OneWay, Converter={StaticResource ComposingConverter}}"
+                        />
+                        
             </Grid>
         </Border>
 

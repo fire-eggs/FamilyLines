@@ -2129,11 +2129,11 @@ namespace KBS.FamilyLines
 
         #region FamilyView to Details commands
 
-        private void Execute_AddChild(object sender, RoutedEventArgs routedEventArgs)
+        private void Execute_AddChild(object sender, RoutedEventArgs e)
         {
             // TODO This isn't quite 'kosher': the OriginalSource property has been set up with the type of child to add
-            var childType = (FamilyMemberComboBoxValue)routedEventArgs.OriginalSource;
-            DetailsControl.AddChild(childType);
+            var childProps = e.OriginalSource as Tuple<Person, FamilyMemberComboBoxValue>;
+            DetailsControl.AddChild(childProps.Item1, childProps.Item2);
         }
 
         private void Execute_AddParent(object sender, RoutedEventArgs e)
