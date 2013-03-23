@@ -63,7 +63,6 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
             // 1. Create 'Add new spouse' entry
             var cbi = new ComboBoxItem();
-            cbi.Name = "AddNewSpouse";
             cbi.Content = Properties.Resources.AddNewSpouse;
             cbi.Selected += addSpouse_Selected;
             SpouseList.Items.Add(cbi);
@@ -77,7 +76,6 @@ namespace KBS.FamilyLines.Controls.FamilyView
                     if (spouse == null)
                         continue;
                     var cbiS = new ComboBoxItem();
-                    cbiS.Name = spouse.PersonFullName.Replace(' ','_'); // Debug
                     cbiS.Content = spouse.PersonFullName;
                     cbiS.DataContext = spouse; // TODO better place to store this?
                     cbiS.Selected += gotoSpouse_Selected;
