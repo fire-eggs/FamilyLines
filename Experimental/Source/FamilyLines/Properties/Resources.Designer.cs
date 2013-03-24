@@ -1567,6 +1567,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Family View.
+        /// </summary>
+        public static string FamilyViewMenu {
+            get {
+                return ResourceManager.GetString("FamilyViewMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to *.familyx.
         /// </summary>
         public static string FamilyxExtension {

@@ -7,7 +7,8 @@
       xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
       xmlns:local="clr-namespace:KBS.FamilyLines" 
       xmlns:Controls="clr-namespace:KBS.FamilyLines.Controls"
-        xmlns:FamilyView="clr-namespace:KBS.FamilyLines.Controls.FamilyView" mc:Ignorable="d"
+      xmlns:FamilyView="clr-namespace:KBS.FamilyLines.Controls.FamilyView" 
+      mc:Ignorable="d"
       Width="960"
       Height="728"  
       Background="{DynamicResource MainBackgroundBrush}" 
@@ -266,13 +267,6 @@
 
     <DockPanel>
 
-        <!-- Header Area-->
-        <!--<Border Height="35" DockPanel.Dock="Top" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Padding="10,0,10,0" >
-            <DockPanel Height="34" >
-                <TextBlock xml:space="preserve" Opacity="1" FontFamily="Segoe UI" FontSize="20" FontStretch="Normal" FontWeight="Light" TextWrapping="Wrap" Foreground="{DynamicResource HeaderFontColor}" VerticalAlignment="Bottom" Margin="0,0,0,5"><Run Foreground="#FFCFD3DA" Text=" "/><Run Foreground="#FFCFD3DA" Text="Family"/><Run FontWeight="Normal" Text="."/><Run FontWeight="Normal" Text="Show"/></TextBlock>
-            </DockPanel>
-        </Border>-->
-
         <!-- Menu Area -->
         <Border 
             VerticalAlignment="Top" 
@@ -348,6 +342,18 @@
                             />
                 </MenuItem>
 
+                <MenuItem Header="{x:Static properties:Resources.View}"
+                          x:Name="ViewMenu"
+                          Style="{DynamicResource MenuItemStyle}"
+                          >
+                    <MenuItem Header="{x:Static properties:Resources.FamilyViewMenu}" 
+                              Click="FamilyViewClick" 
+                              IsCheckable="True" 
+                              IsChecked="False"
+                              x:Name="FamilyViewMenuItem"
+                              />
+                </MenuItem>
+                
                 <MenuItem 
                     Header="{x:Static properties:Resources.Tools}" 
                     x:Name="MediaMenu" 
@@ -418,7 +424,6 @@
                         />
 
                 <MenuItem Header="Test" Style="{DynamicResource MenuItemStyle}">
-                    <MenuItem Header="Family View Test" Click="FamilyViewClick"/>
                     <MenuItem Header="Print Preview - Full Chart" Click="PrintKBR"/>
                     <MenuItem Header="Print Preview - Current View" Click="PrintKBR2"/>
                     <MenuItem Header="Print Preview - Full Chart (Variant)" Click="PrintKBR3"/>
