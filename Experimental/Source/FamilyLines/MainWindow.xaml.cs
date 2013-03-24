@@ -1013,6 +1013,24 @@ namespace KBS.FamilyLines
 
         #endregion
 
+        #region View Menu
+
+        private bool UsingFamilyView;
+        private void FamilyViewClick(object sender, RoutedEventArgs e)
+        {
+            TheFamilyView.Init();
+
+            DiagramPane.Visibility = !UsingFamilyView ? Visibility.Collapsed : Visibility.Visible;
+            FamilyViewPane.Visibility = !UsingFamilyView ? Visibility.Visible : Visibility.Collapsed;
+            TheFamilyView.Visibility = !UsingFamilyView ? Visibility.Visible : Visibility.Collapsed;
+
+            UsingFamilyView = !UsingFamilyView;
+
+            FamilyViewMenuItem.IsChecked = UsingFamilyView;
+        }
+
+        #endregion
+
         #endregion
 
         #region menu command helper methods
@@ -1689,6 +1707,7 @@ namespace KBS.FamilyLines
                 MediaMenu.IsEnabled =
                 ThemesMenu.IsEnabled =
                 HelpMenu.IsEnabled =
+                ViewMenu.IsEnabled =
                     true;
         }
 
@@ -1705,6 +1724,7 @@ namespace KBS.FamilyLines
                 PrintMenu.IsEnabled =
                 ThemesMenu.IsEnabled =
                 HelpMenu.IsEnabled =
+                ViewMenu.IsEnabled =
                     false;
         }
 
@@ -2081,17 +2101,6 @@ namespace KBS.FamilyLines
             DiagramControl.Diagram.OnFamilyContentChanged(null, new ContentChangedEventArgs(null));
         }
 
-        private bool UsingFamilyView;
-        private void FamilyViewClick(object sender, RoutedEventArgs e)
-        {
-            TheFamilyView.Init();
-
-            DiagramPane.Visibility = !UsingFamilyView ? Visibility.Collapsed : Visibility.Visible;
-            FamilyViewPane.Visibility = !UsingFamilyView ? Visibility.Visible : Visibility.Collapsed;
-            TheFamilyView.Visibility = !UsingFamilyView ? Visibility.Visible : Visibility.Collapsed;
-
-            UsingFamilyView = !UsingFamilyView;
-        }
 
         private void LocationConcordance_Click(object sender, RoutedEventArgs e)
         {

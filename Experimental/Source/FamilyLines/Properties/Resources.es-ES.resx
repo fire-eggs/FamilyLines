@@ -1259,5 +1259,8 @@
       {0} is a person's name
     </comment>
   </data>
+  <data name="FamilyViewMenu">
+    <value xml:space="preserve">Family View</value>
+  </data>
 
 </root>
