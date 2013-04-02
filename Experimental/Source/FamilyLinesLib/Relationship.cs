@@ -138,6 +138,7 @@ namespace KBS.FamilyLinesLib
 
         private DateTime? divorceDate;
         private string divorceDateDescriptor;
+        private string divorcePlace;
 
         private string divorceCitation;
         private string divorceSource;
@@ -215,6 +216,12 @@ namespace KBS.FamilyLinesLib
         {
             get { return divorceDateDescriptor; }
             set { divorceDateDescriptor = value; }
+        }
+
+        public string DivorcePlace
+        {
+            get { return divorcePlace; }
+            set { divorcePlace = value; }
         }
 
         public string DivorceCitation

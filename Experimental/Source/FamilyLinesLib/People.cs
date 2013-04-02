@@ -399,6 +399,7 @@ namespace KBS.FamilyLinesLib
        
                                         spouseRel.DivorceDate = null;
                                         spouseRel.DivorceDateDescriptor = null;
+                                        spouseRel.DivorcePlace = null;
 
                                         spouseRel.DivorceCitation = null;
                                         spouseRel.DivorceSource = null;

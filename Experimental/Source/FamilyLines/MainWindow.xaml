@@ -627,7 +627,7 @@
                     />
 
             <!-- Extract Control -->
-            <local:Extract 
+            <Controls:Extract 
                 x:Name="ExtractControl" 
                 HorizontalAlignment="Center" 
                 Visibility="Hidden" 
@@ -653,7 +653,7 @@
                     />
 
             <!-- Places Control -->
-            <local:Places 
+            <Controls:Places 
                 x:Name="PlacesControl" 
                 Visibility="Hidden" 
                 HorizontalAlignment="Center" 
@@ -679,7 +679,7 @@
                     />
 
             <!-- Repositories Control -->
-            <local:Repositories 
+            <Controls:Repositories 
                 x:Name="RepositoriesControl" 
                 Visibility="Hidden" 
                 VerticalAlignment="Center"  

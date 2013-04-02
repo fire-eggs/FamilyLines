@@ -5,7 +5,7 @@
   xmlns:local="clr-namespace:KBS.FamilyLines"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
   xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
-  mc:Ignorable="d" x:Class="KBS.FamilyLines.Places" Width="Auto" MinWidth="200">
+  mc:Ignorable="d" x:Class="KBS.FamilyLines.Controls.Places" Width="Auto" MinWidth="200">
     <StackPanel>
 
         <!-- Header -->
@@ -26,8 +26,8 @@
                                  Height="16" VerticalAlignment="Top" HorizontalAlignment="Left">
                         <Label Padding="0" Content="{x:Static properties:Resources.PlacesWithTimes}" Foreground="{DynamicResource InputFontColor}" />
                     </RadioButton>
-                    <RadioButton GroupName="Html" Margin="10,0,0,0" x:Name="Option3" Foreground="Black"
-                                 Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="Option3_CheckedChanged" Unchecked="Option3_CheckedChanged">
+                    <RadioButton GroupName="Html" Margin="10,0,0,0" x:Name="Lifetimes" Foreground="Black"
+                                 Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="Lifetimes_CheckedChanged" Unchecked="Lifetimes_CheckedChanged">
                         <Label Padding="0" Content="{x:Static properties:Resources.Lifetimes}" Foreground="{DynamicResource InputFontColor}"/>
                     </RadioButton>
                     <StackPanel>
@@ -49,6 +49,9 @@
                         </CheckBox>
                         <CheckBox Margin="10,5,0,0" IsChecked="True" x:Name="MarriagesCheckBox" Foreground="Black">
                             <Label Padding="0" Foreground="{DynamicResource InputFontColor}" Content="{x:Static properties:Resources.Marriages}"/>
+                        </CheckBox>
+                        <CheckBox Margin="10,5,0,0" IsChecked="True" x:Name="DivorcesCheckBox" Foreground="Black">
+                            <Label Padding="0" Foreground="{DynamicResource InputFontColor}" Content="{x:Static properties:Resources.Divorces}"/>
                         </CheckBox>
                     </StackPanel>
  

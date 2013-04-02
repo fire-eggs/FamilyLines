@@ -144,7 +144,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
             }
         }
 
-        public string DivPlace { get { return ""; } } // TODO use DivorcePlace when added
+        public string DivPlace { get { return spouse == null ? "" : spouse.DivorcePlace; } }
 
         #region Implementation of INotifyPropertyChanged
 

@@ -91,7 +91,7 @@
             <!-- Data provider for binding to the gender types enum values -->
             <ObjectDataProvider x:Key="GenderEnumDS" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
                 <ObjectDataProvider.MethodParameters>
-                    <x:Type TypeName="KBS.FamilyLinesLib:Gender" />
+                    <x:Type TypeName="KBS.FamilyLinesLib:HackGender" />
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
             
@@ -630,7 +630,7 @@
 
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEditRelationship" Storyboard.TargetProperty="(FrameworkElement.Height)">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="555"/>
+                    <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="600"/>
                 </DoubleAnimationUsingKeyFrames>
 
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEditRelationship" Storyboard.TargetProperty="(UIElement.Visibility)">
@@ -679,7 +679,7 @@
             <!-- Animation for collapsing the Details Edit Relationship section -->
             <Storyboard x:Key="CollapseDetailsEditRelationship" Completed="CollapseDetailsEditRelationship_StoryboardCompleted">
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEditRelationship" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="555"/>
+                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="600"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
     
@@ -1809,7 +1809,17 @@
                                 <Label Padding="0" Foreground="{DynamicResource InputFontColor}"/>
                             </RadioButton>
 
-                            <ListBox x:Name="ParentChildListbox" ItemTemplate="{DynamicResource ParentChildModifierDataTemplate}" KeyboardNavigation.DirectionalNavigation="Cycle" BorderBrush="Transparent" Foreground="{DynamicResource InputFontColor}" Background="{x:Null}" Padding="10,10,0,0" SelectionChanged="ParentChildListbox_SelectionChanged" Margin="0,-15,0,0" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}">
+                            <ListBox x:Name="ParentChildListbox" 
+                                     ItemTemplate="{DynamicResource ParentChildModifierDataTemplate}" 
+                                     KeyboardNavigation.DirectionalNavigation="Cycle" 
+                                     BorderBrush="Transparent" 
+                                     Foreground="{DynamicResource InputFontColor}" 
+                                     Background="{x:Null}" 
+                                     Padding="10,10,0,0" 
+                                     SelectionChanged="ParentChildListbox_SelectionChanged" 
+                                     Margin="0,-15,0,0" 
+                                     Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}"
+                                     >
                                 <ListBox.Resources>
                                     <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}" >
                                             <Setter Property="Margin" Value="2, 2, 2, 0" />
@@ -1878,7 +1888,7 @@
                                     </ListBox.ItemsSource>
                                 </ListBox>
                                 
-                                <Grid HorizontalAlignment="Left" Margin="10,0,0,0" Width="237.754">
+                                <Grid HorizontalAlignment="Left" Margin="10,5,0,10" Width="238">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="40*" />
@@ -1889,24 +1899,35 @@
                                         <RowDefinition Height="24"/>
                                         <RowDefinition Height="24"/>
                                         <RowDefinition Height="24"/>
-                                       
+                                        <RowDefinition Height="24"/>
                                     </Grid.RowDefinitions>
 
-
+                                    <!-- Marriage date 'From' -->
                                     <Label MouseEnter="Label_MouseEnter" MouseLeave="Label_MouseLeave" Content="{x:Static properties:Resources.From}" Height="22" Margin="-5,-10,0,0" MouseLeftButtonUp="ChangeMarriageDescriptorForward" MouseRightButtonUp="ChangeMarriageDescriptorBackward" HorizontalAlignment="Left" Target="{Binding ElementName=FromEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
                                     <Label x:Name="FromDescriptor" Grid.Column="1" Height="22" Margin="-5,-10,0,0" Foreground="{DynamicResource InputFontColor}" />
                                     <TextBox Grid.Column="2" TextWrapping="Wrap" x:Name="FromEditTextBox" Width="140" LostFocus="FromEditTextBox_LostFocus" Height="22" Margin="0,0,0,0" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
 
-                                    <Label MouseEnter="Label_MouseEnter" MouseLeave="Label_MouseLeave" x:Name="ToLabel" Grid.Row="1" Content="{x:Static properties:Resources.To}" Margin="-5,-10,0,0" MouseLeftButtonUp="ChangeDivorceDescriptorForward" MouseRightButtonUp="ChangeDivorceDescriptorBackward" Height="22" HorizontalAlignment="Left" Target="{Binding ElementName=ToEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
-                                    <Label x:Name="ToDescriptor" Grid.Row="1" Grid.Column="1" Height="22" Margin="0,-10,0,0" Foreground="{DynamicResource InputFontColor}" />
-                                    <TextBox Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" x:Name="ToEditTextBox" Width="140" LostFocus="ToEditTextBox_LostFocus" Height="22" Margin="0,0,0,0" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
+                                    <!-- Marriage place -->
+                                    <Label Grid.Row="1" Margin="-5,-7,0,0" Content="{x:Static properties:Resources.Place}" Height="25" HorizontalAlignment="Left" Target="{Binding ElementName=ToEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
+                                    <TextBox Grid.Row="1" Grid.Column="1" TextWrapping="NoWrap" x:Name="PlaceEditTextBox" Width="173" LostFocus="PlaceEditTextBox_LostFocus" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" Grid.ColumnSpan="3" Height="22" Margin="2,0,23,0" />
+                                    <Image Margin="4,0,0,0" Grid.Row="1" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="3" Width="16" Height="16" />
+                                    <Image Margin="4,0,0,0" Cursor="Hand" MouseLeftButtonUp="SearchMapMarriagePlace" 
+                                           x:Name="MarriageMapSearch"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="3" Grid.Row="1" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />
 
-                                
+                                    <!-- Divorce date 'To' -->
+                                    <Label MouseEnter="Label_MouseEnter" MouseLeave="Label_MouseLeave" x:Name="ToLabel" Grid.Row="2" Content="{x:Static properties:Resources.To}" Margin="-5,-10,0,0" MouseLeftButtonUp="ChangeDivorceDescriptorForward" MouseRightButtonUp="ChangeDivorceDescriptorBackward" Height="22" HorizontalAlignment="Left" Target="{Binding ElementName=ToEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
+                                    <Label x:Name="ToDescriptor" Grid.Row="2" Grid.Column="1" Height="22" Margin="0,-10,0,0" Foreground="{DynamicResource InputFontColor}" />
+                                    <TextBox Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" x:Name="ToEditTextBox" Width="140" LostFocus="ToEditTextBox_LostFocus" Height="22" Margin="0,0,0,0" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
 
-                                    <Label Grid.Row="2" Margin="-5,-7,0,0" Content="{x:Static properties:Resources.Place}" Height="25" HorizontalAlignment="Left" Target="{Binding ElementName=ToEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
-                                    <TextBox Grid.Row="2" Grid.Column="1" TextWrapping="NoWrap" x:Name="PlaceEditTextBox" Width="173" LostFocus="PlaceEditTextBox_LostFocus" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" Grid.ColumnSpan="3" Height="22" Margin="2,0,23,0" />
-                                    <Image Margin="4,0,0,0" Grid.Row="2" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="3" Width="16" Height="16" />
-                                    <Image Margin="4,0,0,0" Cursor="Hand" MouseLeftButtonUp="SearchMapMarriagePlace" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="3" Grid.Row="2" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />
+                                    <!-- divorce place -->
+                                    <Label Grid.Row="3" Margin="-5,-7,0,0" Content="{x:Static properties:Resources.Place}" Height="25" HorizontalAlignment="Left" Target="{Binding ElementName=ToEditTextBox, Mode=OneWay}" Foreground="{DynamicResource InputFontColor}" />
+                                    <TextBox Grid.Row="3" Grid.Column="1" TextWrapping="NoWrap" x:Name="DivorcePlaceEdit" Width="173" LostFocus="DivorcePlaceEdit_LostFocus" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" Grid.ColumnSpan="3" Height="22" Margin="2,0,23,0" />
+                                    <Image Margin="4,0,0,0" Grid.Row="3" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="3" Width="16" Height="16" />
+                                    <Image Margin="4,0,0,0" Cursor="Hand" MouseLeftButtonUp="SearchMapDivorcePlace" 
+                                           x:Name="DivorceMapSearch"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" Source="..\Images\Search.png" Grid.Column="3" Grid.Row="3" Width="16" Height="16" ToolTip="{x:Static properties:Resources.MapToolTip}" />
+
                                 </Grid>
 
                                 <TextBlock Text="{x:Static properties:Resources.SpousePartnerCitation}" TextWrapping="Wrap" Style="{DynamicResource SectionHeaderStyle}" Width="140" Height="15.96" Margin="5,3,0,0" HorizontalAlignment="Left" Foreground="{DynamicResource InputFontColor}"/>

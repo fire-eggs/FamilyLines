@@ -5,7 +5,7 @@
   xmlns:local="clr-namespace:KBS.FamilyLines"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
   xmlns:properties="clr-namespace:KBS.FamilyLines.Properties"
-  mc:Ignorable="d" x:Class="KBS.FamilyLines.Extract" Width="Auto" MinWidth="260">
+  mc:Ignorable="d" x:Class="KBS.FamilyLines.Controls.Extract" Width="Auto" MinWidth="260">
     <StackPanel>
 
         <!-- Header -->

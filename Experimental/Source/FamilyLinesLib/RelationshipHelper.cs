@@ -403,6 +403,32 @@ namespace KBS.FamilyLinesLib
         }
 
         /// <summary>
+        /// Performs the business logic for updating the divorce place
+        /// </summary>
+        public static void UpdateDivorcePlace(Person person, Person spouse, string divorcePlace)
+        {
+            foreach (Relationship relationship in person.Relationships)
+            {
+                if (relationship.RelationshipType == RelationshipType.Spouse && 
+                    relationship.RelationTo.Equals(spouse))
+                {
+                    ((SpouseRelationship)relationship).DivorcePlace = divorcePlace;
+                    break;
+                }
+            }
+
+            foreach (Relationship relationship in spouse.Relationships)
+            {
+                if (relationship.RelationshipType == RelationshipType.Spouse && 
+                    relationship.RelationTo.Equals(person))
+                {
+                    ((SpouseRelationship)relationship).DivorcePlace = divorcePlace;
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
         /// Performs the business logic for updating the marriage place
         /// </summary>
         public static void UpdateMarriagePlace(Person person, Person spouse, string marriagePlace)
