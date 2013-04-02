@@ -17,10 +17,6 @@
 * Places export supports restrictions and quick filter for living people.
 */
 
-//burials
-
-//cremations
-
 using System.IO;
 using GEDCOM.Net;
 
@@ -31,8 +27,11 @@ namespace KBS.FamilyLinesLib
 
         #region export methods
 
-        public string[] ExportPlaces(PeopleCollection peopleCollection, string fileName, bool hideliving, bool times, bool lifespans, bool places,bool burials, bool deaths, bool cremations, bool births, bool marriages)
+        public string[] ExportPlaces(PeopleCollection peopleCollection, string fileName, bool hideliving, bool times, bool lifespans, bool places, 
+                                     bool burials, bool deaths, bool cremations, bool births, bool marriages, bool divorces)
         {
+            // TODO more efficient to filter the collection for living/private FIRST rather than for each export type
+
             string PlacesFileName = Path.GetFileNameWithoutExtension(fileName);
 
             TextWriter tw = new StreamWriter(fileName);
@@ -127,10 +126,10 @@ namespace KBS.FamilyLinesLib
                 #region places with no time information
 
                 tw.WriteLine("<Folder>\n" +
-                             "<name>" + KBS.FamilyLinesLib.Properties.Resources.People + "</name>\n" +
+                             "<name>" + Properties.Resources.People + "</name>\n" +
                              "<open>0</open>\n" +
                              "<Folder>\n" +
-                             "<name>" + KBS.FamilyLinesLib.Properties.Resources.Births + "</name>\n" +
+                             "<name>" + Properties.Resources.Births + "</name>\n" +
                              "<open>0</open>");
 
                 if (births)
@@ -266,7 +265,7 @@ namespace KBS.FamilyLinesLib
                 {
 
                     tw.WriteLine("<Folder>\n" +
-                                 "<name>" + KBS.FamilyLinesLib.Properties.Resources.Marriages + "</name>\n" +
+                                 "<name>" + Properties.Resources.Marriages + "</name>\n" +
                                  "<open>0</open>");
 
                     foreach (Person p in peopleCollection)
@@ -304,6 +303,52 @@ namespace KBS.FamilyLinesLib
                         }
                     }
                         
+                    tw.WriteLine("</Folder>");
+                }
+
+                // TODO refactor for duplication
+                if (divorces)
+                {
+
+                    tw.WriteLine("<Folder>\n" +
+                                 "<name>" + Properties.Resources.Divorces + "</name>\n" +
+                                 "<open>0</open>");
+
+                    foreach (Person p in peopleCollection)
+                    {
+                        if (!(hideliving && p.IsLiving))
+                        {
+                            if (p.Restriction != Restriction.Private)
+                            {
+                                foreach (Relationship rel in p.Relationships)
+                                {
+
+                                    if (rel.RelationshipType == RelationshipType.Spouse)
+                                    {
+
+                                        SpouseRelationship spouseRel = ((SpouseRelationship)rel);
+
+                                        if (!string.IsNullOrEmpty(spouseRel.DivorcePlace))
+                                        {
+                                            tw.WriteLine("<Placemark>\n" +
+                                                         "<name>" + p.FullName + "</name>\n" +
+                                                         "<address>" + spouseRel.DivorcePlace + "</address>\n" +
+                                                         "<description>" + spouseRel.DivorcePlace + "</description>");
+
+                                            // TODO support more than just m/f
+                                            if (p.Gender == GedcomSex.Male)
+                                                tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
+                                            else
+                                                tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
+
+                                            i++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     tw.WriteLine("</Folder>");
                 }
 
@@ -517,7 +562,58 @@ namespace KBS.FamilyLinesLib
                     }
 
                     tw.WriteLine("</Folder>");
-                }
+                } // end marriages
+
+                if (divorces)
+                {
+                    tw.WriteLine("<Folder>\n" +
+                                 "<name>" + Properties.Resources.Divorces + "</name>\n" +
+                                 "<open>0</open>");
+
+                    foreach (Person p in peopleCollection)
+                    {
+                        if (!(hideliving && p.IsLiving))
+                        {
+                            if (p.Restriction != Restriction.Private)
+                            {
+                                foreach (Relationship rel in p.Relationships)
+                                {
+
+                                    if (rel.RelationshipType == RelationshipType.Spouse)
+                                    {
+
+                                        SpouseRelationship spouseRel = ((SpouseRelationship)rel);
+
+                                        if (!string.IsNullOrEmpty(spouseRel.DivorcePlace))
+                                        {
+                                            string date = string.Empty;
+
+                                            if (spouseRel.DivorceDate != null)
+                                                date = spouseRel.DivorceDate.Value.Year.ToString();
+
+                                            tw.WriteLine("<Placemark>\n" +
+                                                         "<name>" + p.FullName + "</name>\n" +
+                                                         "<address>" + spouseRel.DivorcePlace + "</address>\n" +
+                                                         "<description>" + spouseRel.DivorcePlace + "</description>\n" +
+                                                         "<TimeStamp>\n<when>" + date + "</when>\n</TimeStamp>");
+
+                                            // TODO support more than just m/f
+                                            if (p.Gender == GedcomSex.Male)
+                                                tw.WriteLine("<styleUrl>#msn_man</styleUrl>\n</Placemark>");
+                                            else
+                                                tw.WriteLine("<styleUrl>#msn_woman</styleUrl>\n</Placemark>");
+
+                                            i++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    tw.WriteLine("</Folder>");
+                } // end divorces
+
                 #endregion
             }
             else if (lifespans)

@@ -1,26 +1,13 @@
-using System;
-using System.IO;
 using System.Windows;
 using KBS.FamilyLinesLib;
 
-namespace KBS.FamilyLines
+namespace KBS.FamilyLines.Controls
 {
     /// <summary>
     /// Interaction logic for Places.xaml
     /// </summary>
-    public partial class Places: System.Windows.Controls.UserControl
+    public partial class Places
     {
-
-        #region fields
-
-        People familyCollection = App.FamilyCollection;
-        PeopleCollection family = App.Family;
-        SourceCollection source = App.Sources;
-        RepositoryCollection repository = App.Repositories;
-        public int minYear = DateTime.Now.Year;
-
-        #endregion
-
         public Places()
         {
             InitializeComponent();
@@ -56,24 +43,14 @@ namespace KBS.FamilyLines
             Clear();
         }
 
-        private void Option3_CheckedChanged(object sender, RoutedEventArgs e)
+        private void Lifetimes_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            if (Option3.IsChecked == true)
-            {
-                BirthsCheckBox.IsEnabled = false;
-                DeathsCheckBox.IsEnabled = false;
-                MarriagesCheckBox.IsEnabled = false;
-                CremationsCheckBox.IsEnabled = false;
-                BurialsCheckBox.IsEnabled = false;
-            }
-            else
-            {
-                BirthsCheckBox.IsEnabled = true;
-                DeathsCheckBox.IsEnabled = true;
-                MarriagesCheckBox.IsEnabled = true;
-                CremationsCheckBox.IsEnabled = true;
-                BurialsCheckBox.IsEnabled = true;
-            }
+                BirthsCheckBox.IsEnabled = Lifetimes.IsChecked != true;
+                DeathsCheckBox.IsEnabled = Lifetimes.IsChecked != true;
+                MarriagesCheckBox.IsEnabled = Lifetimes.IsChecked != true;
+                CremationsCheckBox.IsEnabled = Lifetimes.IsChecked != true;
+                BurialsCheckBox.IsEnabled = Lifetimes.IsChecked != true;
+                DivorcesCheckBox.IsEnabled = Lifetimes.IsChecked != true;
         }
 
         #endregion
@@ -91,7 +68,7 @@ namespace KBS.FamilyLines
                     choice = "1";
                 if (Option2.IsChecked == true)
                     choice = "2";
-                if (Option3.IsChecked == true)
+                if (Lifetimes.IsChecked == true)
                     choice = "3";
                 return choice;
             }
@@ -99,53 +76,38 @@ namespace KBS.FamilyLines
 
         private bool Privacy()
         {
-            if (PrivacyPlaces.IsChecked == true)
-                return true;
-            else
-                return false;
+            return PrivacyPlaces.IsChecked == true;
         }
 
         private bool Births()
         {
-            if (BirthsCheckBox.IsChecked == true)
-                return true;
-            else
-                return false;
+            return BirthsCheckBox.IsChecked == true;
         }
 
         private bool Deaths()
         {
-            if (DeathsCheckBox.IsChecked == true)
-                return true;
-            else
-                return false;
+            return DeathsCheckBox.IsChecked == true;
+        }
+
+        private bool Divorces()
+        {
+            return DivorcesCheckBox.IsChecked == true;
         }
 
         private bool Marriages()
         {
-            if (MarriagesCheckBox.IsChecked == true)
-                return true;
-            else
-                return false;
+            return MarriagesCheckBox.IsChecked == true;
         }
 
         private bool Burials()
         {
-            if (BurialsCheckBox.IsChecked == true)
-                return true;
-            else
-                return false;
+            return BurialsCheckBox.IsChecked == true;
         }
 
         private bool Cremations()
         {
-            if (CremationsCheckBox.IsChecked == true)
-                return true;
-            else
-                return false;
+            return CremationsCheckBox.IsChecked == true;
         }
-
-
        
         private void Clear()
         {    
@@ -155,67 +117,66 @@ namespace KBS.FamilyLines
             BirthsCheckBox.IsEnabled = true;
             DeathsCheckBox.IsEnabled = true;
             MarriagesCheckBox.IsEnabled = true;
+            DivorcesCheckBox.IsEnabled = true;
             CremationsCheckBox.IsEnabled = true;
             BurialsCheckBox.IsEnabled = true;
         }
 
         private void Export()
         {
+            if (Options() == "0")
+                return; //only run if cancel not clicked
 
-            if (Options() != "0") //only run if cancel not clicked
+            CommonDialog dialog = new CommonDialog();
+            dialog.InitialDirectory = People.ApplicationFolderPath;
+            dialog.Filter.Add(new FilterEntry(Properties.Resources.kmlFiles, Properties.Resources.kmlExtension));
+            dialog.Title = Properties.Resources.Export;
+            dialog.DefaultExtension = Properties.Resources.DefaultkmlExtension;
+            dialog.ShowSave();
+
+            if (string.IsNullOrEmpty(dialog.FileName))
             {
-                CommonDialog dialog = new CommonDialog();
-                dialog.InitialDirectory = People.ApplicationFolderPath;
-                dialog.Filter.Add(new FilterEntry(Properties.Resources.htmlFiles, Properties.Resources.kmlExtension));
-                dialog.Title = Properties.Resources.Export;
-                dialog.DefaultExtension = Properties.Resources.DefaultkmlExtension;
-                dialog.ShowSave();
+                //return without doing anything if no file name is input
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(dialog.FileName))
+                {
+                    PlacesExport places = new PlacesExport();
 
-                if (string.IsNullOrEmpty(dialog.FileName))
-                {
-                    //return without doing anything if no file name is input
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(dialog.FileName))
+                    string filename = dialog.FileName;
+
+                    string[] summary = null;
+
+                    if (Options() == "1")
+                        summary = places.ExportPlaces(App.Family, filename, Privacy(), false, false, true, Burials(), Deaths(), Cremations(), Births(), Marriages(), Divorces());
+                    if (Options() == "2")
+                        summary = places.ExportPlaces(App.Family, filename, Privacy(), true, false, false, Burials(), Deaths(), Cremations(), Births(), Marriages(), Divorces());
+                    if (Options() == "3")
+                        summary = places.ExportPlaces(App.Family, filename, Privacy(), false, true, false, Burials(), Deaths(), Cremations(), Births(), Marriages(), Divorces());
+
+                    if (summary[1] == "No file")
                     {
-                        PlacesExport places = new PlacesExport();
-
-                        string filename = dialog.FileName;
-
-                        string[] summary = null;
-
-                        if (Options() == "1")
-                           summary = places.ExportPlaces(family,filename,Privacy(),false,false,true,Burials(),Deaths(),Cremations(),Births(),Marriages());
-                        if (Options() == "2")
-                            summary = places.ExportPlaces(family, filename, Privacy(), true, false, false, Burials(), Deaths(), Cremations(), Births(), Marriages());
-                        if (Options() == "3")
-                            summary = places.ExportPlaces(family, filename, Privacy(), false, true, false, Burials(), Deaths(), Cremations(), Births(), Marriages());
-
-
-                        if (summary[1] == "No file")
-                        {
-                            MessageBoxResult result = MessageBox.Show(summary[0],
-                             Properties.Resources.ExportResult, MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        else
-                        {
-                            MessageBoxResult result = MessageBox.Show(summary[0] + "\n\n" + Properties.Resources.PlacesMessage,
-                             Properties.Resources.ExportResult, MessageBoxButton.YesNo, MessageBoxImage.Information);
-
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                try
-                                {
-                                    System.Diagnostics.Process.Start(summary[1]);
-                                }
-                                catch
-                                {
-                                    //no viewer or other error
-                                }
-                            }
-                        } 
+                        MessageBoxResult result = MessageBox.Show(summary[0],
+                                                                  Properties.Resources.ExportResult, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
+                    else
+                    {
+                        MessageBoxResult result = MessageBox.Show(summary[0] + "\n\n" + Properties.Resources.PlacesMessage,
+                                                                  Properties.Resources.ExportResult, MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            try
+                            {
+                                System.Diagnostics.Process.Start(summary[1]);
+                            }
+                            catch
+                            {
+                                //no viewer or other error
+                            }
+                        }
+                    } 
                 }
             }
         }

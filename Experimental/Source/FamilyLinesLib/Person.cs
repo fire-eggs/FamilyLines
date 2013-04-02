@@ -2641,6 +2641,11 @@ namespace KBS.FamilyLinesLib
         None, Locked, Private
     }
 
+    public enum HackGender
+    {
+        Male, Female
+    }
+
     /// <summary>
     /// Enumeration of the person's age group
     /// </summary>

@@ -289,19 +289,18 @@ namespace KBS.FamilyLinesLib
             var hubbyP = HackFind(hubby.XRefID);
             var wifeyP = HackFind(wifey.XRefID);
 
-            // TODO: assuming only one marriage/divorce for a couple, i.e. MARR+DIV+MARR would be possible?
+            // TODO: assuming only one marriage/divorce for a couple, i.e. MARR+DIV+MARR would be possible? How does this appear in GED?
 
             if (fambly.Marriage == null && fambly.Divorce == null)
             {
-                // TODO how would we get here?
-                SpouseRelationship wifeMarriage = new SpouseRelationship(hubbyP, SpouseModifier.Current);
-                SpouseRelationship husbandMarriage = new SpouseRelationship(wifeyP, SpouseModifier.Current);
+                // A FAM record has been specified, but no marriage/divorce data.
+                var wifeMarriage = new SpouseRelationship(hubbyP, SpouseModifier.Current);
+                var husbandMarriage = new SpouseRelationship(wifeyP, SpouseModifier.Current);
 
                 wifeyP.Relationships.Add(wifeMarriage);
                 hubbyP.Relationships.Add(husbandMarriage);
 
-                kbrLog("Weird Add Spouse", hubbyP, wifeyP, SpouseModifier.Current);
-                kbrLog("Weird Add Spouse", wifeyP, hubbyP, SpouseModifier.Current);
+                kbrLog("Simple marriage", hubbyP, wifeyP, "");
                 return;
             }
 
@@ -327,10 +326,10 @@ namespace KBS.FamilyLinesLib
                 status = SpouseModifier.Former;
             }
 
-            // TODO Citation
-            // TODO Citationtext
-            // TODO Link/media
-            // TODO Note
+            // TODO Citation : MARR/SOURCE/PAGE
+            // TODO Citationtext : MARR/SOURCE/DATA/TEXT
+            // TODO Link/media 
+            // TODO Note : MARR/SOURCE/NOTE
 
             // TODO incorporate the event into the SpouseRelationship
 
@@ -349,7 +348,7 @@ namespace KBS.FamilyLinesLib
 
                 marriage.DivorceDate = divDate;
                 marriage.DivorceSource = divSrc;
-                //marriage.DivorcePlace = divPlace;  // TODO no Divorce location!!!
+                marriage.DivorcePlace = divPlace;
                 hubbyP.Relationships.Add(marriage);
                 kbrLog("AddSpouse", hubbyP, wifeyP, status);
             }
@@ -367,7 +366,7 @@ namespace KBS.FamilyLinesLib
 
                 marriage.DivorceDate = divDate;
                 marriage.DivorceSource = divSrc;
-                //marriage.DivorcePlace = divPlace;  // TODO no Divorce location!!!
+                marriage.DivorcePlace = divPlace;
                 wifeyP.Relationships.Add(marriage);
                 kbrLog("AddSpouse", wifeyP, hubbyP, status);
             }

@@ -205,8 +205,13 @@ namespace KBS.FamilyLines
 
                         marriages++;
 
-                        if (!string.IsNullOrEmpty(spouseRel.MarriageCitation) && !string.IsNullOrEmpty(spouseRel.MarriageSource) && (!string.IsNullOrEmpty(spouseRel.MarriagePlace) || spouseRel.MarriageDate > DateTime.MinValue))
+                        if (!string.IsNullOrEmpty(spouseRel.MarriageCitation) &&
+                            !string.IsNullOrEmpty(spouseRel.MarriageSource) &&
+                            (!string.IsNullOrEmpty(spouseRel.MarriagePlace) ||
+                             spouseRel.MarriageDate > DateTime.MinValue))
+                        {
                             relationshipCitations++;
+                        }
 
                         if(!string.IsNullOrEmpty(spouseRel.MarriagePlace))
                             progress++;
@@ -233,8 +238,12 @@ namespace KBS.FamilyLines
                                 }
                             }
 
-                            if (!string.IsNullOrEmpty(spouseRel.DivorceCitation) && !string.IsNullOrEmpty(spouseRel.DivorceSource) && spouseRel.DivorceDate > DateTime.MinValue)
+                            if (!string.IsNullOrEmpty(spouseRel.DivorceCitation) &&
+                                !string.IsNullOrEmpty(spouseRel.DivorceSource) &&
+                                spouseRel.DivorceDate > DateTime.MinValue)
+                            {
                                 relationshipCitations++;
+                            }
                         }
                     }
                 }

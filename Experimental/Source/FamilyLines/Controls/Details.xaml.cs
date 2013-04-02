@@ -876,8 +876,9 @@ namespace KBS.FamilyLines
                         {
                             string d1 = string.Empty;  //date descriptor
                             string d2 = string.Empty;  //divorce date
-                            string d3 = string.Empty;  //divorce citation 
-                            string d4 = string.Empty;  //divorce source
+                            string d3 = ""; // divorce place
+                            string d4 = string.Empty;  //divorce citation 
+                            string d5 = string.Empty;  //divorce source
                             string d6 = string.Empty;  //divorce link
                             string d7 = string.Empty;  //divorce citation note
                             string d8 = string.Empty;  //divorce citation actual text 
@@ -886,10 +887,12 @@ namespace KBS.FamilyLines
                                 d1 = ((SpouseRelationship)rel).DivorceDateDescriptor.ToString();
                             if (!string.IsNullOrEmpty(((SpouseRelationship)rel).DivorceDate.ToString()))
                                 d2 = dateformat(((SpouseRelationship)rel).DivorceDate);
+                            if (!string.IsNullOrEmpty(((SpouseRelationship)rel).DivorcePlace))
+                                d3 = ((SpouseRelationship)rel).DivorcePlace;
                             if (!string.IsNullOrEmpty(((SpouseRelationship)rel).DivorceCitation))
-                                d3 = ((SpouseRelationship)rel).DivorceCitation;
+                                d4 = ((SpouseRelationship)rel).DivorceCitation;
                             if (!string.IsNullOrEmpty(((SpouseRelationship)rel).DivorceSource))
-                                d4 = ((SpouseRelationship)rel).DivorceSource;
+                                d5 = ((SpouseRelationship)rel).DivorceSource;
                             if (!string.IsNullOrEmpty(((SpouseRelationship)rel).DivorceLink))  //ensure only fields with link values are exported
                             {
                                 if (((SpouseRelationship)rel).DivorceLink.StartsWith(Properties.Resources.www) || ((SpouseRelationship)rel).DivorceLink.StartsWith(Properties.Resources.http))
@@ -900,7 +903,7 @@ namespace KBS.FamilyLines
                             if (!string.IsNullOrEmpty(((SpouseRelationship)rel).DivorceCitationActualText))
                                 d8 = ((SpouseRelationship)rel).DivorceCitationActualText;
 
-                            tw.WriteLine("<tr><td>Divorce</td><td>" + rel.RelationTo + " " + d1 + " " + d2 + "</td><td>" + d8 + "</td><td>" + d7 + "</td><td>" + d6 + "</td><td>" + d4 + "</td><td></td></tr>");
+                            tw.WriteLine("<tr><td>Divorce</td><td>" + rel.RelationTo + " " + d1 + " " + d2 + " " + d3 + "</td><td>" + d4 + "</td><td>" + d8 + "</td><td>" + d7 + "</td><td>" + d6 + "</td><td>" + d5 + "</td><td></td></tr>");
 
                         }
                     }
@@ -1494,18 +1497,20 @@ namespace KBS.FamilyLines
                 switch ((SpouseModifier)SpouseStatusListbox.SelectedItem)
                 {
                     case SpouseModifier.Former:
-                        SpouseModifer.Content = KBS.FamilyLines.Properties.Resources.Former;
+                        SpouseModifer.Content = Properties.Resources.Former;
                         break;
                     case SpouseModifier.Current:
-                        SpouseModifer.Content = KBS.FamilyLines.Properties.Resources.Current;
+                        SpouseModifer.Content = Properties.Resources.Current;
                         break;
                 }
 
                 RelationshipHelper.UpdateSpouseStatus(family.Current, (Person)SpousesCombobox.SelectedItem, (SpouseModifier)SpouseStatusListbox.SelectedItem);
 
+                // TODO use databinding??
                 //Some fields are only editable for former spouses.
                 ToEditTextBox.IsEnabled = ((SpouseModifier)SpouseStatusListbox.SelectedItem == SpouseModifier.Former);
                 ToLabel.IsEnabled = ((SpouseModifier)SpouseStatusListbox.SelectedItem == SpouseModifier.Former);
+                DivorcePlaceEdit.IsEnabled = ((SpouseModifier)SpouseStatusListbox.SelectedItem == SpouseModifier.Former);
 
                 UpdateRCitationsComboBox();
             }
@@ -1514,11 +1519,7 @@ namespace KBS.FamilyLines
 
         private void SpousesCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            if (family.Current == null)
-                return;
-
-            if (SpousesCombobox.SelectedItem == null) 
+            if (family.Current == null || SpousesCombobox.SelectedItem == null)
                 return;
 
             RelationshipsCitationsComboBox.SelectedIndex = 0;
@@ -1546,6 +1547,12 @@ namespace KBS.FamilyLines
                         FromDescriptor.Content = spouseRel.MarriageDateDescriptor;
                     if (spouseRel.DivorceDateDescriptor != null)
                         ToDescriptor.Content = spouseRel.DivorceDateDescriptor;
+                    if (spouseRel.DivorcePlace != null)
+                        DivorcePlaceEdit.Text = spouseRel.DivorcePlace;
+
+                    // TODO this is brute-force. use an EventDetails control bound to the Marriage event.
+                    MarriageMapSearch.Visibility = string.IsNullOrEmpty(spouseRel.MarriagePlace) ? Visibility.Hidden : Visibility.Visible;
+                    DivorceMapSearch.Visibility = string.IsNullOrEmpty(spouseRel.DivorcePlace) ? Visibility.Hidden : Visibility.Visible;
 
                     UpdateRCitationsComboBox();
                 }
@@ -1974,15 +1981,28 @@ namespace KBS.FamilyLines
             // Update the spouse marriage info
             if (SpousesCombobox.SelectedItem != null)
             {
-                #region Perform the businless logic for updating the marriage place
-
                 string marriagePlace = PlaceEditTextBox.Text;
                 RelationshipHelper.UpdateMarriagePlace(family.Current, (Person)SpousesCombobox.SelectedItem, marriagePlace);
 
+                MarriageMapSearch.Visibility = string.IsNullOrEmpty(marriagePlace) ? Visibility.Hidden : Visibility.Visible;
+
                 // Let the collection know that it has been updated
                 family.OnContentChanged();
+            }
+        }
 
-                #endregion
+        private void DivorcePlaceEdit_LostFocus(object sender, RoutedEventArgs e)
+        {
+            // Update the spouse divorce info
+            if (SpousesCombobox.SelectedItem != null)
+            {
+                string divorcePlace = DivorcePlaceEdit.Text;
+                RelationshipHelper.UpdateDivorcePlace(family.Current, (Person)SpousesCombobox.SelectedItem, divorcePlace);
+
+                DivorceMapSearch.Visibility = string.IsNullOrEmpty(divorcePlace) ? Visibility.Hidden : Visibility.Visible;
+
+                // Let the collection know that it has been updated
+                family.OnContentChanged();
             }
         }
 
@@ -2036,6 +2056,11 @@ namespace KBS.FamilyLines
         private void SearchMapMarriagePlace(object sender, RoutedEventArgs e)
         {
             SearchMap(PlaceEditTextBox.Text);
+        }
+
+        private void SearchMapDivorcePlace(object sender, MouseButtonEventArgs e)
+        {
+            SearchMap(DivorcePlaceEdit.Text);
         }
 
         #endregion
@@ -2836,6 +2861,7 @@ namespace KBS.FamilyLines
                 sb.Begin();
         }
         #endregion
+
     }
 
     /// <summary>

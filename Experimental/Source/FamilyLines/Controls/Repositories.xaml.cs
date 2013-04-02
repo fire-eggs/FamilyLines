@@ -2,22 +2,13 @@ using System.IO;
 using System.Windows;
 using KBS.FamilyLinesLib;
 
-namespace KBS.FamilyLines
+namespace KBS.FamilyLines.Controls
 {
     /// <summary>
     /// Interaction logic for Repositories.xaml
     /// </summary>
-    public partial class Repositories : System.Windows.Controls.UserControl
+    public partial class Repositories
     {
-
-        #region fields
-
-        People familyCollection = App.FamilyCollection;
-        SourceCollection source = App.Sources;
-        RepositoryCollection repository = App.Repositories;
-
-        #endregion
-
         public Repositories()
         {
             InitializeComponent();
@@ -95,7 +86,7 @@ namespace KBS.FamilyLines
             if (!string.IsNullOrEmpty(dialog.FileName))
             {
                 RepositoriesExport repostories = new RepositoriesExport();
-                repostories.ExportRepositories(dialog.FileName, Path.GetFileName(this.familyCollection.FullyQualifiedFilename), repository);
+                repostories.ExportRepositories(dialog.FileName, Path.GetFileName(App.FamilyCollection.FullyQualifiedFilename), App.Repositories);
             }
 
             if (File.Exists(dialog.FileName))
@@ -125,7 +116,7 @@ namespace KBS.FamilyLines
 
             string oldRepositoryIDs = string.Empty;
 
-            foreach (Repository s in repository)
+            foreach (Repository s in App.Repositories)
             {
                 oldRepositoryIDs += s.Id + "E";
             }
@@ -139,8 +130,8 @@ namespace KBS.FamilyLines
             string repositoryID = "R" + y.ToString();
 
             Repository newRepository = new Repository(repositoryID, "", "");
-            repository.Add(newRepository);
-            repository.OnContentChanged();
+            App.Repositories.Add(newRepository);
+            App.Repositories.OnContentChanged();
         }
 
         private void Save()
@@ -162,24 +153,23 @@ namespace KBS.FamilyLines
 
                 bool deletable = true;
 
-                foreach (Source s in source)
+                foreach (Source s in App.Sources)
                 {
-                    if (deletable == true)
+                    if (deletable)
                     {
                         if (s.SourceRepository == repositoryToRemove.Id)
                             deletable = false;
                     }
-                    else { }
                 }
 
-                if (deletable == true)
+                if (deletable)
                 {
                     MessageBoxResult result = MessageBox.Show(Properties.Resources.ConfirmDeleteRepository, Properties.Resources.Repository, MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        repository.Remove(repositoryToRemove);
-                        repository.OnContentChanged();
+                        App.Repositories.Remove(repositoryToRemove);
+                        App.Repositories.OnContentChanged();
                         Clear();
                     }
 

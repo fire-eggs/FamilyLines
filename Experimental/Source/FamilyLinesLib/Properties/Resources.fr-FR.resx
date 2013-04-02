@@ -390,4 +390,7 @@
   <data name="WasCrematedOn" xml:space="preserve">
     <value>a été incinéré sur</value>
   </data>
+  <data name="IncompatibleFormat" xml:space="preserve">
+    <value>This .familyx file appears to have been created by another program, such as "My Family Tree". FamilyLines is currently unable to load this family.</value>
+  </data>
 </root>

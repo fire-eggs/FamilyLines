@@ -3,21 +3,13 @@ using System.IO;
 using System.Windows;
 using KBS.FamilyLinesLib;
 
-namespace KBS.FamilyLines
+namespace KBS.FamilyLines.Controls
 {
     /// <summary>
     /// Interaction logic for Extract.xaml
     /// </summary>
-    public partial class Extract: System.Windows.Controls.UserControl
+    public partial class Extract
     {
-
-        #region fields
-
-        PeopleCollection family = App.Family;
-        People familyCollection = App.FamilyCollection;
-
-        #endregion
-
         public Extract()
         {
             InitializeComponent();
@@ -59,6 +51,7 @@ namespace KBS.FamilyLines
 
         #region helper methods
 
+        // TODO rename option controls intelligently
         private void Clear()
         {
             Option1.IsChecked = true;
@@ -68,6 +61,8 @@ namespace KBS.FamilyLines
             Option5.IsChecked = true;
         }
 
+        // TODO refactor for DRY - individual vs family completely duplicated
+        // TODO need exception handling - failure to create directory, failure to copy file, etc
         private void ExtractFiles()
         {
             //default options
@@ -80,23 +75,23 @@ namespace KBS.FamilyLines
             string folderName = Properties.Resources.Unknown + " (" + DateTime.Now.Day + "-" + DateTime.Now.Month  + "-" + DateTime.Now.Year + ")";
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\" + App.ApplicationFolderName;
 
-            if(!string.IsNullOrEmpty(this.familyCollection.FullyQualifiedFilename))
+            if (!string.IsNullOrEmpty(App.FamilyCollection.FullyQualifiedFilename))
             {
-            folderName = Path.GetFileNameWithoutExtension(this.familyCollection.FullyQualifiedFilename);
-            folderPath = Path.GetDirectoryName(this.familyCollection.FullyQualifiedFilename);
+                folderName = Path.GetFileNameWithoutExtension(App.FamilyCollection.FullyQualifiedFilename);
+                folderPath = Path.GetDirectoryName(App.FamilyCollection.FullyQualifiedFilename);
             }
 
-            if (currentPersonOnly && family.Current!=null)
-                folderName = folderName + " - " + family.Current.Name;
+            if (currentPersonOnly && App.Family.Current != null)
+                folderName = folderName + " - " + App.Family.Current.Name;
 
             string contentpath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\" + App.ApplicationFolderName + @"\" + App.AppDataFolderName;
-            
-            DirectoryInfo extractedFileLocation;
 
-            if (Directory.Exists(Path.Combine(folderPath, folderName)))
+
+            string folderToExtractTo = Path.Combine(folderPath, folderName);
+            if (Directory.Exists(folderToExtractTo))
             {
                 int i=1;
-                string newPath = Path.Combine(folderPath, folderName);
+                string newPath;
 
                 do
                 {
@@ -104,11 +99,9 @@ namespace KBS.FamilyLines
                     i++;
                 }
                 while (Directory.Exists(newPath));
-
-                extractedFileLocation = Directory.CreateDirectory(newPath);
             }
-            else
-                extractedFileLocation = Directory.CreateDirectory(Path.Combine(folderPath, folderName));
+
+            DirectoryInfo extractedFileLocation = Directory.CreateDirectory(folderToExtractTo);
 
             string[] photosToExtract = null;
             string[] storiesToExtract = null;
@@ -126,14 +119,14 @@ namespace KBS.FamilyLines
 
                 if (extractAttachments && attachmentsToExtract != null)
                 {
-                    Directory.CreateDirectory(Path.Combine(folderPath, folderName + @"\" + Attachment.AttachmentsFolderName));
+                    Directory.CreateDirectory(Path.Combine(folderToExtractTo, Attachment.AttachmentsFolderName));
 
                     foreach (string file in attachmentsToExtract)
                     {
                         try
                         {
                             FileInfo f = new FileInfo(file);
-                            f.CopyTo(Path.Combine(Path.Combine(folderPath, folderName + @"\" + Attachment.AttachmentsFolderName), Path.GetFileName(file)), true);
+                            f.CopyTo(Path.Combine(Path.Combine(folderToExtractTo, Attachment.AttachmentsFolderName), Path.GetFileName(file)), true);
                         }
                         catch { }
                     }
@@ -141,29 +134,35 @@ namespace KBS.FamilyLines
 
                 if (extractPhotos && photosToExtract != null)
                 {
-                    Directory.CreateDirectory(Path.Combine(folderPath, folderName + @"\" + Photo.PhotosFolderName));
+                    string destPath = Path.Combine(folderToExtractTo, Photo.PhotosFolderName);
+                    Directory.CreateDirectory(destPath);
 
                     foreach (string file in photosToExtract)
                     {
                         try
                         {
                             FileInfo f = new FileInfo(file);
-                            f.CopyTo(Path.Combine(Path.Combine(folderPath, folderName + @"\" + Photo.PhotosFolderName), Path.GetFileName(file)), true);
+                            string destFile = Path.Combine(destPath, Path.GetFileName(file));
+                            f.CopyTo(destFile, true);
                         }
-                        catch { }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(string.Format("Photo copy failure:{0}|{1}", file, e.Message));
+                        }
                     }
                 }
 
                 if (extractStories && storiesToExtract != null)
                 {
-                    Directory.CreateDirectory(Path.Combine(folderPath, folderName + @"\" + Story.StoriesFolderName));
+                    string destPath = Path.Combine(folderToExtractTo, Story.StoriesFolderName);
+                    Directory.CreateDirectory(destPath); // TODO no exception handling
 
                     foreach (string file in storiesToExtract)
                     {
                         try
                         {
                             FileInfo f = new FileInfo(file);
-                            f.CopyTo(Path.Combine(Path.Combine(folderPath, folderName + @"\" + Story.StoriesFolderName), Path.GetFileName(file)), true);
+                            f.CopyTo(Path.Combine(Path.Combine(folderToExtractTo, Story.StoriesFolderName), Path.GetFileName(file)), true);
                         }
                         catch { }
                     }
@@ -171,39 +170,39 @@ namespace KBS.FamilyLines
             }
             else
             {
-                if (family.Current != null)
+                if (App.Family.Current != null)
                 {
-                    Directory.CreateDirectory(Path.Combine(folderPath, folderName + @"\" + Attachment.AttachmentsFolderName));
-                    Directory.CreateDirectory(Path.Combine(folderPath, folderName + @"\" + Photo.PhotosFolderName));
-                    Directory.CreateDirectory(Path.Combine(folderPath, folderName + @"\" + Story.StoriesFolderName));
+                    Directory.CreateDirectory(Path.Combine(folderToExtractTo, Attachment.AttachmentsFolderName));
+                    Directory.CreateDirectory(Path.Combine(folderToExtractTo, Photo.PhotosFolderName));
+                    Directory.CreateDirectory(Path.Combine(folderToExtractTo, Story.StoriesFolderName));
 
-                    foreach (Photo p in this.family.Current.Photos)
+                    foreach (Photo p in App.Family.Current.Photos)
                     {
                         string file = p.FullyQualifiedPath;
 
                         try
                         {
                             FileInfo f = new FileInfo(file);
-                            f.CopyTo(Path.Combine(Path.Combine(folderPath, folderName + @"\" + Photo.PhotosFolderName), Path.GetFileName(file)), true);
+                            f.CopyTo(Path.Combine(Path.Combine(folderToExtractTo, @"\" + Photo.PhotosFolderName), Path.GetFileName(file)), true);
                         }
                         catch { }
                     }
 
                     try
                     {
-                        FileInfo f = new FileInfo(this.family.Current.Story.AbsolutePath);
-                        f.CopyTo(Path.Combine(Path.Combine(folderPath, folderName + @"\" + Story.StoriesFolderName), Path.GetFileName(this.family.Current.Story.AbsolutePath)), true);
+                        FileInfo f = new FileInfo(App.Family.Current.Story.AbsolutePath);
+                        f.CopyTo(Path.Combine(Path.Combine(folderToExtractTo, @"\" + Story.StoriesFolderName), Path.GetFileName(App.Family.Current.Story.AbsolutePath)), true);
                     }
                     catch { }
 
-                    foreach (Attachment a in this.family.Current.Attachments)
+                    foreach (Attachment a in App.Family.Current.Attachments)
                     {
                         string file = a.FullyQualifiedPath;
 
                         try
                         {
                             FileInfo f = new FileInfo(file);
-                            f.CopyTo(Path.Combine(Path.Combine(folderPath, folderName + @"\" + Attachment.AttachmentsFolderName), Path.GetFileName(file)), true);
+                            f.CopyTo(Path.Combine(Path.Combine(folderToExtractTo, @"\" + Attachment.AttachmentsFolderName), Path.GetFileName(file)), true);
                         }
                         catch { }
                     }
@@ -220,11 +219,8 @@ namespace KBS.FamilyLines
             }
 
             Clear();
-
         }
 
         #endregion
-
-   
     }
 }
