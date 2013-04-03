@@ -24,8 +24,6 @@ using System.IO;
 
 namespace GEDCOM.Net
 {
-	
-	
 	public class GedcomSubmitterRecord : GedcomRecord
 	{
 		#region Variables
@@ -125,18 +123,17 @@ namespace GEDCOM.Net
 			get 
 			{  
 				GedcomChangeDate realChangeDate = base.ChangeDate;
-				GedcomChangeDate childChangeDate;
-				
-				if (Address != null)
+
+			    if (Address != null)
 				{
-					childChangeDate = Address.ChangeDate;
-					if (childChangeDate != null && realChangeDate != null && childChangeDate > realChangeDate)
+				    GedcomChangeDate childChangeDate = Address.ChangeDate;
+				    if (childChangeDate != null && realChangeDate != null && childChangeDate > realChangeDate)
 					{
 						realChangeDate = childChangeDate;
 					}
 				}
-						
-				// change dates can't have an accurate level specified
+
+			    // change dates can't have an accurate level specified
 				// as they could come from non GedcomRecord based objects
 				// such as GedcomAddress, GedcomAge etc.
 				// Set level here so it will be correct for output

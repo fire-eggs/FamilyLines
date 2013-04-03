@@ -1873,11 +1873,47 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Header.
+        /// </summary>
+        public static string HeaderEditMenu {
+            get {
+                return ResourceManager.GetString("HeaderEditMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit the header settings for export.
+        /// </summary>
+        public static string HeaderEditTTip {
+            get {
+                return ResourceManager.GetString("HeaderEditTTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import.
         /// </summary>
         public static string HeaderImport {
             get {
                 return ResourceManager.GetString("HeaderImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GED Header.
+        /// </summary>
+        public static string HeaderViewMenu {
+            get {
+                return ResourceManager.GetString("HeaderViewMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View the imported header info.
+        /// </summary>
+        public static string HeaderViewTTip {
+            get {
+                return ResourceManager.GetString("HeaderViewTTip", resourceCulture);
             }
         }
         

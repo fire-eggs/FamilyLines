@@ -40,13 +40,7 @@ namespace GEDCOM.Net
 		
 		private bool _test;
 
-		private string _applicationName;
-		private string _applicationVersion;
-		private string _applicationSystemID;
-		private string _corporation;
-		private GedcomAddress _corporationAddress;
-
-		#endregion
+	    #endregion
 		
 		#region Constructors
 		
@@ -90,37 +84,17 @@ namespace GEDCOM.Net
 			set { _test = value; }
 		}
 
-		public string ApplicationName
-		{
-			get { return _applicationName; }
-			set { _applicationName = value; }
-		}
+	    public string ApplicationName { get; set; }
 
-		public string ApplicationVersion
-		{
-			get { return _applicationVersion; }
-			set { _applicationVersion = value; }
-		}
+	    public string ApplicationVersion { get; set; }
 
-		public string ApplicationSystemID
-		{
-			get { return _applicationSystemID; }
-			set { _applicationSystemID = value; }
-		}
+	    public string ApplicationSystemID { get; set; }
 
-		public string Corporation
-		{
-			get { return _corporation; }
-			set { _corporation = value; }
-		}
+	    public string Corporation { get; set; }
 
-		public GedcomAddress CorporationAddress
-		{
-			get { return _corporationAddress; }
-			set { _corporationAddress = value; }
-		}
+	    public GedcomAddress CorporationAddress { get; set; }
 
-		public bool AllowInformationSeparatorOneSave { get; set; }
+	    public bool AllowInformationSeparatorOneSave { get; set; }
 		public bool AllowLineTabsSave { get; set; }
 		public bool AllowTabsSave { get; set; }
 		

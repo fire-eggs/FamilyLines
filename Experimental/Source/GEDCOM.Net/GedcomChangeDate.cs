@@ -24,7 +24,10 @@ namespace GEDCOM.Net
 	public class GedcomChangeDate : GedcomDate
 	{
 		#region Constructors
-				
+
+		// For serialization		
+        public GedcomChangeDate() { }
+
 		public GedcomChangeDate(GedcomDatabase database) : base(database)
 		{
 		}

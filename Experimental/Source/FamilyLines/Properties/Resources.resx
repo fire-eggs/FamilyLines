@@ -1444,4 +1444,17 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   <data name="FamilyViewMenu">
     <value xml:space="preserve">Family View</value>
   </data>
+  <data name="HeaderViewMenu">
+    <value xml:space="preserve">GED Header</value>
+  </data>
+  <data name="HeaderEditMenu">
+    <value xml:space="preserve">Edit Header</value>
+  </data>
+  <data name="HeaderViewTTip">
+    <value xml:space="preserve">View the imported header info</value>
+  </data>
+  <data name="HeaderEditTTip">
+    <value xml:space="preserve">Edit the header settings for export</value>
+  </data>
+
 </root>

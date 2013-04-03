@@ -114,6 +114,9 @@ namespace KBS.FamilyLinesLib
         private string dateSaved = string.Empty;
         private string dateCreated = DateTime.Now.ToString();
 
+        // Preserve/view/edit the GEDCOM header information
+        private GedcomHeader header;
+
         #endregion
 
         #region Properties
@@ -268,6 +271,18 @@ namespace KBS.FamilyLinesLib
             set { fullyQualifiedFilename = value; }
         }
 
+        public GedcomHeader Header
+        {
+            get
+            {
+                return header;
+            }
+            set
+            {
+                header = value;
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -279,6 +294,8 @@ namespace KBS.FamilyLinesLib
 
         public People()
         {
+            header = new GedcomHeader();
+
             peopleCollection = new PeopleCollection();
             sourceCollection = new SourceCollection();
             repositoryCollection = new RepositoryCollection();
@@ -529,9 +546,9 @@ namespace KBS.FamilyLinesLib
         public void SaveDirect(string FQFileName, bool privacy)
         {
 
-            this.fullyQualifiedFilename = FQFileName;
+            fullyQualifiedFilename = FQFileName;
 
-            Person primaryPerson = this.PeopleCollection.Current;
+            Person primaryPerson = PeopleCollection.Current;
             PeopleCollection keep = new PeopleCollection();
             PeopleCollection delete = new PeopleCollection();
 
@@ -547,7 +564,7 @@ namespace KBS.FamilyLinesLib
                 keep.Add(child);
 
             //remove all people who are not in the keep collection
-            foreach (Person q in this.PeopleCollection)
+            foreach (Person q in PeopleCollection)
             {
                 if (!keep.Contains(q))
                     delete.Add(q);
@@ -569,7 +586,7 @@ namespace KBS.FamilyLinesLib
                     }
                 }
                 //Then remove the person, their photos and stories
-                this.PeopleCollection.Remove(q);
+                PeopleCollection.Remove(q);
                 //q.DeletePhotos();
                 q.DeleteStory();
 
