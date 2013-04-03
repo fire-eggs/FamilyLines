@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
+using GEDCOM.Net;
 using KBS.FamilyLines.Controls;
 using KBS.FamilyLines.Controls.FamilyView;
 using KBS.FamilyLinesLib;
@@ -1288,12 +1289,14 @@ namespace KBS.FamilyLines
                     PeopleCollection family2 = new PeopleCollection();
                     SourceCollection source2 = new SourceCollection();
                     RepositoryCollection repository2 = new RepositoryCollection();
+                    GedcomHeader header;
 
-                    loaded = ged.Import(family2, source2, repository2, dialog.FileName, appSettings.EnableUTF8);
+                    loaded = ged.Import(out header, family2, source2, repository2, dialog.FileName, appSettings.EnableUTF8);
 
                     family.CurrentChanged -= People_CurrentChanged;
 
 					// KBR Fixes for missing sources/repositories
+                    familyCollection.Header = header;
                     familyCollection.RepositoryCollection = repository2;
                     familyCollection.SourceCollection = source2;
                     familyCollection.PeopleCollection = family2;
@@ -2166,5 +2169,23 @@ namespace KBS.FamilyLines
             DetailsControl.EditMarriage(p);
         }
         #endregion
+
+        private void HeaderViewMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            App.canExecuteJumpList = false;
+            giveControlFocus();
+            HeaderViewer.ViewHeader(familyCollection.Header, ViewContainer, ViewCallback);
+        }
+
+        private void ViewCallback()
+        {
+            removeControlFocus();
+            App.canExecuteJumpList = true;
+        }
+
+        private void HeaderEditMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

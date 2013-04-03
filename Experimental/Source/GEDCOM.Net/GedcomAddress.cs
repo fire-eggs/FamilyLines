@@ -23,6 +23,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace GEDCOM.Net
 {
@@ -82,6 +83,7 @@ namespace GEDCOM.Net
 		/// <value>
 		/// The database the address is in
 		/// </value>
+		[XmlIgnore]
 		public GedcomDatabase Database
 		{
 			get { return _database; }
@@ -91,7 +93,8 @@ namespace GEDCOM.Net
 		/// <value>
 		/// A complete address as a single line
 		/// </value>
-		public string AddressLine
+        [XmlIgnore]
+        public string AddressLine
 		{
 			get { return _AddressLine; }
 			set 

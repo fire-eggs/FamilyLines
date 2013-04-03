@@ -1,7 +1,5 @@
 /*
- * Imports data from a GEDCOM file to the People collection. The GEDCOM file
- * is first converted to an XML file so it's easier to parse, then individuals
- * are parsed from the file, and then families.  GEDCOM Ids are converted to GUIDs.
+ * Imports data from a GEDCOM file to the People collection. GEDCOM Ids are converted to GUIDs.
  *
  * More information on the GEDCOM format is at http://en.wikipedia.org/wiki/Gedcom
  * and http://homepages.rootsweb.ancestry.com/~pmcbride/gedcom/55gctoc.htm
@@ -33,6 +31,7 @@ namespace KBS.FamilyLinesLib
         private PeopleCollection people;
         private SourceCollection sources;
         private RepositoryCollection repositories;
+        private GedcomHeader header;
 
         // GEDCOM.Net state
         private GedcomRecordReader _reader;
@@ -43,8 +42,10 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Populate the people collection with information from the GEDCOM file.
         /// </summary>
-        public bool Import(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, string gedcomFilePath, bool disableCharacterCheck)
+        public bool Import(out GedcomHeader _header, PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, string gedcomFilePath, bool disableCharacterCheck)
         {
+            _header = null;
+
             // Clear current content.
             peopleCollection.Clear();
             sourceCollection.Clear();
@@ -63,6 +64,8 @@ namespace KBS.FamilyLinesLib
             if (!_reader.ReadGedcom(gedcomFilePath))
                 return false;
             reader_Completed(null, null);
+
+            _header = header;
             return true;
         }
 
@@ -75,6 +78,8 @@ namespace KBS.FamilyLinesLib
         void reader_Completed(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             _database = _reader.Database;
+
+            header = ImportHeader();
 
             foreach (GedcomIndividualRecord t in _database.Individuals)
             {
@@ -410,6 +415,14 @@ namespace KBS.FamilyLinesLib
                  //Invalid line, keep processing the file.
             }
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Bring the GEDCOM header information in
+        /// </summary>
+        private GedcomHeader ImportHeader()
+        {
+            return _database.Header.Copy();
         }
     }
 

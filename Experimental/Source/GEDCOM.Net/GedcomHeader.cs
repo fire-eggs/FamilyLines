@@ -21,6 +21,7 @@
 
 using System;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace GEDCOM.Net
 {
@@ -42,9 +43,7 @@ namespace GEDCOM.Net
 
 		private string _language;
 
-		private string _filename;
-
-		private bool _test;
+	    private bool _test;
 
 		private string _applicationName = string.Empty;
 		private string _applicationVersion = string.Empty;
@@ -69,7 +68,8 @@ namespace GEDCOM.Net
 		
 		#region Properties
 
-		public override GedcomDatabase Database
+        [XmlIgnore]
+        public override GedcomDatabase Database
 		{
 			get { return base.Database; }
 			set
@@ -88,6 +88,7 @@ namespace GEDCOM.Net
 			}
 		}
 		
+        [XmlIgnore]
 		public bool Test
 		{
 			get { return _test; }
@@ -137,6 +138,7 @@ namespace GEDCOM.Net
 			}
 		}
 
+        [XmlIgnore]
 		public string SubmitterXRefID
 		{
 			get { return _submitterXRefID; }
@@ -210,13 +212,9 @@ namespace GEDCOM.Net
 			}
 		}
 
-		public string Filename
-		{
-			get { return _filename; }
-			set { _filename = value; }
-		}
+	    public string Filename { get; set; }
 
-		public string SourceName
+	    public string SourceName
 		{
 			get { return _sourceName; }
 			set
@@ -362,5 +360,9 @@ namespace GEDCOM.Net
 
 		#endregion
 
+	    public GedcomHeader Copy()
+	    {
+	        return (GedcomHeader) MemberwiseClone();
+	    }
 	}
 }

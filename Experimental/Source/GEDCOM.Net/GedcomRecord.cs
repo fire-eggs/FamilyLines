@@ -224,8 +224,9 @@ namespace GEDCOM.Net
 			get { return _ParsingLevel; }
 			set { _ParsingLevel = value; }
 		}
-		
-		public string XRefID
+
+        [XmlIgnore]
+        public string XRefID
 		{
 			get { return _XrefID; }
 			set { _XrefID = value; }
@@ -270,7 +271,7 @@ namespace GEDCOM.Net
 			}
 		}
 		
-        [XmlIgnore]
+        [XmlIgnore] // TODO why?
 		public virtual GedcomChangeDate ChangeDate
 		{
 			get 

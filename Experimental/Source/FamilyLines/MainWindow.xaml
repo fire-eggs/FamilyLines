@@ -352,6 +352,17 @@
                               IsChecked="False"
                               x:Name="FamilyViewMenuItem"
                               />
+                    <Separator />
+                    <MenuItem Header="{x:Static properties:Resources.HeaderViewMenu}"
+                              ToolTip="{x:Static properties:Resources.HeaderViewTTip}"
+                              x:Name="HeaderViewMenuItem"
+                              Click="HeaderViewMenuItem_Click"
+                              />
+                    <MenuItem Header="{x:Static properties:Resources.HeaderEditMenu}"
+                              ToolTip="{x:Static properties:Resources.HeaderEditTTip}"
+                              x:Name="HeaderEditMenuItem"
+                              Click="HeaderEditMenuItem_Click"
+                              />
                 </MenuItem>
                 
                 <MenuItem 
