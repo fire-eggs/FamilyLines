@@ -50,9 +50,7 @@ namespace GEDCOM.Net
 		private string _applicationSystemID = "Gedcom.NET";
 		private string _corporation = string.Empty;
 
-		private GedcomAddress _corporationAddress;
-
-		private string _sourceName = string.Empty;
+	    private string _sourceName = string.Empty;
 		private GedcomDate _sourceDate;
 		private string _sourceCopyright;
 		
@@ -60,6 +58,7 @@ namespace GEDCOM.Net
 		
 		#region Constructors
 		
+        // XML Serialization
 		public GedcomHeader()
 		{
 		}
@@ -119,13 +118,9 @@ namespace GEDCOM.Net
 			set { _corporation = value; }
 		}
 
-		public GedcomAddress CorporationAddress
-		{
-			get { return _corporationAddress; }
-			set { _corporationAddress = value; }
-		}
-		
-		public GedcomNoteRecord ContentDescription
+	    public GedcomAddress CorporationAddress { get; set; }
+
+	    public GedcomNoteRecord ContentDescription
 		{
 			get { return _ContentDescription; }
 			set 

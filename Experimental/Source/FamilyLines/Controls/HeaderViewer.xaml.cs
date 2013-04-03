@@ -54,8 +54,11 @@ namespace KBS.FamilyLines.Controls
             get
             {
                 // TODO which date to show? source, transmission, or change?
-//                return header.ChangeDate.DateString;
-                return header.TransmissionDate.DateString;
+                if (header.ChangeDate != null)
+                    return header.ChangeDate.DateString;
+                if (header.TransmissionDate != null)
+                    return header.TransmissionDate.DateString;
+                return "";
             }
         }
 
