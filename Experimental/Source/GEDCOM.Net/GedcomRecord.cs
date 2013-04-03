@@ -279,11 +279,12 @@ namespace GEDCOM.Net
 				GedcomChangeDate realChangeDate = _ChangeDate;
 				GedcomRecord record;
 				GedcomChangeDate childChangeDate;
-								
-				if (_database == null)
-				{
-					throw new Exception("MISSING DATABASE: " + RecordType.ToString());
-				}
+					
+			    // For XML serialization
+                if (_database == null)
+                {
+                    return null;
+                }
 				
 				if (_Notes != null)
 				{

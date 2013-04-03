@@ -40,6 +40,9 @@ namespace GEDCOM.Net
 		public GedcomSubmitterRecord()
 		{
 			_LanguagePreferences = new string[3];
+            _Address = new GedcomAddress();
+		    _Name = "";
+		    _RegisteredRFN = "";
 		}
 
 		public GedcomSubmitterRecord(GedcomDatabase database) : this()

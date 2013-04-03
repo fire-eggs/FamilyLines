@@ -899,8 +899,6 @@ namespace KBS.FamilyLinesLib
                         return false;
                     }
 
-                    Header = pc.Header.Copy();
-
                     foreach (Person person in pc.PeopleCollection)
                         this.PeopleCollection.Add(person);
 
@@ -909,6 +907,9 @@ namespace KBS.FamilyLinesLib
                         // Need to translate from "Family.Show" version to "Family Lines" version.
                         TranslateToFL2(pc);
                     }
+
+                    // Do this after translation - don't have a header in "Family.Show" files
+                    Header = pc.Header.Copy();
 
                     // To avoid circular references when serializing family data to xml, only the person Id
                     // is seralized to express relationships. When family data is loaded, the correct
@@ -986,6 +987,9 @@ namespace KBS.FamilyLinesLib
         // Family Lines data here.
         private void TranslateToFL2(People pc)
         {
+            pc.Header = MakeDefaultHeader();
+            pc.Header.TransmissionDate.ParseDateString(pc.DateCreated);
+
             foreach (var person in pc.PeopleCollection)
             {
                 // TODO Birth and Death are "special" as they impact other Person properties such as Age. Do we need to do anything special in this case?
@@ -1144,6 +1148,19 @@ namespace KBS.FamilyLinesLib
                 person.ReligionCitationNote = null;
                 person.ReligionCitationActualText = null;
             }
+        }
+
+        private GedcomHeader MakeDefaultHeader()
+        {
+            var defaultHeader = new GedcomHeader();
+            defaultHeader.Submitter = new GedcomSubmitterRecord();
+            defaultHeader.CorporationAddress = new GedcomAddress();
+            defaultHeader.ContentDescription = new GedcomNoteRecord();
+            defaultHeader.TransmissionDate = new GedcomDate();
+            defaultHeader.TransmissionDate.ParseDateString(DateTime.Now.ToString());
+
+            defaultHeader.ApplicationName = "Family.Show";
+            return defaultHeader;
         }
 
         /// <summary>
