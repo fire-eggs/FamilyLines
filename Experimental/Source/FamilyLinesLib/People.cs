@@ -899,6 +899,8 @@ namespace KBS.FamilyLinesLib
                         return false;
                     }
 
+                    Header = pc.Header.Copy();
+
                     foreach (Person person in pc.PeopleCollection)
                         this.PeopleCollection.Add(person);
 

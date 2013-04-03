@@ -1364,8 +1364,11 @@ namespace KBS.FamilyLines
             if (fileLoaded)
             {
                 family.CurrentChanged -= People_CurrentChanged;
+
+                // TODO: copy to App.Resources? App.Sources?
                 familyCollection.PeopleCollection = newFamily.PeopleCollection;
-                family = familyCollection.PeopleCollection;
+                familyCollection.Header = newFamily.Header.Copy();
+                family = familyCollection.PeopleCollection; 
                 App.Family = family;
                 if (family.Count > 1)
                     family.Current = family[1]; // magic to force the details pane to focus properly
