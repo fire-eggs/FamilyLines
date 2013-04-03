@@ -157,19 +157,23 @@ namespace GEDCOM.Net
 			}
 		}
 
+	    private GedcomSubmitterRecord _submitter;
 		public GedcomSubmitterRecord Submitter
 		{
-			get { return Database[SubmitterXRefID] as GedcomSubmitterRecord; }
+			get
+			{
+                // XML Serialization case
+                if (Database == null)
+                    return _submitter;
+			    return Database[SubmitterXRefID] as GedcomSubmitterRecord;
+			}
 			set
 			{
-				if (value == null)
-				{
-					SubmitterXRefID = null;
-				}
-				else
-				{
-					SubmitterXRefID = value.XRefID;
-				}
+			    SubmitterXRefID = value == null ? null : value.XRefID;
+
+                // XML Serialization case
+                if (Database == null)
+                    _submitter = value;
 			}
 		}
 		
