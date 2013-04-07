@@ -271,7 +271,6 @@ namespace GEDCOM.Net
 			}
 		}
 		
-        [XmlIgnore] // TODO why?
 		public virtual GedcomChangeDate ChangeDate
 		{
 			get 

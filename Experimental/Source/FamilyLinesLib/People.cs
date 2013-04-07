@@ -114,8 +114,11 @@ namespace KBS.FamilyLinesLib
         private string dateSaved = string.Empty;
         private string dateCreated = DateTime.Now.ToString();
 
-        // Preserve/view/edit the GEDCOM header information
-        private GedcomHeader header;
+        // Preserve any imported GEDCOM header information
+        private GedcomHeader importedHeader;
+
+        // User-entered header information for export
+        private GedcomHeader exportHeader;
 
         #endregion
 
@@ -271,15 +274,33 @@ namespace KBS.FamilyLinesLib
             set { fullyQualifiedFilename = value; }
         }
 
-        public GedcomHeader Header
+        /// <summary>
+        /// The GEDCOM header data as imported.
+        /// </summary>
+        public GedcomHeader ImportedHeader
         {
             get
             {
-                return header;
+                return importedHeader;
             }
             set
             {
-                header = value;
+                importedHeader = value;
+            }
+        }
+
+        /// <summary>
+        /// The header data for edit/export-to-GEDCOM.
+        /// </summary>
+        public GedcomHeader ExportHeader
+        {
+            get
+            {
+                return exportHeader;
+            }
+            set
+            {
+                exportHeader = value;
             }
         }
 
@@ -294,7 +315,8 @@ namespace KBS.FamilyLinesLib
 
         public People()
         {
-            header = new GedcomHeader();
+            importedHeader = new GedcomHeader();
+            exportHeader = new GedcomHeader();
 
             peopleCollection = new PeopleCollection();
             sourceCollection = new SourceCollection();
@@ -909,7 +931,8 @@ namespace KBS.FamilyLinesLib
                     }
 
                     // Do this after translation - don't have a header in "Family.Show" files
-                    Header = pc.Header.Copy();
+                    ImportedHeader = pc.ImportedHeader.Copy();
+                    ExportHeader = pc.ExportHeader.Copy();
 
                     // To avoid circular references when serializing family data to xml, only the person Id
                     // is seralized to express relationships. When family data is loaded, the correct
@@ -980,15 +1003,16 @@ namespace KBS.FamilyLinesLib
             }
         }
 
-        // The Family.Show format contains only a limited number of GED events/attributes 
+        // The Family.Show format contains only a limited number of GEDCOM events/attributes 
         // and stores event/attribute information as explicit properties of the Person 
         // class. For Family Lines I have extended the format to support an arbitrary 
-        // number of GED events/attributes. The Family.Show data is tranlsated to the
-        // Family Lines data here.
+        // number of GEDCOM events/attributes. Additional GEDCOM data has been added. The 
+        // Family.Show data is translated to the Family Lines data here.
         private void TranslateToFL2(People pc)
         {
-            pc.Header = MakeDefaultHeader();
-            pc.Header.TransmissionDate.ParseDateString(pc.DateCreated);
+            pc.ExportHeader = MakeDefaultHeader("Family Lines"); // TODO more details
+            pc.ImportedHeader = MakeDefaultHeader("Family.Show");
+            pc.ImportedHeader.TransmissionDate.ParseDateString(pc.DateCreated);
 
             foreach (var person in pc.PeopleCollection)
             {
@@ -1150,16 +1174,21 @@ namespace KBS.FamilyLinesLib
             }
         }
 
-        private GedcomHeader MakeDefaultHeader()
+        /// <summary>
+        /// Initialize the GEDCOM header data with blank defaults.
+        /// </summary>
+        /// <param name="appName"></param>
+        /// <returns></returns>
+        public static GedcomHeader MakeDefaultHeader(string appName)
         {
             var defaultHeader = new GedcomHeader();
-            defaultHeader.Submitter = new GedcomSubmitterRecord();
+            defaultHeader.AddSubmitter(new GedcomSubmitterRecord());
             defaultHeader.CorporationAddress = new GedcomAddress();
             defaultHeader.ContentDescription = new GedcomNoteRecord();
             defaultHeader.TransmissionDate = new GedcomDate();
             defaultHeader.TransmissionDate.ParseDateString(DateTime.Now.ToString());
 
-            defaultHeader.ApplicationName = "Family.Show";
+            defaultHeader.ApplicationName = appName;
             return defaultHeader;
         }
 
@@ -2498,7 +2527,7 @@ namespace KBS.FamilyLinesLib
 
         #region INotifyPropertyChanged Members
 
-        protected override event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -2607,7 +2636,7 @@ namespace KBS.FamilyLinesLib
 
         #region INotifyPropertyChanged Members
 
-        protected override event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -2859,7 +2888,7 @@ namespace KBS.FamilyLinesLib
         }
         #region INotifyPropertyChanged Members
 
-        protected override event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

@@ -39,19 +39,20 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     
                     <Label Foreground="{DynamicResource InputFontColor}" 
                            Grid.Column="0"
                            Grid.Row="0"
                            Padding="0"
-                               Margin="5,0,5,0"
+                           Margin="5,0,5,0"
                            Content="Submitter"/>
                     <TextBlock Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="0"
                                Grid.Column="1"
                                Text="{Binding Path=Submitter}"/>
-                    
+
                     <Label Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="1"
                                Grid.Column="0"
@@ -88,7 +89,7 @@
                     <Label Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="4"
                                Grid.Column="0"
-                           Padding="0"
+                               Padding="0"
                                Margin="5,0,5,0"
                            Content="Source"/>
                     <TextBlock Foreground="{DynamicResource InputFontColor}" 
@@ -118,7 +119,15 @@
                                Grid.Column="1"
                                Text="{Binding Path=Company}"/>
 
-            </Grid>
+                    <Label Foreground="{DynamicResource InputFontColor}" 
+                               Grid.Row="7"
+                               Grid.Column="0"
+                           Padding="0"
+                               Margin="5,0,5,0"
+                           Content="{Binding Path=SubmitCount}"/>
+
+
+                </Grid>
                 <Button Content="Close" Click="Button_Click"/>
 
             </StackPanel>

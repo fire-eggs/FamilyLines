@@ -1295,8 +1295,10 @@ namespace KBS.FamilyLines
 
                     family.CurrentChanged -= People_CurrentChanged;
 
-					// KBR Fixes for missing sources/repositories
-                    familyCollection.Header = header;
+                    familyCollection.ImportedHeader = header;
+                    familyCollection.ExportHeader = People.MakeDefaultHeader("Family Lines"); // TODO take from settings; more details
+
+                    // KBR Fixes for missing sources/repositories
                     familyCollection.RepositoryCollection = repository2;
                     familyCollection.SourceCollection = source2;
                     familyCollection.PeopleCollection = family2;
@@ -1366,8 +1368,10 @@ namespace KBS.FamilyLines
                 family.CurrentChanged -= People_CurrentChanged;
 
                 // TODO: copy to App.Resources? App.Sources?
+
                 familyCollection.PeopleCollection = newFamily.PeopleCollection;
-                familyCollection.Header = newFamily.Header.Copy();
+                familyCollection.ImportedHeader = newFamily.ImportedHeader.Copy();
+                familyCollection.ExportHeader = newFamily.ExportHeader.Copy();
                 family = familyCollection.PeopleCollection; 
                 App.Family = family;
                 if (family.Count > 1)
@@ -2177,7 +2181,7 @@ namespace KBS.FamilyLines
         {
             App.canExecuteJumpList = false;
             giveControlFocus();
-            HeaderViewer.ViewHeader(familyCollection.Header, ViewContainer, ViewCallback);
+            HeaderViewer.ViewHeader(familyCollection.ImportedHeader, ViewContainer, ViewCallback);
         }
 
         private void ViewCallback()

@@ -93,7 +93,6 @@ namespace GEDCOM.Net
 		/// <value>
 		/// A complete address as a single line
 		/// </value>
-        [XmlIgnore]
         public string AddressLine
 		{
 			get { return _AddressLine; }
