@@ -270,7 +270,11 @@ namespace GEDCOM.Net
 						if (!string.IsNullOrEmpty(_xrefID))
 						{
 							current = new GedcomSubmitterRecord();
-						}
+                            if (Database.Header != null)
+                            {
+                                Database.Header.AddSubmitter(current as GedcomSubmitterRecord);
+                            }
+                        }
 						break;
 					case "HEAD":
 						
@@ -1086,8 +1090,9 @@ namespace GEDCOM.Net
 					case "DEST":
 						break;
 					case "SUBM":
-						string submXref = AddSubmitterRecord(headerRecord);
-						headerRecord.SubmitterXRefID = submXref;
+//						string submXref = 
+                        AddSubmitterRecord(headerRecord);
+//						headerRecord.SubmitterXRefID = submXref;
 						break;
 					case "SUBN":
 						if (_lineValueType == GedcomLineValueType.PointerType)
@@ -1122,6 +1127,9 @@ namespace GEDCOM.Net
 					case "NOTE":
 					    AddNoteRecord(headerRecord);
 						break;
+                    //default:
+                    //    Console.WriteLine("Unhandled header tag:(" + _level + ")" + _tag);
+                    //    break;
 				}
 			}
 			else if (_level == headerRecord.ParsingLevel + 2)
@@ -1162,7 +1170,11 @@ namespace GEDCOM.Net
 							headerRecord.SourceName = _lineValue;
 						}
 						break;
-				}
+
+                    //default:
+                    //    Console.WriteLine("Unhandled header tag:(" + _level + ")" + _tag);
+                    //    break;
+                }
 			}
 			else if (_level == headerRecord.ParsingLevel + 3)
 			{
@@ -1310,7 +1322,10 @@ namespace GEDCOM.Net
 							}
 						}
 						break;
-				}
+                    //default:
+                    //    Console.WriteLine("Unhandled header tag:(" + _level + ")" + _tag);
+                    //    break;
+                }
 			}
 			else if (_level == headerRecord.ParsingLevel + 4)
 			{
@@ -3352,7 +3367,7 @@ namespace GEDCOM.Net
 					case "NAME":
 						if (_lineValueType == GedcomLineValueType.DataType)
 						{
-							submitterRecord.Name = _lineValue;	
+							submitterRecord.Name = _lineValue;
 						}
 						break;
 					case "ADDR":
@@ -3483,7 +3498,8 @@ namespace GEDCOM.Net
 							{
 								if (string.IsNullOrEmpty(submitterRecord.LanguagePreferences[i]))
 								{
-									submitterRecord.LanguagePreferences[i] = _lineValue;	
+									submitterRecord.LanguagePreferences[i] = _lineValue;
+								    break; // Don't repeat for each preference!
 								}
 							}
 						}
@@ -3548,7 +3564,7 @@ namespace GEDCOM.Net
 							_ParseState.Records.Push(submitter);
 							
 							submissionRecord.Submitter = submitter.XRefID;
-						}
+                        }
 						
 						break;
 					case "FAMF":
@@ -4668,7 +4684,7 @@ namespace GEDCOM.Net
 		}
 
         // TODO why is parameter not used???
-		private string AddSubmitterRecord(GedcomRecord record)
+		private string AddSubmitterRecord(GedcomHeader record)
 		{
 			string xref;
 			
@@ -4676,6 +4692,9 @@ namespace GEDCOM.Net
 			{
 				xref = _lineValue;
 				_missingReferences.Add(xref);
+
+                // TODO there is probably a problem with this... (record may not yet exist?)
+			    record.AddSubmitter(Database[xref] as GedcomSubmitterRecord);
 			}
 			else
 			{
@@ -4686,8 +4705,9 @@ namespace GEDCOM.Net
 				_ParseState.Records.Push(submitter);
 
 				xref = submitter.XRefID;
+
+                record.AddSubmitter(submitter);
 			}
-			
 			return xref;
 		}
 

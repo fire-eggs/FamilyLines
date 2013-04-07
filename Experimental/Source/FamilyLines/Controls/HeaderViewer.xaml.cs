@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using GEDCOM.Net;
 
 namespace KBS.FamilyLines.Controls
 {
     /// <summary>
-    /// Interaction logic for HeaderViewer.xaml
+    /// A control to view (read-only) the contents of the GEDCOM header. The imported header is
+    /// historic data and should not be edited. The user can enter their own data elsewhere for 
+    /// when they export to GEDCOM.
     /// </summary>
     public partial class HeaderViewer
     {
         private Grid owner;
         private ViewerCallback cb;
-        private GedcomHeader header;
+        private readonly GedcomHeader header;
 
         public HeaderViewer(GedcomHeader _header)
         {
@@ -32,8 +25,10 @@ namespace KBS.FamilyLines.Controls
 
         private string makeAddress(GedcomAddress addr)
         {
-            // TODO: consider dumping blank lines
+            // TODO: consider dumping blank lines?
+            // TODO: collapsible portions? (e.g. address, email, phone)
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine(addr.AddressLine);
             sb.AppendLine(addr.AddressLine1);
             sb.AppendLine(addr.AddressLine2);
             sb.AppendLine(addr.AddressLine3);
@@ -43,9 +38,8 @@ namespace KBS.FamilyLines.Controls
             sb.Append(" ");
             sb.AppendLine(addr.PostCode);
             sb.AppendLine(addr.Country);
+            sb.AppendLine(addr.Phone1);
             sb.AppendLine(addr.Email1);
-            sb.AppendLine(addr.Email2);
-            sb.AppendLine(addr.Email3);
             return sb.ToString();
         }
 
@@ -66,10 +60,22 @@ namespace KBS.FamilyLines.Controls
         {
             get
             {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(header.Submitter.Name);
-                sb.Append(makeAddress(header.Submitter.Address));
-                return sb.ToString();
+                if (header.HasSubmitter)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine(header.Submitter.Name);
+                    sb.Append(makeAddress(header.Submitter.Address));
+                    return sb.ToString();
+                }
+                return "";
+            }
+        }
+
+        public string SubmitCount
+        {
+            get
+            {
+                return "" + header.Submitters.Count + " submitters";
             }
         }
 
@@ -107,7 +113,8 @@ namespace KBS.FamilyLines.Controls
             {
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(header.Corporation);
-                sb.Append(makeAddress(header.CorporationAddress));
+                if (header.CorporationAddress != null)
+                    sb.Append(makeAddress(header.CorporationAddress));
                 return sb.ToString();
             }
         }
@@ -136,7 +143,11 @@ namespace KBS.FamilyLines.Controls
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             owner.Children.Remove(this);
-            cb();
+
+            // make the callback to the invoking code. This really, really should not
+            // be null (otherwise the app misbehaves) but we'll check just in case.
+            if (cb != null)
+                cb();
         }
     }
 }

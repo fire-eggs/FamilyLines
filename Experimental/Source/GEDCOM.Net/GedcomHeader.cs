@@ -20,6 +20,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -35,7 +36,7 @@ namespace GEDCOM.Net
 		
 		private GedcomNoteRecord _ContentDescription;
 
-		private string _submitterXRefID;
+//		private string _submitterXRefID;
 
 		private GedcomDate _transmissionDate;
 
@@ -61,6 +62,7 @@ namespace GEDCOM.Net
         // XML Serialization
 		public GedcomHeader()
 		{
+            Submitters = new List<GedcomSubmitterRecord>();
 		}
 		
 		#endregion
@@ -133,45 +135,43 @@ namespace GEDCOM.Net
 			}
 		}
 
-        [XmlIgnore]
-		public string SubmitterXRefID
-		{
-			get { return _submitterXRefID; }
-			set 
-			{				
-				if (_submitterXRefID != value)
-				{
-					if (!string.IsNullOrEmpty(_submitterXRefID))
-					{
-						Submitter.Delete();
-					}
-					
-					_submitterXRefID = value;
-					Changed();
-				}
-			}
-		}
+        //[XmlIgnore]
+        //public string SubmitterXRefID
+        //{
+        //    get { return _submitterXRefID[0]; }
+        //}
 
-	    private GedcomSubmitterRecord _submitter;
-		public GedcomSubmitterRecord Submitter
+        public List<GedcomSubmitterRecord> Submitters { get; set; }
+
+        [XmlIgnore]
+        public GedcomSubmitterRecord Submitter
 		{
 			get
 			{
-                // XML Serialization case
-                if (Database == null)
-                    return _submitter;
-			    return Database[SubmitterXRefID] as GedcomSubmitterRecord;
+			    return Submitters[0];
+                //// XML Serialization case
+                //if (Database == null)
+                //    return Submitters[0];
+                //return Database[SubmitterXRefID] as GedcomSubmitterRecord;
 			}
-			set
-			{
-			    SubmitterXRefID = value == null ? null : value.XRefID;
+            //set
+            //{
+            //    // XML Serialization case
+            //    if (Database == null)
+            //        _submitter = value;
+            //    SubmitterXRefID = value == null ? null : value.XRefID;
 
-                // XML Serialization case
-                if (Database == null)
-                    _submitter = value;
-			}
+            //}
 		}
 		
+	    public bool HasSubmitter
+	    {
+	        get
+	        {
+	            return Submitters.Count > 0 && Submitters[0] != null;
+	        }
+	    }
+
 		public GedcomDate TransmissionDate
 		{
 			get { return _transmissionDate; }
@@ -326,13 +326,14 @@ namespace GEDCOM.Net
 			sw.Write(Environment.NewLine);
 			sw.Write("1 DATE {0:dd MMM yyyy}", date);
 			
-			bool hasSubmitter = (!string.IsNullOrEmpty(_submitterXRefID));
+//			bool hasSubmitter = (!string.IsNullOrEmpty(Submitters[0]));
 			
-			if (hasSubmitter)
+            // TODO multiple submitter records
+			if (HasSubmitter)
 			{
 				sw.Write(Environment.NewLine);
 				sw.Write("1 SUBM ");
-				sw.Write(_submitterXRefID);
+				sw.Write(Submitter.XRefID);
 			}
 
 			if (ContentDescription != null)
@@ -362,6 +363,16 @@ namespace GEDCOM.Net
 	    public GedcomHeader Copy()
 	    {
 	        return (GedcomHeader) MemberwiseClone();
+	    }
+
+        // Multiple submitter records are supported in a GEDCOM file. I'm storing them all
+        // in the header for historical reasons. The original GEDCOM.Net recorded only the
+        // submitter as referenced by the GEDCOM header.
+        public void AddSubmitter(GedcomSubmitterRecord current)
+	    {
+            if (current != null) // True for the header record which has a forward reference to the submitter record
+                Submitters.Add(current);
+            Changed();
 	    }
 	}
 }
