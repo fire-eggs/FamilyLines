@@ -112,38 +112,38 @@
                     <TextBlock HorizontalAlignment="Left" Grid.Row="0" Padding="5,0,0,2" Grid.Column="1" Text="{x:Static properties:Resources.SummaryOfNames}" Foreground="{DynamicResource FontColor}" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                     <TextBlock HorizontalAlignment="Left" Grid.Row="0" Padding="5,0,0,2" Grid.Column="2" Text="{x:Static properties:Resources.SummaryOfMedia}" Foreground="{DynamicResource FontColor}" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
 
-                        <TextBlock Margin="0,0,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="MinYear" Text="Earliest known event:"/>
-                        <TextBlock Margin="0,18,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="MaxYear" Text="Latest known event:"/>
-                        <TextBlock Margin="0,36,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="Marriages" Text="Marriages:"/>
-                        <TextBlock Margin="0,54,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="Divorces" Text="Divorces:"/>
-                        <TextBlock Margin="0,72,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="TotalFactsEvents" Text="Facts/Events:"/>
-                        <TextBlock Margin="0,90,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="Relationships" Text="Relationships:"/>
-                    
-                        <TextBlock Margin="5,0,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}"  Grid.Column="1" x:Name="FemaleNames" Text="Top girls names:" ToolTip="{x:Static properties:Resources.Tiebreak}"/>
-                        <TextBlock Margin="5,36,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" Grid.Column="1" x:Name="MaleNames" Text="Top boys names:" ToolTip="{x:Static properties:Resources.Tiebreak}"/>
-                        <TextBlock Margin="5,72,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" Grid.Column="1" x:Name="Surnames" Text="Top surnames:" ToolTip="{x:Static properties:Resources.Tiebreak}"/>
+                        <TextBlock Margin="0,0,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="MinYear" Text="{x:Static properties:Resources.EarliestKnownEvent}"/>
+                        <TextBlock Margin="0,18,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="MaxYear" Text="{x:Static properties:Resources.LatestKnownEvent}"/>
+                        <TextBlock Margin="0,36,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="Marriages" Text="{x:Static properties:Resources.Marriages}"/>
+                        <TextBlock Margin="0,54,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="Divorces" Text="{x:Static properties:Resources.Divorces}"/>
+                        <TextBlock Margin="0,72,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="TotalFactsEvents" Text="{x:Static properties:Resources.FactsEvents}"/>
+                        <TextBlock Margin="0,90,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" x:Name="Relationships" Text="{x:Static properties:Resources.Relationships}"/>
+
+                        <TextBlock Margin="5,0,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}"  Grid.Column="1" x:Name="FemaleNames" Text="{x:Static properties:Resources.TopGirlsNames}" ToolTip="{x:Static properties:Resources.Tiebreak}"/>
+                        <TextBlock Margin="5,36,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" Grid.Column="1" x:Name="MaleNames" Text="{x:Static properties:Resources.TopBoysNames}" ToolTip="{x:Static properties:Resources.Tiebreak}"/>
+                        <TextBlock Margin="5,72,0,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" Grid.Column="1" x:Name="Surnames" Text="{x:Static properties:Resources.TopSurnames}" ToolTip="{x:Static properties:Resources.Tiebreak}"/>
                     
                     <Border Grid.Column="2" Grid.Row="1" Padding="5,0,0,0">
                        
                     <Grid>
 
                             <Image Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="..\Images\Photo.png" Width="16" Height="16" />
-                            <TextBlock Margin="20,0,0,0" Foreground="{DynamicResource FontColor}" x:Name="Photos" Text="Photos:"/>
+                                <TextBlock Margin="20,0,0,0" Foreground="{DynamicResource FontColor}" x:Name="Photos" Text="{x:Static properties:Resources.Photos}"/>
                             
                             <Image Margin="0,18,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="..\Images\Note.png" Width="16" Height="16" />
-                            <TextBlock Margin="20,18,0,0" Foreground="{DynamicResource FontColor}" x:Name="Notes" Text="Notes:"/>
+                                <TextBlock Margin="20,18,0,0" Foreground="{DynamicResource FontColor}" x:Name="Notes" Text="{x:Static properties:Resources.Notes}"/>
                             
-                            <Image Margin="0,36,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="..\Images\paperclip.png" Width="16" Height="16" />           
-                            <TextBlock Margin="20,36,0,0" Foreground="{DynamicResource FontColor}" x:Name="Attachments" Text="Attachments:"/>
+                            <Image Margin="0,36,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="..\Images\paperclip.png" Width="16" Height="16" />
+                                <TextBlock Margin="20,36,0,0" Foreground="{DynamicResource FontColor}" x:Name="Attachments" Text="{x:Static properties:Resources.Attachments}"/>
                             
-                            <Image Margin="0,54,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="..\Images\Citation.png" Width="16" Height="16" />           
-                            <TextBlock Margin="20,54,0,0" Foreground="{DynamicResource FontColor}" x:Name="Citations" Text="Citations:"/>
+                            <Image Margin="0,54,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="..\Images\Citation.png" Width="16" Height="16" />
+                                <TextBlock Margin="20,54,0,0" Foreground="{DynamicResource FontColor}" x:Name="Citations" Text="{x:Static properties:Resources.Citations}"/>
                             
-                            <Image Margin="0,72,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="..\Images\Source.png" Width="16" Height="16" />           
-                            <TextBlock Margin="20,72,0,0" Foreground="{DynamicResource FontColor}" x:Name="Sources" Text="Sources:"/>
+                            <Image Margin="0,72,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="..\Images\Source.png" Width="16" Height="16" />
+                                <TextBlock Margin="20,72,0,0" Foreground="{DynamicResource FontColor}" x:Name="Sources" Text="{x:Static properties:Resources.Sources}"/>
                             
-                            <Image Margin="0,90,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="..\Images\Repository.png" Width="16" Height="16" />           
-                            <TextBlock Margin="20,90,0,0" Foreground="{DynamicResource FontColor}" x:Name="Repositories" Text="Repositories:"/>
+                            <Image Margin="0,90,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="..\Images\Repository.png" Width="16" Height="16" />
+                                <TextBlock Margin="20,90,0,0" Foreground="{DynamicResource FontColor}" x:Name="Repositories" Text="{x:Static properties:Resources.Repositories}"/>
                          
                     </Grid>   
                     </Border>
@@ -167,8 +167,6 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        
-                        
                         <TextBlock HorizontalAlignment="Left" Grid.ColumnSpan="2"  Padding="5,0,0,2" Grid.Column="0" Text="{x:Static properties:Resources.SummaryOfData}" Foreground="{DynamicResource FontColor}" FontWeight="Bold"/>
    
                         <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5,0,5,0" Grid.Row="1" Foreground="{DynamicResource FontColor}" Text="{x:Static properties:Resources.DataQualityColon}"/>
@@ -183,7 +181,7 @@
                         <ProgressBar x:Name="FileProgressBar" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="2" Height="15" Width="100" Margin="0,0,10,0" />
                         <TextBlock x:Name="FileProgressText" VerticalAlignment="Center"  Grid.Row="2" Margin="0,0,0,0" Foreground="{DynamicResource FontColor}" Text="%"/>
                         </StackPanel>
-                        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Height="20" x:Name="DataSize" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="{DynamicResource FontColor}" Text="Data Size:"/>                    
+                        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Height="20" x:Name="DataSize" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="{DynamicResource FontColor}" Text="{x:Static properties:Resources.DataSize}"/>                    
                     </Grid>
                 </Border>
             </Grid>
