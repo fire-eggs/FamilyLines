@@ -1445,16 +1445,18 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
     <value xml:space="preserve">Family View</value>
   </data>
   <data name="HeaderViewMenu">
-    <value xml:space="preserve">GED Header</value>
+    <value xml:space="preserve">GEDCOM Header</value>
   </data>
   <data name="HeaderEditMenu">
-    <value xml:space="preserve">Edit Header</value>
+    <value xml:space="preserve">Edit GEDCOM Header</value>
   </data>
   <data name="HeaderViewTTip">
-    <value xml:space="preserve">View the imported header info</value>
+    <value xml:space="preserve">View the imported GEDCOM header info</value>
   </data>
   <data name="HeaderEditTTip">
-    <value xml:space="preserve">Edit the header settings for export</value>
+    <value xml:space="preserve">Edit the GEDCOM header settings for export</value>
   </data>
-
+  <data name="Divorces" xml:space="preserve">
+    <value>Divorces</value>
+  </data>
 </root>

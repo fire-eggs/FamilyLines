@@ -103,6 +103,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\HeaderEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\HeaderViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,6 +175,9 @@
     </Compile>
     <Compile Include="Controls\FamilyView\PersonView.xaml.cs">
       <DependentUpon>PersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HeaderEditor.xaml.cs">
+      <DependentUpon>HeaderEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\HeaderViewer.xaml.cs">
       <DependentUpon>HeaderViewer.xaml</DependentUpon>
