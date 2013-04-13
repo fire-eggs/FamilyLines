@@ -1873,7 +1873,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Header.
+        ///   Looks up a localized string similar to Edit GEDCOM Header.
         /// </summary>
         public static string HeaderEditMenu {
             get {
@@ -1882,7 +1882,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit the header settings for export.
+        ///   Looks up a localized string similar to Edit the GEDCOM header settings for export.
         /// </summary>
         public static string HeaderEditTTip {
             get {
@@ -1900,7 +1900,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GED Header.
+        ///   Looks up a localized string similar to GEDCOM Header.
         /// </summary>
         public static string HeaderViewMenu {
             get {
@@ -1909,7 +1909,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View the imported header info.
+        ///   Looks up a localized string similar to View the imported GEDCOM header info.
         /// </summary>
         public static string HeaderViewTTip {
             get {

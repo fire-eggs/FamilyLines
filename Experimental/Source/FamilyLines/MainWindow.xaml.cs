@@ -2192,7 +2192,9 @@ namespace KBS.FamilyLines
 
         private void HeaderEditMenuItem_Click(object sender, RoutedEventArgs e)
         {
-
+            App.canExecuteJumpList = false;
+            giveControlFocus();
+            HeaderEditor.EditHeader(familyCollection.ExportHeader, ViewContainer, ViewCallback);
         }
     }
 }
