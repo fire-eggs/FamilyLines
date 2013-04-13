@@ -433,7 +433,7 @@ namespace KBS.FamilyLinesLib
 
                 }
 
-                if (deaths)
+                if (burials)
                 {
 
                     tw.WriteLine("<Folder>\n" +
