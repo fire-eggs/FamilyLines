@@ -248,7 +248,26 @@ namespace KBS.FamilyLines
         {
             GedcomLocalizationControl.Visibility = Visibility.Hidden;
             removeControlFocus();
-            ShowWelcomeScreen();
+            //ShowWelcomeScreen();
+            CollapseDetailsPanels();
+            ShowDetailsPane();
+            family.OnContentChanged();
+            TheFamilyView.Init(); // TODO this is brute force (Family disconnect?)
+
+            // The collection requires a primary-person, use the first
+            // person added to the collection as the primary-person.
+            if (family.Count > 0)
+                family.Current = family[0];
+
+            TaskBar.Current.Restore();
+            UpdateStatus();
+            App.canExecuteJumpList = true;
+
+            if ( family.Count == 0)
+            {
+                ShowWelcomeScreen();
+                UpdateStatus();
+            }
         }
 
         private void SourcesControl_CancelButtonClick(object sender, RoutedEventArgs e)
