@@ -2332,8 +2332,9 @@ namespace KBS.FamilyLines
         /// </summary>
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(Properties.Resources.ConfirmDeletePerson,
-                Properties.Resources.Person, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            string msg = string.Format(Properties.Resources.ConfirmDeletePerson, family.Current.FirstName, family.Current.LastName);
+            MessageBoxResult result = MessageBox.Show(msg, Properties.Resources.Person, 
+                MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result != MessageBoxResult.Yes) 
                 return;
@@ -2633,6 +2634,7 @@ namespace KBS.FamilyLines
             SuffixInputTextBox.Clear();
             BirthDateInputTextBox.Clear();
             BirthPlaceInputTextBox.Clear();
+            IsLivingInputCheckbox.IsChecked = true;
         }
 
         public void SetDefaultFocus()
