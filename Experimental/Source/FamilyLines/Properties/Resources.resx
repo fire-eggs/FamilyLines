@@ -187,7 +187,7 @@
     <value>Do you want to save changes to the current family?</value>
   </data>
   <data name="ConfirmDeletePerson" xml:space="preserve">
-    <value>Do you want to delete this person?</value>
+    <value>Are you sure you want to delete {0} {1}?</value>
   </data>
   <data name="Open" xml:space="preserve">
     <value>Open</value>
@@ -1432,31 +1432,28 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   <data name="ClickMarriageDetail" xml:space="preserve">
     <value>Click to Edit Marriage Details</value>
   </data>
-  <data name="AddNewSpouse">
-    <value xml:space="preserve">Add a new spouse</value>
+  <data name="AddNewSpouse" xml:space="preserve">
+    <value>Add a new spouse</value>
   </data>
-  <data name="ClickToMakeCurrent">
-    <value xml:space="preserve">Click to make {0} the current person</value>
+  <data name="ClickToMakeCurrent" xml:space="preserve">
+    <value>Click to make {0} the current person</value>
     <comment>
       {0} is a person's name
     </comment>
   </data>
-  <data name="FamilyViewMenu">
-    <value xml:space="preserve">Family View</value>
+  <data name="FamilyViewMenu" xml:space="preserve">
+    <value>Family View</value>
   </data>
-  <data name="HeaderViewMenu">
-    <value xml:space="preserve">GEDCOM Header</value>
+  <data name="HeaderViewMenu" xml:space="preserve">
+    <value>GEDCOM Header</value>
   </data>
-  <data name="HeaderEditMenu">
-    <value xml:space="preserve">Edit GEDCOM Header</value>
+  <data name="HeaderEditMenu" xml:space="preserve">
+    <value>Edit GEDCOM Header</value>
   </data>
-  <data name="HeaderViewTTip">
-    <value xml:space="preserve">View the imported GEDCOM header info</value>
+  <data name="HeaderViewTTip" xml:space="preserve">
+    <value>View the imported GEDCOM header info</value>
   </data>
-  <data name="HeaderEditTTip">
-    <value xml:space="preserve">Edit the GEDCOM header settings for export</value>
-  </data>
-  <data name="Divorces" xml:space="preserve">
-    <value>Divorces</value>
+  <data name="HeaderEditTTip" xml:space="preserve">
+    <value>Edit the GEDCOM header settings for export</value>
   </data>
 </root>
