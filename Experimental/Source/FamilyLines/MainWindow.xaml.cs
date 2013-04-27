@@ -53,6 +53,7 @@ namespace KBS.FamilyLines
             AddParentH += Execute_AddParent;
             AddSpouseH += Execute_AddSpouse;
             EditMarrH += Execute_EditMarriage;
+            EditAllDetailsH += Execute_EditAllDetails;
         }        
 
         #region event handlers
@@ -381,6 +382,18 @@ namespace KBS.FamilyLines
             remove
             {
                 RemoveHandler(Commands.EditMarriage, value);
+            }
+        }
+
+        public event RoutedEventHandler EditAllDetailsH
+        {
+            add
+            {
+                AddHandler(Commands.EditAllFactDetails, value);
+            }
+            remove
+            {
+                RemoveHandler(Commands.EditAllFactDetails, value);
             }
         }
         #endregion
@@ -2214,6 +2227,24 @@ namespace KBS.FamilyLines
             App.canExecuteJumpList = false;
             giveControlFocus();
             HeaderEditor.EditHeader(familyCollection.ExportHeader, ViewContainer, ViewCallback);
+        }
+
+        private void Execute_EditAllDetails(object sender, RoutedEventArgs e)
+        {
+            var factProps = e.OriginalSource as Tuple<Person, GEDAttribute>;
+            if (factProps == null)
+                return;
+
+            giveControlFocus();
+            EditFactDetails.Target = factProps.Item1;
+            EditFactDetails.Event = factProps.Item2;
+            EditFactDetails.Visibility = Visibility.Visible;
+        }
+
+        private void EditFactDetails_Finish(object sender, RoutedEventArgs e)
+        {
+            EditFactDetails.Visibility = Visibility.Hidden;
+            removeControlFocus();
         }
     }
 }

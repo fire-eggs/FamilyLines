@@ -20,6 +20,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -687,5 +688,28 @@ namespace GEDCOM.Net
 		}
 		
 		#endregion
+
+        /// <summary>
+        /// The Notes property is a list of GUIDs in the database. This property provides
+        /// access to a list of Note strings.
+        /// </summary>
+	    public List<string> NoteStrings
+	    {
+	        get
+	        {
+	            var res = new List<string>();
+	            if (_Notes != null)
+	            {
+	                foreach (string noteID in _Notes)
+	                {
+	                    var note = _database[noteID] as GedcomNoteRecord;
+                        if (note != null)
+                            res.Add(note.Text);
+	                }
+	            }
+	            return res;
+	        }
+	    }
+
 	}
 }

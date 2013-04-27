@@ -9,6 +9,7 @@
  * 4. The EventDetails.xaml GUI relies on this model.
  */
 using System;
+using System.Xml.Serialization;
 using GEDCOM.Net;
 
 namespace KBS.FamilyLinesLib
@@ -29,6 +30,17 @@ namespace KBS.FamilyLinesLib
             Place = individualEvent.Place == null ? null : individualEvent.Place.Name;
 
             // TODO remainder of properties
+
+            // TODO note list is GUIDs->database
+            // TODO multiple notes
+            if (individualEvent.NoteStrings.Count > 0)
+                Note = individualEvent.NoteStrings[0];
+
+            Age = individualEvent.Age;
+            ResponsibleAgency = individualEvent.ResponsibleAgency;
+            ReligiousAffiliation = individualEvent.ReligiousAffiliation;
+            Cause = individualEvent.Cause;
+            Address = individualEvent.Address;
         }
 
         public GedcomEvent.GedcomEventType Type { get; set; }
@@ -41,15 +53,19 @@ namespace KBS.FamilyLinesLib
         public string CitationNote { get; set; }
         public string CitationActualText { get; set; }
 
+        // TODO need the Note -> Description
+        public string Note { get; set; }
+
+        public GedcomAge Age { get; set; }
+        public string ResponsibleAgency { get; set; }
+        public string ReligiousAffiliation { get; set; }
+        public string Cause { get; set; }
+        public GedcomAddress Address { get; set; }
+
         // TODO additional GEDCOM event details/properties
-        // Age
         // Famc
         // ChangeDate
         // Certainty
-        // Cause
-        // ReligiousAffiliation
-        // ResponsibleAgency
-        // Address
         // Sources
         // Notes
         // Multimedia

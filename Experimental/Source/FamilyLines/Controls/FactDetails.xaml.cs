@@ -14,8 +14,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
 
+using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using GEDCOM.Net;
 using KBS.FamilyLinesLib;
 
@@ -131,5 +134,15 @@ namespace KBS.FamilyLines.Controls
         }
 
         #endregion
+
+        private void Click_EditAllDetails(object sender, MouseButtonEventArgs e)
+        {
+            insureFact();
+
+            // fire to the main window. pass the person, which 'fact'
+            var childProps = new Tuple<Person, GEDAttribute>(Individual, Event);
+            var e2 = new RoutedEventArgs(Commands.EditAllFactDetails, childProps);
+            RaiseEvent(e2);
+        }
     }
 }

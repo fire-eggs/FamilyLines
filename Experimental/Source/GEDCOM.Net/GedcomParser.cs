@@ -421,13 +421,7 @@ namespace GEDCOM.Net
 		
 		private static bool IsAlphaNum(char c)
 		{
-			bool ret = IsAlpha(c);
-			if (!ret)
-			{
-				ret = IsDigit(c);	
-			}
-			
-			return ret;
+			return IsAlpha(c) || IsDigit(c);
 		}
 		
 		private bool IsOtherChar(char c)
@@ -458,10 +452,9 @@ namespace GEDCOM.Net
 		
 		private bool IsAnyChar(string data, int i)
 		{
-			bool ret = false;
-			char c = data[i];
+		    char c = data[i];
 			
-			ret = IsAlpha(c);
+			bool ret = IsAlpha(c);
 			if (!ret)
 			{
 				ret = IsDigit(c);	

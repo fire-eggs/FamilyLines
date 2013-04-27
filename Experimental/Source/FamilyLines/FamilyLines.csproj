@@ -91,6 +91,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\FactEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\FamilyView\FamilyViewViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +170,9 @@
     </Compile>
     <Compile Include="Controls\FactDetails.xaml.cs">
       <DependentUpon>FactDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FactEditor.xaml.cs">
+      <DependentUpon>FactEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\FamilyView\FamilyViewViewer.xaml.cs">
       <DependentUpon>FamilyViewViewer.xaml</DependentUpon>
