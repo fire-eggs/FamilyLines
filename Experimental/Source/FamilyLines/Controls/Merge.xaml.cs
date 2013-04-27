@@ -564,9 +564,13 @@ namespace KBS.FamilyLines
 
         private static string citationString(string source, string details, string actualText, string note, string link)
         {
-
             if(!string.IsNullOrEmpty(source))
-                source = App.FamilyCollection.SourceCollection.Find(source).SourceNameAndId;
+            {
+                // TODO KBR 04/03/2013 merging 'test55c.ged' (experimental Gedcom.NET) against itself crashes here.
+                var src = App.FamilyCollection.SourceCollection.Find(source);
+                if (src != null)
+                    source = src.SourceNameAndId;
+            }
             
             return  source + "\n" +
                     details + "\n" +

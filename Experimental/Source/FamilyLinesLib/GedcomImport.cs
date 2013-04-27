@@ -10,7 +10,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -88,7 +87,7 @@ namespace KBS.FamilyLinesLib
             }
 
 #if DEBUG
-            startLog(@"c:\kbrlog_gn.txt");
+            startLog(@"c:\temp\kbrlog_gn.txt");
 #endif
             ImportFamiliesGN();
             ImportSourcesGN();
@@ -315,13 +314,30 @@ namespace KBS.FamilyLinesLib
             string divPlace = null;
             string divSrc = null;
             DateTime? divDate = null;
+            string marrCitationActualText = null;
+            string marrCitationNote = null;
 
             SpouseModifier status = SpouseModifier.Current;
             if (fambly.Marriage != null)
             {
                 marrPlace = fambly.Marriage.Place == null ? null : fambly.Marriage.Place.Name; // TODO smart property
-                marrSrc = (fambly.Marriage.Sources.Count > 1) ? fambly.Marriage.Sources[0].Text : ""; // TODO smart property
                 marrDate = fambly.Marriage.Date == null ? null : fambly.Marriage.Date.DateTime1; // TODO smart property
+
+                // TODO duplicated in Person
+                if (fambly.Marriage.Sources != null && fambly.Marriage.Sources.Count > 0)
+                {
+                    var src = fambly.Marriage.Sources[0];
+                    marrCitationActualText = src.Text;
+                    var src2 = src.Database[src.Source] as GedcomSourceRecord;
+                    if (src2 != null)
+                    {
+                        marrSrc = src2.Title;
+                    }
+                    if (src.Notes != null && src.Notes.Count > 0)
+                    {
+                        marrCitationNote = src.Notes[0];
+                    }
+                }
             }
             if (fambly.Divorce != null)
             {
@@ -346,10 +362,12 @@ namespace KBS.FamilyLinesLib
             }
 
             {
-                SpouseRelationship marriage = new SpouseRelationship(wifeyP, status);
+                var marriage = new SpouseRelationship(wifeyP, status);
                 marriage.MarriageDate = marrDate;
                 marriage.MarriagePlace = marrPlace;
                 marriage.MarriageSource = marrSrc;
+                marriage.MarriageCitationActualText = marrCitationActualText;
+                marriage.MarriageCitationNote = marrCitationNote;
 
                 marriage.DivorceDate = divDate;
                 marriage.DivorceSource = divSrc;
@@ -364,10 +382,12 @@ namespace KBS.FamilyLinesLib
                 wifeyP.Relationships.Remove(existW);
             }
             {
-                SpouseRelationship marriage = new SpouseRelationship(hubbyP, status);
+                var marriage = new SpouseRelationship(hubbyP, status);
                 marriage.MarriageDate = marrDate;
                 marriage.MarriagePlace = marrPlace;
                 marriage.MarriageSource = marrSrc;
+                marriage.MarriageCitationActualText = marrCitationActualText;
+                marriage.MarriageCitationNote = marrCitationNote;
 
                 marriage.DivorceDate = divDate;
                 marriage.DivorceSource = divSrc;

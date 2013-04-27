@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:KBS.FamilyLines"
+             xmlns:local="clr-namespace:KBS.FamilyLines" xmlns:Properties="clr-namespace:KBS.FamilyLines.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" 
              d:DesignWidth="300">
@@ -16,10 +16,17 @@
 
     <StackPanel Margin="0,0,0,5" HorizontalAlignment="Stretch">
 
-        <Label Content="{Binding Path=FactName}"  
-               Target="{Binding ElementName=FactTextBox, Mode=OneWay}" 
-               Foreground="{DynamicResource InputFontColor}" />
-
+        <DockPanel>
+            <Label Content="{Binding Path=FactName}" DockPanel.Dock="Left" 
+                   Target="{Binding ElementName=FactTextBox, Mode=OneWay}" 
+                   Foreground="{DynamicResource InputFontColor}" />
+        
+            <Image Margin="4,0,0,0" Cursor="Pen" x:Name="EditAllDetails" DockPanel.Dock="Right"
+                   MouseLeftButtonUp="Click_EditAllDetails" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Source="..\Images\RightArrowBlue.png" 
+                   Width="16" Height="16" ToolTip="View and edit all fact details" />
+        </DockPanel>
+        
         <TextBox TextWrapping="NoWrap" 
                  x:Name="FactTextBox" 
                  AcceptsReturn="True"
@@ -31,6 +38,7 @@
                  Height="21.96" 
                  ToolTip="" 
                  ToolTipOpening="ToolTip_All"/>
+
 
     </StackPanel>
 </UserControl>

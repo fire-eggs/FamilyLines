@@ -21,6 +21,7 @@
 
 using System;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace GEDCOM.Net
 {
@@ -55,7 +56,8 @@ namespace GEDCOM.Net
 		#endregion
 		
 		#region Properties
-							
+
+		[XmlIgnore]					
 		public GedcomDatabase Database
 		{
 			get { return _database; }

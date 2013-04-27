@@ -1570,7 +1570,10 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox TextWrapping="NoWrap" x:Name="BirthDateEditTextBox" Width="135" VerticalAlignment="Top" Grid.Row="1" Margin="5,0,0,0" Text="{Binding Path=BirthDate, Converter={StaticResource DateFormattingConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="" ToolTipOpening="ToolTip_All" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
+                            <TextBox TextWrapping="NoWrap" x:Name="BirthDateEditTextBox" Width="135" 
+                                     VerticalAlignment="Top" Grid.Row="1" Margin="5,0,0,0" 
+                                     Text="{Binding Path=BirthDate, Converter={StaticResource DateFormattingConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                                     ToolTip="" ToolTipOpening="ToolTip_All" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}"/>
                           <CheckBox Margin="10,0,0,0" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=IsLiving, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=True}" IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}">
                             <Label Padding="0,0,0,0" Content="{x:Static properties:Resources.Living}" Foreground="{DynamicResource InputFontColor}" />
                           </CheckBox>

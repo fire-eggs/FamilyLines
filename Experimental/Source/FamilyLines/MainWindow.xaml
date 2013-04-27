@@ -468,6 +468,7 @@
             DockPanel.Dock="Top" 
                 >
 
+            <!-- The "Family View" area. User can choose to see this instead of the Diagram. -->
             <Grid x:Name="FamilyViewPane" Margin="10,0,10,10" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -722,6 +723,15 @@
                 VerticalAlignment="Center" 
                 CancelButtonClick="DateCalculatorControl_CancelButtonClick" 
                     />
+            
+            <!-- Edit all Fact details -->
+            <Controls:FactEditor
+                x:Name="EditFactDetails"
+                HorizontalAlignment="Center"
+                Visibility="Collapsed"
+                VerticalAlignment="Center"
+                CloseButtonClick="EditFactDetails_Finish"
+                />
 
         </Grid>
 

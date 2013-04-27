@@ -125,7 +125,7 @@ namespace GEDCOM.Net
 		// used for Gedcom 6 XML output
 		private string _EventXRefID;
 		
-		static string[] TypeStrings = new string[]
+		static readonly string[] TypeStrings = new[]
 		{
 			"EVEN",
 			
@@ -188,7 +188,7 @@ namespace GEDCOM.Net
 			"_UNKN"
 		};
 		
-		static List<string> TypeDescriptions = new List<string>()
+		static readonly List<string> TypeDescriptions = new List<string>
 		{
 			"Other Event",
 			"Annulment",
@@ -262,7 +262,7 @@ namespace GEDCOM.Net
 		
 		public override string GedcomTag
 		{
-			get { return GedcomEvent.TypeToTag(EventType); }
+			get { return TypeToTag(EventType); }
 		}
 		
 		public GedcomEventType EventType
@@ -471,7 +471,7 @@ namespace GEDCOM.Net
 	    {
 	        get
 	        {
-	            string type = string.Empty;
+	            string type;
 	            if (EventType == GedcomEventType.GenericEvent ||
 	                EventType == GedcomEventType.GenericFact)
 	            {
@@ -626,10 +626,9 @@ namespace GEDCOM.Net
 			XmlDocument doc = root.OwnerDocument;
 			
 			XmlNode node;
-			XmlAttribute attr;
-			
-			XmlNode eventNode = doc.CreateElement("EventRec");
-			attr = doc.CreateAttribute("Id");
+
+		    XmlNode eventNode = doc.CreateElement("EventRec");
+			XmlAttribute attr = doc.CreateAttribute("Id");
 			attr.Value = EventXRefID;
 			eventNode.Attributes.Append(attr);
 			
