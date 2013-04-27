@@ -40,7 +40,15 @@ namespace KBS.FamilyLines
         }
 
         #region event handlers
+        private void LinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("IExplore.exe", LinkTextBox.Text);
+        }
+        private void LinkButton2_Click(object sender, RoutedEventArgs e)
+        {
 
+            System.Diagnostics.Process.Start("IExplore.exe", LinkTextBox2.Text);
+        }
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (this.Visibility == Visibility.Visible)
@@ -65,6 +73,11 @@ namespace KBS.FamilyLines
                     CaptionTextBlock.Visibility = Visibility.Hidden;
                 }
 
+                Person p = (Person)this.DataContext;
+                LinkTextBox.Text = p.Links[0];
+                LinkTextBox2.Text = p.Links[1];
+                DescTextBox.Text = p.LinkDesc[0];
+                DescTextBox2.Text = p.LinkDesc[1];
                 // Workaround to get the StoryViewer to display the first page instead of the last page when first loaded
                 StoryViewer.ViewingMode = FlowDocumentReaderViewingMode.Scroll;
                 StoryViewer.ViewingMode = FlowDocumentReaderViewingMode.Page;
@@ -78,6 +91,26 @@ namespace KBS.FamilyLines
         {
             // Raise the CloseButtonClickEvent to notify the container to close this control
             RaiseEvent(new RoutedEventArgs(CloseButtonClickEvent));
+        }
+
+        /// <summary>
+        /// Handler for the SavLink click event
+        /// </summary>
+        private void SaveLink_Click(object Sender, RoutedEventArgs e)
+        {
+             Person person = (Person)this.DataContext;
+
+             if (person != null)
+             {
+                 System.Collections.Specialized.StringCollection strColl=new System.Collections.Specialized.StringCollection();
+                 strColl.Add(LinkTextBox.Text);
+                 strColl.Add(LinkTextBox2.Text);
+                 person.Links = strColl;
+                 strColl.Clear();
+                 strColl.Add(DescTextBox.Text);
+                 strColl.Add(DescTextBox2.Text);
+                 person.LinkDesc = strColl;
+             }
         }
 
         #region Rich Text event handlers and helper methods
