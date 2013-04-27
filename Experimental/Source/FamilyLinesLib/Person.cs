@@ -10,6 +10,8 @@ using System.Text;
 using System.Xml.Serialization;
 using GEDCOM.Net;
 using KBS.FamilyLinesLib.Properties;
+using System.Collections;
+using System.Collections.Specialized;
 
 namespace KBS.FamilyLinesLib
 {
@@ -103,6 +105,8 @@ namespace KBS.FamilyLinesLib
 
         private int tree; // Which tree does this person belong to?
 
+        private StringCollection m_picLinkCollection;
+        private StringCollection m_picLinkDescCollection;
         #endregion
 
         #region Properties
@@ -1392,6 +1396,31 @@ namespace KBS.FamilyLinesLib
             }
         }
 
+        public StringCollection Links
+        {
+            get { return m_picLinkCollection; }
+            set
+            {
+                if (m_picLinkCollection != value)
+                {
+                    m_picLinkCollection = value;
+                    OnPropertyChanged("Links");
+                }
+            }
+        }
+
+        public StringCollection LinkDesc
+        {
+            get { return m_picLinkDescCollection; }
+            set
+            {
+                if (m_picLinkDescCollection != value)
+                {
+                    m_picLinkDescCollection = value;
+                    OnPropertyChanged("LinkDescs");
+                }
+            }
+        }
         /// <summary>
         /// Gets or sets the photos associated with the person
         /// </summary>
@@ -2290,6 +2319,7 @@ namespace KBS.FamilyLinesLib
 
             m_events = new ObservableCollection<GEDEvent>();
             m_facts = new ObservableCollection<GEDAttribute>();
+            m_picLinkCollection = new StringCollection();
         }
 
         /// <summary>
