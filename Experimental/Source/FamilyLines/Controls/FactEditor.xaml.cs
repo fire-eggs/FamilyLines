@@ -48,6 +48,14 @@ namespace KBS.FamilyLines.Controls
                 OnPropertyChanged("EventPlace");
                 OnPropertyChanged("IsLocked");
                 OnPropertyChanged("Description");
+                OnPropertyChanged("Address");
+                OnPropertyChanged("Age");
+                OnPropertyChanged("Cause");
+                OnPropertyChanged("Agency");
+                OnPropertyChanged("Religion");
+                OnPropertyChanged("HasReligion");
+                OnPropertyChanged("Certainty");
+                OnPropertyChanged("Privacy");
             }
         }
 
@@ -120,14 +128,74 @@ namespace KBS.FamilyLines.Controls
         {
             get
             {
-                if (Event == null || Event.Note == null)
+                if (Event == null || Event.Description == null)
                     return "";
-                return Event.Note;
+                return Event.Description;
             }
             set
             {
-                Event.Note = value;
+                Event.Description = value;
                 OnPropertyChanged("Description");
+            }
+        }
+
+        public string Religion
+        {
+            get
+            {
+                if (Event == null || Event.ReligiousAffiliation == null)
+                    return "";
+                return Event.ReligiousAffiliation;
+            }
+            set
+            {
+                Event.ReligiousAffiliation = value;
+                OnPropertyChanged("Religion");
+            }
+        }
+
+        public string Agency
+        {
+            get
+            {
+                if (Event == null || Event.ResponsibleAgency == null)
+                    return "";
+                return Event.ResponsibleAgency;
+            }
+            set
+            {
+                Event.ResponsibleAgency = value;
+                OnPropertyChanged("Agency");
+            }
+        }
+
+        public string Address
+        {
+            get
+            {
+                if (Event == null || Event.Address == null || Event.Address.AddressLine == null)
+                    return "";
+                return Event.Address.AddressLine;
+            }
+            set
+            {
+                Event.Address.AddressLine = value;
+                OnPropertyChanged("Address");
+            }
+        }
+
+        public string Cause
+        {
+            get
+            {
+                if (Event == null || Event.Cause == null)
+                    return "";
+                return Event.Cause;
+            }
+            set
+            {
+                Event.Cause = value;
+                OnPropertyChanged("Cause");
             }
         }
 
