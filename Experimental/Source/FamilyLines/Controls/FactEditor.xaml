@@ -33,6 +33,8 @@
 
     </UserControl.Resources>
 
+    <!-- TODO embedded strings -->
+    
     <StackPanel>
 
         <!-- Header -->
@@ -51,7 +53,9 @@
 
         <!-- Content -->
         <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,1">
-            <StackPanel Height="500" Background="{DynamicResource InputBackgroundBrush}">
+            <StackPanel Height="500"
+                        Background="{DynamicResource InputBackgroundBrush}" 
+                        >
 
                 <!-- Fact (Event Type) -->
                 <StackPanel Orientation="Horizontal">
@@ -63,7 +67,7 @@
                        />
                 </StackPanel>
 
-                <Grid>
+                <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -77,6 +81,9 @@
                     <!-- Event date: row 0 -->
                     <Label Grid.Row="0" Grid.Column="0" Content="Date"
                            HorizontalAlignment="Right"
+                           Margin="0,5,0,0"
+                           VerticalAlignment="Center"
+                           Padding="0"
                            Foreground="{DynamicResource InputFontColor}" 
                            />
                     <TextBox Grid.Row="0" 
@@ -86,7 +93,7 @@
                              Height="22" 
                              Width="135" 
                              HorizontalAlignment="Left" 
-                             Margin="5,0,0,0" 
+                             Margin="5,5,0,0" 
                              IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" 
                              Text="{Binding Path=EventDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                              ToolTip="" 
@@ -96,6 +103,9 @@
                     <!-- Place : row 1 -->
                     <Label Grid.Row="1" Grid.Column="0" Content="Place"
                            HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Margin="0,5,0,0"
                            Foreground="{DynamicResource InputFontColor}" 
                            />
 
@@ -104,7 +114,7 @@
                              x:Name="PlaceEditTextBox" 
                              Text="{Binding Path=EventPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                              Width="250" 
-                             Margin="5,0,5,0" 
+                             Margin="5,5,0,0" 
                              IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" 
                              Height="22" 
                              ToolTip="" 
@@ -113,32 +123,38 @@
                     <!-- Description : row 2 -->
                     <Label Grid.Row="2" Grid.Column="0" Content="Description"
                            HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Margin="0,5,0,0"
                            Foreground="{DynamicResource InputFontColor}" 
                            />
                     <TextBox Grid.Row="2" Grid.Column="1"
                              TextWrapping="NoWrap" 
                              Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                              Width="250" 
-                             Margin="5,0,5,0" 
+                             Margin="5,5,0,0" 
                              IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" 
                              Height="22" 
                              ToolTip="" 
                              ToolTipOpening="ToolTip_All"/>
                 </Grid>
 
-                <StackPanel Margin="10" Orientation="Horizontal">
+                <!-- TODO spread buttons out; use grid? -->
+                <StackPanel Margin="10" 
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            >
                     <Button Content="Notes"/>
                     <Button Content="Multimedia"/>
                     <Button Content="Citations"/>
                 </StackPanel>
 
                 <Expander Name="expandCHR" 
-                          Margin="10"
                           Style="{StaticResource MainViewExpander}"
                           ExpandDirection="Down" 
                           IsExpanded="False" 
                           Header="More Details">
-                    <Grid>
+                    <Grid Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -156,38 +172,97 @@
                         <!-- Address -->
                         <Label Grid.Row="0" Grid.Column="0" Content="Address"
                            HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Margin="0,5,0,0"
                            Foreground="{DynamicResource InputFontColor}" 
                            />
+                        <TextBox Grid.Row="0" Grid.Column="1"
+                             TextWrapping="NoWrap" 
+                             Text="{Binding Path=Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="250" 
+                             Margin="5,5,0,0" 
+                             IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" 
+                             Height="22" 
+                             ToolTip="" 
+                             ToolTipOpening="ToolTip_All"/>
                         <!-- Age -->
-                        <Label Grid.Row="1" Grid.Column="0" Content="Age"
-                           HorizontalAlignment="Right"
-                           Foreground="{DynamicResource InputFontColor}" 
-                           />
+                        <Label Grid.Row="1" Grid.Column="0" 
+                               Content="Age"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Padding="0"
+                               Margin="0,5,0,0"
+                               Foreground="{DynamicResource InputFontColor}" 
+                               />
                         <!-- Cause -->
-                        <Label Grid.Row="2" Grid.Column="0" Content="Cause"
-                           HorizontalAlignment="Right"
-                           Foreground="{DynamicResource InputFontColor}" 
-                           />
+                        <Label Grid.Row="2" Grid.Column="0" 
+                               Content="Cause"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Padding="0"
+                               Margin="0,5,0,0"
+                               Foreground="{DynamicResource InputFontColor}" 
+                               />
+                        <TextBox Grid.Row="2" Grid.Column="1"
+                                 TextWrapping="NoWrap" 
+                                 Text="{Binding Path=Cause, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 Width="250" 
+                                 Margin="5,5,0,0" 
+                                 IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" 
+                                 Height="22" 
+                                 ToolTip="" 
+                                 ToolTipOpening="ToolTip_All"/>
                         <!-- Responsible Agency -->
                         <Label Grid.Row="3" Grid.Column="0" Content="Agency"
                            HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Margin="0,5,0,0"
                            Foreground="{DynamicResource InputFontColor}" 
                            />
-                        <!-- Religious Affiliation -->
-                        <Label Grid.Row="4" Grid.Column="0" Content="Religion"
-                           HorizontalAlignment="Right"
-                           Foreground="{DynamicResource InputFontColor}" 
-                           />
+                        <TextBox Grid.Row="3" Grid.Column="1"
+                             TextWrapping="NoWrap" 
+                             Text="{Binding Path=Agency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="250" 
+                             Margin="5,5,0,0" 
+                             IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" 
+                             Height="22" 
+                             ToolTip="" 
+                             ToolTipOpening="ToolTip_All"/>
                         <!-- Certainty -->
-                        <Label Grid.Row="5" Grid.Column="0" Content="Certainty"
+                        <Label Grid.Row="4" Grid.Column="0" Content="Certainty"
                            HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Margin="0,5,0,0"
                            Foreground="{DynamicResource InputFontColor}" 
                            />
                         <!-- Privacy -->
-                        <Label Grid.Row="6" Grid.Column="0" Content="Privacy"
+                        <Label Grid.Row="5" Grid.Column="0" Content="Privacy"
                            HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Margin="0,5,0,0"
                            Foreground="{DynamicResource InputFontColor}" 
                            />
+                        <!-- Religious Affiliation -->
+                        <Label Grid.Row="6" Grid.Column="0" Content="Religion"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Margin="0,5,0,0"
+                           Foreground="{DynamicResource InputFontColor}" 
+                           />
+                        <TextBox Grid.Row="6" Grid.Column="1"
+                             TextWrapping="NoWrap" 
+                             Text="{Binding Path=Religion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="250" 
+                             Margin="5,5,0,0" 
+                             IsEnabled="{Binding Path=IsLocked, Converter={StaticResource NotConverter}, Mode=Default}" 
+                             Height="22" 
+                             ToolTip="" 
+                             ToolTipOpening="ToolTip_All"/>
 
                     </Grid>
                 </Expander>

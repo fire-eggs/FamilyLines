@@ -29,18 +29,16 @@ namespace KBS.FamilyLinesLib
             DateDescriptor = null;
             Place = individualEvent.Place == null ? null : individualEvent.Place.Name;
 
-            // TODO remainder of properties
-
-            // TODO note list is GUIDs->database
-            // TODO multiple notes
-            if (individualEvent.NoteStrings.Count > 0)
-                Note = individualEvent.NoteStrings[0];
+            // Description is the EventName value
+            Description = individualEvent.EventName;
 
             Age = individualEvent.Age;
             ResponsibleAgency = individualEvent.ResponsibleAgency;
-            ReligiousAffiliation = individualEvent.ReligiousAffiliation;
             Cause = individualEvent.Cause;
             Address = individualEvent.Address;
+
+            // TODO not sure when this applies?
+            ReligiousAffiliation = individualEvent.ReligiousAffiliation;
         }
 
         public GedcomEvent.GedcomEventType Type { get; set; }
@@ -52,9 +50,7 @@ namespace KBS.FamilyLinesLib
         public string Link { get; set; }
         public string CitationNote { get; set; }
         public string CitationActualText { get; set; }
-
-        // TODO need the Note -> Description
-        public string Note { get; set; }
+        public string Description { get; set; }
 
         public GedcomAge Age { get; set; }
         public string ResponsibleAgency { get; set; }
