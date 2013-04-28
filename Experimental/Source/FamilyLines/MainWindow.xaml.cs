@@ -12,7 +12,6 @@ using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 using GEDCOM.Net;
 using KBS.FamilyLines.Controls;
-using KBS.FamilyLines.Controls.FamilyView;
 using KBS.FamilyLinesLib;
 using SUT.PrintEngine.Paginators;
 using SUT.PrintEngine.Utils;
@@ -46,6 +45,7 @@ namespace KBS.FamilyLines
 
             BuildOpenMenu();
             BuildThemesMenu();
+            BuildShadowsMenu();
             family.CurrentChanged += People_CurrentChanged;
             ProcessCommandLines();
 
@@ -77,15 +77,14 @@ namespace KBS.FamilyLines
         private void NewUserControl_CancelButtonClick(object sender, RoutedEventArgs e)
         {
             HideNewUserControl();
-            //enableMenus();
-            ShowWelcomeScreen();
+            ReturnToWelcomeOrCurrentFamily();
         }
 
         private void DetailsControl_PersonInfoClick(object sender, RoutedEventArgs e)
         {
             PersonInfoControl.DataContext = family.Current;
             // Uses an animation to show the Person Info Control
-            ((Storyboard)this.Resources["ShowPersonInfo"]).Begin(this);
+            ((Storyboard)Resources["ShowPersonInfo"]).Begin(this);
         }
 
         private void DetailsControl_FamilyDataClick(object sender, RoutedEventArgs e)
@@ -93,7 +92,7 @@ namespace KBS.FamilyLines
             FamilyDataControl.MakeVisible();
             FamilyDataControl.Refresh();
             // Uses an animation to show the Family Data Control
-            ((Storyboard)this.Resources["ShowFamilyData"]).Begin(this);
+            ((Storyboard)Resources["ShowFamilyData"]).Begin(this);
         }
 
         /// <summary>
@@ -125,7 +124,7 @@ namespace KBS.FamilyLines
 
         private void HidePersonInfo_StoryboardCompleted(object sender, EventArgs e)
         {
-            this.family.OnContentChanged();
+            family.OnContentChanged();
             DetailsControl.SetDefaultFocus();
             enableButtons();
         }
@@ -213,13 +212,12 @@ namespace KBS.FamilyLines
                 BuildOpenMenu();
             }
             else
-                this.familyCollection.FullyQualifiedFilename = string.Empty;
+                familyCollection.FullyQualifiedFilename = "";
 
-            this.family.OnContentChanged();
+            family.OnContentChanged();
             UpdateStatus();
             TaskBar.Current.Restore();
             removeControlFocus();
-
         }
 
         private void SaveControl_CancelButtonClick(object sender, RoutedEventArgs e)
@@ -240,7 +238,7 @@ namespace KBS.FamilyLines
         private void GedcomLocalizationControl_ContinueButtonClick(object sender, RoutedEventArgs e)
         {
             GedcomLocalizationControl.Visibility = Visibility.Hidden;
-            appSettings.EnableUTF8 = (bool)GedcomLocalizationControl.EnableUTF8CheckBox.IsChecked;
+            appSettings.EnableUTF8 = GedcomLocalizationControl.EnableUTF8CheckBox.IsChecked == true;
             appSettings.Save();
             ImportGedcom();
         }
@@ -249,6 +247,15 @@ namespace KBS.FamilyLines
         {
             GedcomLocalizationControl.Visibility = Visibility.Hidden;
             removeControlFocus();
+            ReturnToWelcomeOrCurrentFamily();
+        }
+
+        /// <summary>
+        /// User has cancelled a New or Import dialog. Return to an already loaded family if we
+        /// have one, otherwise show the 'Welcome' dialog.
+        /// </summary>
+        private void ReturnToWelcomeOrCurrentFamily()
+        {
             //ShowWelcomeScreen();
             CollapseDetailsPanels();
             ShowDetailsPane();
@@ -264,7 +271,7 @@ namespace KBS.FamilyLines
             UpdateStatus();
             App.canExecuteJumpList = true;
 
-            if ( family.Count == 0)
+            if (family.Count == 0)
             {
                 ShowWelcomeScreen();
                 UpdateStatus();
@@ -2130,13 +2137,21 @@ namespace KBS.FamilyLines
 
         #endregion
 
-        // TODO Localization support
+        private void BuildShadowsMenu()
+        {
+            bool showShadows = Properties.Settings.Default.showShadows;
+            // TODO Localization support - no embedded strings
+            shadowMenu.Header = showShadows ? "Hide Shadows" : "Show Shadows";
+        }
+
         private void ShowShadows_Click(object sender, RoutedEventArgs e)
         {
             bool showShadows = Properties.Settings.Default.showShadows;
             showShadows = !showShadows;
             Properties.Settings.Default.showShadows = showShadows;
+            Properties.Settings.Default.Save(); // part of fix for 1380
 
+            // TODO Localization support - no embedded strings
             shadowMenu.Header = showShadows ? "Hide Shadows" : "Show Shadows";
 
             // TODO this is my brute-force mechanism to rebuild the diagram - make it better
