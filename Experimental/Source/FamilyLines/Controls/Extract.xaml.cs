@@ -170,11 +170,14 @@ namespace KBS.FamilyLines.Controls
             }
             else
             {
-                if (App.Family.Current != null)
+                if (App.Family.Current != null) // TODO when would this be true??
                 {
-                    Directory.CreateDirectory(Path.Combine(folderToExtractTo, Attachment.AttachmentsFolderName));
-                    Directory.CreateDirectory(Path.Combine(folderToExtractTo, Photo.PhotosFolderName));
-                    Directory.CreateDirectory(Path.Combine(folderToExtractTo, Story.StoriesFolderName));
+                    var photoFold = Path.Combine(folderToExtractTo, Photo.PhotosFolderName);
+                    var attachFold = Path.Combine(folderToExtractTo, Attachment.AttachmentsFolderName);
+                    var storyFold = Path.Combine(folderToExtractTo, Story.StoriesFolderName);
+                    Directory.CreateDirectory(attachFold);
+                    Directory.CreateDirectory(photoFold);
+                    Directory.CreateDirectory(storyFold);
 
                     foreach (Photo p in App.Family.Current.Photos)
                     {
@@ -183,7 +186,8 @@ namespace KBS.FamilyLines.Controls
                         try
                         {
                             FileInfo f = new FileInfo(file);
-                            f.CopyTo(Path.Combine(Path.Combine(folderToExtractTo, @"\" + Photo.PhotosFolderName), Path.GetFileName(file)), true);
+                            var destFileName = Path.Combine(photoFold, Path.GetFileName(file));
+                            f.CopyTo(destFileName, true);
                         }
                         catch { }
                     }
@@ -191,7 +195,8 @@ namespace KBS.FamilyLines.Controls
                     try
                     {
                         FileInfo f = new FileInfo(App.Family.Current.Story.AbsolutePath);
-                        f.CopyTo(Path.Combine(Path.Combine(folderToExtractTo, @"\" + Story.StoriesFolderName), Path.GetFileName(App.Family.Current.Story.AbsolutePath)), true);
+                        var destFileName = Path.Combine(storyFold, Path.GetFileName(App.Family.Current.Story.AbsolutePath));
+                        f.CopyTo(destFileName, true);
                     }
                     catch { }
 
@@ -202,7 +207,8 @@ namespace KBS.FamilyLines.Controls
                         try
                         {
                             FileInfo f = new FileInfo(file);
-                            f.CopyTo(Path.Combine(Path.Combine(folderToExtractTo, @"\" + Attachment.AttachmentsFolderName), Path.GetFileName(file)), true);
+                            var destFileName = Path.Combine(attachFold, Path.GetFileName(file));
+                            f.CopyTo(destFileName, true);
                         }
                         catch { }
                     }
@@ -217,8 +223,6 @@ namespace KBS.FamilyLines.Controls
                 }
                 catch { }
             }
-
-            Clear();
         }
 
         #endregion
