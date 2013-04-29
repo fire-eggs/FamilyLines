@@ -77,7 +77,10 @@ namespace KBS.FamilyLines
         private void NewUserControl_CancelButtonClick(object sender, RoutedEventArgs e)
         {
             HideNewUserControl();
-            ReturnToWelcomeOrCurrentFamily();
+            ShowWelcomeScreen();
+            // KBR the process of invoking 'New' wipes the current loaded Family state. So we MUST
+            // return to the Welcome Screen at this point.
+            //ReturnToWelcomeOrCurrentFamily();
         }
 
         private void DetailsControl_PersonInfoClick(object sender, RoutedEventArgs e)
