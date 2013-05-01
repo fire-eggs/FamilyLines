@@ -74,10 +74,19 @@ namespace KBS.FamilyLines
                 }
 
                 Person p = (Person)this.DataContext;
-                LinkTextBox.Text = p.Links[0];
-                LinkTextBox2.Text = p.Links[1];
-                DescTextBox.Text = p.LinkDesc[0];
-                DescTextBox2.Text = p.LinkDesc[1];
+                //clear out the links and desc
+                LinkTextBox.Clear();
+                LinkTextBox2.Clear();
+                DescTextBox.Clear();
+                DescTextBox2.Clear();
+
+                if (p.Links.Count > 0)
+                {
+                    LinkTextBox.Text = p.Links[0];
+                    LinkTextBox2.Text = p.Links[1];
+                    DescTextBox.Text = p.LinkDesc[0];
+                    DescTextBox2.Text = p.LinkDesc[1];
+                }
                 // Workaround to get the StoryViewer to display the first page instead of the last page when first loaded
                 StoryViewer.ViewingMode = FlowDocumentReaderViewingMode.Scroll;
                 StoryViewer.ViewingMode = FlowDocumentReaderViewingMode.Page;
@@ -106,10 +115,10 @@ namespace KBS.FamilyLines
                  strColl.Add(LinkTextBox.Text);
                  strColl.Add(LinkTextBox2.Text);
                  person.Links = strColl;
-                 strColl.Clear();
-                 strColl.Add(DescTextBox.Text);
-                 strColl.Add(DescTextBox2.Text);
-                 person.LinkDesc = strColl;
+                 System.Collections.Specialized.StringCollection strColl1 = new System.Collections.Specialized.StringCollection();
+                 strColl1.Add(DescTextBox.Text);
+                 strColl1.Add(DescTextBox2.Text);
+                 person.LinkDesc = strColl1;
              }
         }
 
