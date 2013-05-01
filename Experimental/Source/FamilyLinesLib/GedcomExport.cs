@@ -221,6 +221,9 @@ namespace KBS.FamilyLinesLib
                 ExportPhotos(person);
                 ExportAttachments(person);
 
+                //Links
+                ExportLinks(person);
+
                 // Notes.	
                 if (!string.IsNullOrEmpty(person.Note))
                     WriteLine(1, "NOTE", person.Note);
@@ -528,10 +531,26 @@ namespace KBS.FamilyLinesLib
             {
                 WriteLine(1, "OBJE", "");
                 WriteLine(2, "FORM", System.IO.Path.GetExtension(photo.FullyQualifiedPath).Replace(".",""));
-                WriteLine(2, "FILE", @"\PathToFile\Images\" + System.IO.Path.GetFileName(photo.FullyQualifiedPath));
+                WriteLine(2, "FILE", @"\Images\" + System.IO.Path.GetFileName(photo.FullyQualifiedPath));
             }
         }
 
+        private void ExportLinks(Person person)
+        {
+            int index = 0;
+            foreach (String strLink in person.Links)
+            {
+                if (strLink.Length > 0)
+                {
+                    WriteLine(1, "OBJE", "");
+                    WriteLine(2, "FORM", "URL");
+                    String strDesc = person.LinkDesc[index++];
+                    if (strDesc.Length > 0)
+                        WriteLine(2, "TITL", strDesc);
+                    WriteLine(2, "FILE", strLink);
+                }
+            }
+        }
         private void ExportAttachments(Person person)
         {
             foreach (Attachment attachment in person.Attachments)
@@ -644,6 +663,8 @@ namespace KBS.FamilyLinesLib
         {
             WriteLine(1, "SEX", (person.Gender == GedcomSex.Female) ? "F" : "M");
         }
+
+       
 
         private void ExportRestriction(Person person)
         {
