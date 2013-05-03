@@ -79,14 +79,22 @@ namespace KBS.FamilyLines
                 LinkTextBox2.Clear();
                 DescTextBox.Clear();
                 DescTextBox2.Clear();
-
-                if (p.Links.Count > 0)
+                int i = 0;
+                string[] a = new string[5];
+                string[] desc = new string[5];
+                while (i < p.Links.Count )
                 {
-                    LinkTextBox.Text = p.Links[0];
-                    LinkTextBox2.Text = p.Links[1];
-                    DescTextBox.Text = p.LinkDesc[0];
-                    DescTextBox2.Text = p.LinkDesc[1];
+                    a[i] = p.Links[i++];
                 }
+                i = 0;
+                while (i < p.LinkDesc.Count)
+                {
+                    desc[i] = p.LinkDesc[i++];
+                }
+                LinkTextBox.Text = a[0];
+                LinkTextBox2.Text = a[1];
+                DescTextBox.Text =desc[0];
+                DescTextBox2.Text = desc[1];
                 // Workaround to get the StoryViewer to display the first page instead of the last page when first loaded
                 StoryViewer.ViewingMode = FlowDocumentReaderViewingMode.Scroll;
                 StoryViewer.ViewingMode = FlowDocumentReaderViewingMode.Page;
