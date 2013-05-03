@@ -2320,6 +2320,7 @@ namespace KBS.FamilyLinesLib
             m_events = new ObservableCollection<GEDEvent>();
             m_facts = new ObservableCollection<GEDAttribute>();
             m_picLinkCollection = new StringCollection();
+            m_picLinkDescCollection = new StringCollection();
         }
 
         /// <summary>
@@ -2405,28 +2406,36 @@ namespace KBS.FamilyLinesLib
                     foreach (var gnMMediaFile in mmRec.Files)
                     {
                         // TODO This'll be true for URLs
-                        if (gnMMediaFile.Basepath == null || gnMMediaFile.Filename == null)
-                            continue;
-
-                        var filePath = Path.Combine(gnMMediaFile.Basepath, gnMMediaFile.Filename);
-                        if ( File.Exists(filePath) )
+                        if (gnMMediaFile.Format == "URL")//I dont think this needs to be localized.
                         {
-                            // TODO extend supported photos
-                            if (App.IsPhotoFileSupported(filePath))
-                            {
-                                Photo photo = new Photo(filePath) {IsAvatar = firstPhoto};
-                                firstPhoto = false;
-                                Photos.Add(photo);
-                            }
+                            LinkDesc.Add(mmRec.Title);
+                            Links.Add(gnMMediaFile.Filename);
+                        }
+                        else
+                        {
+                            if (gnMMediaFile.Basepath == null || gnMMediaFile.Filename == null)
+                                continue;
 
-                            // TODO extend supported attachments
-                            else if (App.IsAttachmentFileSupported(filePath))
+                            var filePath = Path.Combine(gnMMediaFile.Basepath, gnMMediaFile.Filename);
+                            if (File.Exists(filePath))
                             {
-                                Attachment attachment = new Attachment(filePath);
-                                Attachments.Add(attachment);
-                            }
+                                // TODO extend supported photos
+                                if (App.IsPhotoFileSupported(filePath))
+                                {
+                                    Photo photo = new Photo(filePath) { IsAvatar = firstPhoto };
+                                    firstPhoto = false;
+                                    Photos.Add(photo);
+                                }
 
-                            // TODO store all other file types for later re-export
+                                // TODO extend supported attachments
+                                else if (App.IsAttachmentFileSupported(filePath))
+                                {
+                                    Attachment attachment = new Attachment(filePath);
+                                    Attachments.Add(attachment);
+                                }
+
+                                // TODO store all other file types for later re-export
+                            }
                         }
                     }
                 }
