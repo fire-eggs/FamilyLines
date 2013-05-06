@@ -118,7 +118,67 @@ namespace KBS.FamilyLinesLib
         {
             return FullyQualifiedPath;
         }
+        //copy from photo location to foldername
+        public static string Copy(string fileName, string folderName)
+       {
+           string photoRelLocation="";
+            
 
+            // Absolute path to the application folder
+            string appLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                App.ApplicationFolderName);
+            appLocation = Path.Combine(appLocation, App.AppDataFolderName);
+
+            // Absolute path to the photos folder
+            string photoLocation = Path.Combine(appLocation, PhotosFolderName);
+
+            // Fully qualified path to the new photo file
+            string photoFullPath = Path.Combine(photoLocation, fileName);
+
+            // The photo file being copied
+            FileInfo fi = new FileInfo(photoFullPath);
+
+            // Relative path to the new photo file
+
+            //string photoRelLocation = Path.Combine(folderName, App.ReplaceEncodedCharacters(fi.Name));
+
+        //    // Create the appLocation directory if it doesn't exist
+            if (!Directory.Exists(folderName))
+                Directory.CreateDirectory(folderName);
+            
+        //    // Copy the photo.
+           try
+            {
+                string photoName = Path.GetFileName(photoFullPath);
+                string photoNameNoExt = Path.GetFileNameWithoutExtension(photoFullPath);
+                string photoNameExt = Path.GetExtension(photoFullPath);
+
+                int i = 1;
+                string destphotoFullPath = Path.Combine(folderName, photoName);
+                photoRelLocation = Path.Combine(folderName, photoName);
+                if (File.Exists(destphotoFullPath))
+                {
+                    do
+                    {
+                        photoName = photoNameNoExt + "(" + i + ")" + photoNameExt;  //don't overwrite existing files, append (#) to file if exists.
+                        photoRelLocation = Path.Combine(folderName, photoName);
+                        destphotoFullPath = Path.Combine(folderName, photoName);
+                        i++;
+                    }
+                    while (File.Exists(destphotoFullPath));
+
+                }
+                fi.CopyTo(destphotoFullPath, true);
+
+            }
+            catch
+            {
+        //        // Could not copy the photo. Handle all exceptions 
+        //        // the same, ignore and continue.
+            }
+
+            return photoRelLocation;
+        }
         /// <summary>
         /// Copies the photo file to the application photos folder. 
         /// Returns the relative path to the copied photo.
