@@ -64,7 +64,7 @@ namespace KBS.FamilyLinesLib
             {
                 WriteLine(0, "HEAD", "");
 				ExportSummary(gedcomFilePath,familyxFilePath,language);
-                ExportPeople();
+                ExportPeople(gedcomFilePath);
                 ExportFamilies();
                 ExportSources();
                 ExportRepositories();
@@ -166,7 +166,7 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Export each person to the GEDCOM file.
         /// </summary>
-        private void ExportPeople()
+        private void ExportPeople(string gedcomFilePath)
         {
 
             FamilyMap map = new FamilyMap();
@@ -218,7 +218,7 @@ namespace KBS.FamilyLinesLib
                 ExportEvent("RELI", person.Religion, "", null , "", person.ReligionCitation, person.ReligionCitationNote, person.ReligionCitationActualText, person.ReligionLink, person.ReligionSource);
 
                 // Photo file names, files themselves cannot be exported as GEDCOM is simply a text file.
-                ExportPhotos(person);
+                ExportPhotos(person, gedcomFilePath);
                 ExportAttachments(person);
 
                 //Links
@@ -525,14 +525,19 @@ namespace KBS.FamilyLinesLib
             WriteLine(1, "NAME", value);
         }
 
-        private void ExportPhotos(Person person)
+        private void ExportPhotos(Person person, string gedcomFilePath)
         {
             foreach (Photo photo in person.Photos)
             {
                 WriteLine(1, "OBJE", "");
                 WriteLine(2, "FORM", System.IO.Path.GetExtension(photo.FullyQualifiedPath).Replace(".",""));
-                WriteLine(2, "FILE", @"\Images\" + System.IO.Path.GetFileName(photo.FullyQualifiedPath));
+                //copy the file to the \\images folder
+                string photoPath = Photo.Copy(photo.FullyQualifiedPath, Path.GetDirectoryName(gedcomFilePath) + "\\Images");
+                WriteLine(2, "FILE", @"Images\" + System.IO.Path.GetFileName(photoPath));
+                
+                
             }
+            
         }
 
         private void ExportLinks(Person person)
