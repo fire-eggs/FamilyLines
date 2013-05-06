@@ -219,7 +219,7 @@ namespace KBS.FamilyLinesLib
 
                 // Photo file names, files themselves cannot be exported as GEDCOM is simply a text file.
                 ExportPhotos(person, gedcomFilePath);
-                ExportAttachments(person);
+                ExportAttachments(person, gedcomFilePath);
 
                 //Links
                 ExportLinks(person);
@@ -556,13 +556,16 @@ namespace KBS.FamilyLinesLib
                 }
             }
         }
-        private void ExportAttachments(Person person)
+        private void ExportAttachments(Person person, string gedcomFilePath)
         {
             foreach (Attachment attachment in person.Attachments)
             {
                 WriteLine(1, "OBJE", "");
                 WriteLine(2, "FORM", System.IO.Path.GetExtension(attachment.FullyQualifiedPath).Replace(".", ""));
-                WriteLine(2, "FILE", @"\PathToFile\Attachments\" + System.IO.Path.GetFileName(attachment.FullyQualifiedPath));
+
+                //copy the file to the \\images folder
+                string attchmntPath = Photo.Copy(attachment.FullyQualifiedPath, Path.GetDirectoryName(gedcomFilePath) + "\\Attachments");
+                WriteLine(2, "FILE", @"Attachments\" + System.IO.Path.GetFileName(attachment.FullyQualifiedPath));
             }
         }
         
