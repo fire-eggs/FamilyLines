@@ -902,6 +902,9 @@ namespace KBS.FamilyLinesLib
                 if (string.IsNullOrEmpty(this.FullyQualifiedFilename))
                     this.FullyQualifiedFilename = People.DefaultFullyQualifiedFilename;
 
+                // KBR 03/18/2012 part of patch 1784 from PandaWood.
+                Photo.SetFamilyFileNamePath(Path.GetDirectoryName(FullyQualifiedFilename));
+
                 string tempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                     App.ApplicationFolderName);
                 tempFolder = Path.Combine(tempFolder, App.AppDataFolderName + @"\");
@@ -926,8 +929,17 @@ namespace KBS.FamilyLinesLib
 
                     if (pc.Version != FAMILY_LINES_VERSION1) // TODO deal with new Family Lines version values
                     {
-                        // Need to translate from "Family.Show" version to "Family Lines" version.
-                        TranslateToFL2(pc);
+                        try
+                        {
+                            // Need to translate from "Family.Show" version to "Family Lines" version.
+                            TranslateToFL2(pc);
+                        }
+                        catch (Exception ex)
+                        {
+                            fullyQualifiedFilename = string.Empty;
+                            MessageBox.Show("Please submit an error report. Failed to load file:" + ex.Message, "Internal problem translating to FamilyLines");
+                            return false;
+                        }
                     }
 
                     // Do this after translation - don't have a header in "Family.Show" files
@@ -992,13 +1004,13 @@ namespace KBS.FamilyLinesLib
             }
             catch (Exception ex)
             {
-#if DEBUG
-                MessageBox.Show("Failed to load file:" + ex.Message);
-#endif
                 // Could not load the file. Handle all exceptions
                 // the same, ignore and continue.
-                this.fullyQualifiedFilename = string.Empty;
+                fullyQualifiedFilename = string.Empty;
+
                 // Warn user of problem with file.
+                MessageBox.Show("Please submit an error report. Failed to load file:" + ex.Message, "Internal problem loading OPC file");
+
                 return false;
             }
         }
@@ -1283,7 +1295,7 @@ namespace KBS.FamilyLinesLib
                         {
                             string photoOldPath = Path.Combine(Path.Combine(
                                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                                App.ApplicationFolderName), photo.RelativePath);
+                                App.ApplicationFolderName), photo.RelativePath ?? "");
 
                             if (File.Exists(photoOldPath) && App.IsPhotoFileSupported(photoOldPath))
                             {
@@ -1320,7 +1332,7 @@ namespace KBS.FamilyLinesLib
                             {
                                 string storyOldPath = Path.Combine(Path.Combine(
                                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                                    App.ApplicationFolderName), p.Story.RelativePath);
+                                    App.ApplicationFolderName), p.Story.RelativePath ?? "");
                                 if (File.Exists(storyOldPath))
                                 {
 
@@ -1375,12 +1387,15 @@ namespace KBS.FamilyLinesLib
                 PeopleCollection.IsDirty = false;
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 // Could not load the file. Handle all exceptions
                 // the same, ignore and continue.
-                this.fullyQualifiedFilename = string.Empty;
+                fullyQualifiedFilename = string.Empty;
+
                 // Warn user of problem with file.
+                MessageBox.Show("Please submit an error report. Failed to load file:" + ex.Message, "Internal problem loading V2 file");
+
                 return false;
             }
         }

@@ -66,6 +66,8 @@ namespace KBS.FamilyLinesLib
                 // I believe this works only with "Version2" format, not the "V3" format???
                 if (File.Exists(path1))
                     return path1;
+                if (FamilyFilePath == null)
+                    return relativePath;
 			    return Path.Combine(FamilyFilePath, relativePath);
             }
             set

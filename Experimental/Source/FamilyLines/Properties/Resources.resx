@@ -1459,4 +1459,15 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   <data name="Divorces" xml:space="preserve">
     <value>Divorces</value>
   </data>
+  <data name="Credits" xml:space="preserve">
+    <value>Family Lines Team
+    Brian Belden, Kevin Routley: Coordinators
+    Additional Contributions from:
+        V0.4 : Hema Shivram
+
+        V0.3 : Agon Eous
+
+        V0.2 : Candice Olechna, Agon Eous       
+    </value>
+  </data>
 </root>

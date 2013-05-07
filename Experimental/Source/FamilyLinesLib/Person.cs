@@ -173,13 +173,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string FirstName
         {
-            get
-            {
-                // TODO asserting with gl120366.ged (intl chars)
-                //if (Individual != null)
-                //    Debug.Assert(Individual.FirstName == firstName);
-                return firstName;
-            }
+            get { return firstName; }
             set
             {
                 if (firstName != value)
@@ -216,13 +210,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string LastName
         {
-            get
-            {
-                // TODO why asserting w/ gl120366.ged but not stopping?
-                //if (Individual != null)
-                //    Debug.Assert(Individual.LastName == lastName);
-                return lastName;
-            }
+            get { return lastName; }
             set
             {
                 if (lastName != value)
@@ -247,11 +235,6 @@ namespace KBS.FamilyLinesLib
                     name += firstName;
                 if (!string.IsNullOrEmpty(LastName))
                     name += " " + lastName;
-
-                // 'Name' property has slashes
-                //if (Individual != null)
-                //    Debug.Assert(Individual.GetName().Name == name);
-
                 return name;
             }
         }
@@ -283,12 +266,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string Prefix
         {
-            get
-            {
-                if (Individual != null)
-                    Debug.Assert(Individual.GetName().Prefix == prefix);
-                return prefix;
-            }
+            get { return prefix; }
             set
             {
                 if (prefix != value)
@@ -305,12 +283,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string Suffix
         {
-            get
-            {
-                //if (Individual != null)
-                //    Debug.Assert(Individual.GetName().Suffix == suffix);
-                return suffix;
-            }
+            get { return suffix; }
             set
             {
                 if (suffix != value)
@@ -460,10 +433,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string BirthDateDescriptor
         {
-            get
-            {
-                return birthDateDescriptor;
-            }
+            get { return birthDateDescriptor; }
             set
             {
                 if (birthDateDescriptor == null || birthDateDescriptor != value)
@@ -479,10 +449,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string BirthPlace
         {
-            get
-            {
-                return birthPlace;
-            }
+            get { return birthPlace; }
             set
             {
                 if (birthPlace != value)
@@ -500,10 +467,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string BirthCitation
         {
-            get
-            {
-                return birthCitation;
-            }
+            get { return birthCitation; }
             set
             {
                 if (birthCitation != value)
@@ -520,10 +484,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string BirthSource
         {
-            get
-            {
-                return birthSource;
-            }
+            get { return birthSource; }
             set
             {
                 if (birthSource != value)
@@ -671,15 +632,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public string DeathPlace
         {
-            get
-            {
-                // TODO asserting for gl120366.ged (intl chars)
-                //if (Individual != null && 
-                //    Individual.Death != null &&
-                //    Individual.Death.Place != null)
-                //    Debug.Assert(Individual.Death.Place.Name == deathPlace);
-                return deathPlace;
-            }
+            get { return deathPlace; }
             set
             {
                 if (deathPlace != value)
@@ -2669,6 +2622,42 @@ namespace KBS.FamilyLinesLib
         {
             // TODO custom attributes
             return m_facts.Where(gedEvent => gedEvent.Type == evType).ToList();
+        }
+
+        /// <summary>
+        /// Called to validate the person's data - TODO extend for issue 1538(?)
+        /// </summary>
+        public void Validate()
+        {
+            if (!isLiving) 
+                return;
+
+            // 1. If any of the current spouses died over 100 yrs ago, this person should not be living:
+            foreach (Person curSpouse in CurrentSpouses)
+            {
+                if (curSpouse.deathDate != null)
+                {
+                    if ((DateTime.Now.Year - curSpouse.deathDate.Value.Year) > 100)
+                    {
+                        isLiving = false;
+                        break;
+                    }
+                }
+            }
+
+            // 2. If this person has a child who died over 100 years ago, this person should not be living:
+            foreach (Person child in Children)
+            {
+                if (child.deathDate != null)
+                {
+                    if ((DateTime.Now.Year - child.deathDate.Value.Year) > 100)
+                    {
+                        isLiving = false;
+                        break;
+                    }
+                }
+            }
+
         }
     }
 
