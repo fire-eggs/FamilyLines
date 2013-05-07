@@ -93,6 +93,10 @@ namespace KBS.FamilyLinesLib
             ImportSourcesGN();
             ImportRepositoriesGN();
 
+            foreach (Person p in people)
+            {
+                p.Validate();
+            }
             people.RebuildTrees(); // set up the initial state of trees
         }
 // ReSharper restore UnusedParameter.Local
