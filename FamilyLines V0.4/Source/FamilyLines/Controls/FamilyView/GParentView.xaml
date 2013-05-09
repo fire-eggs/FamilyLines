@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="KBS.FamilyLines.Controls.FamilyView.GParentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:FamilyLines="clr-namespace:KBS.FamilyLines" 
+             mc:Ignorable="d" 
+             d:DesignHeight="50" 
+             d:DesignWidth="300"
+>
+
+    <UserControl.Resources>
+        <FamilyLines:BoolToVisibilityConverter x:Key="VisiConvert"/>
+        <FamilyLines:ImageConverter x:Key="ImageConvert" />
+        <FamilyLines:ComposingConverter x:Key="ComposingConverter">
+            <FamilyLines:ComposingConverter.Converters>
+                <FamilyLines:NotConverter />
+                <FamilyLines:BoolToVisibilityConverter />
+            </FamilyLines:ComposingConverter.Converters>
+        </FamilyLines:ComposingConverter>
+    </UserControl.Resources>
+
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Center">
+
+            <Button Click="go_click" Height="Auto" Width="Auto" 
+                    ToolTip="" ToolTipOpening="Button_ToolTipOpening_1"
+                    Style="{DynamicResource BlackButtonStyle}"
+                    Visibility="{Binding Path=Show, Converter={StaticResource VisiConvert}, Mode=Default}"
+                    >
+                <StackPanel DataContext="{Binding Path=Human}" Orientation="Horizontal">
+                    <Border BorderBrush="#02747474" Background="#02000000" HorizontalAlignment="Center" 
+                            Margin="5,2,5,0" 
+                            VerticalAlignment="Top" BorderThickness="1,1,1,1" 
+                            Visibility="{Binding Path=HasAvatar, Converter={StaticResource VisiConvert}, Mode=Default}">
+                        <Border.BitmapEffect>
+                            <DropShadowBitmapEffect ShadowDepth="4" Softness="0.75" />
+                        </Border.BitmapEffect>
+                        <Image Source="{Binding Path=Avatar, Converter={StaticResource ImageConvert}, Mode=OneWay}" 
+                               Stretch="Uniform" VerticalAlignment="Top" MaxWidth="50" 
+                               Height="30" HorizontalAlignment="Left" StretchDirection="DownOnly" />
+                    </Border>
+                    <Border Visibility="{Binding Path=HasAvatar, Converter={StaticResource ComposingConverter}, Mode=Default}" 
+                            BorderBrush="#FFFFFFFF" Background="#02FFFFFF" Margin="5,2,5,0">
+                        <Rectangle Fill="{DynamicResource NoPhotoBrush}" Stroke="{x:Null}" 
+                                   Width="25" Height="30" 
+                                   VerticalAlignment="Top">
+                            <Rectangle.BitmapEffect>
+                                <DropShadowBitmapEffect ShadowDepth="4" Softness="0.75" />
+                            </Rectangle.BitmapEffect>
+                        </Rectangle>
+                    </Border>
+                    <!-- TODO: multiline with year-range shown -->
+                <TextBlock Text="{Binding Path=Name, Mode=OneWay, FallbackValue=Full name }" 
+                           TextTrimming="CharacterEllipsis" VerticalAlignment="Center" 
+                           Margin="2,0,5,0"
+                           />
+                </StackPanel>
+            </Button>
+            <Button Click="add_click" 
+                    Content="{Binding Path=TypeName}"
+                    Style="{DynamicResource BlackButtonStyle}"
+                    Visibility="{Binding Path=Show, Converter={StaticResource ComposingConverter}, Mode=Default}"
+                    ToolTip="" ToolTipOpening="Button_ToolTipOpening"
+                    />
+        </StackPanel>
+
+</UserControl>
