@@ -26,8 +26,11 @@ namespace KBS.FamilyLinesLib
         {
             Type = individualEvent.EventType;
             Date = individualEvent.Date;
-            DateDescriptor = null;
-            Place = individualEvent.Place == null ? null : individualEvent.Place.Name;
+
+            // NOTE: do NOT set to null, prevents proper serialization (???)
+            DateDescriptor = "";
+            // NOTE: do NOT set to null, prevents proper serialization (???)
+            Place = individualEvent.Place == null ? "" : individualEvent.Place.Name;
 
             // Description is the EventName value
             Description = individualEvent.EventName;
