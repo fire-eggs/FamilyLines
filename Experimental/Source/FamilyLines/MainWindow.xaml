@@ -734,6 +734,12 @@
                 CloseButtonClick="EditFactDetails_Finish"
                 />
 
+            <Controls:ViewAllFacts
+                x:Name="ViewAllFacts"
+                Visibility="Hidden"
+                CloseButtonClick="ViewAllFacts_Finish" 
+                />
+            
         </Grid>
 
     </DockPanel>

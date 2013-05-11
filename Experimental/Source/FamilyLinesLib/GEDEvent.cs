@@ -9,6 +9,7 @@
  * 4. The EventDetails.xaml GUI relies on this model.
  */
 using System;
+using System.Xml.Serialization;
 using GEDCOM.Net;
 
 namespace KBS.FamilyLinesLib
@@ -42,6 +43,9 @@ namespace KBS.FamilyLinesLib
             // TODO not sure when this applies?
             ReligiousAffiliation = individualEvent.ReligiousAffiliation;
         }
+
+        [XmlIgnore]
+        public string EventName { get { return GedcomEvent.TypeToReadable(Type); } }
 
         public GedcomEvent.GedcomEventType Type { get; set; }
         public string Place { get; set; }

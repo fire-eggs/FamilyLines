@@ -115,6 +115,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ViewAllFacts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PreviewWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -188,6 +192,9 @@
     </Compile>
     <Compile Include="Controls\HeaderViewer.xaml.cs">
       <DependentUpon>HeaderViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ViewAllFacts.xaml.cs">
+      <DependentUpon>ViewAllFacts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
