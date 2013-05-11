@@ -2439,9 +2439,8 @@ namespace KBS.FamilyLinesLib
             foreach (var individualEvent in indiv.Attributes)
                 m_facts.Add(new GEDAttribute(individualEvent));
 
-            // TODO convert all events
-            //foreach (var individualEvent in indiv.Events)
-            //    m_events.Add(new GEDEvent(individualEvent));
+            foreach (var individualEvent in indiv.Events)
+                m_events.Add(new GEDEvent(individualEvent));
         }
 
         #endregion
