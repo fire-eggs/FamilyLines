@@ -58,12 +58,12 @@ namespace KBS.FamilyLines
 
             // TODO support other gender values
             //filter for gender
-            if (person.Gender == GedcomSex.Male)
+            if (person.Gender == Gender.Male)
             {
                 if(this.Filter.MatchesGender(Properties.Resources.Male.ToLower()))
                     return true;
             }
-            if(person.Gender == GedcomSex.Female)
+            if(person.Gender == Gender.Female)
             {
                 if(this.Filter.MatchesGender(Properties.Resources.Female.ToLower()))
                     return true;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -10,11 +11,12 @@ using System.Text;
 using System.Xml.Serialization;
 using GEDCOM.Net;
 using KBS.FamilyLinesLib.Properties;
-using System.Collections;
-using System.Collections.Specialized;
 
 namespace KBS.FamilyLinesLib
 {
+    // A number of properties are deliberately written so the 'value' parameter is ignored for 'set'.
+    // ReSharper disable ValueParameterNotUsed
+
     /// <summary>
     /// Representation for a single serializable Person.
     /// INotifyPropertyChanged allows properties of the Person class to
@@ -26,8 +28,7 @@ namespace KBS.FamilyLinesLib
         #region Fields and Constants
 
         private string id;
-//        private Gender gender;
-        private GedcomSex gender;
+        private Gender gender;
         private bool isLiving;
 
         private Restriction restriction;
@@ -131,7 +132,7 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Gets or sets the person's gender
         /// </summary>
-        public GedcomSex Gender
+        public Gender Gender
         {
             get { return gender; }
             set
@@ -1817,7 +1818,7 @@ namespace KBS.FamilyLinesLib
         [XmlIgnore]
         public bool IsLockedIsLiving
         {
-            get { return (restriction == Restriction.Locked || isLiving == true ); }
+            get { return (restriction == Restriction.Locked || isLiving ); }
             set
             {
                 OnPropertyChanged("IsLockedIsLiving");
@@ -2025,10 +2026,10 @@ namespace KBS.FamilyLinesLib
             {
                 switch (gender)
                 {
-                    case GedcomSex.Male:
-                        return Properties.Resources.Son;
-                    case GedcomSex.Female:
-                        return Properties.Resources.Daughter;
+                    case Gender.Male:
+                        return Resources.Son;
+                    case Gender.Female:
+                        return Resources.Daughter;
                     default:
                         return "Unknown"; // TODO embedded string
                 }
@@ -2079,10 +2080,10 @@ namespace KBS.FamilyLinesLib
             {
                 switch (gender)
                 {
-                    case GedcomSex.Male:
-                        return Properties.Resources.Brother;
-                    case GedcomSex.Female:
-                        return Properties.Resources.Sister;
+                    case Gender.Male:
+                        return Resources.Brother;
+                    case Gender.Female:
+                        return Resources.Sister;
                     default:
                         return "Unknown"; // TODO embedded string
                 }
@@ -2135,10 +2136,10 @@ namespace KBS.FamilyLinesLib
                 // TODO just use 'partner'?
                 switch (gender)
                 {
-                    case GedcomSex.Male:
-                        return Properties.Resources.Husband;
-                    case GedcomSex.Female:
-                        return Properties.Resources.Wife;
+                    case Gender.Male:
+                        return Resources.Husband;
+                    case Gender.Female:
+                        return Resources.Wife;
                     default:
                         return "Unknown"; // TODO embedded string
                 }
@@ -2189,10 +2190,10 @@ namespace KBS.FamilyLinesLib
             {
                 switch (gender)
                 {
-                    case GedcomSex.Male:
-                        return Properties.Resources.Father;
-                    case GedcomSex.Female:
-                        return Properties.Resources.Mother;
+                    case Gender.Male:
+                        return Resources.Father;
+                    case Gender.Female:
+                        return Resources.Mother;
                     default:
                         return "Unknown"; // TODO embedded string
                 }
@@ -2292,8 +2293,7 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Creates a new instance of the person class with the firstname, the lastname, and gender
         /// </summary>
-//        public Person(string firstName, string lastName, Gender gender)
-        public Person(string firstName, string lastName, GedcomSex _gender)
+        public Person(string firstName, string lastName, Gender _gender)
             : this(firstName, lastName)
         {
             gender = _gender;
@@ -2660,17 +2660,14 @@ namespace KBS.FamilyLinesLib
         }
     }
 
+    // ReSharper restore ValueParameterNotUsed
+
     /// <summary>
     /// Enumeration of the person's restriction
     /// </summary>
     public enum Restriction
     {
         None, Locked, Private
-    }
-
-    public enum HackGender
-    {
-        Male, Female
     }
 
     /// <summary>

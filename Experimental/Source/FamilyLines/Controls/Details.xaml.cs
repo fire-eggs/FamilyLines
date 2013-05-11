@@ -24,7 +24,7 @@ namespace KBS.FamilyLines
         PeopleCollection family = App.Family;
         SourceCollection sources = App.Sources;
 
-        GedcomSex genderFilter = GedcomSex.Male;
+        Gender genderFilter = Gender.Male;
 
         Boolean ResetFilter = false;     //When true, enables quick filter reset
         Boolean ExistingFilter = false;  //When true, enables automatic filtering on gender and relatives
@@ -397,7 +397,7 @@ namespace KBS.FamilyLines
                 case FamilyMemberComboBoxValue.Son:
                     relationship = Properties.Resources.Son;
                     // Assume that the new person has the same last name as the husband
-                    if ((family.Current.Gender == GedcomSex.Female) && (family.Current.Spouses.Count > 0) && (family.Current.Spouses[0].Gender == GedcomSex.Male))
+                    if ((family.Current.Gender == Gender.Female) && (family.Current.Spouses.Count > 0) && (family.Current.Spouses[0].Gender == Gender.Male))
                         surname = family.Current.Spouses[0].LastName;
                     else
                         surname = family.Current.LastName;
@@ -487,7 +487,7 @@ namespace KBS.FamilyLines
             switch (relationshipAdd)
             {
                 case FamilyMemberComboBoxValue.Father:
-                    newPerson.Gender = GedcomSex.Male;
+                    newPerson.Gender = Gender.Male;
 
                     RelationshipHelper.AddParent(family, destinationPerson, newPerson);
 
@@ -498,7 +498,7 @@ namespace KBS.FamilyLines
                     break;
 
                 case FamilyMemberComboBoxValue.Mother:
-                    newPerson.Gender = GedcomSex.Female;
+                    newPerson.Gender = Gender.Female;
 
                     RelationshipHelper.AddParent(family, destinationPerson, newPerson);
 
@@ -509,7 +509,7 @@ namespace KBS.FamilyLines
                     break;
 
                 case FamilyMemberComboBoxValue.Brother:
-                    newPerson.Gender = GedcomSex.Male;
+                    newPerson.Gender = Gender.Male;
 
                     // Check to see if there are multiple parents
                     if (possibleParents.Count > 1)
@@ -519,7 +519,7 @@ namespace KBS.FamilyLines
                     break;
 
                 case FamilyMemberComboBoxValue.Sister:
-                    newPerson.Gender = GedcomSex.Female;
+                    newPerson.Gender = Gender.Female;
 
                     // Check to see if there are multiple parents
                     if (possibleParents.Count > 1)
@@ -535,7 +535,7 @@ namespace KBS.FamilyLines
                     break;
 
                 case FamilyMemberComboBoxValue.Son:
-                    newPerson.Gender = GedcomSex.Male;
+                    newPerson.Gender = Gender.Male;
 
                     if (destinationPerson.Spouses.Count > 1)
                     {
@@ -547,7 +547,7 @@ namespace KBS.FamilyLines
                     break;
 
                 case FamilyMemberComboBoxValue.Daughter:
-                    newPerson.Gender = GedcomSex.Female;
+                    newPerson.Gender = Gender.Female;
                     if (destinationPerson.Spouses.Count > 1)
                     {
                         possibleParents = destinationPerson.MakeParentSets();
@@ -562,7 +562,7 @@ namespace KBS.FamilyLines
                     family.OnContentChanged();
                     SetNextFamilyMemberAction(FamilyMemberComboBoxValue.Father);
 
-                    newPerson.Gender = MaleCheck.IsChecked == false ? GedcomSex.Female : GedcomSex.Male;
+                    newPerson.Gender = MaleCheck.IsChecked == false ? Gender.Female : Gender.Male;
                     break;
             }
 
@@ -600,21 +600,21 @@ namespace KBS.FamilyLines
             switch (relationshipAdd)
             {
                 case FamilyMemberComboBoxValue.Brother:
-                    newPerson.Gender = GedcomSex.Male;
+                    newPerson.Gender = Gender.Male;
                     RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
                     break;
 
                 case FamilyMemberComboBoxValue.Sister:
-                    newPerson.Gender = GedcomSex.Female;
+                    newPerson.Gender = Gender.Female;
                     RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
                     break;
                 case FamilyMemberComboBoxValue.Son:
-                    newPerson.Gender = GedcomSex.Male;
+                    newPerson.Gender = Gender.Male;
                     RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
                     break;
 
                 case FamilyMemberComboBoxValue.Daughter:
-                    newPerson.Gender = GedcomSex.Female;
+                    newPerson.Gender = Gender.Female;
                     RelationshipHelper.AddParent(family, newPerson, (ParentSet)ParentsListBox.SelectedValue);
                     break;
             }
@@ -645,26 +645,26 @@ namespace KBS.FamilyLines
                     {
 
                         case ExistingFamilyMemberComboBoxValue.Father:
-                            if (existingPerson.Gender == GedcomSex.Male)
+                            if (existingPerson.Gender == Gender.Male)
                                 RelationshipHelper.AddExistingParent(family, family.Current, existingPerson, ParentChildModifier.Natural);
 
                             break;
 
                         case ExistingFamilyMemberComboBoxValue.Mother:
-                            if (existingPerson.Gender == GedcomSex.Female)
+                            if (existingPerson.Gender == Gender.Female)
                                 RelationshipHelper.AddExistingParent(family, family.Current, existingPerson, ParentChildModifier.Natural);
 
                             break;
 
                         case ExistingFamilyMemberComboBoxValue.Brother:
-                            if (existingPerson.Gender == GedcomSex.Male)
+                            if (existingPerson.Gender == Gender.Male)
                                 RelationshipHelper.AddExistingSibling(family, family.Current, existingPerson);
 
                             break;
 
                         case ExistingFamilyMemberComboBoxValue.Sister:
 
-                            if (existingPerson.Gender == GedcomSex.Female)
+                            if (existingPerson.Gender == Gender.Female)
                                 RelationshipHelper.AddExistingSibling(family, family.Current, existingPerson);
                             break;
 
@@ -676,13 +676,13 @@ namespace KBS.FamilyLines
 
                         case ExistingFamilyMemberComboBoxValue.Son:
 
-                            if (existingPerson.Gender == GedcomSex.Male)
+                            if (existingPerson.Gender == Gender.Male)
                                 RelationshipHelper.AddExistingChild(family, family.Current, existingPerson, ParentChildModifier.Natural);
                             break;
 
                         case ExistingFamilyMemberComboBoxValue.Daughter:
 
-                            if (existingPerson.Gender == GedcomSex.Female)
+                            if (existingPerson.Gender == Gender.Female)
                                 RelationshipHelper.AddExistingChild(family, family.Current, existingPerson, ParentChildModifier.Natural);
                             break;
                     }
@@ -741,25 +741,25 @@ namespace KBS.FamilyLines
                 switch ((ExistingFamilyMemberComboBoxValue)ExistingFamilyMemberComboBox.SelectedValue)
                 {
                     case ExistingFamilyMemberComboBoxValue.Father:
-                        genderFilter = GedcomSex.Male;
+                        genderFilter = Gender.Male;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Mother:
-                        genderFilter = GedcomSex.Female;
+                        genderFilter = Gender.Female;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Brother:
-                        genderFilter = GedcomSex.Male;
+                        genderFilter = Gender.Male;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Sister:
-                        genderFilter = GedcomSex.Female;
+                        genderFilter = Gender.Female;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Spouse:
                         ignoreGender = true;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Son:
-                        genderFilter = GedcomSex.Male;
+                        genderFilter = Gender.Male;
                         break;
                     case ExistingFamilyMemberComboBoxValue.Daughter:
-                        genderFilter = GedcomSex.Female;
+                        genderFilter = Gender.Female;
                         break;
                 }
 

@@ -419,7 +419,7 @@ namespace KBS.FamilyLines
             // Format string, the resource is in the XAML file.
             string resourceName = string.Format(
                 CultureInfo.InvariantCulture, "{0}{1}{2}{3}",
-                (person.Gender == GedcomSex.Female) ? "Female" : "Male",
+                (person.Gender == Gender.Female) ? "Female" : "Male",
                 this.type.ToString(),
                 (this.person.IsLiving) ? "Living" : "Deceased",
                 part);
@@ -448,7 +448,7 @@ namespace KBS.FamilyLines
             // Determine the node template based on node properties.
             string template = string.Format(
                 CultureInfo.InvariantCulture, "{0}{1}{2}NodeTemplate",
-                (person.Gender == GedcomSex.Female) ? "Female" : "Male",
+                (person.Gender == Gender.Female) ? "Female" : "Male",
                 (this.type == NodeType.Primary) ? "Primary" : "",
                 (person.Restriction != Restriction.Private && person.HasAvatar && Diagram.showPhotos) ? "Photo" : "");
 
