@@ -114,7 +114,7 @@ namespace KBS.FamilyLines
 
                 #region top names
 
-                if (p.Gender == GedcomSex.Male)
+                if (p.Gender == Gender.Male)
                     maleNames[i] = p.FirstName.Split()[0];
                 else
                     femaleNames[i] = p.FirstName.Split()[0];
@@ -491,8 +491,8 @@ namespace KBS.FamilyLines
             ListCollectionView histogramView = CreateView("Gender", "Gender");
             GenderDistributionControl.View = histogramView;
             GenderDistributionControl.CategoryLabels.Clear();
-            GenderDistributionControl.CategoryLabels.Add(GedcomSex.Male, Properties.Resources.Male);
-            GenderDistributionControl.CategoryLabels.Add(GedcomSex.Female, Properties.Resources.Female);
+            GenderDistributionControl.CategoryLabels.Add(Gender.Male, Properties.Resources.Male);
+            GenderDistributionControl.CategoryLabels.Add(Gender.Female, Properties.Resources.Female);
 
             //Living bar chart
 

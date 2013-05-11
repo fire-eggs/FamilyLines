@@ -95,7 +95,7 @@ namespace GEDCOM.Net
 				
 				switch (indi1.Sex)
 				{
-					case GedcomSex.Female:
+					case Gender.Female:
 						Wife = indi1.XRefID;
 						if (indi2 != null)
 						{

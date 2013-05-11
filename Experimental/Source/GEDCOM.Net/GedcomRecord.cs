@@ -57,7 +57,7 @@ namespace GEDCOM.Net
 		Header
 	}
 	
-	public enum GedcomSex
+	public enum Gender
 	{
 		Undetermined,
 		Male,

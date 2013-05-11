@@ -35,7 +35,7 @@ namespace GEDCOM.Net
 		#region Variables
 		
 		private GedcomRecordList<GedcomName> _Names;
-		private GedcomSex _Sex = GedcomSex.Undetermined;
+		private Gender _Sex = Gender.Undetermined;
 		
 		private GedcomRecordList<GedcomIndividualEvent> _Events;
 		private GedcomRecordList<GedcomIndividualEvent> _Attributes;
@@ -97,7 +97,7 @@ namespace GEDCOM.Net
 		{
 			base.Database = database;
 			Level = 0;
-			Sex = GedcomSex.Undetermined;
+			Sex = Gender.Undetermined;
 			XRefID = database.GenerateXref("I");
 			
 			GedcomName name = new GedcomName();
@@ -137,18 +137,18 @@ namespace GEDCOM.Net
 				string str = "U";
 				switch (Sex)
 				{
-					case GedcomSex.Undetermined:
+					case Gender.Undetermined:
 						break;
-					case GedcomSex.Male:
+					case Gender.Male:
 						str = "M";
 						break;
-					case GedcomSex.Female:
+					case Gender.Female:
 						str = "F";
 						break;
-					case GedcomSex.Both:
+					case Gender.Both:
 						str = "B";
 						break;
-					case GedcomSex.Neuter:
+					case Gender.Neuter:
 						str = "N";
 						break;
 				}
@@ -157,7 +157,7 @@ namespace GEDCOM.Net
 			}
 		}
 		
-		public GedcomSex Sex
+		public Gender Sex
 		{
 			get { return _Sex; }
 			set
@@ -176,7 +176,7 @@ namespace GEDCOM.Net
 							if ((fam.Husband == XRefID && string.IsNullOrEmpty(fam.Wife)) ||
 							    (fam.Wife == XRefID && string.IsNullOrEmpty(fam.Husband)))
 							{
-								if (value == GedcomSex.Male)
+								if (value == Gender.Male)
 								{
 									fam.Husband = XRefID;
 									fam.Wife = null;
@@ -1108,19 +1108,19 @@ namespace GEDCOM.Net
 			sw.Write(" SEX ");
 			switch (Sex)
 			{
-				case GedcomSex.Male:
+				case Gender.Male:
 					sw.Write("M");
 					break;
-				case GedcomSex.Female:
+				case Gender.Female:
 					sw.Write("F");
 					break;
-				case GedcomSex.Neuter:
+				case Gender.Neuter:
 					sw.Write("N");
 					break;
-				case GedcomSex.Both:
+				case Gender.Both:
 					sw.Write("B");
 					break;
-				case GedcomSex.Undetermined:
+				case Gender.Undetermined:
 					sw.Write("U");
 					break;
 				default:

@@ -89,11 +89,11 @@
             </ObjectDataProvider>
 
             <!-- Data provider for binding to the gender types enum values -->
-            <ObjectDataProvider x:Key="GenderEnumDS" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
+            <!--<ObjectDataProvider x:Key="GenderEnumDS" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
                 <ObjectDataProvider.MethodParameters>
-                    <x:Type TypeName="KBS.FamilyLinesLib:HackGender" />
+                    <x:Type TypeName="KBS.FamilyLinesLib:Gender" />
                 </ObjectDataProvider.MethodParameters>
-            </ObjectDataProvider>
+            </ObjectDataProvider>-->
             
             <!-- Data provider for binding to the restriction types enum values -->
             <ObjectDataProvider x:Key="RestrictionEnumDS" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">

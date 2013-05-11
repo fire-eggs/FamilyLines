@@ -82,8 +82,8 @@ namespace KBS.FamilyLines
             AgeDistributionControl.CategoryLabels.Add(AgeGroup.MiddleAge, Properties.Resources.AgeGroupMiddleAge);
             AgeDistributionControl.CategoryLabels.Add(AgeGroup.Senior, Properties.Resources.AgeGroupSenior);
 
-            GenderDistributionControl1.CategoryLabels.Add(GedcomSex.Male, Properties.Resources.Male);
-            GenderDistributionControl1.CategoryLabels.Add(GedcomSex.Female, Properties.Resources.Female);
+            GenderDistributionControl1.CategoryLabels.Add(Gender.Male, Properties.Resources.Male);
+            GenderDistributionControl1.CategoryLabels.Add(Gender.Female, Properties.Resources.Female);
 
             LivingDistributionControl1.CategoryLabels.Add(false, Properties.Resources.Deceased);
             LivingDistributionControl1.CategoryLabels.Add(true, Properties.Resources.Living);

@@ -1817,22 +1817,22 @@ namespace GEDCOM.Net
 							switch (_lineValue)
 							{
 								case "M":
-									individualRecord.Sex = GedcomSex.Male;
+									individualRecord.Sex = Gender.Male;
 									break;
 								case "F":
-									individualRecord.Sex = GedcomSex.Female;
+									individualRecord.Sex = Gender.Female;
 									break;
 								// non standard
 								case "B":
-									individualRecord.Sex = GedcomSex.Both;
+									individualRecord.Sex = Gender.Both;
 									break;
 								// non standard
 								case "N":
-									individualRecord.Sex = GedcomSex.Neuter;
+									individualRecord.Sex = Gender.Neuter;
 									break;
 								// non standard
 								case "U":
-									individualRecord.Sex = GedcomSex.Undetermined;
+									individualRecord.Sex = Gender.Undetermined;
 									break;
 							}
 						}

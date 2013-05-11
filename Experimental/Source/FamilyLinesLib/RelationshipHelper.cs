@@ -77,7 +77,7 @@ namespace KBS.FamilyLinesLib
             // In this case, just add a simple child parent relationship and don't try to add
             // siblings etc, this should be done manually.
 
-            GedcomSex parentGender = parent.Gender;
+            Gender parentGender = parent.Gender;
 
             int i = 0;  // number of parents of same gender
 
@@ -211,10 +211,10 @@ namespace KBS.FamilyLinesLib
         {
             // TODO unreasonable assumption - impact is how?
             // Assume the spouse's gender based on the counterpart of the person's gender
-            if (person.Gender == GedcomSex.Male)
-                spouse.Gender = GedcomSex.Female;
+            if (person.Gender == Gender.Male)
+                spouse.Gender = Gender.Female;
             else
-                spouse.Gender = GedcomSex.Male;
+                spouse.Gender = Gender.Male;
 
             if (person.Spouses != null)
             {
@@ -263,10 +263,10 @@ namespace KBS.FamilyLinesLib
         {
             // TODO unreasonable assumption - impact is how?
             // Assume the spouse's gender based on the counterpart of the person's gender
-            if (person.Gender == GedcomSex.Male)
-                spouse.Gender = GedcomSex.Female;
+            if (person.Gender == Gender.Male)
+                spouse.Gender = Gender.Female;
             else
-                spouse.Gender = GedcomSex.Male;
+                spouse.Gender = Gender.Male;
 
             if (person.Spouses != null)
             {

@@ -9,7 +9,6 @@
  * 4. The EventDetails.xaml GUI relies on this model.
  */
 using System;
-using System.Xml.Serialization;
 using GEDCOM.Net;
 
 namespace KBS.FamilyLinesLib

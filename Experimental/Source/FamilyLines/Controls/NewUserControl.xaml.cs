@@ -50,7 +50,7 @@ namespace KBS.FamilyLines.Controls
 
             // TODO need a gender dropdown (?) - support other gender values
             // Setup the properties based on the input
-            newPerson.Gender = (MaleRadioButton.IsChecked == true) ? GedcomSex.Male : GedcomSex.Female;
+            newPerson.Gender = (MaleRadioButton.IsChecked == true) ? Gender.Male : Gender.Female;
             newPerson.BirthPlace = BirthPlaceInputTextBox.Text;
             newPerson.IsLiving = true;
 
