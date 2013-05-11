@@ -54,6 +54,7 @@ namespace KBS.FamilyLines
             AddSpouseH += Execute_AddSpouse;
             EditMarrH += Execute_EditMarriage;
             EditAllDetailsH += Execute_EditAllDetails;
+            ViewAllFactsH += Execute_ViewAllFacts;
         }        
 
         #region event handlers
@@ -406,6 +407,19 @@ namespace KBS.FamilyLines
                 RemoveHandler(Commands.EditAllFactDetails, value);
             }
         }
+
+        public event RoutedEventHandler ViewAllFactsH
+        {
+            add
+            {
+                AddHandler(Commands.ViewAllFacts, value);
+            }
+            remove
+            {
+                RemoveHandler(Commands.ViewAllFacts, value);
+            }
+        }
+
         #endregion
 
         #region menu command handlers
@@ -2247,6 +2261,22 @@ namespace KBS.FamilyLines
             HeaderEditor.EditHeader(familyCollection.ExportHeader, ViewContainer, ViewCallback);
         }
 
+        private void Execute_ViewAllFacts(object sender, RoutedEventArgs e)
+        {
+            var factProp = e.OriginalSource as Person;
+            if (factProp == null)
+                return;
+            giveControlFocus();
+            ViewAllFacts.Target = factProp;
+            ViewAllFacts.Visibility = Visibility.Visible;
+        }
+
+        private void ViewAllFacts_Finish(object sender, RoutedEventArgs e)
+        {
+            ViewAllFacts.Visibility = Visibility.Hidden;
+            removeControlFocus();
+        }
+
         private void Execute_EditAllDetails(object sender, RoutedEventArgs e)
         {
             var factProps = e.OriginalSource as Tuple<Person, GEDAttribute>;
@@ -2262,6 +2292,12 @@ namespace KBS.FamilyLines
         private void EditFactDetails_Finish(object sender, RoutedEventArgs e)
         {
             EditFactDetails.Visibility = Visibility.Hidden;
+            removeControlFocus();
+        }
+
+        private void ViewAllFacts_CloseButtonClick(object sender, RoutedEventArgs e)
+        {
+            ViewAllFacts.Visibility = Visibility.Hidden;
             removeControlFocus();
         }
     }

@@ -2864,6 +2864,13 @@ namespace KBS.FamilyLines
         }
         #endregion
 
+        private void ViewAllFacts_Click(object sender, RoutedEventArgs e)
+        {
+            // Show the "view all facts" dialog for the current person
+            var childProps = family.Current;
+            var e2 = new RoutedEventArgs(Commands.ViewAllFacts, childProps);
+            RaiseEvent(e2);
+        }
     }
 
     /// <summary>

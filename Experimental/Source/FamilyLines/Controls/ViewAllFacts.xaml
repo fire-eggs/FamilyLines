@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="KBS.FamilyLines.Controls.ViewAllFacts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KBS.FamilyLines"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" 
+             d:DesignWidth="300"
+>
+
+    <StackPanel>
+
+        <!-- Header -->
+        <Border Padding="5,0,5,0" Background="{DynamicResource BackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" 
+                BorderThickness="1,1,1,0" CornerRadius="5,5,0,0" Height="30" MinWidth="300" Width="Auto">
+            <Grid>
+                <!-- Person name -->
+                <TextBlock Text="{Binding Path=PName, Mode=Default, FallbackValue=Current Person}" 
+                   Style="{DynamicResource HeaderStyle}" FontWeight="Bold" Height="23.94" 
+                   Margin="5,1,10,0" DockPanel.Dock="Left" TextTrimming="CharacterEllipsis" 
+                   Foreground="{DynamicResource HeaderFontColor}"/>
+                <Button Content="X" x:Name="CloseButton" Click="CloseButton_Click"  Height="15"  
+                        HorizontalAlignment="Right" Width="15" Style="{DynamicResource RedButtonStyle}"/>
+            </Grid>
+        </Border>
+
+        <!-- Content -->
+        <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,1">
+            <StackPanel Height="500"
+                        Background="{DynamicResource InputBackgroundBrush}" 
+                        >
+                <DataGrid ItemsSource="{Binding Facts}" 
+                          AutoGenerateColumns="False"
+                          CanUserReorderColumns="True"
+                          CanUserResizeColumns="True"
+                          CanUserSortColumns="True"
+                          SelectionMode="Single" 
+                          SelectionUnit="FullRow">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Fact" Binding="{Binding EventName}" />
+                        <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
+                        <DataGridTextColumn Header="Place" Binding="{Binding Place}"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+            </StackPanel>
+        </Border>
+
+        <!-- Footer -->
+        <Border Background="{DynamicResource BackgroundBrush}" Height="15" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,1,1" CornerRadius="0,0,5,5"/>
+
+    </StackPanel>
+
+</UserControl>
