@@ -845,7 +845,7 @@ namespace KBS.FamilyLines
 
             // Primary row.
             Person primaryPerson = logic.Family.Current;
-            DiagramRow primaryRow = logic.CreatePrimaryRow(primaryPerson, 1.0, Const.RelatedMultiplier, hideSiblings, hideSpouses, hidePreviousSpouses);
+            DiagramRow primaryRow = logic.CreatePrimaryRow(primaryPerson, 1.0, Const.RelatedMultiplier, hideSiblings, hideSpouses, hidePreviousSpouses, true);
             primaryRow.GroupSpace = Const.PrimaryRowGroupSpace;
             AddRow(primaryRow);
 
@@ -948,11 +948,14 @@ namespace KBS.FamilyLines
         {
             // Get list of parents for the current row.
             Collection<Person> parents = DiagramLogic.GetParents(row);
-            if (parents.Count == 0)
+
+            // Get list of parentsinlaw for the current row.
+            Collection<Person> parentsinLaw = DiagramLogic.GetParentsInLaw(row);
+            if ((parents.Count == 0)&&(parentsinLaw.Count == 0))
                 return null;
 
             // Add another row.
-            DiagramRow parentRow = logic.CreateParentRow(parents, nodeScale, nodeScale * Const.RelatedMultiplier, hideAuntsUncles);
+            DiagramRow parentRow = logic.CreateParentRow(parents, parentsinLaw, nodeScale, nodeScale * Const.RelatedMultiplier, hideAuntsUncles, hideInLaws);
             parentRow.Margin = new Thickness(0, 0, 0, Const.RowSpace);
             parentRow.GroupSpace = Const.ParentRowGroupSpace;
             InsertRow(parentRow);
