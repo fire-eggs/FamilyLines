@@ -333,7 +333,7 @@
     </Setter>
   </Style>
 
-  <ControlTemplate x:Key="FamilyListViewItemTemplate" TargetType='{x:Type ListViewItem}'>
+  <ControlTemplate x:Key="oldFamilyListViewItemTemplate" TargetType='{x:Type ListViewItem}'>
     <Grid SnapsToDevicePixels="True" Margin="0,0,0,0">
       <Border x:Name="Border" CornerRadius="3,3,3,3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" />
       <GridViewRowPresenter TextBlock.Foreground="{DynamicResource ListViewFontColor}" TextBlock.FontSize="11" Content="{TemplateBinding Content}" Columns="{TemplateBinding GridView.ColumnCollection}" />
