@@ -177,6 +177,48 @@ namespace KBS.FamilyLines
         }
 
         /// <summary>
+        /// Return a list of parents for the people in the specified row.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public static Collection<Person> GetParentsInLaw(DiagramRow row)
+        {
+            // List that is returned.
+            Collection<Person> list = new Collection<Person>();
+
+            // Get possible children in the row.
+            List<Person> rowList = GetPrimarySpouse(row);
+
+            // Add each parent to the list, make sure the parent is only added once.
+            foreach (Person person in rowList)
+            {
+                foreach (Person parent in person.NaturalParents)
+                {
+                    if (!list.Contains(parent))
+                        list.Add(parent);
+                }
+            }
+
+            return list;
+        }
+        /// <summary>
+        /// Return list of people in the row that are primary or related node types.
+        /// </summary>
+        private static List<Person> GetPrimarySpouse(DiagramRow row)
+        {
+            List<Person> list = new List<Person>();
+            foreach (DiagramGroup group in row.Groups)
+            {
+                foreach (DiagramNode node in group.Nodes)
+                {
+                    if ( node.Type == NodeType.Spouse)
+                        list.Add(node.Person);
+                }
+            }
+
+            return list;
+        }
+        /// <summary>
         /// Return a list of children for the people in the specified row.
         /// </summary>
         public static List<Person> GetChildren(DiagramRow row)
@@ -305,7 +347,7 @@ namespace KBS.FamilyLines
         /// that only contains the primary node, and 2) The optional left-group 
         /// that contains spouses and siblings.
         /// </summary>
-        public DiagramRow CreatePrimaryRow(Person person, double scale, double scaleRelated, bool hideSiblings, bool hideSpouses, bool hidePreviousSpouses)
+        public DiagramRow CreatePrimaryRow(Person person, double scale, double scaleRelated, bool hideSiblings, bool hideSpouses, bool hidePreviousSpouses, bool hideInLaws)
         {
             // The primary node contains two groups, 
             DiagramGroup primaryGroup = new DiagramGroup();
@@ -348,6 +390,14 @@ namespace KBS.FamilyLines
                 // Half siblings.
                 Collection<Person> halfSiblings = person.HalfSiblings;
                 AddSiblingNodes(row, leftGroup, halfSiblings, NodeType.SiblingLeft, scaleRelated);
+
+                if (hideInLaws == false)
+                {
+                    //add spouse's siblings
+                    // Siblings.
+                    Collection<Person> inlawsiblings = person.CurrentSpouses[0].Siblings;
+                    AddSiblingNodes(row, leftGroup, inlawsiblings, NodeType.Related, scaleRelated);
+                }
    
             }
 
@@ -413,7 +463,7 @@ namespace KBS.FamilyLines
         /// Create the parent row. The row contains a group for each parent. 
         /// Each groups contains the parent, spouses and siblings.
         /// </summary>
-        public DiagramRow CreateParentRow(Collection<Person> parents, double scale, double scaleRelated, bool hideInLaws)
+        public DiagramRow CreateParentRow(Collection<Person> parents, Collection<Person> parentsInLaw, double scale, double scaleRelated, bool hideAuntUncles, bool hideInLaws)
         {
             // Set up the row.
             DiagramRow row = new DiagramRow();
@@ -443,14 +493,14 @@ namespace KBS.FamilyLines
                 RemoveDuplicates(currentSpouses, parents);
                 AddSpouseNodes(person, row, group, currentSpouses,
                     NodeType.Spouse, scaleRelated, true);
-
+                
                 // Previous spouses.
                 Collection<Person> previousSpouses = person.PreviousSpouses;
                 RemoveDuplicates(previousSpouses, parents);
                 AddSpouseNodes(person, row, group, previousSpouses,
                     NodeType.Spouse, scaleRelated, false);
 
-                if (hideInLaws == false)
+                if (hideAuntUncles == false)
                 {
                     // Siblings.
                     Collection<Person> siblings = person.Siblings;
@@ -469,9 +519,35 @@ namespace KBS.FamilyLines
                 if (left)
                     group.Reverse();
             }
-
             // Add connections that span across groups.
             AddSpouseConnections(parents);
+
+            if (hideInLaws == false)
+            {
+                // Inlaws.
+                
+                foreach (Person person in parentsInLaw)
+                {
+                    DiagramGroup group = new DiagramGroup();
+                    row.Add(group);
+
+                    // Determine if this is a left or right oriented group.
+                    bool left = (groupCount++ % 2 == 0) ? true : false;
+                    // Parentinlaws.
+                    if (!personLookup.ContainsKey(person))
+                    {
+                        DiagramNode node = CreateNode(person, NodeType.Related, true, scale);
+                        group.Add(node);
+                        personLookup.Add(node.Person, new DiagramConnectorNode(node, group, row));
+                    }
+                    // Connections.
+                    AddChildConnections(person);
+
+                }
+                AddSpouseConnections(parentsInLaw);
+            }
+
+            
 
             return row;
         }
