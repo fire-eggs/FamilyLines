@@ -1669,12 +1669,20 @@
                         <Controls1:FactDetails x:Name="TitleFact"/>
                         <Controls1:FactDetails x:Name="CasteFact"/>
 
-                        <Button Margin="0,0,0,0" HorizontalAlignment="Left" 
-                                Content="All Facts" Height="15" FontSize="10" 
-                                Width="Auto" MinWidth="60" 
+                        <StackPanel Orientation="Horizontal">
+                            <Button Margin="5,0,0,0" HorizontalAlignment="Left" 
+                                Content="All Facts" Height="20" FontSize="10" 
+                                Width="Auto" MinWidth="70" 
                                 x:Name="ViewAllFactsBtn" 
                                 Click="ViewAllFacts_Click"
                                 />
+                            <Button Margin="5,0,0,0" HorizontalAlignment="Left" 
+                                Content="All Events" Height="20" FontSize="10" 
+                                Width="Auto" MinWidth="70" 
+                                x:Name="ViewAllEventsBtn" 
+                                Click="ViewAllEvents_Click"
+                                />
+                        </StackPanel>
 
                     </StackPanel>
                 </Border>

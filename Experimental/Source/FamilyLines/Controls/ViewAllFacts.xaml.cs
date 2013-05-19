@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines.Controls
@@ -29,12 +31,38 @@ namespace KBS.FamilyLines.Controls
                 _target = value;
                 OnPropertyChanged("PName");
                 OnPropertyChanged("Facts");
+                OnPropertyChanged("Events");
+            }
+        }
+
+        public bool ShowFacts
+        {
+            set
+            {
+                if (value)
+                {
+                    Binding b = new Binding("Facts");
+                    DisplayGrid.SetBinding(ItemsControl.ItemsSourceProperty, b);
+                }
+                else
+                {
+                    Binding b = new Binding("Events");
+                    DisplayGrid.SetBinding(ItemsControl.ItemsSourceProperty, b);
+                }
             }
         }
 
         public string PName
         {
             get { return Target == null ? "" : Target.FullName; }
+        }
+
+        public ObservableCollection<GEDEvent> Events
+        {
+            get
+            {
+                return Target == null ? null : Target.Events;
+            }
         }
 
         public ObservableCollection<GEDAttribute> Facts

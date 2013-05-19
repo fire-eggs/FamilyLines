@@ -39,6 +39,8 @@ namespace KBS.FamilyLines
 
         public static readonly RoutedEvent ViewAllFacts;
 
+        public static readonly RoutedEvent ViewAllEvents;
+
         static Commands()
         {
             AddChild = EventManager.RegisterRoutedEvent("AddChild", RoutingStrategy.Bubble,
@@ -54,6 +56,8 @@ namespace KBS.FamilyLines
             EditAllFactDetails = EventManager.RegisterRoutedEvent("EditAllFactDetails", RoutingStrategy.Bubble,
                                                         typeof(RoutedEventHandler), typeof(Commands));
             ViewAllFacts = EventManager.RegisterRoutedEvent("ViewAllFacts", RoutingStrategy.Bubble,
+                                                        typeof(RoutedEventHandler), typeof(Commands));
+            ViewAllEvents = EventManager.RegisterRoutedEvent("ViewAllEvents", RoutingStrategy.Bubble,
                                                         typeof(RoutedEventHandler), typeof(Commands));
         }
     }

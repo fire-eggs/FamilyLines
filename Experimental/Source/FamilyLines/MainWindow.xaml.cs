@@ -55,6 +55,7 @@ namespace KBS.FamilyLines
             EditMarrH += Execute_EditMarriage;
             EditAllDetailsH += Execute_EditAllDetails;
             ViewAllFactsH += Execute_ViewAllFacts;
+            ViewAllEventsH += Execute_ViewAllEvents;
         }        
 
         #region event handlers
@@ -417,6 +418,18 @@ namespace KBS.FamilyLines
             remove
             {
                 RemoveHandler(Commands.ViewAllFacts, value);
+            }
+        }
+
+        public event RoutedEventHandler ViewAllEventsH
+        {
+            add
+            {
+                AddHandler(Commands.ViewAllEvents, value);
+            }
+            remove
+            {
+                RemoveHandler(Commands.ViewAllEvents, value);
             }
         }
 
@@ -2267,11 +2280,29 @@ namespace KBS.FamilyLines
             if (factProp == null)
                 return;
             giveControlFocus();
+            ViewAllFacts.ShowFacts = true; // Q&D: must call before setting Target
             ViewAllFacts.Target = factProp;
             ViewAllFacts.Visibility = Visibility.Visible;
         }
 
         private void ViewAllFacts_Finish(object sender, RoutedEventArgs e)
+        {
+            ViewAllFacts.Visibility = Visibility.Hidden;
+            removeControlFocus();
+        }
+
+        private void Execute_ViewAllEvents(object sender, RoutedEventArgs e)
+        {
+            var factProp = e.OriginalSource as Person;
+            if (factProp == null)
+                return;
+            giveControlFocus();
+            ViewAllFacts.ShowFacts = false; // Q&D: must call before setting Target
+            ViewAllFacts.Target = factProp;
+            ViewAllFacts.Visibility = Visibility.Visible;
+        }
+
+        private void ViewAllEvents_Finish(object sender, RoutedEventArgs e)
         {
             ViewAllFacts.Visibility = Visibility.Hidden;
             removeControlFocus();
