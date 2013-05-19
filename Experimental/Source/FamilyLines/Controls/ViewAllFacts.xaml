@@ -26,11 +26,12 @@
         </Border>
 
         <!-- Content -->
-        <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,1">
-            <StackPanel Height="500"
+        <Border BorderBrush="{DynamicResource BorderBrush}" Background="{DynamicResource InputBackgroundBrush}" BorderThickness="1,1,1,1">
+            <StackPanel Height="500" Margin="5"
                         Background="{DynamicResource InputBackgroundBrush}" 
                         >
-                <DataGrid ItemsSource="{Binding Facts}" 
+                <DataGrid x:Name="DisplayGrid" 
+                          ItemsSource="{Binding Path=Facts}" 
                           AutoGenerateColumns="False"
                           CanUserReorderColumns="True"
                           CanUserResizeColumns="True"
@@ -38,10 +39,10 @@
                           SelectionMode="Single" 
                           SelectionUnit="FullRow">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Fact" Binding="{Binding EventName}" />
-                        <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
-                        <DataGridTextColumn Header="Place" Binding="{Binding Place}"/>
-                        <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                        <DataGridTextColumn Header="Fact/Event" Binding="{Binding Path=EventName}" />
+                        <DataGridTextColumn Header="Date" Binding="{Binding Path=Date.DateString}"/>
+                        <DataGridTextColumn Header="Place" Binding="{Binding Path=Place}"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 

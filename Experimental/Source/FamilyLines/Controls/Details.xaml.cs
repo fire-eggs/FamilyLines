@@ -2866,9 +2866,21 @@ namespace KBS.FamilyLines
 
         private void ViewAllFacts_Click(object sender, RoutedEventArgs e)
         {
+            // TODO: turn into a single event w/ boolean fact/event switch
+
             // Show the "view all facts" dialog for the current person
             var childProps = family.Current;
             var e2 = new RoutedEventArgs(Commands.ViewAllFacts, childProps);
+            RaiseEvent(e2);
+        }
+
+        private void ViewAllEvents_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: turn into a single event w/ boolean fact/event switch
+
+            // Show the "view all events" dialog for the current person
+            var childProps = family.Current;
+            var e2 = new RoutedEventArgs(Commands.ViewAllEvents, childProps);
             RaiseEvent(e2);
         }
     }
