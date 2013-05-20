@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:KBS.FamilyLines"
              mc:Ignorable="d" 
              d:DesignHeight="300" 
              d:DesignWidth="300"
@@ -26,11 +25,19 @@
         </Border>
 
         <!-- Content -->
-        <Border BorderBrush="{DynamicResource BorderBrush}" Background="{DynamicResource InputBackgroundBrush}" BorderThickness="1,1,1,1">
-            <StackPanel Height="500" Margin="5"
-                        Background="{DynamicResource InputBackgroundBrush}" 
-                        >
-                <DataGrid x:Name="DisplayGrid" 
+        <Border BorderBrush="{DynamicResource BorderBrush}" 
+                Background="{DynamicResource InputBackgroundBrush}" 
+                BorderThickness="1,1,1,1">
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="DisplayGrid"
+                          Grid.Row="0"
+                          SelectionChanged="DisplayGrid_SelectionChanged"
                           ItemsSource="{Binding Path=Facts}" 
                           AutoGenerateColumns="False"
                           CanUserReorderColumns="True"
@@ -39,14 +46,25 @@
                           SelectionMode="Single" 
                           SelectionUnit="FullRow">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Fact/Event" Binding="{Binding Path=EventName}" />
+                        <DataGridTextColumn Header="Fact/Event" Binding="{Binding Path=EventName, Mode=OneWay}" />
                         <DataGridTextColumn Header="Date" Binding="{Binding Path=Date.DateString}"/>
                         <DataGridTextColumn Header="Place" Binding="{Binding Path=Place}"/>
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                
-            </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button x:Name="addBtn" Click="addBtn_Click" Content="Add"/>
+                    <Button x:Name="delBtn" IsEnabled="False" Click="delBtn_Click" Content="Delete"/>
+                    <Button x:Name="resetBtn" IsEnabled="False" Click="resetBtn_Click" Content="Reset"/>
+                    <Button x:Name="saveBtn" IsEnabled="False" Click="saveBtn_Click" Content="Save"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <TextBox x:Name="txt1" />
+                    <TextBox x:Name="txt2" />
+                    <TextBox x:Name="txt3" />
+                    <TextBox x:Name="txt4" />
+                </StackPanel>
+            </Grid>
         </Border>
 
         <!-- Footer -->
