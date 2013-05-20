@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -109,6 +108,49 @@ namespace KBS.FamilyLines.Controls
         }
 
         #endregion
+
+        // User has selected an entry in the grid. Allow delete, edit
+        private void DisplayGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var sel = DisplayGrid.SelectedItem as GEDEvent;
+
+            delBtn.IsEnabled = sel != null;
+            resetBtn.IsEnabled = sel != null;
+            saveBtn.IsEnabled = sel != null;
+
+            if (sel == null)
+                return;
+
+            txt1.Text = sel.Date == null ? "" : sel.Date.DateString;
+            txt2.Text = sel.Place;
+            txt3.Text = sel.Description;
+            txt4.Text = sel.Address == null ? "" : sel.Address.AddressLine;
+
+        }
+
+        private void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayGrid.SelectedItem = null;
+            txt1.Text = "new date";
+            txt2.Text = "new place";
+            txt3.Text = "new description";
+            txt4.Text = "new address";
+        }
+
+        private void delBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // delete the current event/fact from the person (with confirmation)
+        }
+
+        private void resetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // when adding, clear all edits. when editing, reset all edits to original values
+        }
+
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // save all edits
+        }
 
     }
 }
