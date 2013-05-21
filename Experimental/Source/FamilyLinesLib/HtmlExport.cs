@@ -1401,20 +1401,13 @@ namespace KBS.FamilyLinesLib
         }
 
         /// <summary>
-        /// Get a date in dd/mm/yyyy format from a full DateTime?
+        /// Get a date in dd-MMM-yyyy format from a full DateTime?
+        /// (Switched from dd/mm/yyyy format to dd-MMM-yyyy format as per genealogical "standard")
         /// </summary>
         private static string dateformat(DateTime? dates)
-         {
-            string date = string.Empty;
-                    if (dates != null)  //don't try if date is null!
-                    {
-                        int month = dates.Value.Month;
-                        int day = dates.Value.Day;
-                        int year = dates.Value.Year;
-                        date = day + "/" + month + "/" + year;
-                    }
-            return date;
-         }
+        {
+            return dates == null ? "" : dates.Value.ToString("dd-MMM-yyyy");
+        }
 
         #endregion
 
