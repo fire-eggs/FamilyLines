@@ -370,21 +370,20 @@
         TargetType="{x:Type DataGrid}"
             >
         <Setter Property="SnapsToDevicePixels" Value="true" />
-        <Setter Property="Background" Value="#8F8F8F" />
+        <Setter Property="Background" Value="#FF202020" />
+      <Setter Property="AlternatingRowBackground" Value="#8F8F8F" />
     </Style>
     
     <Style
         x:Key="FamilyListViewItemTemplate" 
-        TargetType="{x:Type DataGridRow}"
-            >
-        <Setter Property="Background" Value="Gray" />
+        TargetType="{x:Type DataGridRow}">
+        
         <Setter Property="Foreground" Value="Black" />
     </Style>
 
     <Style x:Key="FamilyDataGridColumnHeader"
-           TargetType="DataGridColumnHeader"
-           >
-        <Setter Property="Background" Value="#252525" />
+           TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="#FF414C6F" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
