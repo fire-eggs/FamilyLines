@@ -350,26 +350,24 @@
 
     <!-- START Controls.Details.xaml -->
 
-    <Style 
-        x:Key="FamilyListViewDataGridStyle" 
-        TargetType="{x:Type DataGrid}"
-            >
+    <Style x:Key="FamilyListViewDataGridStyle" 
+        TargetType="{x:Type DataGrid}" >
         <Setter Property="SnapsToDevicePixels" Value="true" />
-        <Setter Property="Background" Value="#8F8F8F" />
+        <!--<Setter Property="Background" Value="#8F8F8F" />-->
+        <Setter Property="Background" Value="#FFE8EBEC" />
+        <Setter Property="AlternatingRowBackground" Value="#FFC4CED8" />
     </Style>
 
     <Style
         x:Key="FamilyListViewItemTemplate" 
-        TargetType="{x:Type DataGridRow}"
-            >
-        <Setter Property="Background" Value="Gray" />
+        TargetType="{x:Type DataGridRow}">
+        
         <Setter Property="Foreground" Value="Black" />
     </Style>
 
     <Style x:Key="FamilyDataGridColumnHeader"
-           TargetType="DataGridColumnHeader"
-           >
-        <Setter Property="Background" Value="#252525" />
+           TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="#FF04448C" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
