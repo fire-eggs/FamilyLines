@@ -2252,7 +2252,6 @@
                                 CanUserAddRows="False"
                                 CanUserDeleteRows="False"
                             AlternationCount="2"
-                            AlternatingRowBackground="LightGray"
                                 IsReadOnly="True"
                                 SelectionMode="Single"
                             CanUserResizeRows="False"
