@@ -42,12 +42,12 @@ namespace KBS.FamilyLines
         #region event handlers
         private void LinkButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("IExplore.exe", LinkTextBox.Text);
+           FindLink( LinkTextBox.Text);
         }
         private void LinkButton2_Click(object sender, RoutedEventArgs e)
         {
 
-            System.Diagnostics.Process.Start("IExplore.exe", LinkTextBox2.Text);
+            FindLink(LinkTextBox2.Text);
         }
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -727,6 +727,24 @@ namespace KBS.FamilyLines
         #endregion
 
         #region helper methods
+
+        /// <summary>
+        /// Search for a map of a location string using Bing maps
+        /// </summary>
+        private static void FindLink(string s)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(s))
+                {
+                    if ((s.StartsWith("http://")) || (s.StartsWith("https://")) || s.StartsWith("www."))
+                        System.Diagnostics.Process.Start( s);
+                }
+                
+
+            }
+            catch { }
+        }
 
         public void SetDefaultFocus()
         {
