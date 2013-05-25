@@ -494,14 +494,14 @@ namespace GEDCOM.Net
 					match = (matches / parts) * 100.0F;
 				}
 			}
-			
-			
-			
 			return match;
 		}
 		
 		public void ParseDateString(string dataString)
 		{
+            _dateTime1 = null;
+            _dateTime2 = null;
+
 			// clear possible Period cached value;
 			_period = null;
 			
@@ -980,15 +980,19 @@ namespace GEDCOM.Net
 						}
 					}
 
-				    try
-					{
+                    // KBR 20130525: reardon.ged had five digit dates for some reason. drop the last digit.
+                    if (y > 9999)
+                        y = y/10;
+
+//				    try
+//					{
 						ret = new DateTime(y, m, d, calendar);
-					}
-					catch
-					{
-						// if we fail to parse not much we can do, 
-						// just don't provide a datetime
-					}
+//					}
+//					catch
+//					{
+//						// if we fail to parse not much we can do, 
+//						// just don't provide a datetime
+//					}
 				}
 			}
 			
