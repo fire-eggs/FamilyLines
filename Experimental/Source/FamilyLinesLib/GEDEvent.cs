@@ -1,4 +1,6 @@
 ﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
  * The Model for a GEDCOM Event.
  * 
  * 1. On import from a GED file, the data from GEDCOM.Net is translated to
@@ -46,6 +48,8 @@ namespace KBS.FamilyLinesLib
 
         [XmlIgnore]
         public string EventName { get { return GedcomEvent.TypeToReadable(Type); } }
+        [XmlIgnore]
+        public string GEDCOMTag { get { return GedcomEvent.TypeToTag(Type); } }
 
         public GedcomEvent.GedcomEventType Type { get; set; }
         public string Place { get; set; }
