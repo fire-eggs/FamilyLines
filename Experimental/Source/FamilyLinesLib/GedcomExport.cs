@@ -1,4 +1,6 @@
 /*
+ * Family.Show derived code provided under MS-PL license.
+ * 
  * Exports data from the People collection to a GEDCOM file.
  * 
  * More information on the GEDCOM format is at http://en.wikipedia.org/wiki/Gedcom 
@@ -174,8 +176,7 @@ namespace KBS.FamilyLinesLib
 
             foreach (Person person in people)
             {
-
-                string id = idMap.Get(person.Id);
+                var id = idMap.Get(person.Id);
 
                 // Start of a new individual record.
                 WriteLine(0, string.Format(CultureInfo.InvariantCulture, "@{0}@", id), "INDI");
@@ -185,16 +186,17 @@ namespace KBS.FamilyLinesLib
                 // Restriction.
                 ExportRestriction(person);
 
-                if(person.Restriction ==Restriction.Private)
-                    WriteLine(1, "NAME", Properties.Resources.PrivateRecord);
-                else
+                if (person.Restriction == Restriction.Private)
                 {
+                    WriteLine(1, "NAME", Resources.PrivateRecord);
+                    continue;
+                }
 
                 // Name.
                 ExportName(person);
-				
-				// Surname
-				if (!string.IsNullOrEmpty(person.LastName))
+
+                // Surname
+                if (!string.IsNullOrEmpty(person.LastName))
                     WriteLine(2, "SURN", person.LastName);
 
                 // Prefix.
@@ -207,17 +209,17 @@ namespace KBS.FamilyLinesLib
 
                 // Gender.
                 ExportGender(person);
-                
+
+                // TODO: exporting twice, once with fields & once with events
                 // Birth and death info.
-                ExportEvent("BIRT", "",person.BirthDateDescriptor ,person.BirthDate, person.BirthPlace, person.BirthCitation, person.BirthCitationNote, person.BirthCitationActualText, person.BirthLink, person.BirthSource);
+                ExportEvent("BIRT", "", person.BirthDateDescriptor, person.BirthDate, person.BirthPlace, person.BirthCitation, person.BirthCitationNote, person.BirthCitationActualText, person.BirthLink, person.BirthSource);
                 ExportEvent("DEAT", "", person.DeathDateDescriptor, person.DeathDate, person.DeathPlace, person.DeathCitation, person.DeathCitationNote, person.DeathCitationActualText, person.BirthLink, person.BirthSource);
-                ExportEvent("BURI", "", person.BurialDateDescriptor, person.BurialDate, person.BurialPlace, person.BurialCitation, person.BurialCitationNote, person.BurialCitationActualText, person.BirthLink, person.BirthSource);
-                ExportEvent("CREM", "", person.CremationDateDescriptor, person.CremationDate, person.CremationPlace, person.CremationCitation, person.CremationCitationNote, person.CremationCitationActualText, person.BirthLink, person.BirthSource);
-                ExportEvent("EDUC", person.Education, "", null, "", person.EducationCitation, person.EducationCitationNote, person.EducationCitationActualText, person.EducationLink, person.EducationSource);
-                ExportEvent("OCCU", person.Occupation, "", null, "", person.OccupationCitation, person.OccupationCitationNote, person.OccupationCitationActualText, person.OccupationLink, person.OccupationSource);
-                ExportEvent("RELI", person.Religion, "", null , "", person.ReligionCitation, person.ReligionCitationNote, person.ReligionCitationActualText, person.ReligionLink, person.ReligionSource);
+
+                ExportEvents(person);
+                ExportFacts(person);
 
                 // Photo file names, files themselves cannot be exported as GEDCOM is simply a text file.
+                // TODO the above statement isn't quite true, can export embedded data
                 ExportPhotos(person, gedcomFilePath);
                 ExportAttachments(person, gedcomFilePath);
 
@@ -233,7 +235,6 @@ namespace KBS.FamilyLinesLib
                 //Write a FAMC or FAMS tag for every family which contains the person
                 foreach (Family family in map.Values)
                 {
-
                     //FAMC for children
                     foreach (Person child in family.Children)
                     {
@@ -249,9 +250,6 @@ namespace KBS.FamilyLinesLib
                         WriteLine(1, "FAMS", string.Format(CultureInfo.InvariantCulture, "@F{0}@", i));
 
                     i++;
-                }
-
-
                 }
             }
         }
@@ -534,10 +532,7 @@ namespace KBS.FamilyLinesLib
                 //copy the file to the \\images folder
                 string photoPath = Photo.Copy(photo.FullyQualifiedPath, Path.GetDirectoryName(gedcomFilePath) + "\\Images");
                 WriteLine(2, "FILE", @"Images\" + System.IO.Path.GetFileName(photoPath));
-                
-                
             }
-            
         }
 
         private void ExportLinks(Person person)
@@ -556,19 +551,76 @@ namespace KBS.FamilyLinesLib
                 }
             }
         }
+
         private void ExportAttachments(Person person, string gedcomFilePath)
         {
             foreach (Attachment attachment in person.Attachments)
             {
                 WriteLine(1, "OBJE", "");
-                WriteLine(2, "FORM", System.IO.Path.GetExtension(attachment.FullyQualifiedPath).Replace(".", ""));
+                WriteLine(2, "FORM", Path.GetExtension(attachment.FullyQualifiedPath).Replace(".", ""));
 
                 //copy the file to the \\images folder
                 string attchmntPath = Photo.Copy(attachment.FullyQualifiedPath, Path.GetDirectoryName(gedcomFilePath) + "\\Attachments");
-                WriteLine(2, "FILE", @"Attachments\" + System.IO.Path.GetFileName(attachment.FullyQualifiedPath));
+                WriteLine(2, "FILE", @"Attachments\" + Path.GetFileName(attachment.FullyQualifiedPath));
             }
         }
         
+        private void ExportEvents(Person person)
+        {
+            foreach (var gedEvent in person.Events)
+            {
+                ExportEvent(gedEvent);
+            }
+        }
+
+        private void ExportFacts(Person person)
+        {
+            foreach (var gedAttribute in person.Facts)
+            {
+                ExportEvent(gedAttribute, gedAttribute.Text);
+            }
+        }
+
+        private void ExportEvent(GEDEvent evData, string extra="")
+        {
+            // Do nothing if don't have important data
+            if (evData.Date == null || string.IsNullOrEmpty(evData.Place))
+                return;
+
+            WriteLine(1, evData.GEDCOMTag, evData.Description ?? "");
+            if (!string.IsNullOrEmpty(evData.Date.DateString))
+                WriteLine(2, "DATE", evData.Date.DateString);
+            if (!string.IsNullOrEmpty(evData.Place))
+                WriteLine(2, "PLAC", evData.Place);
+
+            // TODO Type (Classification)
+            //if (!string.IsNullOrEmpty(evData.Classification))
+            //    WriteLine(2, "TYPE", evData.Classification);
+
+            // Address
+            if (evData.Address != null && !string.IsNullOrEmpty(evData.Address.AddressLine))
+                WriteLine(2, "ADDR", evData.Address.AddressLine);
+
+            // Cause
+            if (!string.IsNullOrEmpty(evData.Cause))
+                WriteLine(2, "CAUS", evData.Cause);
+
+            // Agency
+            if (!string.IsNullOrEmpty(evData.ResponsibleAgency))
+                WriteLine(2, "AGNC", evData.ResponsibleAgency);
+
+            // Age
+            if (evData.Age != null && evData.Age.Years > 0)
+                WriteLine(2, "AGE", evData.Age.Years.ToString());
+
+            // TODO: Source
+            // TODO: Note
+            // TODO: Famc
+
+
+        }
+
+
         private void ExportEvent(string tag, string tagDescription, string descriptor, DateTime? date, string place,string citation, string citationNote, string citationActualText,string link, string source)
         {
             // Return right away if don't have a date or place to export.
@@ -621,19 +673,14 @@ namespace KBS.FamilyLinesLib
         {
             if(date==null)
                 return string.Empty;
-            else
-            {
 
             string day = date.Value.Day.ToString();
             string year = date.Value.Year.ToString();
             int month = date.Value.Month;
 
-            string monthString = string.Empty;
+            string monthString = GetMMM(month);
 
-            monthString = GetMMM(month);
-
-            return day + " " + monthString + " " + year;  
-            }
+            return day + " " + monthString + " " + year;
         }
 
 		//converts month number to 3 letter month abbreviation as used in GEDCOM
@@ -753,16 +800,11 @@ namespace KBS.FamilyLinesLib
                     }
                     else
                     {
+                        // KBR correctly output split lines: start with 'CONT' and use 'CONC' only if necessary (> 200)
+                        var gedTag = (chunkIndex == 0) ? "CONT" : "CONC";
                         writer.WriteLine(string.Format(CultureInfo.InvariantCulture, 
-                            "{0} {1} {2}", level + 1, "CONC", chunk));
+                            "{0} {1} {2}", level + 1, gedTag, chunk));
                     }
-                }
-
-                // All lines except the last line have the continue (CONT) tag.
-                if (lineIndex < lines.Length - 1)
-                {
-                    writer.WriteLine(string.Format(CultureInfo.InvariantCulture, 
-                       "{0} {1}", level + 1, "CONT"));
                 }
             }
         }
