@@ -300,6 +300,7 @@ namespace GEDCOM.Net
 						// Unknown tag
 						
 						Debug.WriteLine("Unknown: " + _tag + " at level: " + _level);
+                        importLog("Unknown tag", _tag);
 						break;
 				}
 				
@@ -389,7 +390,53 @@ namespace GEDCOM.Net
 		}
 		
 		#endregion
-		
+
+        #region Logging
+
+	    public int _lineNum;
+	    public string logName = @"E:\import_log.txt";
+
+        public void importLog(string msg, string extra="", bool mark=false)
+        {
+            try
+            {
+                StreamWriter log = new StreamWriter(logName, true);
+                if (mark) log.WriteLine("=========================");
+                log.WriteLine("{0} : {2} {1}", DateTime.Now, extra, msg);
+                log.Close();
+            }
+            catch
+            {
+            }
+        }
+
+        public void importLog(Exception ex, string extra="")
+        {
+            try
+            {
+                StreamWriter log = new StreamWriter(logName, true);
+                log.WriteLine("Input Line {3} ({4}) - Exception '{0}'({1}) : {2}", ex.Message, ex.InnerException, ex.StackTrace, _lineNum, extra);
+                log.Close();
+            }
+            catch
+            {
+            }
+        }
+
+        public void importLog(GedcomErrorState err)
+        {
+            try
+            {
+                StreamWriter log = new StreamWriter(logName, true);
+                log.WriteLine("Input Line {1} - Parser error '{0}'", err, _lineNum);
+                log.Close();
+            }
+            catch
+            {
+            }
+        }
+        #endregion
+
 		#region Methods
 		
 		private GedcomRecord PopStack(int level)
@@ -521,12 +568,14 @@ namespace GEDCOM.Net
 		public bool ReadGedcom(string gedcomFile)
 		{
 		    GedcomFile = gedcomFile;
-			
+		    importLog("starting", gedcomFile, true);
+
 			_percent = 0;
 
 			FileInfo info = new FileInfo(gedcomFile);
 			long fileSize = info.Length;
 			long read = 0;
+		    _lineNum = 1;
 			
 			_missingReferences = new List<string>();
 			_sourceCitations = new List<GedcomSourceCitation>();
@@ -598,8 +647,11 @@ namespace GEDCOM.Net
 					{
 						// file may not have same newline as environment so this isn't 100% correct
 						read += line.Length + Environment.NewLine.Length;
-						_Parser.GedcomParse(line);
-						line = null;
+						
+                        if (!_Parser.GedcomParse(line))
+                        {
+                            importLog(_Parser.ErrorState);
+                        }
 						
 						// to allow for inaccuracy above
 						int percentDone = (int)Math.Min(100, (read * 100.0F)/fileSize);
@@ -612,9 +664,15 @@ namespace GEDCOM.Net
 							}
 						}
 					}
+				    _lineNum++;
 				}
 				Flush();
 			}
+            catch (Exception ex)
+            {
+                importLog(ex, "");
+                throw;
+            }
 			finally
 			{
 				if (_stream != null)
@@ -624,6 +682,8 @@ namespace GEDCOM.Net
 			}
 
 			bool success = (_Parser.ErrorState == GedcomErrorState.NoError);
+
+            importLog("done read");
 			
 			if (success)
 			{
@@ -683,7 +743,8 @@ namespace GEDCOM.Net
 						}
 						else
 						{
-							Debug.WriteLine("Husband in family points to non individual record");	
+							Debug.WriteLine("Husband in family points to non individual record");
+                            importLog("Husband in family points to non individual record");
 						}
 					}
 					
@@ -707,7 +768,8 @@ namespace GEDCOM.Net
 						}
 						else
 						{
-							Debug.WriteLine("Wife in family points to non individual record");	
+							Debug.WriteLine("Wife in family points to non individual record");
+                            importLog("Wife in family points to non individual record","");
 						}
 					}
 					
@@ -803,6 +865,7 @@ namespace GEDCOM.Net
 					else if (!_removedNotes.Contains(xref))
 					{
 						Debug.WriteLine("Missing reference: " + xref);
+                        importLog("Missing reference: ",xref);
 					}
 				}
 				Console.WriteLine("Removed " + _removedNotes.Count + " notes");
@@ -858,6 +921,8 @@ namespace GEDCOM.Net
 			}
 
 			Database.Loading = false;
+
+            importLog("done fixup");
 			
 			return success;
 		}
@@ -962,8 +1027,15 @@ namespace GEDCOM.Net
 		}
 		
 		private void DateParse(GedcomDate date, string lineValue)
-		{			
-			date.ParseDateString(lineValue);
+		{
+		    try
+		    {
+                date.ParseDateString(lineValue);
+            }
+		    catch (Exception ex)
+		    {
+		        importLog(ex, lineValue);
+		    }
 			
 			// no parsed date, perhaps it was an age?
 			if (date.DateTime1 == null)
@@ -1658,7 +1730,8 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing family node: " + _tag + "\t at level: " + _level);
-			}
+                importLog("Unknown state / tag parsing family node: " + _tag, " at level: " + _level);
+            }
 		}
 		
 		private void ReadIndividualRecord()
@@ -2639,8 +2712,9 @@ namespace GEDCOM.Net
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing individual (" + individualRecord.XRefID + ") node: " + _tag + "\t at level: " + _level);
 				Console.WriteLine("Unknown state / tag parsing individual (" + individualRecord.XRefID + ") node: " + _tag + "\t at level: " + _level);
-				Console.WriteLine("Previous tag: " + _ParseState.PreviousTag + "\tPrevious Level: " + _ParseState.PreviousLevel);
-			}
+                Console.WriteLine("Previous tag: " + _ParseState.PreviousTag + "\tPrevious Level: " + _ParseState.PreviousLevel);
+                importLog("Unknown state / tag parsing individual (" + individualRecord.XRefID, ") node: " + _tag + "\t at level: " + _level);
+            }
 		}
 		
 		private void ReadMultimediaRecord()
@@ -4284,7 +4358,7 @@ namespace GEDCOM.Net
                                 childOf.Pedigree = tmp;
                             else
                             {
-                                Debug.WriteLine("Invalid pedegree linkage type: " + _lineValue);
+                                Debug.WriteLine("Invalid pedigree linkage type: " + _lineValue);
                                 childOf.Pedigree = PedegreeLinkageType.Unknown;
                             }
 						}

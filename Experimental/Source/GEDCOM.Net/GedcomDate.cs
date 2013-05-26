@@ -982,17 +982,12 @@ namespace GEDCOM.Net
 
                     // KBR 20130525: reardon.ged had five digit dates for some reason. drop the last digit.
                     if (y > 9999)
-                        y = y/10;
+                    {
+                        y = y / 10;
+                        // TODO add logging for this
+                    }
 
-//				    try
-//					{
-						ret = new DateTime(y, m, d, calendar);
-//					}
-//					catch
-//					{
-//						// if we fail to parse not much we can do, 
-//						// just don't provide a datetime
-//					}
+					ret = new DateTime(y, m, d, calendar);
 				}
 			}
 			
