@@ -1,4 +1,6 @@
 ﻿/*
+ * Family.Show derived code provided under MS-PL license.
+ * 
  * Exports data from the People collection to a Html based report.
  * 
  * There are 5 different export methods:
@@ -139,11 +141,11 @@ namespace KBS.FamilyLinesLib
 
             tw.WriteLine("</head><body onload=\"javascripts\">");
             tw.WriteLine(Buttons());
-            tw.WriteLine("<h2>" + KBS.FamilyLinesLib.Properties.Resources.FamilyShow + "</h2>");
-            tw.WriteLine("<i>" + KBS.FamilyLinesLib.Properties.Resources.SummaryOfPeople + "</i><br/><br/>");
+            tw.WriteLine("<h2>" + Properties.Resources.FamilyShow + "</h2>");
+            tw.WriteLine("<i>" + Properties.Resources.SummaryOfPeople + "</i><br/><br/>");
 
             if (!string.IsNullOrEmpty(familyxFileName))
-                tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + KBS.FamilyLinesLib.Properties.Resources.FamilyTree + "</b><br/>");
+                tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + Properties.Resources.FamilyTree + "</b><br/>");
             
             int i = pc.Count; 
 
@@ -151,27 +153,27 @@ namespace KBS.FamilyLinesLib
                 i = 0;
 
             tw.WriteLine(CurrentPersonString(peopleCollection.Current,privacy));
-            tw.WriteLine(KBS.FamilyLinesLib.Properties.Resources.SummaryOfPeople + " <b>" + i + "</b><br/><br/>");
+            tw.WriteLine(Properties.Resources.SummaryOfPeople + " <b>" + i + "</b><br/><br/>");
 
             tw.WriteLine("<table id=\"qstable\" border=\"1\" rules=\"all\" frame=\"box\">\n" +
             "<thead>\n" +
             "<tr>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.RelationshipToCurrentPerson + "</th> \n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.Names + "</th> \n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.Surname + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.Age + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.BirthDate + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.BirthPlace + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.DeathDate + "</th> \n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.DeathPlace + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.Occupation + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.Education + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.Religion + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.BurialPlace + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.BurialDate + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.CremationPlace + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.CremationDate + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.AdditionalInfo + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.RelationshipToCurrentPerson + "</th> \n" +
+            "<th width=\"5%\">" + Properties.Resources.Names + "</th> \n" +
+            "<th width=\"5%\">" + Properties.Resources.Surname + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.Age + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.BirthDate + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.BirthPlace + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.DeathDate + "</th> \n" +
+            "<th width=\"8.5%\">" + Properties.Resources.DeathPlace + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.Occupation + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.Education + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.Religion + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.BurialPlace + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.BurialDate + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.CremationPlace + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.CremationDate + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.AdditionalInfo + "</th>\n" +
             "</tr>\n" +
             "</thead>");
 
@@ -196,22 +198,22 @@ namespace KBS.FamilyLinesLib
                         {
                             ParentRelationship parentRel = ((ParentRelationship)rel);
 
-                            relstring = KBS.FamilyLinesLib.Properties.Resources.Parent;
+                            relstring = Properties.Resources.Parent;
 
                             if(parentRel.ParentChildModifier == ParentChildModifier.Natural)
-                                relstringmodifier = KBS.FamilyLinesLib.Properties.Resources.Natural;
+                                relstringmodifier = Properties.Resources.Natural;
                             if (parentRel.ParentChildModifier == ParentChildModifier.Adopted)
-                                relstringmodifier = KBS.FamilyLinesLib.Properties.Resources.Adopted;
+                                relstringmodifier = Properties.Resources.Adopted;
                             if (parentRel.ParentChildModifier == ParentChildModifier.Foster)
-                                relstringmodifier = KBS.FamilyLinesLib.Properties.Resources.Foster;
+                                relstringmodifier = Properties.Resources.Foster;
 
                             relationship = relstring + " (" + relstringmodifier + ")";
 
                         }
                         else if (rel.RelationshipType == RelationshipType.Child)
-                            relationship = KBS.FamilyLinesLib.Properties.Resources.Child;
+                            relationship = Properties.Resources.Child;
                         else if (rel.RelationshipType == RelationshipType.Spouse)
-                            relationship = KBS.FamilyLinesLib.Properties.Resources.Spouse;
+                            relationship = Properties.Resources.Spouse;
                         else if (rel.RelationshipType == RelationshipType.Sibling)
                             relationship = KBS.FamilyLinesLib.Properties.Resources.Sibling;
 
@@ -591,7 +593,7 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         public void ExportGenerations(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, decimal ancestors, decimal descendants, string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
         {
-            PeopleCollection pc = new PeopleCollection();
+            var pc = new PeopleCollection();
             string filename = Path.GetFileName(htmlFilePath);
             tw = new StreamWriter(filename);
 
@@ -763,31 +765,31 @@ namespace KBS.FamilyLinesLib
 
             tw.WriteLine("</head><body onload=\"javascript:showhideall('hide_all')\">");
             tw.WriteLine(Buttons());
-            tw.WriteLine("<h2>" + KBS.FamilyLinesLib.Properties.Resources.FamilyShow + "</h2>");
-            tw.WriteLine("<i>" + KBS.FamilyLinesLib.Properties.Resources.SummaryOfPeople + "</i><br/><br/>");
+            tw.WriteLine("<h2>" + Properties.Resources.FamilyShow + "</h2>");
+            tw.WriteLine("<i>" + Properties.Resources.SummaryOfPeople + "</i><br/><br/>");
 
             if (!string.IsNullOrEmpty(familyxFileName))
                 tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + KBS.FamilyLinesLib.Properties.Resources.FamilyTree + "</b><br/>");
 
             tw.WriteLine(CurrentPersonString(peopleCollection.Current, privacy));
-            tw.WriteLine(KBS.FamilyLinesLib.Properties.Resources.AncestralGenerations + " <b>" + ancestors + "</b><br/>");
-            tw.WriteLine(KBS.FamilyLinesLib.Properties.Resources.DescendantGenerations + " <b>" + descendants + "</b><br/>");
-            tw.WriteLine(KBS.FamilyLinesLib.Properties.Resources.FamilyShow + " <b>" + pc.Count + "</b><br/><br/>");
+            tw.WriteLine(Properties.Resources.AncestralGenerations + " <b>" + ancestors + "</b><br/>");
+            tw.WriteLine(Properties.Resources.DescendantGenerations + " <b>" + descendants + "</b><br/>");
+            tw.WriteLine(Properties.Resources.FamilyShow + " <b>" + pc.Count + "</b><br/><br/>");
 
             tw.WriteLine(NormalTableColumns());
 
             //write all the appropriate people to the html file including relationship to current person
             foreach (Person p in pc)
             {
-                string[,] sourceArray = new string[1, 7];
+                var sourceArray = new string[1, 7];
 
-                if (sourcesbool == true)
+                if (sourcesbool)
                     sourceArray = Sources(p);
 
-                if (p.IsLiving == true && privacy == true && p.Restriction != Restriction.Private) //quick privacy option
-                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + KBS.FamilyLinesLib.Properties.Resources.Living + "</td><td>" + p.LastName + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                if (p.IsLiving && privacy && p.Restriction != Restriction.Private) //quick privacy option
+                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + Properties.Resources.Living + "</td><td>" + p.LastName + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                 else if (p.Restriction == Restriction.Private) //a private record should not be exported
-                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + KBS.FamilyLinesLib.Properties.Resources.PrivateRecord + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + Properties.Resources.PrivateRecord + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                 else
                 {
                     if (p.Note != null)
@@ -797,7 +799,7 @@ namespace KBS.FamilyLinesLib
                 }
             }
 
-            if (sourcesbool == true)
+            if (sourcesbool)
             {
                 if (sourceCollection.Count > 0)
                 {
@@ -1142,7 +1144,7 @@ namespace KBS.FamilyLinesLib
                     "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
                     "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n" +
                     "<head>\n" +
-                    "<title>" + KBS.FamilyLinesLib.Properties.Resources.FamilyShow + "</title>";
+                    "<title>" + Properties.Resources.FamilyShow + "</title>";
         }
 
         /// <summary>
@@ -1154,8 +1156,8 @@ namespace KBS.FamilyLinesLib
 
                     "body { background-color: white; font-family: Calibri, Arial, sans-serif; font-size: 12px; line-height: 1.2; padding: 1em; color: #2E2E2E; }\n" +
 
-                    "table { border: 0.5px gray solid; width: 100%; empty-cells: show; }\n" +
-                    "th, td { border: 0.5px gray solid; padding: 0.5em; vertical-align: top; }\n" +
+                    "table { border: 1px gray solid; width: 100%; empty-cells: show; }\n" +
+                    "th, td { border: 1px gray solid; padding: 0.5em; vertical-align: top; }\n" +
                     "td { text-align: left; }\n" +
                     "th { background-color: #F0F8FF; }\n" +
                     "td a { color: navy; text-decoration: none; }\n" +
