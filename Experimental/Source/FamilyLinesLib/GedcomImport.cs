@@ -1,4 +1,6 @@
 /*
+ * Family.Show derived code provided under MS-PL license.
+ * 
  * Imports data from a GEDCOM file to the People collection. GEDCOM Ids are converted to GUIDs.
  *
  * More information on the GEDCOM format is at http://en.wikipedia.org/wiki/Gedcom
@@ -41,7 +43,8 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Populate the people collection with information from the GEDCOM file.
         /// </summary>
-        public bool Import(out GedcomHeader _header, PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, string gedcomFilePath, bool disableCharacterCheck)
+        public bool Import(out GedcomHeader _header, PeopleCollection peopleCollection, SourceCollection sourceCollection, 
+                           RepositoryCollection repositoryCollection, string gedcomFilePath, bool disableCharacterCheck)
         {
             _header = null;
 
@@ -98,6 +101,8 @@ namespace KBS.FamilyLinesLib
                 p.Validate();
             }
             people.RebuildTrees(); // set up the initial state of trees
+
+            _reader.importLog("complete import","");
         }
 // ReSharper restore UnusedParameter.Local
 
