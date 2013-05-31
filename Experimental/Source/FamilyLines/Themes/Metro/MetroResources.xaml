@@ -60,7 +60,7 @@
     <!-- Padding value for labels -->
     <Thickness x:Key="LabelPadding">5,8,5,2</Thickness>
 
-    <FontFamily x:Key="LabelFontAboutBox">Algerian</FontFamily>
+    <FontFamily x:Key="LabelFontAboutBox">"Chiller"</FontFamily>
     
     <!-- The Background Brush is used as the background for the Main Window  -->
     <LinearGradientBrush x:Key="MainBackgroundBrush" StartPoint="0.102759,-0.0431519" EndPoint="0.802759,0.913967">
@@ -271,6 +271,8 @@
     
     <CornerRadius x:Key="AboutBorderTopCorner" >0,0,0,0</CornerRadius>
     <CornerRadius x:Key="AboutBorderBottomCorner" >0,0,0,0</CornerRadius>
+    <CornerRadius x:Key="DetailsBorderTopCorner" >0,0,0,0</CornerRadius>
+    <CornerRadius x:Key="DetailsBorderBottomCorner" >0,0,0,0</CornerRadius>
 
 
     <!-- This is the default style for all labels -->
@@ -278,13 +280,13 @@
         <Setter Property="Foreground" Value="#FF1F3066" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Padding" Value="{DynamicResource LabelPadding}" />
-        <Setter Property="FontFamily" Value="Chiller" />
+        <Setter Property="FontFamily" Value="Stencil" />
         <Setter Property="FontSize" Value="12" />
     </Style>
 
     <!-- This is the default style for all textblocks -->
     <Style TargetType="{x:Type TextBlock}">
-        <Setter Property="FontFamily" Value="Calibri,Segoe UI" />
+        <Setter Property="FontFamily" Value="Segoe UI,Stencil " />
     </Style>
 
     <!-- This is the default style for all radio buttons -->
@@ -507,8 +509,32 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style x:Key="BlackButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButtonStyle}">
+    <Style x:Key="NormalButtonStyle1" TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Ellipse Stroke="DarkGray"  StrokeThickness="1.500000" Width="15" Height="15"  x:Name="ellipse">
+                            
+                        </Ellipse>
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true" />
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Stroke" TargetName="ellipse" Value="Black" />
+                            <Setter Property="Foreground"  Value="Black" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true" />
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Fill" TargetName="ellipse" Value="LightGray" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+     <Style x:Key="BlackButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButtonStyle}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -598,8 +624,7 @@
     <Style x:Key="WelcomeButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundcolor}" />
         <Setter Property="Width" Value="Auto"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontFamily" Value="Calibri,Tahoma"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -626,8 +651,7 @@
     <Style x:Key="RecentFileButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundcolor}"  />
         <Setter Property="Width" Value="Auto"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="FontFamily" Value="Calibri,Tahoma"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Template">
             <Setter.Value>
