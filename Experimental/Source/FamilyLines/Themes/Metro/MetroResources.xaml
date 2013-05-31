@@ -69,7 +69,7 @@
     </LinearGradientBrush>
 
     <!-- The Background Brush is used as the background for the Headers and Footers-->
-    <SolidColorBrush x:Key="BackgroundBrush" Color="#FFE2F1FF" />
+    <SolidColorBrush x:Key="BackgroundBrush" Color="#FF2E64FE" />
 
     <!-- The Panel Gradient Brush is used as the background for the panels such as the Details Panel -->
     <LinearGradientBrush x:Key="PanelGradientBrush" StartPoint="0.0337444,0.5" EndPoint="1.24881,0.5">
@@ -85,8 +85,8 @@
 
     <!-- Colors used for the Welcome Header -->
     <LinearGradientBrush x:Key="WelcomeBackgroundBrush" StartPoint="0.132488,0.500228" EndPoint="1,0.500228">
-        <GradientStop Color="#FFF1F8FC" Offset="0" />
-        <GradientStop Color="#FFA4B0B9" Offset="1" />
+        <GradientStop Color="#FF2E64FE" Offset="0" />
+        <GradientStop Color="#FF2E64FE" Offset="1" />
     </LinearGradientBrush>
     <SolidColorBrush x:Key="WelcomeHeaderFontColor" Color="#FF223166" />
 
