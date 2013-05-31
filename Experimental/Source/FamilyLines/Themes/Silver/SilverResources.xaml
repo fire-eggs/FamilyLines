@@ -268,6 +268,8 @@
 
     <CornerRadius x:Key="AboutBorderTopCorner" >5,5,0,0</CornerRadius>
     <CornerRadius x:Key="AboutBorderBottomCorner" >0,0,5,5</CornerRadius>
+    <CornerRadius x:Key="DetailsBorderTopCorner" >10,10,0,0</CornerRadius>
+    <CornerRadius x:Key="DetailsBorderBottomCorner" >0,0,10,10</CornerRadius>
     <FontFamily x:Key="LabelFontAboutBox">Algerian</FontFamily>
     
     <!-- This is the default style for all labels -->
@@ -503,8 +505,43 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style x:Key="BlackButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButtonStyle}">
+    <Style x:Key="NormalButtonStyle1" TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Rectangle x:Name="Rectangle" Stroke="{x:Null}" StrokeMiterLimit="1.000000" StrokeThickness="0.500000" RadiusX="5" RadiusY="5">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.501,0.039" StartPoint="0.501,0.971">
+                                    <GradientStop Color="#FF4A7DDB" Offset="0.335" />
+                                    <GradientStop Color="#FF75B5E0" Offset="0.879" />
+                                    <GradientStop Color="#FF04448C" Offset="0.011" />
+                                    <GradientStop Color="#FF75B5E0" Offset="0.986" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true" />
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Fill" TargetName="Rectangle">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.501,0.039" StartPoint="0.501,0.971">
+                                        <GradientStop Color="#FF5287E8" Offset="0.335" />
+                                        <GradientStop Color="#FFA4D4F4" Offset="0.879" />
+                                        <GradientStop Color="#FF075AB7" Offset="0.011" />
+                                        <GradientStop Color="#FFA4D4F4" Offset="0.986" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+        <Style x:Key="BlackButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButtonStyle}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
