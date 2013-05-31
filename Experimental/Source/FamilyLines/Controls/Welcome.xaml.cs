@@ -116,5 +116,17 @@ namespace KBS.FamilyLines
         }
 
         #endregion
+
+        public void OnThemeChange()
+        {
+            foreach (Button b in RecentFilesStackPanel.Children)
+            {
+                string p = (string)b.Content;
+                System.Diagnostics.Trace.TraceInformation(p);
+                b.Style = (Style)FindResource("RecentFileButtonStyle");
+                //textRange.ApplyPropertyValue(TextElement.ForegroundProperty, FindResource("FlowDocumentFontColor"));
+            }
+            
+        }
     }
 }
