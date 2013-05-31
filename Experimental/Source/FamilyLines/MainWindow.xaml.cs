@@ -1060,6 +1060,7 @@ namespace KBS.FamilyLines
 
             family.OnContentChanged();
             PersonInfoControl.OnThemeChange();
+            WelcomeUserControl.OnThemeChange();
             UpdateStatus();
             this.DiagramControl.TimeSlider.Value = DateTime.Now.Year;
 
