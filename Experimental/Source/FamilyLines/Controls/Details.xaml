@@ -1311,20 +1311,20 @@
     </UserControl.Triggers>
         <DockPanel>
         <!-- Details Header -->
-        <Border DockPanel.Dock="Top" Background="{DynamicResource BackgroundBrush}" BorderThickness="1,1,1,0" CornerRadius="10,10,0,0" BorderBrush="{DynamicResource BorderBrush}">
+        <Border DockPanel.Dock="Top" Background="{DynamicResource BackgroundBrush}" BorderThickness="1,1,1,0" CornerRadius="{DynamicResource DetailsBorderTopCorner}" BorderBrush="{DynamicResource BorderBrush}">
             <DockPanel Height="30">
                 <!-- Star -->
                 <Path StrokeThickness="1.500000" Stroke="#ffffffff" StrokeMiterLimit="1.000000" Fill="{DynamicResource PrimaryStarBrush}" Data="F1 M 9.816406,1.694336 L 12.351074,6.830078 L 18.018066,7.654297 L 13.918457,11.654297 L 14.886230,17.299805 L 9.816406,14.630859 L 4.746094,17.299805 L 5.713867,11.654297 L 1.611328,7.654297 L 7.281250,6.830078 L 9.816406,1.694336 Z" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
               
-                <Button  Style="{DynamicResource NormalButtonStyle}"  x:Name="Next" Height="15"   Content=">" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,12,0" Width="18"  Click="Next_Click" FontSize="10"/>
-                <Button  Style="{DynamicResource NormalButtonStyle}"  x:Name="Previous" Height="15"   Content="&lt;" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,5,0" Width="18"  Click="Previous_Click" FontSize="10"/>
+                <Button  Style="{DynamicResource NormalButtonStyle1}"  x:Name="Next" Height="15"   Content=">" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,12,0" Width="18"  Click="Next_Click" FontSize="10"/>
+                <Button  Style="{DynamicResource NormalButtonStyle1}"  x:Name="Previous" Height="15"   Content="&lt;" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,5,0" Width="18"  Click="Previous_Click" FontSize="10"/>
                 <Button MinWidth="45" Width="Auto" x:Name="DeleteButton" Content="{x:Static properties:Resources.Delete}" FontSize="10" Height="15" Click="DeleteButton_Click" HorizontalAlignment="Right" Margin="0,0,5,0" DockPanel.Dock="Right" Visibility="{Binding Path=IsDeletable, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" Style="{DynamicResource RedButtonStyle}" />
 
                 <TextBlock Text="{Binding Path=Name, Mode=Default, FallbackValue=Current Person}" Style="{DynamicResource HeaderStyle}" FontWeight="Bold" Height="23.94" Margin="5,1,10,0" DockPanel.Dock="Left" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource HeaderFontColor}"/> 
             </DockPanel>
         </Border>
 
-        <Border DockPanel.Dock="Top" Background="{DynamicResource PanelGradientBrush}" Style="{DynamicResource BorderStyle}" BorderThickness="1,0,1,1" CornerRadius="0,0,10,10">
+        <Border DockPanel.Dock="Top" Background="{DynamicResource PanelGradientBrush}" Style="{DynamicResource BorderStyle}" BorderThickness="1,0,1,1" CornerRadius="{DynamicResource DetailsBorderBottomCorner}">
             <DockPanel>
                 <!-- Details Info displays the information about the person such as the person's photo, name, and birth date. -->
                 <Border x:Name="DetailsInfo" DockPanel.Dock="Top" Style="{DynamicResource DetailsBorderStyle}" Margin="0,0,0,0" BorderThickness="0,0,0,0" CornerRadius="0,0,0,0" Padding="0,0,0,0" Height="315" Opacity="1" Background="{x:Null}">
