@@ -91,6 +91,8 @@
     <!-- This is a color setting for text -->
     <SolidColorBrush x:Key="FontColor" Color="#FF1F3066" />
 
+    <SolidColorBrush x:Key="ButtonForegroundcolor" Color="#FFB5C8D8" />
+    
     <SolidColorBrush x:Key="HeaderFontColor" Color="#FFFFFFFF" />
 
     <SolidColorBrush x:Key="InputFontColor" Color="#FFFFFFFF" />
@@ -264,6 +266,10 @@
         <Setter Property="CornerRadius" Value="10,10,10,10" />
     </Style>
 
+    <CornerRadius x:Key="AboutBorderTopCorner" >5,5,0,0</CornerRadius>
+    <CornerRadius x:Key="AboutBorderBottomCorner" >0,0,5,5</CornerRadius>
+    <FontFamily x:Key="LabelFontAboutBox">Algerian</FontFamily>
+    
     <!-- This is the default style for all labels -->
     <Style TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource FontColor}" />
@@ -572,6 +578,92 @@
         </Setter>
     </Style>
 
+    <Style x:Key="RedButtonStyle2" TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Rectangle Stroke="#FF570606" StrokeMiterLimit="1.000000" StrokeThickness="0.500000" RadiusX="5" RadiusY="5" x:Name="rectangle">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.501,0.039" StartPoint="0.501,0.971">
+                                    <GradientStop Color="#FF882119" Offset="0.234" />
+                                    <GradientStop Color="#FFC78A81" Offset="0.879" />
+                                    <GradientStop Color="#FF440D09" Offset="0.004" />
+                                    <GradientStop Color="#FFC78A81" Offset="0.986" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true" />
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Fill" TargetName="rectangle">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.501,0.039" StartPoint="0.501,0.971">
+                                        <GradientStop Color="#FFC72E23" Offset="0.234" />
+                                        <GradientStop Color="#FFEAA49A" Offset="0.879" />
+                                        <GradientStop Color="#FF9A2017" Offset="0.004" />
+                                        <GradientStop Color="#FFEAA49A" Offset="0.986" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="WelcomeButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Calibri,Tahoma"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="bd" CornerRadius="3,3,3,3" Padding="5,0,0,0">
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" Margin="5,1,0,1"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true"/>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Background" TargetName="bd" Value="#FF29367B"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="RecentFileButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="#FFFFFF" />
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Calibri,Tahoma"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="bd" CornerRadius="3,3,3,3" Padding="5,0,0,0">
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True" Margin="5,1,0,1"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true"/>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Background" TargetName="bd" Value="#FF29367B"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!--This sets the default style for all buttons-->
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButtonStyle}" />
 
