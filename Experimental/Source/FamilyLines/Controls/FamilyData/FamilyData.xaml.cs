@@ -199,6 +199,7 @@ namespace KBS.FamilyLines
         /// </summary>
         private void UpdateColumnWidths()
         {
+            
             CalculateColumnWidth(NamesMenu, Names);
             CalculateColumnWidth(CitationMenu, Citation);
             CalculateColumnWidth(PhotosMenu, Photo);
