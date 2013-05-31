@@ -73,14 +73,14 @@
 
     <!-- The Panel Gradient Brush is used as the background for the panels such as the Details Panel -->
     <LinearGradientBrush x:Key="PanelGradientBrush" StartPoint="0.0337444,0.5" EndPoint="1.24881,0.5">
-        <GradientStop Color="#FFEFF6FF" Offset="0" />
-        <GradientStop Color="#FFA3AFBA" Offset="1" />
+        <GradientStop Color="#FFFFFFFF" Offset="0" />
+        <GradientStop Color="#FFFFFFFF" Offset="1" />
     </LinearGradientBrush>
 
     <!-- The Diagram Gradient Brush is used as the background for the Diagram area-->
     <LinearGradientBrush x:Key="DiagramGradientBrush" StartPoint="-0.00995466,0.777842" EndPoint="1.63827,-0.110634">
-        <GradientStop Color="#FFEFF6FF" Offset="0" />
-        <GradientStop Color="#FFA3AFBA" Offset="1" />
+        <GradientStop Color="#FFFFFFFF" Offset="0" />
+        <GradientStop Color="#FFFFFFFF" Offset="1" />
     </LinearGradientBrush>
 
     <!-- Colors used for the Welcome Header -->
