@@ -6,18 +6,14 @@
             <Button Content="{TemplateBinding Content}"/>
         </DataTemplate>
 
-        
-
- 
-
     </UserControl.Resources>
     <StackPanel>
 
         <!-- Header -->
-        <Border MinWidth="300" Width="Auto" Padding="5,0,5,0" Opacity="0.8" Background="{DynamicResource WelcomeBackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,0" CornerRadius="5,5,0,0" HorizontalAlignment="Center" >
+        <Border MinWidth="300" Width="Auto" Padding="5,0,5,0" Opacity="0.8" Background="{DynamicResource WelcomeBackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,0" CornerRadius="{DynamicResource AboutBorderTopCorner}" HorizontalAlignment="Center" >
             <Grid>
                 <Rectangle Fill="{DynamicResource WelcomeHeaderBg}" Height="69"/>
-                <TextBlock Padding="4,0,0,0" Text="{x:Static properties:Resources.Welcome}" TextWrapping="Wrap" Foreground="{DynamicResource WelcomeHeaderFontColor}" FontSize="18" FontWeight="Bold" d:LayoutOverrides="Height" HorizontalAlignment="Left" Margin="3.5,0,0,2" VerticalAlignment="Bottom"/>
+                <TextBlock Padding="4,0,0,0" Text="{x:Static properties:Resources.Welcome}"  TextWrapping="Wrap" Foreground="{DynamicResource WelcomeHeaderFontColor}" FontSize="18" FontWeight="Bold" d:LayoutOverrides="Height" HorizontalAlignment="Left" Margin="3.5,0,0,2" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
 
@@ -45,7 +41,7 @@
         </Border>
 
         <!-- Footer -->
-        <Border Background="{DynamicResource BackgroundBrush}" Height="30" Opacity="0.8" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,1,1" CornerRadius="0,0,5,5">
+        <Border Background="{DynamicResource BackgroundBrush}" Height="30" Opacity="0.8" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,1,1" CornerRadius="{DynamicResource AboutBorderBottomCorner}">
             <Label x:Name="VersionLabel" Margin="10,0,0,0" Foreground="#FFB5C8D8" Content="{x:Static properties:Resources.Version}"/>
         </Border>
 
