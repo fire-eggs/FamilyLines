@@ -72,6 +72,8 @@
     <Compile Include="Experimental.cs" />
     <Compile Include="GEDAttribute.cs" />
     <Compile Include="GEDEvent.cs" />
+    <Compile Include="HTMLReport.cs" />
+    <Compile Include="PeopleReport.cs" />
     <Compile Include="PlacesExport.cs" />
     <Compile Include="Properties\Resources.ru-RU.Designer.cs">
       <DependentUpon>Resources.ru-RU.resx</DependentUpon>

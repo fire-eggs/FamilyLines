@@ -1131,6 +1131,8 @@ namespace KBS.FamilyLinesLib
                     @fact.CitationActualText = person.OccupationCitationActualText;
 
                     person.Facts.Add(@fact);
+
+                    person.OccupationFact = @fact;
                 }
 
                 if (!string.IsNullOrEmpty(person.Education))

@@ -14,15 +14,16 @@
  * are written to the XHtml 1.0 Transitional Standard and CSS2 standard.
  * For further information see the http://www.w3.org/
  * 
- * tw.WriteLine(KBS.FamilyLinesLib.Properties.Resources.Tree + " <b>" + Path.GetFileNameWithoutExtension(familyxFileName) + "</b><br/>"); is utilised to provide some helper funtions for reports.  
+ * tw.WriteLine(KBS.FamilyLinesLib.Properties.Resources.Tree + " <b>" + Path.GetFileNameWithoutExtension(familyxFileName) + "</b><br/>"); 
+ * is utilised to provide some helper funtions for reports,
  * for example to hide/show a note.  For users who have Java disabled, 
  * the Html file is written so that all notes will be shown in the file.
  * 
- * CSS is used to style the report.  CSS hides any helper buttons during 
- * print.
+ * CSS is used to style the report.  CSS hides any helper buttons during print.
 */
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
@@ -42,7 +43,8 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Export all the data from the People collection to the specified html file.
         /// </summary>
-        public void ExportAll(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
+        public void ExportAll(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, 
+            string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
         {
             string filename = Path.GetFileName(htmlFilePath);
             tw = new StreamWriter(filename);
@@ -55,13 +57,13 @@ namespace KBS.FamilyLinesLib
             tw.WriteLine("</head><body onload=\"javascript:showhideall('hide_all')\">");
             tw.WriteLine(Buttons());
 
-            tw.WriteLine("<h2>"+ KBS.FamilyLinesLib.Properties.Resources.FamilyShow + "</h2>");
-            tw.WriteLine("<i>" + KBS.FamilyLinesLib.Properties.Resources.SummaryOfPeople + "</i><br/><br/>");
+            tw.WriteLine("<h2>"+ Properties.Resources.FamilyShow + "</h2>");
+            tw.WriteLine("<i>" + Properties.Resources.SummaryOfPeople + "</i><br/><br/>");
 
             if (!string.IsNullOrEmpty(familyxFileName))
-                tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + KBS.FamilyLinesLib.Properties.Resources.FamilyTree + "</b><br/>");
+                tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + Properties.Resources.FamilyTree + "</b><br/>");
 
-            tw.WriteLine(KBS.FamilyLinesLib.Properties.Resources.NumberOfPeople + " <b>" + peopleCollection.Count + "</b><br/><br/>");
+            tw.WriteLine(Properties.Resources.NumberOfPeople + " <b>" + peopleCollection.Count + "</b><br/><br/>");
 
             tw.WriteLine(NormalTableColumns());
 
@@ -70,13 +72,13 @@ namespace KBS.FamilyLinesLib
             {
                 string[,] sourceArray = new string[1, 7];
 
-                if (sourcesbool == true)
+                if (sourcesbool)
                     sourceArray = Sources(p);
 
-                if (p.IsLiving == true && privacy == true && p.Restriction != Restriction.Private) //quick privacy option
-                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + KBS.FamilyLinesLib.Properties.Resources.Living + "</td><td>" + p.LastName + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                if (p.IsLiving && privacy && p.Restriction != Restriction.Private) //quick privacy option
+                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + Properties.Resources.Living + "</td><td>" + p.LastName + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                 else if (p.Restriction == Restriction.Private) //a private record should not be exported
-                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + KBS.FamilyLinesLib.Properties.Resources.PrivateRecord + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + Properties.Resources.PrivateRecord + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                 else
                 {
                     if (p.Note != null)
@@ -86,7 +88,7 @@ namespace KBS.FamilyLinesLib
                 }
             }
 
-            if (sourcesbool == true)
+            if (sourcesbool)
             {
                 if(sourceCollection.Count>0)
                 {
@@ -111,7 +113,8 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Export current person and immediate family data from the People collection to the specified html file.
         /// </summary>
-        public void ExportDirect(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
+        public void ExportDirect(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, 
+                                 string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
         {
             PeopleCollection pc = new PeopleCollection();
             string filename = Path.GetFileName(htmlFilePath);
@@ -182,7 +185,7 @@ namespace KBS.FamilyLinesLib
             {
                 string[,] sourceArray = new string[1, 7];
 
-                if (sourcesbool == true)
+                if (sourcesbool)
                     sourceArray = Sources(p);
 
                 foreach (Relationship rel in peopleCollection.Current.Relationships)
@@ -190,7 +193,6 @@ namespace KBS.FamilyLinesLib
                     if (rel.RelationTo == p)
                     {
                         string relationship = string.Empty;
-                        string relstring = string.Empty;
                         string relstringmodifier = string.Empty;
 
                         //for parent relationships, also specify if natural or adopted parent
@@ -198,7 +200,7 @@ namespace KBS.FamilyLinesLib
                         {
                             ParentRelationship parentRel = ((ParentRelationship)rel);
 
-                            relstring = Properties.Resources.Parent;
+                            string relstring = Properties.Resources.Parent;
 
                             if(parentRel.ParentChildModifier == ParentChildModifier.Natural)
                                 relstringmodifier = Properties.Resources.Natural;
@@ -215,12 +217,12 @@ namespace KBS.FamilyLinesLib
                         else if (rel.RelationshipType == RelationshipType.Spouse)
                             relationship = Properties.Resources.Spouse;
                         else if (rel.RelationshipType == RelationshipType.Sibling)
-                            relationship = KBS.FamilyLinesLib.Properties.Resources.Sibling;
+                            relationship = Properties.Resources.Sibling;
 
-                        if (p.IsLiving == true && privacy == true && p.Restriction != Restriction.Private) //quick privacy option
-                            tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + relationship + "</td><td>" + KBS.FamilyLinesLib.Properties.Resources.Living + "</td><td>" + p.LastName + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                        if (p.IsLiving && privacy && p.Restriction != Restriction.Private) //quick privacy option
+                            tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + relationship + "</td><td>" + Properties.Resources.Living + "</td><td>" + p.LastName + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                         else if (p.Restriction == Restriction.Private) //a private record should not be exported
-                            tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + KBS.FamilyLinesLib.Properties.Resources.PrivateRecord + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                            tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + Properties.Resources.PrivateRecord + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                         else
                         {
                             if (p.Note != null)
@@ -240,7 +242,7 @@ namespace KBS.FamilyLinesLib
                                     + p.CremationDateDescriptor + " " + dateformat(p.CremationDate) + sourceArray[0, 6] + "</td>"
                                     + "</td><td><p class=\"notelink\">[<a href=\"javascript:showhide('id_" + p.Id + "')\">Note</a>]</p></td></tr>");
 
-                                tw.WriteLine("<tr id=\"note_id_" + p.Id + "\" class=\"noteshown\"><td colspan=\"16\"><b>"+KBS.FamilyLinesLib.Properties.Resources.Note + "</b>: <pre>" + p.Note + "</pre></td></tr>");
+                                tw.WriteLine("<tr id=\"note_id_" + p.Id + "\" class=\"noteshown\"><td colspan=\"16\"><b>"+Properties.Resources.Note + "</b>: <pre>" + p.Note + "</pre></td></tr>");
 
                             }
                             else
@@ -263,7 +265,7 @@ namespace KBS.FamilyLinesLib
                     }
                 }
             }
-            if (sourcesbool == true)
+            if (sourcesbool)
             {
                 if (sourceCollection.Count > 0)
                 {
@@ -288,7 +290,8 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Export current person to the specified html file.
         /// </summary>
-        public void ExportCurrent(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
+        public void ExportCurrent(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, 
+                                  string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
         {
             PeopleCollection pc = new PeopleCollection();
             string filename = Path.GetFileName(htmlFilePath);
@@ -307,30 +310,29 @@ namespace KBS.FamilyLinesLib
             tw.WriteLine(CSSprinting(15));
 
             tw.WriteLine("</head><body>");
-            tw.WriteLine("<h2>" + KBS.FamilyLinesLib.Properties.Resources.FamilyShow + "</h2>");
-            tw.WriteLine("<i>" + KBS.FamilyLinesLib.Properties.Resources.SummaryOfPeople + "</i><br/><br/>");
+            tw.WriteLine("<h2>" + Properties.Resources.FamilyShow + "</h2>");
+            tw.WriteLine("<i>" + Properties.Resources.SummaryOfPeople + "</i><br/><br/>");
 
             if (!string.IsNullOrEmpty(familyxFileName))
-                tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + KBS.FamilyLinesLib.Properties.Resources.FamilyTree + "</b><br/>");
+                tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + Properties.Resources.FamilyTree + "</b><br/>");
 
             tw.WriteLine(CurrentPersonString(peopleCollection.Current, privacy));
-            tw.WriteLine(KBS.FamilyLinesLib.Properties.Resources.NumberOfPeople + " <b>" + pc.Count + "</b><br/><br/>");
+            tw.WriteLine(Properties.Resources.NumberOfPeople + " <b>" + pc.Count + "</b><br/><br/>");
             tw.WriteLine(NormalTableColumns());
 
 
             //write all the appropriate people to the html file including relationship to current person
             foreach (Person p in pc)
             {
-
                 string[,] sourceArray = new string[1, 7];
 
-                if (sourcesbool == true)
+                if (sourcesbool)
                     sourceArray = Sources(p);
 
-                if (p.IsLiving == true && privacy == true && p.Restriction != Restriction.Private) //quick privacy option
-                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + KBS.FamilyLinesLib.Properties.Resources.Living + "</td><td>" + p.LastName + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                if (p.IsLiving && privacy && p.Restriction != Restriction.Private) //quick privacy option
+                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + Properties.Resources.Living + "</td><td>" + p.LastName + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                 else if (p.Restriction == Restriction.Private) //a private record should not be exported
-                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + KBS.FamilyLinesLib.Properties.Resources.PrivateRecord + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + Properties.Resources.PrivateRecord + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                 else
                 {
                         if (p.Note != null)
@@ -340,7 +342,7 @@ namespace KBS.FamilyLinesLib
                 }
             }
 
-            if (sourcesbool == true)
+            if (sourcesbool)
             {
                 if (sourceCollection.Count > 0)
                 {
@@ -364,7 +366,8 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Export people to the report based on a filter to the specified html file.
         /// </summary>
-        public void ExportFilter(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, string searchtext,string searchfield, int searchfieldindex, string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
+        public void ExportFilter(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, 
+                                 string searchtext,string searchfield, int searchfieldindex, string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
         {
             PeopleCollection pc = new PeopleCollection();
             string filename = Path.GetFileName(htmlFilePath);
@@ -529,15 +532,15 @@ namespace KBS.FamilyLinesLib
 
             tw.WriteLine("</head><body onload=\"javascript:showhideall('hide_all')\">");
             tw.WriteLine(Buttons());
-            tw.WriteLine("<h2>" + KBS.FamilyLinesLib.Properties.Resources.FamilyShow + "</h2>");
-            tw.WriteLine("<i>" + KBS.FamilyLinesLib.Properties.Resources.SummaryOfPeople + "</i><br/><br/>");
+            tw.WriteLine("<h2>" + Properties.Resources.FamilyShow + "</h2>");
+            tw.WriteLine("<i>" + Properties.Resources.SummaryOfPeople + "</i><br/><br/>");
 
             if (!string.IsNullOrEmpty(familyxFileName))
-                tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + KBS.FamilyLinesLib.Properties.Resources.FamilyTree + "</b><br/>");
+                tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + Properties.Resources.FamilyTree + "</b><br/>");
 
-            tw.WriteLine(KBS.FamilyLinesLib.Properties.Resources.FilteredOn + " <b>" + searchfield + "</b><br/>");
+            tw.WriteLine(Properties.Resources.FilteredOn + " <b>" + searchfield + "</b><br/>");
             tw.WriteLine(searchfield + ": <b>" + searchtext + "</b><br/>");
-            tw.WriteLine(KBS.FamilyLinesLib.Properties.Resources.NumberOfPeople + " <b>" + pc.Count + "</b><br/><br/>");
+            tw.WriteLine(Properties.Resources.NumberOfPeople + " <b>" + pc.Count + "</b><br/><br/>");
             tw.WriteLine(NormalTableColumns());
 
             //write all the appropriate people to the html file including relationship to current person
@@ -545,13 +548,13 @@ namespace KBS.FamilyLinesLib
             {
                 string[,] sourceArray = new string[1, 7];
 
-                if (sourcesbool == true)
+                if (sourcesbool)
                     sourceArray = Sources(p);
 
-                if (p.IsLiving == true && privacy == true && p.Restriction != Restriction.Private) //quick privacy option
-                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + KBS.FamilyLinesLib.Properties.Resources.Living + "</td><td>" + p.LastName + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                if (p.IsLiving && privacy && p.Restriction != Restriction.Private) //quick privacy option
+                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + Properties.Resources.Living + "</td><td>" + p.LastName + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                 else if (p.Restriction == Restriction.Private) //a private record should not be exported
-                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + KBS.FamilyLinesLib.Properties.Resources.PrivateRecord + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                    tw.WriteLine("<tr id=\"id_" + p.Id + "\" class=\"person\"><td>" + Properties.Resources.PrivateRecord + "</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
                 else
                 {
                         if (p.Note != null)
@@ -591,7 +594,8 @@ namespace KBS.FamilyLinesLib
         /// If 0, export current person and their siblings and spouse
         /// In summary, this method exports what it visible in the default tree.
         /// </summary>
-        public void ExportGenerations(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, decimal ancestors, decimal descendants, string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
+        public void ExportGenerations(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, 
+                                      decimal ancestors, decimal descendants, string htmlFilePath, string familyxFileName, bool privacy, bool sourcesbool)
         {
             var pc = new PeopleCollection();
             string filename = Path.GetFileName(htmlFilePath);
@@ -823,9 +827,9 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Export events by year to html file.
         /// </summary>
-        public void ExportEventsByDecade(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, string htmlFilePath, string familyxFileName, bool privacy, int startYear, int endYear)
+        public void ExportEventsByDecade(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, 
+                                         string htmlFilePath, string familyxFileName, bool privacy, int startYear, int endYear)
         {
-            PeopleCollection pc = new PeopleCollection();
             string filename = Path.GetFileName(htmlFilePath);
             tw = new StreamWriter(filename);
 
@@ -835,10 +839,10 @@ namespace KBS.FamilyLinesLib
             tw.WriteLine(CSSevents());
  
             tw.WriteLine("</head><body>");
-            tw.WriteLine("<h2>" + KBS.FamilyLinesLib.Properties.Resources.FamilyShow + "</h2>");
-            tw.WriteLine("<i>" + KBS.FamilyLinesLib.Properties.Resources.Events + " " + startYear.ToString() + " - " + endYear.ToString() + "</i><br/><br/>");
+            tw.WriteLine("<h2>" + Properties.Resources.FamilyShow + "</h2>");
+            tw.WriteLine("<i>" + Properties.Resources.Events + " " + startYear + " - " + endYear + "</i><br/><br/>");
             if (!string.IsNullOrEmpty(familyxFileName))
-                tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + KBS.FamilyLinesLib.Properties.Resources.FamilyTree + "</b><br/>");
+                tw.WriteLine("<b>" + Path.GetFileNameWithoutExtension(familyxFileName) + " " + Properties.Resources.FamilyTree + "</b><br/>");
             tw.WriteLine("<div class=\"timeline\">");
 
             // Ensure we use actual decades and not just 10 year periods
@@ -861,9 +865,11 @@ namespace KBS.FamilyLinesLib
                 if (i < DateTime.Now.Year) // Only export events which have happened.
                 {
                     
-                    tw.WriteLine("<p class=\"decade\"><span class=\"tick\">&#8212;</span><b>" + i.ToString() + "-" + ii.ToString() + "</b></p>");
+                    tw.WriteLine("<p class=\"decade\"><span class=\"tick\">&#8212;</span><b>" + i + "-" + ii + "</b></p>");
 
                     int year = 0;
+
+                    // TODO living/privacy check can be done once per person, not every loop. Also death events don't apply to living people...
 
                     //write all the events split by decade
                     foreach (Person p in peopleCollection)
@@ -873,11 +879,10 @@ namespace KBS.FamilyLinesLib
                             if (p.BirthDate != null)
                                 year = p.BirthDate.Value.Year;
 
-                            string place = p.BirthPlace;
-
                             if (year >= i && year <= ii)
                             {
 
+                                // TODO localization issue: must use format string from properties
                                 if (!string.IsNullOrEmpty(p.BirthPlace))
                                     tw.WriteLine("<p class=\"event\"><b>" + p.FullName + "</b> " + Properties.Resources.WasBornOn + " " + dateformat(p.BirthDate) + " " + Properties.Resources.In + " " + p.BirthPlace + ".</p>");
                                 else
@@ -898,6 +903,7 @@ namespace KBS.FamilyLinesLib
 
                             if (year >= i && year <= ii)
                             {
+                                // TODO localization issue: must use format string from properties
                                 if (!string.IsNullOrEmpty(p.DeathPlace))
                                     tw.WriteLine("<p class=\"event\"><b>" + p.FullName + "</b> " + Properties.Resources.DiedOn + " " + dateformat(p.DeathDate) + " " + Properties.Resources.In + " " + p.DeathPlace + ".</p>");
                                 else
@@ -916,6 +922,7 @@ namespace KBS.FamilyLinesLib
 
                             if (year >= i && year <= ii)
                             {
+                                // TODO localization issue: must use format string from properties
                                 if (!string.IsNullOrEmpty(p.BurialPlace))
                                     tw.WriteLine("<p class=\"event\"><b>" + p.FullName + "</b> " + Properties.Resources.WasBuriedOn + " " + dateformat(p.BurialDate) + " " + Properties.Resources.At + " " + p.BurialPlace + ".</p>");
                                 else
@@ -934,6 +941,7 @@ namespace KBS.FamilyLinesLib
 
                             if (year >= i && year <= ii)
                             {
+                                // TODO localization issue: must use format string from properties
                                 if (!string.IsNullOrEmpty(p.CremationPlace))
                                     tw.WriteLine("<p class=\"event\"><b>" + p.FullName + "</b> " + Properties.Resources.WasCrematedOn + " " + dateformat(p.CremationDate) + " " + Properties.Resources.At + " " + p.CremationPlace + ".</p>");
                                 else
@@ -974,7 +982,7 @@ namespace KBS.FamilyLinesLib
                             + p.CremationPlace + sourceArray[0, 6] + "</td><td>"
                             + p.CremationDateDescriptor + " " + dateformat(p.CremationDate) + sourceArray[0, 6]
                             + "</td><td><p class=\"notelink\">[<a href=\"javascript:showhide('id_" + p.Id + "')\">Note</a>]</p></td></tr>"
-                            + "<tr id=\"note_id_" + p.Id + "\" class=\"noteshown\"><td colspan=\"15\"><b>"+KBS.FamilyLinesLib.Properties.Resources.Note + "</b>: <pre>" + p.Note + "</pre></td></tr>";
+                            + "<tr id=\"note_id_" + p.Id + "\" class=\"noteshown\"><td colspan=\"15\"><b>"+Properties.Resources.Note + "</b>: <pre>" + p.Note + "</pre></td></tr>";
 
         }
 
@@ -1003,17 +1011,17 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         private static string NormalSourceColumns()
         {
-            return "<br/><br/><i>" + KBS.FamilyLinesLib.Properties.Resources.SummaryOfSources + "</i><br/><br/>\n" +
+            return "<br/><br/><i>" + Properties.Resources.SummaryOfSources + "</i><br/><br/>\n" +
 
             "<table id=\"sourcetable\" border=\"1\" rules=\"all\" frame=\"box\">\n" +
             "<thead>\n" +
             "<tr>\n" +
-            "<th width=\"10%\">" + KBS.FamilyLinesLib.Properties.Resources.Source + "</th>\n" +
-            "<th width=\"15%\">" + KBS.FamilyLinesLib.Properties.Resources.Name + "</th>\n" +
-            "<th width=\"15%\">" + KBS.FamilyLinesLib.Properties.Resources.Author + "</th>\n" +
-            "<th width=\"15%\">" + KBS.FamilyLinesLib.Properties.Resources.Publisher + "</th>\n" +
-            "<th width=\"15%\">" + KBS.FamilyLinesLib.Properties.Resources.Note + "</th>\n" +
-            "<th width=\"10%\">" + KBS.FamilyLinesLib.Properties.Resources.Repository + "</th>\n" +
+            "<th width=\"10%\">" + Properties.Resources.Source + "</th>\n" +
+            "<th width=\"15%\">" + Properties.Resources.Name + "</th>\n" +
+            "<th width=\"15%\">" + Properties.Resources.Author + "</th>\n" +
+            "<th width=\"15%\">" + Properties.Resources.Publisher + "</th>\n" +
+            "<th width=\"15%\">" + Properties.Resources.Note + "</th>\n" +
+            "<th width=\"10%\">" + Properties.Resources.Repository + "</th>\n" +
             "</tr>\n" +
             "</thead>";
 
@@ -1027,21 +1035,21 @@ namespace KBS.FamilyLinesLib
         return "<table id=\"peopletable\" border=\"1\" rules=\"all\" frame=\"box\">\n" +
             "<thead>\n" +
             "<tr>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.Names + "</th> \n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.Surname + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.Age + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.BirthDate + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.BirthPlace + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.DeathDate + "</th> \n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.DeathPlace + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.Occupation + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.Education + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.Religion + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.BurialPlace + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.BurialDate + "</th>\n" +
-            "<th width=\"8.5%\">" + KBS.FamilyLinesLib.Properties.Resources.CremationPlace + "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.CremationDate+ "</th>\n" +
-            "<th width=\"5%\">" + KBS.FamilyLinesLib.Properties.Resources.AdditionalInfo + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.Names + "</th> \n" +
+            "<th width=\"5%\">" + Properties.Resources.Surname + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.Age + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.BirthDate + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.BirthPlace + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.DeathDate + "</th> \n" +
+            "<th width=\"8.5%\">" + Properties.Resources.DeathPlace + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.Occupation + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.Education + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.Religion + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.BurialPlace + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.BurialDate + "</th>\n" +
+            "<th width=\"8.5%\">" + Properties.Resources.CremationPlace + "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.CremationDate+ "</th>\n" +
+            "<th width=\"5%\">" + Properties.Resources.AdditionalInfo + "</th>\n" +
             "</tr>\n" +
             "</thead>";
         }
@@ -1051,14 +1059,14 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         private static string NormalRepositoryColumns()
         {
-            return "<br/><br/><i>" + KBS.FamilyLinesLib.Properties.Resources.SummaryOfRepositories + "</i><br/><br/>\n" +
+            return "<br/><br/><i>" + Properties.Resources.SummaryOfRepositories + "</i><br/><br/>\n" +
                 
             "<table id=\"reositorytable\" border=\"1\" rules=\"all\" frame=\"box\">\n" +
             "<thead>\n" +
             "<tr>\n" +
-            "<th width=\"10%\">" + KBS.FamilyLinesLib.Properties.Resources.Repository + "</th>\n" +
-            "<th width=\"15%\">" + KBS.FamilyLinesLib.Properties.Resources.Name + "</th>\n" +
-            "<th width=\"15%\">" + KBS.FamilyLinesLib.Properties.Resources.Address + "</th>\n" +
+            "<th width=\"10%\">" + Properties.Resources.Repository + "</th>\n" +
+            "<th width=\"15%\">" + Properties.Resources.Name + "</th>\n" +
+            "<th width=\"15%\">" + Properties.Resources.Address + "</th>\n" +
             "</tr>\n" +
             "</thead>";
 
@@ -1214,11 +1222,10 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         private static string Buttons()
         {
-
-            return "<input type=\"button\" onclick=\"showhideall('hide_all')\" value=\"" + KBS.FamilyLinesLib.Properties.Resources.HideNotes + "\" />\n" +
-               "<input type=\"button\" onclick=\"showhideall('show_all')\" value=\"" + KBS.FamilyLinesLib.Properties.Resources.ShowNotes + "\" />\n" +
+            return "<input type=\"button\" onclick=\"showhideall('hide_all')\" value=\"" + Properties.Resources.HideNotes + "\" />\n" +
+               "<input type=\"button\" onclick=\"showhideall('show_all')\" value=\"" + Properties.Resources.ShowNotes + "\" />\n" +
                "<noscript>\n" +
-               "<p>[" + KBS.FamilyLinesLib.Properties.Resources.HidingNotes + "]</p>\n" +
+               "<p>[" + Properties.Resources.HidingNotes + "]</p>\n" +
                "</noscript>";
         }
 
@@ -1284,7 +1291,7 @@ namespace KBS.FamilyLinesLib
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             string versionlabel = string.Format(CultureInfo.CurrentCulture, "{0}.{1}.{2}", version.Major, version.Minor, version.Build);
             string date = DateTime.Now.ToString();
-            return "</table><br/><p><i>" + KBS.FamilyLinesLib.Properties.Resources.GeneratedByFamilyShow + " " + versionlabel + " " + KBS.FamilyLinesLib.Properties.Resources.On + " " + date + "</i></p></body></html>";
+            return "</table><br/><p><i>" + Properties.Resources.GeneratedByFamilyShow + " " + versionlabel + " " + Properties.Resources.On + " " + date + "</i></p></body></html>";
         }
 
         #endregion
@@ -1296,43 +1303,42 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         private static string CurrentPersonString(Person p, bool privacy)
         {
-            string CurrentPerson = string.Empty;
+            string currentPerson;
 
-            if (p.IsLiving == true && privacy == true && p.Restriction != Restriction.Private) //quick privacy option
-                CurrentPerson = KBS.FamilyLinesLib.Properties.Resources.CurrentPerson + " <b>" + KBS.FamilyLinesLib.Properties.Resources.Living + " " + p.LastName + "</b><br/>";
+            if (p.IsLiving && privacy && p.Restriction != Restriction.Private) //quick privacy option
+                currentPerson = Properties.Resources.CurrentPerson + " <b>" + Properties.Resources.Living + " " + p.LastName + "</b><br/>";
             else if (p.Restriction == Restriction.Private) //a private record should not be exported
-                CurrentPerson = KBS.FamilyLinesLib.Properties.Resources.CurrentPerson + " <b>" + KBS.FamilyLinesLib.Properties.Resources.PrivateRecord + "</b><br/>";
+                currentPerson = Properties.Resources.CurrentPerson + " <b>" + Properties.Resources.PrivateRecord + "</b><br/>";
             else
-            CurrentPerson = KBS.FamilyLinesLib.Properties.Resources.CurrentPerson + " <b>" + p.FullName + "</b><br/>";
+                currentPerson = Properties.Resources.CurrentPerson + " <b>" + p.FullName + "</b><br/>";
 
-            return CurrentPerson;
+            return currentPerson;
         }
 
         /// <summary>
         /// Handles the export logic for a descendent generation
         /// </summary>
-        private static PeopleCollection descendentGenerations(Person child)
+        private static IEnumerable<Person> descendentGenerations(Person child)
         {
-            PeopleCollection pc = new PeopleCollection();
+            var pc = new PeopleCollection();
 
             if (!pc.Contains(child))
-                        pc.Add(child);
+                pc.Add(child);
 
-                    foreach (Person p in getSpouses(child))
-                    {
-                        if (!pc.Contains(p))
-                            pc.Add(p);
-                    }
-
+            foreach (Person p in getSpouses(child))
+            {
+                if (!pc.Contains(p))
+                    pc.Add(p);
+            }
             return pc;
         }
 
         /// <summary>
         /// Handles the export logic for an ancestor generation
         /// </summary>
-        private static PeopleCollection ancestorGenerations(Person parent)
+        private static IEnumerable<Person> ancestorGenerations(Person parent)
         {
-            PeopleCollection pc = new PeopleCollection();
+            var pc = new PeopleCollection();
 
             if (!pc.Contains(parent))
                 pc.Add(parent);
@@ -1349,9 +1355,9 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Get the siblings, spouses, previous spouses and children of a parent
         /// </summary>
-        private static PeopleCollection getSiblingsSpousesChildren(Person parent)
+        private static IEnumerable<Person> getSiblingsSpousesChildren(Person parent)
         {
-            PeopleCollection pc = new PeopleCollection();
+            var pc = new PeopleCollection();
 
             foreach (Person sibling in parent.Siblings)
             {
@@ -1364,42 +1370,33 @@ namespace KBS.FamilyLinesLib
                     pc.Add(child);
             }
 
-            foreach (Person spouse in parent.Spouses)
+            foreach (var person in getSpouses(parent))
             {
-                if (!pc.Contains(spouse))
-                    pc.Add(spouse);
-            }
-
-            foreach (Person previousSpouse in parent.PreviousSpouses)
-            {
-                if (!pc.Contains(previousSpouse))
-                    pc.Add(previousSpouse);
+                if (!pc.Contains(person))
+                    pc.Add(person);
             }
 
             return pc;
-
         }
 
         /// <summary>
-        /// Get all spouses of a child
+        /// Get all spouses of a person
         /// </summary>
-        private static PeopleCollection getSpouses(Person child)
+        private static IEnumerable<Person> getSpouses(Person person)
         {
-            PeopleCollection pc = new PeopleCollection();
+            var pc = new PeopleCollection();
 
-            foreach (Person spouse in child.Spouses)
+            foreach (Person spouse in person.Spouses)
             {
                 if (!pc.Contains(spouse))
                     pc.Add(spouse);
             }
-            foreach (Person previousSpouse in child.PreviousSpouses)
+            foreach (Person previousSpouse in person.PreviousSpouses)
             {
                 if (!pc.Contains(previousSpouse))
                     pc.Add(previousSpouse);
             }
-
             return pc;
-
         }
 
         /// <summary>
