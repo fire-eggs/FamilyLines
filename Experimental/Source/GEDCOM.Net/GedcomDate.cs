@@ -1031,5 +1031,34 @@ namespace GEDCOM.Net
 	        parser = null;
 	        return res;
 	    }
+
+        #region Equality operations
+	    public bool Equals(GedcomDate other)
+	    {
+	        if (ReferenceEquals(null, other)) return false;
+	        if (ReferenceEquals(this, other)) return true;
+	        return Equals(other._DateType, _DateType) && Equals(other._DatePeriod, _DatePeriod) && other._dateTime2.Equals(_dateTime2) && other._dateTime1.Equals(_dateTime1);
+	    }
+
+	    public override bool Equals(object obj)
+	    {
+	        if (ReferenceEquals(null, obj)) return false;
+	        if (ReferenceEquals(this, obj)) return true;
+	        if (obj.GetType() != typeof (GedcomDate)) return false;
+	        return Equals((GedcomDate) obj);
+	    }
+
+	    public override int GetHashCode()
+	    {
+	        unchecked
+	        {
+	            int result = _DateType.GetHashCode();
+	            result = (result*397) ^ _DatePeriod.GetHashCode();
+	            result = (result*397) ^ (_dateTime2.HasValue ? _dateTime2.Value.GetHashCode() : 0);
+	            result = (result*397) ^ (_dateTime1.HasValue ? _dateTime1.Value.GetHashCode() : 0);
+	            return result;
+	        }
+	    }
+        #endregion
 	}
 }
