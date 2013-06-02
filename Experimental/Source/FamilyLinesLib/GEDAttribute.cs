@@ -1,4 +1,6 @@
 ﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
  * The Model for a GEDCOM Attribute.
  * 
  * 1. On import from a GED file, the data from GEDCOM.Net is translated to

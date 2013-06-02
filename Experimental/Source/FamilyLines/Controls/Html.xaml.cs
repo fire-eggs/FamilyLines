@@ -1,9 +1,13 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ * 
+ */
 using System;
 using System.IO;
 using System.Windows;
 using KBS.FamilyLinesLib;
 
-namespace KBS.FamilyLines
+namespace KBS.FamilyLines.Controls
 {
     /// <summary>
     /// Interaction logic for Html.xaml
@@ -13,7 +17,7 @@ namespace KBS.FamilyLines
 
         #region fields
 
-        public int minYear = DateTime.Now.Year;
+        public int minYear = DateTime.Now.Year; // TODO should be a property
 
         #endregion
 
@@ -75,14 +79,7 @@ namespace KBS.FamilyLines
 
         private void Option6_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            if (Option6.IsChecked == true)
-            {
-                SourcesHtml.IsEnabled = false;
-            }
-            else
-            {
-                SourcesHtml.IsEnabled = true;
-            }
+            SourcesHtml.IsEnabled = Option6.IsChecked != true;
         }
 
         #endregion
@@ -160,67 +157,94 @@ namespace KBS.FamilyLines
 
         private void Export()
         {
+            if (Options() == "0") 
+                return;
 
-            if (Options() != "0") //only run if cancel not clicked
+            CommonDialog dialog = new CommonDialog();
+            dialog.InitialDirectory = People.ApplicationFolderPath;
+            dialog.Filter.Add(new FilterEntry(Properties.Resources.htmlFiles, Properties.Resources.htmlExtension));
+            dialog.Title = Properties.Resources.Export;
+            dialog.DefaultExtension = Properties.Resources.DefaulthtmlExtension;
+            dialog.ShowSave();
+
+            if (string.IsNullOrEmpty(dialog.FileName))
+                return;
+
+            HtmlExport html = new HtmlExport();
+
+            People familyCollection = App.FamilyCollection;
+            PeopleCollection family = App.Family;
+            SourceCollection source = App.Sources;
+            RepositoryCollection repository = App.Repositories;
+
+            switch (Options())
             {
-                CommonDialog dialog = new CommonDialog();
-                dialog.InitialDirectory = People.ApplicationFolderPath;
-                dialog.Filter.Add(new FilterEntry(Properties.Resources.htmlFiles, Properties.Resources.htmlExtension));
-                dialog.Title = Properties.Resources.Export;
-                dialog.DefaultExtension = Properties.Resources.DefaulthtmlExtension;
-                dialog.ShowSave();
-
-                if (string.IsNullOrEmpty(dialog.FileName))
-                    return;
-
-                if (!string.IsNullOrEmpty(dialog.FileName))
-                {
-                    HtmlExport html = new HtmlExport();
-
+                case "1":
+                    html.ExportAll(family, source, repository, dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), Sources());  //Export the all individuals
+                    break;
+                case "2":
+                    html.ExportCurrent(family, source, repository, dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), Sources());
+                    break;
+                case "3":
+                    html.ExportDirect(family, source, repository, dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), Sources());     //Export current person and immediate family relatives 
+                    break;
+                case "4":
+                    html.ExportGenerations(family, source, repository, Ancestors(), Descendants(), dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), Sources());
+                    break;
+                case "5":
+                    html.ExportFilter(family, source, repository, searchtextvalue(), searchfieldvalue(), searchfieldindex(), dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), Sources());
+                    break;
+                case "6":
                     int start = minYear;
                     int end = DateTime.Now.Year;
-
-                    People familyCollection = App.FamilyCollection;
-                    PeopleCollection family = App.Family;
-                    SourceCollection source = App.Sources;
-                    RepositoryCollection repository = App.Repositories;
-
-                    string filename = dialog.FileName;
-                    switch (Options())
-                    {
-                        case "1":
-                            html.ExportAll(family, source, repository, dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), Sources());  //Export the all individuals
-                            break;
-                        case "2":
-                            html.ExportCurrent(family, source, repository, dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), Sources());
-                            break;
-                        case "3":
-                            html.ExportDirect(family, source, repository, dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), Sources());     //Export current person and immediate family relatives 
-                            break;
-                        case "4":
-                            html.ExportGenerations(family, source, repository, Ancestors(), Descendants(), dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), Sources());
-                            break;
-                        case "5":
-                            html.ExportFilter(family, source, repository, searchtextvalue(), searchfieldvalue(), searchfieldindex(), dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), Sources());
-                            break;
-                        case "6":
-                            html.ExportEventsByDecade(family, source, repository, dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), start, end);
-                            break;
-                    }
-                    MessageBoxResult result = MessageBox.Show(Properties.Resources.SourcesExportMessage, Properties.Resources.ExportResult, MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                    try
-                    {
-                        if (result == MessageBoxResult.Yes)
-                            System.Diagnostics.Process.Start(filename);
-                    }
-                    catch { }
-
-                }
+                    html.ExportEventsByDecade(family, source, repository, dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), start, end);
+                    break;
             }
+            MessageBoxResult result = MessageBox.Show(Properties.Resources.SourcesExportMessage, Properties.Resources.ExportResult, MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            try
+            {
+                if (result == MessageBoxResult.Yes)
+                    System.Diagnostics.Process.Start(dialog.FileName);
+            }
+            catch { }
         }
 
         #endregion
 
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(CancelButtonClickEvent)); // TODO this is unintuitive: why raise a 'cancel'?
+            ExportKBR();
+            Clear(); // TODO why are we clearing the settings? shouldn't they be left alone?
+        }
+
+        private void ExportKBR()
+        {
+            if (Options() == "0")
+                return;
+
+            var dialog = new CommonDialog();
+            dialog.InitialDirectory = People.ApplicationFolderPath;
+            dialog.Filter.Add(new FilterEntry(Properties.Resources.htmlFiles, Properties.Resources.htmlExtension));
+            dialog.Title = Properties.Resources.Export;
+            dialog.DefaultExtension = Properties.Resources.DefaulthtmlExtension;
+            dialog.ShowSave();
+
+            if (string.IsNullOrEmpty(dialog.FileName))
+                return;
+
+            PeopleReport pr = new PeopleReport(dialog.FileName, App.Family, App.Sources, App.Repositories);
+            pr.generateReport(showHide:true);
+
+            MessageBoxResult result = MessageBox.Show(Properties.Resources.SourcesExportMessage, Properties.Resources.ExportResult, MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            try
+            {
+                if (result == MessageBoxResult.Yes)
+                    System.Diagnostics.Process.Start(dialog.FileName);
+            }
+            catch { }
+        }
     }
 }

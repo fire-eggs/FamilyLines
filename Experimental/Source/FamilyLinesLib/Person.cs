@@ -1,3 +1,6 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,6 +41,7 @@ namespace KBS.FamilyLinesLib
         private string prefix; // KBR add missing prefix support
         private string suffix;
 
+        #region Historical (Family.Show) fields only kept for serialization from familyx
         private string occupation;
         private string occupationCitation;
         private string occupationSource;
@@ -58,6 +62,7 @@ namespace KBS.FamilyLinesLib
         private string religionLink;
         private string religionCitationNote;
         private string religionCitationActualText;
+        #endregion
 
         private DateTime? birthDate;
         private string birthDateDescriptor;
@@ -101,8 +106,12 @@ namespace KBS.FamilyLinesLib
         private Story story;
         private readonly RelationshipCollection relationships;
 
+        // Events and Facts as imported from GEDCOM by Gedcom.NET.
         private readonly ObservableCollection<GEDEvent> m_events;
         private readonly ObservableCollection<GEDAttribute> m_facts;
+
+        // Accessor for convenience converting existing code
+        private GEDAttribute occupationFact;
 
         private int tree; // Which tree does this person belong to?
 
@@ -554,7 +563,7 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                if (birthDate == null)
+                if (birthDate == null || DateTimeFormatInfo.CurrentInfo == null)
                     return null;
                 return birthDate.Value.ToString(
                     DateTimeFormatInfo.CurrentInfo.MonthDayPattern,
@@ -570,11 +579,11 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                if (birthDate == null)
+                if (birthDate == null || DateTimeFormatInfo.CurrentInfo == null)
                     return null;
 
                 var returnValue = new StringBuilder();
-                returnValue.Append("Born ");
+                returnValue.Append("Born "); // TODO LOCALIZATION ISSUE
                 returnValue.Append(
                     birthDate.Value.ToString(
                         DateTimeFormatInfo.CurrentInfo.ShortDatePattern,
@@ -1008,6 +1017,19 @@ namespace KBS.FamilyLinesLib
         #endregion
 
         #region occupation details
+
+        public GEDAttribute OccupationFact
+        {
+            get
+            {
+                return occupationFact;
+            }
+            set
+            {
+                occupationFact = value;
+                // TODO update fact list
+            }
+        }
 
         /// <summary>
         /// Gets or sets the person's occupation
@@ -2347,7 +2369,6 @@ namespace KBS.FamilyLinesLib
             }
 
             // TODO replicate for events/facts/families/marriages?
-            // TODO no storage for URLs!
             // Photos and attachments
             bool firstPhoto = true;
             foreach (var mmediaID in indiv.Multimedia)
@@ -2358,8 +2379,8 @@ namespace KBS.FamilyLinesLib
                 {
                     foreach (var gnMMediaFile in mmRec.Files)
                     {
-                        // TODO This'll be true for URLs
-                        if (gnMMediaFile.Format == "URL")//I dont think this needs to be localized.
+                        // This'll be true for URLs
+                        if (gnMMediaFile.Format == "URL") // Do NOT translate
                         {
                             LinkDesc.Add(mmRec.Title);
                             Links.Add(gnMMediaFile.Filename);
@@ -2430,10 +2451,41 @@ namespace KBS.FamilyLinesLib
                         birthCitationNote = src.Notes[0];
                     }
                 }
+            }
 
-                // TODO birthCitation : how get to appropriate citation record?
-                // TODO birthCitationActualText : how get to appropriate citation record?
-                // TODO birthCitationNote : how get to appropriate citation record?
+            if (indiv.Death != null)
+            {
+                // TODO this is a hack: code separates death date/descriptor everywhere
+                // TODO use gedcomdate
+                if (indiv.Death.Date != null)
+                {
+                    deathDate = indiv.Death.Date.DateTime1;
+
+                    // TODO hack: need to convert to AFT, BEF, etc
+                    var temp = indiv.Death.Date.DatePeriod.ToString();
+                    deathDateDescriptor = temp != "Exact" ? temp : "";
+                }
+                else
+                {
+                    deathDate = null;
+                }
+
+                deathPlace = indiv.Death.Place != null ? indiv.Death.Place.Name : "";
+
+                if (indiv.Death.Sources != null && indiv.Death.Sources.Count > 0)
+                {
+                    var src = indiv.Death.Sources[0];
+                    deathCitationActualText = src.Text; // TODO: src.Text or src2.TextText?
+                    var src2 = src.Database[src.Source] as GedcomSourceRecord;
+                    if (src2 != null)
+                    {
+                        deathSource = src2.Title;
+                    }
+                    if (src.Notes != null && src.Notes.Count > 0)
+                    {
+                        deathCitationNote = src.Notes[0];
+                    }
+                }
             }
 
             foreach (var individualEvent in indiv.Attributes)
@@ -2611,6 +2663,12 @@ namespace KBS.FamilyLinesLib
         [XmlIgnore]
         public GedcomIndividualRecord Individual { get; set; }
 
+        [XmlIgnore]
+        public bool HasEvents { get { return m_events.Count > 0; } }
+
+        [XmlIgnore]
+        public bool HasFacts { get { return m_facts.Count > 0; } }
+
         public IList<GEDEvent> GetEvents(GedcomEvent.GedcomEventType evType)
         {
             // TODO custom events
@@ -2634,9 +2692,9 @@ namespace KBS.FamilyLinesLib
             // 1. If any of the current spouses died over 100 yrs ago, this person should not be living:
             foreach (Person curSpouse in CurrentSpouses)
             {
-                if (curSpouse.deathDate != null)
+                if (curSpouse.DeathDate != null)
                 {
-                    if ((DateTime.Now.Year - curSpouse.deathDate.Value.Year) > 100)
+                    if ((DateTime.Now.Year - curSpouse.DeathDate.Value.Year) > 100)
                     {
                         isLiving = false;
                         break;
@@ -2647,9 +2705,9 @@ namespace KBS.FamilyLinesLib
             // 2. If this person has a child who died over 100 years ago, this person should not be living:
             foreach (Person child in Children)
             {
-                if (child.deathDate != null)
+                if (child.DeathDate != null)
                 {
-                    if ((DateTime.Now.Year - child.deathDate.Value.Year) > 100)
+                    if ((DateTime.Now.Year - child.DeathDate.Value.Year) > 100)
                     {
                         isLiving = false;
                         break;

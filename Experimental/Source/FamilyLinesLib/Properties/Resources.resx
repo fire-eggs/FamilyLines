@@ -399,4 +399,59 @@
   <data name="Divorces" xml:space="preserve">
     <value>Divorces</value>
   </data>
+  <data name="PeopleReportCSS" xml:space="preserve">
+    <value>&lt;style type="text/css"&gt;
+body { background-color: white; font-family: Calibri, Arial, sans-serif; font-size: 12px; line-height: 1; padding: 1em; color: #2E2E2E; }
+td { text-align: left; }
+th { background-color: #F0F8FF; }
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+tr.personhighlight {border-left: 1px #2E2E2E solid;}
+tr.person {border-left: 0.5px gray solid;}
+
+tr.notehide { display: none;}
+tr.noteshow {border-left: 1px #2E2E2E solid;}
+tr.noteshow pre {width: 98%; white-space: pre-wrap;}
+
+table.people { border: 0px; width: 75%; empty-cells: show; }
+tr.people { border: 0px; }
+td.people { border: 0px; font-family: Calibri, Arial, sans-serif; font-size: 16px; font-weight: bold; padding-top: 0.5em; vertical-align: bottom }
+
+table.event { border: 1px gray solid; width: 85%; empty-cells: show; margin-right:auto; margin-left:auto; }
+
+td.date { text-align: right }
+td.age { text-align: center; vertical-align: top; }
+td.notelink {text-align: center; vertical-align: top; }
+
+@media print {
+td.notelink, noscript, input  { display: none; }
+table { border-width: 0px; }
+tr { page-break-inside: avoid; }
+tr &gt;*+*+*+*+*+*+*+*{display: none; }
+}
+&lt;/style&gt;</value>
+    <comment>Do not translate.</comment>
+  </data>
+  <data name="GEDCOMDate" xml:space="preserve">
+    <value>{0}{1}{2}</value>
+    <comment>E.g. "About 1-Jan-2000". {1} is a space if required.</comment>
+  </data>
+  <data name="PeopleReportPersonAliveTD" xml:space="preserve">
+    <value>&lt;td class="people" colspan="7"&gt;{0}, {1} &amp;nbsp;&amp;nbsp; Born: {2} &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;td&gt;</value>
+  </data>
+  <data name="PeopleReportPersonTD" xml:space="preserve">
+    <value>&lt;td class="people" colspan="8"&gt;{0}, {1} &amp;nbsp;&amp;nbsp; Born: {2} &amp;nbsp;&amp;nbsp; Died: {3} &amp;nbsp; Age: {4}&lt;/td&gt;</value>
+  </data>
+  <data name="PeopleReportTRFormat" xml:space="preserve">
+    <value>&lt;tr id="id_{0}"&gt;</value>
+  </data>
+  <data name="PeopleReportEventLink" xml:space="preserve">
+    <value>[&lt;a href="javascript:showhide('id_{0}','event')"&gt;Events&lt;/a&gt;]</value>
+  </data>
+  <data name="PeopleReportFactLink" xml:space="preserve">
+    <value>[&lt;a href="javascript:showhide('id_{0}','fact')"&gt;Facts&lt;/a&gt;]</value>
+  </data>
+  <data name="PeopleReportNoteLink" xml:space="preserve">
+    <value>[&lt;a href="javascript:showhide('id_{0}','note')"&gt;Note&lt;/a&gt;]</value>
+  </data>
 </root>

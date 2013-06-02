@@ -393,7 +393,7 @@ namespace GEDCOM.Net
 
         #region Logging
 
-	    public int _lineNum;
+	    private int lineNum;
 	    public string logName = @"E:\import_log.txt";
 
         public void importLog(string msg, string extra="", bool mark=false)
@@ -415,7 +415,7 @@ namespace GEDCOM.Net
             try
             {
                 StreamWriter log = new StreamWriter(logName, true);
-                log.WriteLine("Input Line {3} ({4}) - Exception '{0}'({1}) : {2}", ex.Message, ex.InnerException, ex.StackTrace, _lineNum, extra);
+                log.WriteLine("Input Line {3} ({4}) - Exception '{0}'({1}) : {2}", ex.Message, ex.InnerException, ex.StackTrace, lineNum, extra);
                 log.Close();
             }
             catch
@@ -428,7 +428,7 @@ namespace GEDCOM.Net
             try
             {
                 StreamWriter log = new StreamWriter(logName, true);
-                log.WriteLine("Input Line {1} - Parser error '{0}'", err, _lineNum);
+                log.WriteLine("Input Line {1} - Parser error '{0}'", err, lineNum);
                 log.Close();
             }
             catch
@@ -575,7 +575,7 @@ namespace GEDCOM.Net
 			FileInfo info = new FileInfo(gedcomFile);
 			long fileSize = info.Length;
 			long read = 0;
-		    _lineNum = 1;
+		    lineNum = 1;
 			
 			_missingReferences = new List<string>();
 			_sourceCitations = new List<GedcomSourceCitation>();
@@ -664,7 +664,7 @@ namespace GEDCOM.Net
 							}
 						}
 					}
-				    _lineNum++;
+				    lineNum++;
 				}
 				Flush();
 			}
