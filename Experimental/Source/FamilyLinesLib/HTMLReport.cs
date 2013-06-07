@@ -1,9 +1,13 @@
-﻿using System;
+﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
+ * Attempts to provide "standard" HTML output support for multiple derived reports.
+ */
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
+using KBS.FamilyLinesLib.Properties;
 
 namespace KBS.FamilyLinesLib
 {
@@ -18,11 +22,17 @@ namespace KBS.FamilyLinesLib
             people = enumerable;
         }
 
+        public bool Privacy { get; set; }
+
         private void openReport(string htmlFilePath)
         {
             tw = new StreamWriter(Path.GetFileName(htmlFilePath));
         }
 
+        /// <summary>
+        /// Generic header w/ standard doctype, html, head tags.
+        /// </summary>
+        /// <param name="title">The title of the HTML document</param>
         protected void outputHeader( string title )
         {
             tw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -32,69 +42,51 @@ namespace KBS.FamilyLinesLib
             tw.WriteLine("<title>" + title + "</title>");
         }
 
+        /// <summary>
+        /// Generic footer displaying the product name and version #
+        /// </summary>
         protected void outputFooter()
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             string versionlabel = string.Format(CultureInfo.CurrentCulture, "{0}.{1}.{2}", version.Major, version.Minor, version.Build);
             string date = DateTime.Now.ToString();
-            tw.WriteLine("</table><br/><p><i>" + Properties.Resources.GeneratedByFamilyShow + " " + versionlabel + " " + Properties.Resources.On + " " + date + "</i></p></body></html>");
-            tw.Close();
+
+            // TODO localization needs to be corrected
+            tw.WriteLine("</table><br/><p><i>" + Resources.GeneratedByFamilyShow + " " + versionlabel + " " + Resources.On + " " + date + "</i></p></body></html>");
         }
 
-        protected void outputBody(bool showHide = false)
+        protected void outputBody(string tableName, bool showHide = false, bool stripe = false)
         {
             tw.Write("<body");
             if (showHide)
             {
-                tw.WriteLine("onload=\"javascript:showhideall('hide_all')\">");
-                tw.WriteLine("<input type=\"button\" onclick=\"showhideall('hide_all')\" value=\"Hide all notes\" />");
-                tw.WriteLine("<input type=\"button\" onclick=\"showhideall('show_all')\" value=\"Show all notes\" />");
+                tw.Write(" onload=\"javascript:showhideall('hide_all','note');");
+                if (stripe)
+                    tw.Write("stripe('"+ tableName + "');");
+                tw.WriteLine("\">");
+                tw.WriteLine("<input type=\"button\" onclick=\"showhideall('hide_all','event')\" value=\"Hide all events\" />");
+                tw.WriteLine("<input type=\"button\" onclick=\"showhideall('show_all','event')\" value=\"Show all events\" />");
+                tw.WriteLine("<input type=\"button\" onclick=\"showhideall('hide_all','fact')\" value=\"Hide all facts\" />");
+                tw.WriteLine("<input type=\"button\" onclick=\"showhideall('show_all','fact')\" value=\"Show all facts\" />");
+                tw.WriteLine("<input type=\"button\" onclick=\"showhideall('hide_all','note')\" value=\"Hide all notes\" />");
+                tw.WriteLine("<input type=\"button\" onclick=\"showhideall('show_all','note')\" value=\"Show all notes\" />");
             }
             else
             {
+                if (stripe)
+                    tw.Write(" onload=\"javascript:stripe('" + tableName + "');\"");
                 tw.WriteLine(">");
             }
         }
 
         protected void outputCSS()
         {
-            tw.WriteLine(Properties.Resources.PeopleReportCSS);
+            tw.WriteLine(Resources.PeopleReportCSS);
         }
 
         protected void showHideScript()
         {
-            tw.WriteLine("<script type=\"text/javascript\">");
-
-            tw.WriteLine("function showhide(id,thing) {");
-	        tw.WriteLine("    var person = document.getElementById(id);");
-	        tw.WriteLine("    var note = document.getElementById(thing+'_'+id);");
-	        tw.WriteLine("    if (note.className == 'noteshow') {");
-		    tw.WriteLine("        note.className = 'notehide';");
-		    tw.WriteLine("        person.className = 'person';");
-	        tw.WriteLine("    } else {");
-		    tw.WriteLine("        note.className = 'noteshow';");
-		    tw.WriteLine("        person.className = 'personhighlight'; }");
-            tw.WriteLine("}");
-//function showhideall(hide) {
-//var allTags=document.getElementsByTagName('tr');
-//for (i=0; i<allTags.length; i++) {
-//if(hide=='hide_all'){
-//if (allTags[i].className=='noteshow') {
-//    allTags[i].className='notehide';
-//    }
-//if (allTags[i].className=='personhighlight') {
-//    allTags[i].className='person';
-//    }	
-//}
-//if(hide=='show_all'){
-//if (allTags[i].className=='notehide') {
-//    allTags[i].className='noteshow';
-//    allTags[i-1].className='personhighlight'; 	
-//    }
-//}
-//}
-//}
-            tw.WriteLine("</script>");
+            tw.WriteLine(Resources.PeopleReportShowHideScript);
         }
 
         protected void finishTable()

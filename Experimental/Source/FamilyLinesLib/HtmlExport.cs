@@ -564,7 +564,7 @@ namespace KBS.FamilyLinesLib
                 }
             }
 
-            if (sourcesbool == true)
+            if (sourcesbool)
             {
                 if (sourceCollection.Count > 0)
                 {

@@ -657,7 +657,7 @@
                     />
 
             <!-- Html Control -->
-            <local:Html 
+            <Controls:Html 
                 x:Name="HtmlControl" 
                 Visibility="Hidden" 
                 HorizontalAlignment="Center" 

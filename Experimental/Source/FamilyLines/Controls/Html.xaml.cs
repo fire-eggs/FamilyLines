@@ -235,6 +235,7 @@ namespace KBS.FamilyLines.Controls
                 return;
 
             PeopleReport pr = new PeopleReport(dialog.FileName, App.Family, App.Sources, App.Repositories);
+            pr.Privacy = Privacy();
             pr.generateReport(showHide:true);
 
             MessageBoxResult result = MessageBox.Show(Properties.Resources.SourcesExportMessage, Properties.Resources.ExportResult, MessageBoxButton.YesNo, MessageBoxImage.Question);
