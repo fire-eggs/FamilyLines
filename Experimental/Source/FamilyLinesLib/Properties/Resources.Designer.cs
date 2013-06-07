@@ -729,6 +729,24 @@ namespace KBS.FamilyLinesLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;td colspan=&quot;9&quot;&gt;&lt;b&gt;Note:&lt;/b&gt;&lt;pre&gt;{0}&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;.
+        /// </summary>
+        public static string PeopleReportNoteTD {
+            get {
+                return ResourceManager.GetString("PeopleReportNoteTD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;tr id=&quot;note_id_{0}&quot; class=&quot;noteshow&quot;&gt;.
+        /// </summary>
+        public static string PeopleReportNoteTR {
+            get {
+                return ResourceManager.GetString("PeopleReportNoteTR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;td class=&quot;people&quot; colspan=&quot;7&quot;&gt;{0}, {1} &amp;nbsp;&amp;nbsp; Born: {2} &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;td&gt;.
         /// </summary>
         public static string PeopleReportPersonAliveTD {
@@ -743,6 +761,58 @@ namespace KBS.FamilyLinesLib.Properties {
         public static string PeopleReportPersonTD {
             get {
                 return ResourceManager.GetString("PeopleReportPersonTD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;script type=&quot;text/javascript&quot;&gt;
+        ///function showhide(id,thing) {
+        ///  var person = document.getElementById(id);
+        ///  var note = document.getElementById(thing+&apos;_&apos;+id);
+        ///  var c1 = thing + &apos;show&apos;;
+        ///  var c2 = thing + &apos;hide&apos;;
+        ///  if (note.className == c1) {
+        ///    note.className = c2;
+        ///    person.className = &apos;person&apos;;
+        ///  } else if (note.className == c2) {
+        ///    note.className = c1;
+        ///    person.className = &apos;personhighlight&apos;;
+        ///  }
+        ///}
+        ///
+        ///function showhideall(hide,thing) {
+        ///  var allTags=document.getElementsByTagName(&apos;tr&apos;); [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string PeopleReportShowHideScript {
+            get {
+                return ResourceManager.GetString("PeopleReportShowHideScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;script type=&quot;text/javascript&quot;&gt;
+        ///&lt;!--
+        ///// this function is needed to work around 
+        ///  // a bug in IE related to element attributes
+        ///  function hasClass(obj) {
+        ///     var result = false;
+        ///     if (obj.getAttributeNode(&quot;class&quot;) != null) {
+        ///         result = obj.getAttributeNode(&quot;class&quot;).value;
+        ///     }
+        ///     return result;
+        ///  }   
+        ///
+        /// function stripe(id) {
+        ///
+        ///    // the flag we&apos;ll use to keep track of 
+        ///    // whether the current row is odd or even
+        ///    var even = false;
+        ///  
+        ///    // if arguments are provided to  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string PeopleReportStripeScript {
+            get {
+                return ResourceManager.GetString("PeopleReportStripeScript", resourceCulture);
             }
         }
         
