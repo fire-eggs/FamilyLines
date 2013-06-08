@@ -2422,17 +2422,11 @@ namespace KBS.FamilyLinesLib
             {
                 // TODO this is a hack: code separates birth date/descriptor everywhere
                 // TODO use gedcomdate
+                birthDate = null;
                 if (indiv.Birth.Date != null)
                 {
                     birthDate = indiv.Birth.Date.DateTime1;
-
-                    // TODO hack: need to convert to AFT, BEF, etc
-                    var temp = indiv.Birth.Date.DatePeriod.ToString();
-                    birthDateDescriptor = temp != "Exact" ? temp : "";
-                }
-                else
-                {
-                    birthDate = null;
+                    birthDateDescriptor = indiv.Birth.Date.PeriodAbbrev; // TODO some values don't translate
                 }
 
                 birthPlace = indiv.Birth.Place != null ? indiv.Birth.Place.Name : "";
@@ -2457,17 +2451,11 @@ namespace KBS.FamilyLinesLib
             {
                 // TODO this is a hack: code separates death date/descriptor everywhere
                 // TODO use gedcomdate
+                deathDate = null;
                 if (indiv.Death.Date != null)
                 {
                     deathDate = indiv.Death.Date.DateTime1;
-
-                    // TODO hack: need to convert to AFT, BEF, etc
-                    var temp = indiv.Death.Date.DatePeriod.ToString();
-                    deathDateDescriptor = temp != "Exact" ? temp : "";
-                }
-                else
-                {
-                    deathDate = null;
+                    deathDateDescriptor = indiv.Death.Date.PeriodAbbrev; // TODO some values don't translate
                 }
 
                 deathPlace = indiv.Death.Place != null ? indiv.Death.Place.Name : "";
