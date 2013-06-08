@@ -956,13 +956,15 @@ namespace GEDCOM.Net
 		private bool AddressParse(GedcomAddress address, string tag, string lineValue, GedcomLineValueType lineValueType)
 		{
 			bool done = false;
-						
+            if (address == null)
+                return false;
+
 			//  FIXME: checking for ADDR is wrong, doesn't work properly, ok to just
 			//  check address is not null?  Real solution is to use a stack for PreviousTag
 			// like it should have been doing in the first place
 			// PreviousTag is now using a stack so will return the parent tag, which should be ADDR
             // TODO fix this
-			if (address != null || _ParseState.PreviousTag == "ADDR")
+			if (_ParseState.PreviousTag == "ADDR")
 			{
 				switch (tag)
 				{
@@ -1030,13 +1032,16 @@ namespace GEDCOM.Net
 		{
 		    try
 		    {
+		        GedcomDate._logger = importLog;
                 date.ParseDateString(lineValue);
             }
 		    catch (Exception ex)
 		    {
 		        importLog(ex, lineValue);
 		    }
-			
+
+		    GedcomDate._logger = null;
+
 			// no parsed date, perhaps it was an age?
 			if (date.DateTime1 == null)
 			{

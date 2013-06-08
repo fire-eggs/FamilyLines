@@ -533,7 +533,10 @@ namespace GEDCOM.Net
 			}
 			return match;
 		}
-		
+
+	    public delegate void Logger(string msg, string extra, bool mark);
+	    public static Logger _logger = null;
+
 		public void ParseDateString(string dataString)
 		{
             _dateTime1 = null;
@@ -584,7 +587,7 @@ namespace GEDCOM.Net
             // KBR need to reset on re-parse
             DatePeriod = GedcomDatePeriod.Exact;
 						
-			CultureInfo culture = System.Globalization.CultureInfo.CurrentCulture;
+			CultureInfo culture = CultureInfo.CurrentCulture;
 						
 			if (period.StartsWith("BEF ", true, culture))
 			{
@@ -857,6 +860,9 @@ namespace GEDCOM.Net
            		}
            		else
            		{
+                    if (_logger != null)
+                        _logger("date is generic text", dataString, false);
+
            		    // assume date is generic text
            			// can't do much with it
            		}
@@ -885,6 +891,9 @@ namespace GEDCOM.Net
       			// it was entered on doesn't remove the event due
       			// to lack of any date entered.
       			// accept as unparsable
+
+                if (_logger != null)
+                    _logger("Unparseable date", dataString, false);
            		
            	}
 		}
@@ -1018,10 +1027,14 @@ namespace GEDCOM.Net
 					}
 
                     // KBR 20130525: reardon.ged had five digit dates for some reason. drop the last digit.
+                    // KBR 20130608: all_1.ged had eight digit dates. Fix this intelligently.
                     if (y > 9999)
                     {
-                        y = y / 10;
-                        // TODO add logging for this
+                        if (_logger != null)
+                            _logger("Year problem", year, false);
+
+                        var year2 = year.Substring(0, 4);
+                        int.TryParse(year2, out y);
                     }
 
 					ret = new DateTime(y, m, d, calendar);
@@ -1065,7 +1078,6 @@ namespace GEDCOM.Net
             GedcomDate parser = new GedcomDate();
             parser.ParseDateString(adateString);
 	        bool res = parser.DateTime1.HasValue;
-	        parser = null;
 	        return res;
 	    }
 
