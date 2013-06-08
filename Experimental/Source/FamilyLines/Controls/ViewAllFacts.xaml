@@ -8,11 +8,11 @@
              d:DesignWidth="300"
 >
 
-    <StackPanel>
+    <StackPanel Width="600">
 
         <!-- Header -->
         <Border Padding="5,0,5,0" Background="{DynamicResource BackgroundBrush}" BorderBrush="{DynamicResource BorderBrush}" 
-                BorderThickness="1,1,1,0" CornerRadius="5,5,0,0" Height="30" MinWidth="300" Width="Auto">
+                BorderThickness="1,1,1,0"  CornerRadius="{DynamicResource AboutBorderTopCorner}" Height="30" MinWidth="300" Width="Auto">
             <Grid>
                 <!-- Person name -->
                 <TextBlock Text="{Binding Path=PName, Mode=Default, FallbackValue=Current Person}" 
@@ -29,14 +29,18 @@
                 Background="{DynamicResource InputBackgroundBrush}" 
                 BorderThickness="1,1,1,1">
             
-            <Grid>
+            <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="DisplayGrid"
+                          MinHeight="75"
+                          MaxHeight="300"
+                          VerticalScrollBarVisibility="Auto"
                           Grid.Row="0"
+                          ColumnWidth="Auto"
                           SelectionChanged="DisplayGrid_SelectionChanged"
                           ItemsSource="{Binding Path=Facts}" 
                           AutoGenerateColumns="False"
@@ -52,23 +56,70 @@
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Button x:Name="addBtn" Click="addBtn_Click" Content="Add"/>
-                    <Button x:Name="delBtn" IsEnabled="False" Click="delBtn_Click" Content="Delete"/>
-                    <Button x:Name="resetBtn" IsEnabled="False" Click="resetBtn_Click" Content="Reset"/>
-                    <Button x:Name="saveBtn" IsEnabled="False" Click="saveBtn_Click" Content="Save"/>
+                <StackPanel Margin="5" Grid.Row="1" Orientation="Horizontal">
+                    <Button x:Name="addBtn"  Click="addBtn_Click" Content="Add"/>
+                    <Button x:Name="delBtn"  Click="delBtn_Click" Content="Delete"/>
+                    <Button x:Name="resetBtn" Click="resetBtn_Click" Content="Reset"/>
+                    <Button x:Name="saveBtn" Click="saveBtn_Click" Content="Save"/>
                 </StackPanel>
-                <StackPanel Grid.Row="2">
-                    <TextBox x:Name="txt1" />
-                    <TextBox x:Name="txt2" />
-                    <TextBox x:Name="txt3" />
-                    <TextBox x:Name="txt4" />
-                </StackPanel>
+                <Grid x:Name="eventDetails" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0"
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Foreground="{DynamicResource InputFontColor}"
+                           Content="Event:" HorizontalAlignment="Right"/>
+                    <Label Grid.Row="0" Grid.Column="1"
+                           x:Name="txt0"
+                           Padding="0"
+                           Foreground="{DynamicResource InputFontColor}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Date:" 
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Foreground="{DynamicResource InputFontColor}"
+                           HorizontalAlignment="Right"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="txt1"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Place:" 
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Foreground="{DynamicResource InputFontColor}"
+                           HorizontalAlignment="Right"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="txt2" />
+                    <Label Grid.Row="3" Grid.Column="0" Content="Description:" 
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Foreground="{DynamicResource InputFontColor}"
+                           HorizontalAlignment="Right"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="txt3" />
+                    <Label Grid.Row="4" Grid.Column="0" Content="Address:" 
+                           VerticalAlignment="Center"
+                           Padding="0"
+                           Foreground="{DynamicResource InputFontColor}"
+                           HorizontalAlignment="Right"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" 
+                             x:Name="txt4"
+                             Height="50"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Visible"
+                             AcceptsReturn="True"
+                             />
+                </Grid>
             </Grid>
         </Border>
 
         <!-- Footer -->
-        <Border Background="{DynamicResource BackgroundBrush}" Height="15" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,1,1" CornerRadius="0,0,5,5"/>
+        <Border Background="{DynamicResource BackgroundBrush}" Height="15" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,1,1" CornerRadius="{DynamicResource AboutBorderBottomCorner}"/>
 
     </StackPanel>
 

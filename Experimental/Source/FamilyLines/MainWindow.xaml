@@ -738,6 +738,8 @@
                 x:Name="ViewAllFacts"
                 Visibility="Hidden"
                 CloseButtonClick="ViewAllFacts_Finish" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
                 />
             
         </Grid>
