@@ -11,10 +11,10 @@
 */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using GEDCOM.Net;
 
 // ReSharper disable SpecifyACultureInStringConversionExplicitly
@@ -26,6 +26,24 @@ namespace KBS.FamilyLinesLib
     /// </summary>
     public class GedcomImport
     {
+        class Finder
+        {
+            private Hashtable _dex = new Hashtable();
+            public void Add(Person p)
+            {
+                if (p.Individual == null)
+                    return;
+                _dex.Add(p.Individual.XRefID, p);
+            }
+
+            public Person Find(string id)
+            {
+                return (Person) _dex[id];
+            }
+        }
+
+        private Finder _finder;
+
         #region fields
 
         // The collection to add entries.
@@ -47,6 +65,7 @@ namespace KBS.FamilyLinesLib
                            RepositoryCollection repositoryCollection, string gedcomFilePath, bool disableCharacterCheck)
         {
             _header = null;
+            _finder = new Finder();
 
             // Clear current content.
             peopleCollection.Clear();
@@ -81,12 +100,14 @@ namespace KBS.FamilyLinesLib
         {
             _database = _reader.Database;
 
+            _finder = new Finder();
             header = ImportHeader();
 
             foreach (GedcomIndividualRecord t in _database.Individuals)
             {
                 Person aPerson = new Person(t);
                 people.Add(aPerson);
+                _finder.Add(aPerson);
             }
 
 #if DEBUG
@@ -148,7 +169,7 @@ namespace KBS.FamilyLinesLib
 
                 repository.Id = gnrepos.XRefID;
                 repository.RepositoryName = gnrepos.Name;
-                repository.RepositoryAddress = gnrepos.Address.ToString(); // TODO gedcomaddress is an object not a string
+                repository.RepositoryAddress = gnrepos.Address == null ? "" : gnrepos.Address.ToString(); // TODO gedcomaddress is an object not a string
                 repositories.Add(repository);
             }            
         }
@@ -189,7 +210,7 @@ namespace KBS.FamilyLinesLib
 
         private void ImportChildGN(GedcomIndividualRecord child, GedcomIndividualRecord daddy, GedcomIndividualRecord mommy)
         {
-            var childP = HackFind(child.XRefID);
+            var childP = _finder.Find(child.XRefID);
 
             ParentChildModifier dadMod = ParentChildModifier.Natural;
             ParentChildModifier momMod = ParentChildModifier.Natural;
@@ -225,7 +246,7 @@ namespace KBS.FamilyLinesLib
             List<Person> firstParentChildren = new List<Person>();
             if (daddy != null)
             {
-                var daddyP = HackFind(daddy.XRefID);
+                var daddyP = _finder.Find(daddy.XRefID);
                 kbrLog("AddChild", daddyP, childP, dadMod);
                 people.AddChild(daddyP, childP, dadMod);
                 firstParentChildren = new List<Person>(daddyP.NaturalChildren);
@@ -234,7 +255,7 @@ namespace KBS.FamilyLinesLib
             List<Person> secondParentChildren = new List<Person>();
             if (mommy != null)
             {
-                var mommyP = HackFind(mommy.XRefID);
+                var mommyP = _finder.Find(mommy.XRefID);
                 kbrLog("AddChild", mommyP, childP, momMod);
                 people.AddChild(mommyP, childP, momMod);
                 secondParentChildren = new List<Person>(mommyP.NaturalChildren);
@@ -281,16 +302,16 @@ namespace KBS.FamilyLinesLib
             // TODO diagram doesn't show child as adopted initially but changes on refresh?
         }
 
-        // TODO slow with large family: turn into a HashMap?
-        private Person HackFind(string XRefID)
-        {
-            foreach (var aperson in people)
-            {
-                if (aperson.Individual != null && aperson.Individual.XRefID == XRefID)
-                    return aperson;
-            }
-            return null;
-        }
+        //// TODO slow with large family: turn into a HashMap?
+        //private Person HackFind(string XRefID)
+        //{
+        //    foreach (var aperson in people)
+        //    {
+        //        if (aperson.Individual != null && aperson.Individual.XRefID == XRefID)
+        //            return aperson;
+        //    }
+        //    return null;
+        //}
 
         private void ImportMarriageGN(GedcomFamilyRecord fambly, GedcomIndividualRecord hubby, GedcomIndividualRecord wifey)
         {
@@ -299,8 +320,8 @@ namespace KBS.FamilyLinesLib
 
             // TODO hubby or wifey null
 
-            var hubbyP = HackFind(hubby.XRefID);
-            var wifeyP = HackFind(wifey.XRefID);
+            var hubbyP = _finder.Find(hubby.XRefID);
+            var wifeyP = _finder.Find(wifey.XRefID);
 
             // TODO: assuming only one marriage/divorce for a couple, i.e. MARR+DIV+MARR would be possible? How does this appear in GED?
 
@@ -406,45 +427,45 @@ namespace KBS.FamilyLinesLib
             }
         }
 		
-        /// <summary>
-        /// Often programs do not store links correctly.
-        /// Method to extract the first url link out of citation note.
-        /// </summary>
-        private static string GetLink(string Note)
-        {
+        ///// <summary>
+        ///// Often programs do not store links correctly.
+        ///// Method to extract the first url link out of citation note.
+        ///// </summary>
+        //private static string GetLink(string Note)
+        //{
 
-            if (!string.IsNullOrEmpty(Note))
-            {
-                Array Link = Note.Split();
+        //    if (!string.IsNullOrEmpty(Note))
+        //    {
+        //        Array Link = Note.Split();
 
-                foreach (string s in Link)
-                {
-                    if ((s.StartsWith("http://") || s.StartsWith("www.")))
-                        return s;  //only extract one link
-                }
+        //        foreach (string s in Link)
+        //        {
+        //            if ((s.StartsWith("http://") || s.StartsWith("www.")))
+        //                return s;  //only extract one link
+        //        }
               
-                return string.Empty;
-            }
-            else
-                return string.Empty;
-        }
+        //        return string.Empty;
+        //    }
+        //    else
+        //        return string.Empty;
+        //}
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        private static string GetValue(XmlNode node, string xpath)
-        {
-            try 
-            { 
-                XmlNode valueNode = node.SelectSingleNode(xpath);
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
+        //private static string GetValue(XmlNode node, string xpath)
+        //{
+        //    try 
+        //    { 
+        //        XmlNode valueNode = node.SelectSingleNode(xpath);
 
-                if (valueNode != null)
-                        return valueNode.Attributes["Value"].Value.Trim();
-            }
-            catch 
-            {
-                 //Invalid line, keep processing the file.
-            }
-            return string.Empty;
-        }
+        //        if (valueNode != null)
+        //                return valueNode.Attributes["Value"].Value.Trim();
+        //    }
+        //    catch 
+        //    {
+        //         //Invalid line, keep processing the file.
+        //    }
+        //    return string.Empty;
+        //}
 
         /// <summary>
         /// Bring the GEDCOM header information in

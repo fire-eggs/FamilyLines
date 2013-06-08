@@ -2819,6 +2819,7 @@ namespace KBS.FamilyLinesLib
         {
             if (id == null)
                 return null;
+            return lookup[id] as Person;
 
 // TODO May be broken (hash search ID has not been updated to GUIDs)?
 			// KBR 03/??/2012 search by hash is faster
