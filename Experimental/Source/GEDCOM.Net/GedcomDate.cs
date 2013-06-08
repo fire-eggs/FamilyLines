@@ -286,6 +286,43 @@ namespace GEDCOM.Net
 			}
 		}
 		
+	    public string PeriodAbbrev
+	    {
+	        get
+	        {
+                switch (_DatePeriod)
+                {
+                    default:
+                    case GedcomDatePeriod.Exact:
+                        return "";
+
+                    case GedcomDatePeriod.After:
+                        return "AFT";
+
+                    case GedcomDatePeriod.Before:
+                        return "BEF";
+
+                    case GedcomDatePeriod.Between:
+                        return "BET";
+
+                    case GedcomDatePeriod.About:
+                        return "ABT";
+
+                    case GedcomDatePeriod.Calculated:
+                        return "CAL";
+
+                    case GedcomDatePeriod.Estimate:
+                        return "EST";
+
+                    case GedcomDatePeriod.Interpretation:
+                        return "INT";
+
+                    case GedcomDatePeriod.Range:
+                        return "FROM";
+                }
+            }
+	    }
+
 		public string Period
 		{
 			get
