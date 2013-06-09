@@ -8,6 +8,19 @@
              d:DesignWidth="300"
 >
 
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{x:Null}">
+            <Setter Property="Margin" Value="3,3,0,0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style TargetType="{x:Type Label}" BasedOn="{x:Null}">
+            <Setter Property="Margin" Value="3,3,0,0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{DynamicResource InputFontColor}"/>
+        </Style>
+    </UserControl.Resources>
+    
     <StackPanel Width="600">
 
         <!-- Header -->
@@ -33,11 +46,12 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="DisplayGrid"
                           MinHeight="75"
-                          MaxHeight="300"
+                          MaxHeight="200"
                           VerticalScrollBarVisibility="Auto"
                           Grid.Row="0"
                           ColumnWidth="Auto"
@@ -56,14 +70,24 @@
                         <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel Margin="5" Grid.Row="1" Orientation="Horizontal">
-                    <Button x:Name="addBtn"  Click="addBtn_Click" Content="Add"/>
-                    <Button x:Name="delBtn"  Click="delBtn_Click" Content="Delete"/>
-                    <Button x:Name="resetBtn" Click="resetBtn_Click" Content="Reset"/>
-                    <Button x:Name="saveBtn" Click="saveBtn_Click" Content="Save"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button x:Name="addBtn"  Margin="5" Click="addBtn_Click" Content="Add"/>
+                    <Button x:Name="delBtn"  Margin="5" Click="delBtn_Click" Content="Delete"/>
+                    <Button x:Name="resetBtn" Margin="5" Click="resetBtn_Click" Content="Reset"/>
+                    <Button x:Name="saveBtn" Margin="5" Click="saveBtn_Click" Content="Save"/>
                 </StackPanel>
                 <Grid x:Name="eventDetails" Grid.Row="2">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="22px"/> <!-- prevent flicker when flip between label & combo -->
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -76,45 +100,67 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0"
-                           VerticalAlignment="Center"
-                           Padding="0"
-                           Foreground="{DynamicResource InputFontColor}"
-                           Content="Event:" HorizontalAlignment="Right"/>
+                           Content="Event:" 
+                           HorizontalAlignment="Right"/>
                     <Label Grid.Row="0" Grid.Column="1"
-                           x:Name="txt0"
-                           Padding="0"
-                           Foreground="{DynamicResource InputFontColor}"/>
-                    <Label Grid.Row="1" Grid.Column="0" Content="Date:" 
-                           VerticalAlignment="Center"
-                           Padding="0"
-                           Foreground="{DynamicResource InputFontColor}"
+                           Margin="3,5,0,0"
+                           x:Name="txt0" />
+                    <ComboBox Grid.Row="0" Grid.Column="1"
+                              x:Name="eventPick"
+                              Width="100"
+                              HorizontalAlignment="Left"
+                              Visibility="Collapsed"/>
+                    <Label Grid.Row="1" Grid.Column="0" 
+                           Content="Date:" 
                            HorizontalAlignment="Right"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="txt1"/>
-                    <Label Grid.Row="2" Grid.Column="0" Content="Place:" 
-                           VerticalAlignment="Center"
-                           Padding="0"
-                           Foreground="{DynamicResource InputFontColor}"
+                    <TextBox Grid.Row="1" Grid.Column="1" 
+                             x:Name="txtDate"/>
+                    <Label Grid.Row="2" Grid.Column="0" 
+                           Content="Place:" 
                            HorizontalAlignment="Right"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="txt2" />
-                    <Label Grid.Row="3" Grid.Column="0" Content="Description:" 
-                           VerticalAlignment="Center"
-                           Padding="0"
-                           Foreground="{DynamicResource InputFontColor}"
+                    <TextBox Grid.Row="2" Grid.Column="1" 
+                             x:Name="txtPlace" />
+                    <Label Grid.Row="3" Grid.Column="0" 
+                           Content="Description:" 
                            HorizontalAlignment="Right"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="txt3" />
-                    <Label Grid.Row="4" Grid.Column="0" Content="Address:" 
-                           VerticalAlignment="Center"
-                           Padding="0"
-                           Foreground="{DynamicResource InputFontColor}"
+                    <TextBox Grid.Row="3" Grid.Column="1" 
+                             x:Name="txtDesc" />
+                    <Label Grid.Row="4" Grid.Column="0" 
+                           Content="Address:" 
                            HorizontalAlignment="Right"/>
                     <TextBox Grid.Row="4" Grid.Column="1" 
-                             x:Name="txt4"
+                             x:Name="txtAddress"
                              Height="50"
                              TextWrapping="Wrap"
                              VerticalScrollBarVisibility="Visible"
                              AcceptsReturn="True"
                              />
+                    <Label Grid.Row="5" Grid.Column="0" 
+                           Content="Age:" 
+                           HorizontalAlignment="Right"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" 
+                             x:Name="txtAge" />
+                    <Label Grid.Row="6" Grid.Column="0" 
+                           Content="Agency:" 
+                           HorizontalAlignment="Right"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" 
+                             x:Name="txtAgency" />
+                    <Label Grid.Row="7" Grid.Column="0" 
+                           Content="Cause:" 
+                           HorizontalAlignment="Right"/>
+                    <TextBox Grid.Row="7" Grid.Column="1" 
+                             x:Name="txtCause" />
+                    <Label Grid.Row="8" Grid.Column="0" 
+                           Content="Certainty:" 
+                           HorizontalAlignment="Right"/>
+                    <TextBox Grid.Row="8" Grid.Column="1" 
+                             x:Name="txtCertainty" />
                 </Grid>
+                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                    <Button x:Name="NotesBtn"  Margin="5" Content="Notes"/>
+                    <Button x:Name="MMediaBtn" Margin="5" Content="Multimedia"/>
+                    <Button x:Name="SourceBtn" Margin="5" Content="Sources"/>
+                </StackPanel>
             </Grid>
         </Border>
 

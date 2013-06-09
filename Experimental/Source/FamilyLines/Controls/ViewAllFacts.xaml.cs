@@ -1,9 +1,15 @@
-﻿using System.Collections.ObjectModel;
+﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
+ */
+
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using GEDCOM.Net;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines.Controls
@@ -13,13 +19,87 @@ namespace KBS.FamilyLines.Controls
     /// </summary>
     public partial class ViewAllFacts : INotifyPropertyChanged
     {
+        #region Event and Fact display for adding a new event/fact
+        private readonly List<string> EventList = new List<string>();
+        private readonly List<string> FactList = new List<string>();
+
+        public GedcomEvent.GedcomEventType[] FactsOnly = new[]
+                                                             {
+                                                            GedcomEvent.GedcomEventType.GenericFact,
+                                                            GedcomEvent.GedcomEventType.CASTFact,
+                                                            GedcomEvent.GedcomEventType.DSCRFact,
+                                                            GedcomEvent.GedcomEventType.EDUCFact,
+                                                            GedcomEvent.GedcomEventType.IDNOFact,
+                                                            GedcomEvent.GedcomEventType.NATIFact,
+                                                            GedcomEvent.GedcomEventType.NCHIFact,
+                                                            GedcomEvent.GedcomEventType.NMRFact,
+                                                            GedcomEvent.GedcomEventType.OCCUFact,
+                                                            GedcomEvent.GedcomEventType.PROPFact,
+                                                            GedcomEvent.GedcomEventType.RELIFact,
+                                                            GedcomEvent.GedcomEventType.RESIFact,
+                                                            GedcomEvent.GedcomEventType.SSNFact,
+                                                            GedcomEvent.GedcomEventType.TITLFact,
+                                                            GedcomEvent.GedcomEventType.Custom
+                                                             };
+
+        public GedcomEvent.GedcomEventType[] IndivEventsOnly = new[]
+                                                                   {
+                                                                    GedcomEvent.GedcomEventType.BIRT,
+                                                                    GedcomEvent.GedcomEventType.DEAT,
+                                                                    GedcomEvent.GedcomEventType.BURI,
+                                                                    GedcomEvent.GedcomEventType.CHR,
+                                                                    GedcomEvent.GedcomEventType.CREM,
+                                                                    GedcomEvent.GedcomEventType.ADOP,
+                                                                    GedcomEvent.GedcomEventType.BAPM,
+                                                                    GedcomEvent.GedcomEventType.BARM,
+                                                                    GedcomEvent.GedcomEventType.BASM,
+                                                                    GedcomEvent.GedcomEventType.BLES,
+                                                                    GedcomEvent.GedcomEventType.CHRA,
+                                                                    GedcomEvent.GedcomEventType.CONF,
+                                                                    GedcomEvent.GedcomEventType.FCOM,
+                                                                    GedcomEvent.GedcomEventType.ORDN,
+                                                                    GedcomEvent.GedcomEventType.NATU,
+                                                                    GedcomEvent.GedcomEventType.EMIG,
+                                                                    GedcomEvent.GedcomEventType.IMMI,
+                                                                    GedcomEvent.GedcomEventType.CENS,
+                                                                    GedcomEvent.GedcomEventType.PROB,
+                                                                    GedcomEvent.GedcomEventType.WILL,
+                                                                    GedcomEvent.GedcomEventType.GRAD,
+                                                                    GedcomEvent.GedcomEventType.RETI,
+                                                                    GedcomEvent.GedcomEventType.Custom
+                                                                   };
+
+        private void initLists()
+        {
+            foreach (GedcomEvent.GedcomEventType enumVal in IndivEventsOnly)
+            {
+                string val = GedcomEvent.TypeToReadable(enumVal);
+                if (!string.IsNullOrEmpty(val))
+                    EventList.Add(val);
+            }
+            foreach (GedcomEvent.GedcomEventType enumVal in FactsOnly)
+            {
+                string val = GedcomEvent.TypeToReadable(enumVal);
+                if (!string.IsNullOrEmpty(val))
+                    FactList.Add(val);
+            }
+        }
+
+        #endregion
+
+        private Person _target;
+
         public ViewAllFacts()
         {
             InitializeComponent();
             DataContext = this; // TODO set in XAML?
+            initLists();
         }
 
-        private Person _target;
+        /// <summary>
+        /// The person whose facts/events we're to view. Changing the
+        /// person needs to force the title bar, grid, etc to update.
+        /// </summary>
         public Person Target
         {
             get
@@ -38,26 +118,34 @@ namespace KBS.FamilyLines.Controls
             }
         }
 
+        /// <summary>
+        /// This toggles between Event mode and Fact mode
+        /// </summary>
         public bool ShowFacts
         {
             set
             {
                 if (value)
                 {
-                    Binding b = new Binding("Facts");
+                    var b = new Binding("Facts");
                     DisplayGrid.SetBinding(ItemsControl.ItemsSourceProperty, b);
+                    eventPick.ItemsSource = FactList;
                 }
                 else
                 {
-                    Binding b = new Binding("Events");
+                    var b = new Binding("Events");
                     DisplayGrid.SetBinding(ItemsControl.ItemsSourceProperty, b);
+                    eventPick.ItemsSource = EventList;
                 }
             }
         }
 
         public string PName
         {
-            get { return Target == null ? "" : Target.FullName; }
+            get
+            {
+                return Target == null ? "" : Target.FullName;
+            }
         }
 
         public ObservableCollection<GEDEvent> Events
@@ -79,13 +167,21 @@ namespace KBS.FamilyLines.Controls
         #region routed events
 
         public static readonly RoutedEvent CloseButtonClickEvent = EventManager.RegisterRoutedEvent(
-            "CloseButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ViewAllFacts));
+            "CloseButtonClick", RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (ViewAllFacts));
+
+        private GEDEvent _activeEvent;
 
         // Expose this event for this control's container
         public event RoutedEventHandler CloseButtonClick
         {
-            add { AddHandler(CloseButtonClickEvent, value); }
-            remove { RemoveHandler(CloseButtonClickEvent, value); }
+            add
+            {
+                AddHandler(CloseButtonClickEvent, value);
+            }
+            remove
+            {
+                RemoveHandler(CloseButtonClickEvent, value);
+            }
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -116,13 +212,13 @@ namespace KBS.FamilyLines.Controls
         // User has selected an entry in the grid. Allow delete, edit
         private void DisplayGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var sel = DisplayGrid.SelectedItem as GEDEvent;
+            _activeEvent = DisplayGrid.SelectedItem as GEDEvent;
 
-            //delBtn.IsEnabled = sel != null;
-            //resetBtn.IsEnabled = sel != null;
-            //saveBtn.IsEnabled = sel != null;
+            // hide the event picker combobox
+            eventName.Visibility = Visibility.Visible;
+            eventPick.Visibility = Visibility.Collapsed;
 
-            if (sel == null)
+            if (_activeEvent == null) // true when the blank line in the grid is selected
             {
                 ClearInputs();
                 setButtonState(OpState.NoSel);
@@ -130,28 +226,15 @@ namespace KBS.FamilyLines.Controls
             }
 
             setButtonState(OpState.ValidSel);
-
-            txt0.Content = sel.EventName;
-            txt1.Text = sel.Date == null ? "" : sel.Date.DateString;
-            txt2.Text = sel.Place;
-            txt3.Text = sel.Description;
-            txt4.Text = sel.Address == null ? "" : sel.Address.AddressLine;
-
+            resetData();
         }
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-            setButtonState(OpState.AddClick);
-
             DisplayGrid.SelectedItem = null;
-
-            // TODO show the event picker combobox
-
-            txt0.Visibility = Visibility.Collapsed;
-            txt1.Text = "new date";
-            txt2.Text = "new place";
-            txt3.Text = "new description";
-            txt4.Text = "new address";
+            _activeEvent = null;
+            resetData();
+            setButtonState(OpState.AddClick);
         }
 
         private void delBtn_Click(object sender, RoutedEventArgs e)
@@ -162,6 +245,7 @@ namespace KBS.FamilyLines.Controls
         private void resetBtn_Click(object sender, RoutedEventArgs e)
         {
             // when adding, clear all edits. when editing, reset all edits to original values
+            resetData();
         }
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
@@ -169,14 +253,75 @@ namespace KBS.FamilyLines.Controls
             // save all edits
         }
 
+        private void resetData()
+        {
+            if (_activeEvent == null) // true if adding [careful with invalid selection case!]
+            {
+                ClearInputs();
+                txtDate.Text = "new date";
+                txtPlace.Text = "new place";
+                txtDesc.Text = "new description";
+                txtAddress.Text = "new address";
+
+                eventName.Visibility = Visibility.Collapsed;
+                eventPick.Visibility = Visibility.Visible;
+                // TODO should event picker be reset to unselected?
+                return;
+            }
+
+            eventName.Content = _activeEvent.EventName;
+            txtDate.Text = _activeEvent.Date == null ? "" : _activeEvent.Date.DateString;
+            txtPlace.Text = _activeEvent.Place;
+            txtDesc.Text = _activeEvent.Description;
+            txtAddress.Text = _activeEvent.Address == null ? "" : _activeEvent.Address.AddressLine;
+            txtAge.Text = _activeEvent.Age == null ? "" : _activeEvent.Age.Years.ToString();
+            txtAgency.Text = _activeEvent.ResponsibleAgency;
+            txtCause.Text = _activeEvent.Cause;
+            txtCertainty.Text = ""; // TODO don't have certainty data
+        }
+
         private void ClearInputs()
         {
-            txt0.Content = "";
-            txt1.Text = "";
-            txt2.Text = "";
-            txt3.Text = "";
-            txt4.Text = "";
+            eventName.Content = "";
+            eventName.Visibility = Visibility.Visible;
+            eventPick.Visibility = Visibility.Collapsed;
+
+            txtDate.Text = "";
+            txtPlace.Text = "";
+            txtDesc.Text = "";
+            txtAddress.Text = "";
+            txtAge.Text = "";
+            txtAgency.Text = "";
+            txtCause.Text = "";
+            txtCertainty.Text = "";
         }
+
+        private void setButtonState(OpState state)
+        {
+            switch (state)
+            {
+                case OpState.NoSel:
+                    addBtn.Visibility = Visibility.Visible;
+                    delBtn.Visibility = Visibility.Hidden;
+                    resetBtn.Visibility = Visibility.Hidden;
+                    saveBtn.Visibility = Visibility.Hidden;
+                    break;
+                case OpState.AddClick:
+                    addBtn.Visibility = Visibility.Hidden;
+                    delBtn.Visibility = Visibility.Hidden;
+                    resetBtn.Visibility = Visibility.Visible;
+                    saveBtn.Visibility = Visibility.Visible;
+                    break;
+                case OpState.ValidSel:
+                    addBtn.Visibility = Visibility.Visible;
+                    delBtn.Visibility = Visibility.Visible;
+                    resetBtn.Visibility = Visibility.Visible;
+                    saveBtn.Visibility = Visibility.Visible;
+                    break;
+            }
+        }
+
+        #region Nested type: OpState
 
         private enum OpState
         {
@@ -185,30 +330,7 @@ namespace KBS.FamilyLines.Controls
             ValidSel
         };
 
-        private void setButtonState(OpState state)
-        {
-            switch (state)
-            {
-             case OpState.NoSel:
-                    addBtn.Visibility = Visibility.Visible;
-                    delBtn.Visibility = Visibility.Hidden;
-                    resetBtn.Visibility = Visibility.Hidden;
-                    saveBtn.Visibility = Visibility.Hidden;
-                    break;
-            case OpState.AddClick:
-                    addBtn.Visibility = Visibility.Hidden;
-                    delBtn.Visibility = Visibility.Hidden;
-                    resetBtn.Visibility = Visibility.Visible;
-                    saveBtn.Visibility = Visibility.Visible;
-                    break;
-            case OpState.ValidSel:
-                    addBtn.Visibility = Visibility.Visible;
-                    delBtn.Visibility = Visibility.Visible;
-                    resetBtn.Visibility = Visibility.Visible;
-                    saveBtn.Visibility = Visibility.Visible;
-                    break;
-            }
-        }
+        #endregion
 
         //private void ResetColumns(object sender, RoutedEventArgs routedEventArgs)
         //{
