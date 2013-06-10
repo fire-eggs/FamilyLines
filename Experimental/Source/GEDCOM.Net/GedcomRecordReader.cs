@@ -394,13 +394,16 @@ namespace GEDCOM.Net
         #region Logging
 
 	    private int lineNum;
-	    public string logName = @"E:\import_log.txt";
+	    public string logName = "FamilyLines_Import.log";
 
         public void importLog(string msg, string extra="", bool mark=false)
         {
             try
             {
-                StreamWriter log = new StreamWriter(logName, true);
+                // write the log to "my documents" instead of a possibly non-existing folder
+                var mydocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                var logPath = Path.Combine(mydocs, logName);
+                StreamWriter log = new StreamWriter(logPath, true);
                 if (mark) log.WriteLine("=========================");
                 log.WriteLine("{0} : {2} {1}", DateTime.Now, extra, msg);
                 log.Close();
