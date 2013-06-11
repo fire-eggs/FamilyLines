@@ -103,11 +103,11 @@
                            Content="Event:" 
                            HorizontalAlignment="Right"/>
                     <Label Grid.Row="0" Grid.Column="1"
-                           Margin="3,5,0,0"
-                           x:Name="txt0" />
+                           x:Name="eventName" />
                     <ComboBox Grid.Row="0" Grid.Column="1"
                               x:Name="eventPick"
-                              Width="100"
+                              Margin="3,0,0,0"
+                              Width="200"
                               HorizontalAlignment="Left"
                               Visibility="Collapsed"/>
                     <Label Grid.Row="1" Grid.Column="0" 
