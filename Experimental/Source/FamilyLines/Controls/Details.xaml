@@ -281,7 +281,12 @@
                 <BooleanAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="EditMoreButton" Storyboard.TargetProperty="(UIElement.IsEnabled)">
                     <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 </BooleanAnimationUsingKeyFrames>
-                
+
+                <!-- Fix issue 1450, when navigating away from DetailsEdit border, make its visibility to collapsed.-->
+                <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
+                </ObjectAnimationUsingKeyFrames>
+
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="DetailsEdit">
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="615"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
@@ -337,9 +342,10 @@
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="615"/>
                     <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
+
+                <!-- Fix issue 1450, when navigating away from DetailsEdit border, make its visibility to collapsed.-->
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(UIElement.Visibility)">
-                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
                 </ObjectAnimationUsingKeyFrames>
 
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsInfo" Storyboard.TargetProperty="(FrameworkElement.Height)">
@@ -381,6 +387,11 @@
                 <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEdit" Storyboard.TargetProperty="(UIElement.Visibility)">
                     <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
                     <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+
+                <!-- Fix issue 1450, when navigating away from DetailsEditMore border, make its visibility to collapsed.-->
+                <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsEditMore" Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}"/>
                 </ObjectAnimationUsingKeyFrames>
 
                 <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="DetailsList" Storyboard.TargetProperty="(UIElement.Opacity)">
