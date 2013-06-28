@@ -137,7 +137,8 @@ namespace KBS.FamilyLinesLib
             foreach (var gedEvent in person.Facts)
             {
                 tw.WriteLine(string.Format("<tr><td>{0}</td><td class=\"age\">{1}</td><td>{2}</td><td>{3}</td><td class=\"age\">{4}</td></tr>",
-                    gedEvent.EventName, gedEvent.Date.DateString,
+                    gedEvent.EventName, 
+                    gedEvent.Date == null ? "" : gedEvent.Date.DateString, // TODO should we insure the event always has a valid date?
                     gedEvent.Description,
                     gedEvent.Place, gedEvent.Age));
             }
