@@ -77,12 +77,14 @@ namespace KBS.FamilyLines.Controls
                 if (!string.IsNullOrEmpty(val))
                     EventList.Add(val);
             }
+            EventList.Sort();
             foreach (GedcomEvent.GedcomEventType enumVal in FactsOnly)
             {
                 string val = GedcomEvent.TypeToReadable(enumVal);
                 if (!string.IsNullOrEmpty(val))
                     FactList.Add(val);
             }
+            FactList.Sort();
         }
 
         #endregion
@@ -118,13 +120,19 @@ namespace KBS.FamilyLines.Controls
             }
         }
 
+        private bool _showFacts;
         /// <summary>
         /// This toggles between Event mode and Fact mode
         /// </summary>
         public bool ShowFacts
         {
+            get
+            {
+                return _showFacts;
+            }
             set
             {
+                _showFacts = value;
                 if (value)
                 {
                     var b = new Binding("Facts");
@@ -239,7 +247,24 @@ namespace KBS.FamilyLines.Controls
 
         private void delBtn_Click(object sender, RoutedEventArgs e)
         {
-            // delete the current event/fact from the person (with confirmation)
+            // TODO confirmation - correct text w/ identification of event/fact
+            MessageBoxResult result = MessageBox.Show(Properties.Resources.ConfirmDeleteSource, Properties.Resources.Source, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result != MessageBoxResult.Yes)
+                return;
+
+            // delete the current event/fact from the person
+            if (ShowFacts)
+            {
+                Facts.Remove(_activeEvent as GEDAttribute);
+                OnPropertyChanged("Facts");
+            }
+            else
+            {
+                Events.Remove(_activeEvent);
+                OnPropertyChanged("Events");
+            }
+
+            setButtonState(OpState.NoSel);
         }
 
         private void resetBtn_Click(object sender, RoutedEventArgs e)
@@ -251,6 +276,21 @@ namespace KBS.FamilyLines.Controls
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
             // save all edits
+            // when adding, need to add a new event/fact to the person
+        }
+
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (_activeEvent == null) // true if adding [careful with invalid selection case!]
+            {
+                ClearInputs();
+                setButtonState(OpState.NoSel);
+            }
+            else
+            {
+                resetData();
+                setButtonState(OpState.ValidSel);
+            }
         }
 
         private void resetData()
@@ -285,6 +325,7 @@ namespace KBS.FamilyLines.Controls
             eventName.Content = "";
             eventName.Visibility = Visibility.Visible;
             eventPick.Visibility = Visibility.Collapsed;
+            eventPick.SelectedIndex = -1;
 
             txtDate.Text = "";
             txtPlace.Text = "";
@@ -305,18 +346,21 @@ namespace KBS.FamilyLines.Controls
                     delBtn.Visibility = Visibility.Hidden;
                     resetBtn.Visibility = Visibility.Hidden;
                     saveBtn.Visibility = Visibility.Hidden;
+                    cancelBtn.Visibility = Visibility.Hidden;
                     break;
                 case OpState.AddClick:
                     addBtn.Visibility = Visibility.Hidden;
                     delBtn.Visibility = Visibility.Hidden;
                     resetBtn.Visibility = Visibility.Visible;
                     saveBtn.Visibility = Visibility.Visible;
+                    cancelBtn.Visibility = Visibility.Visible;
                     break;
                 case OpState.ValidSel:
                     addBtn.Visibility = Visibility.Visible;
                     delBtn.Visibility = Visibility.Visible;
                     resetBtn.Visibility = Visibility.Visible;
                     saveBtn.Visibility = Visibility.Visible;
+                    cancelBtn.Visibility = Visibility.Visible;
                     break;
             }
         }
