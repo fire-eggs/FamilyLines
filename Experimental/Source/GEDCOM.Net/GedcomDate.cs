@@ -786,7 +786,7 @@ namespace GEDCOM.Net
             
 			// FIXME: the split here accounts for large(ish) amounts of memory allocation
 			// Need to do this better, ideally without any splitting.
-           	string[] dateSplit = dataString.Split(new char[] { ' ', '-' }, StringSplitOptions.RemoveEmptyEntries);
+           	string[] dateSplit = dataString.Split( SPLITCHARS, StringSplitOptions.RemoveEmptyEntries);
            	
            	_dateTime1 = null;
            	_dateTime2 = null;
@@ -897,7 +897,10 @@ namespace GEDCOM.Net
            		
            	}
 		}
-		
+
+        // KBR 20130629 LIFELINES appears to be using dd/mm/yyyy format?
+	    private static readonly char[] SPLITCHARS = {'-', ' ', '/'};
+
 		private static DateTime? GetDateInfo(string[] dateSplit, int start, int num, Calendar calendar)
 		{
 			string year = string.Empty;
