@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" 
+             d:DesignHeight="600" 
              d:DesignWidth="300"
 >
 
@@ -12,6 +12,7 @@
         <Style TargetType="{x:Type TextBox}" BasedOn="{x:Null}">
             <Setter Property="Margin" Value="3,3,0,0"/>
             <Setter Property="Padding" Value="0"/>
+            <Setter Property="Height" Value="22"/>
         </Style>
         <Style TargetType="{x:Type Label}" BasedOn="{x:Null}">
             <Setter Property="Margin" Value="3,3,0,0"/>
@@ -50,8 +51,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <DataGrid x:Name="DisplayGrid"
-                          MinHeight="75"
-                          MaxHeight="200"
+                          Height="180"
                           VerticalScrollBarVisibility="Auto"
                           Grid.Row="0"
                           ColumnWidth="Auto"
@@ -75,6 +75,7 @@
                     <Button x:Name="delBtn"  Margin="5" Click="delBtn_Click" Content="Delete"/>
                     <Button x:Name="resetBtn" Margin="5" Click="resetBtn_Click" Content="Reset"/>
                     <Button x:Name="saveBtn" Margin="5" Click="saveBtn_Click" Content="Save"/>
+                    <Button x:Name="cancelBtn" Margin="5" Click="cancelBtn_Click" Content="Cancel"/>
                 </StackPanel>
                 <Grid x:Name="eventDetails" Grid.Row="2">
                     <Grid.RowDefinitions>
