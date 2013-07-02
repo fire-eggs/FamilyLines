@@ -1,10 +1,12 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+-Microsoft Visual Studio Solution File, Format Version 11.00
+-# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{C354EA53-F548-45D1-B441-2589EBD113C5}"
 	ProjectSection(SolutionItems) = preProject
 		..\Libraries\Microsoft.WindowsAPICodePack.dll = ..\Libraries\Microsoft.WindowsAPICodePack.dll
 		..\Libraries\Microsoft.WindowsAPICodePack.Shell.dll = ..\Libraries\Microsoft.WindowsAPICodePack.Shell.dll
+		..\Libraries\Moq.dll = ..\Libraries\Moq.dll
+		..\Libraries\Moq.pdb = ..\Libraries\Moq.pdb
 		..\Libraries\WPFToolkit.Design.dll = ..\Libraries\WPFToolkit.Design.dll
 		..\Libraries\WPFToolkit.Design.pdb = ..\Libraries\WPFToolkit.Design.pdb
 		..\Libraries\WPFToolkit.dll = ..\Libraries\WPFToolkit.dll
@@ -20,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SUT.PrintEngine", "SUT.PrintEngine\SUT.PrintEngine.csproj", "{0B3D76D5-D9F4-4C0E-AFA9-143138EBC74D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GEDCOM.Net", "GEDCOM.Net\GEDCOM.Net.csproj", "{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyLinesLib.Test", "FamilyLinesLib.Test\FamilyLinesLib.Test.csproj", "{7EA31FAB-C856-47B5-BC3F-6249DD681C67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,10 @@ Global
 		{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA31FAB-C856-47B5-BC3F-6249DD681C67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA31FAB-C856-47B5-BC3F-6249DD681C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA31FAB-C856-47B5-BC3F-6249DD681C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA31FAB-C856-47B5-BC3F-6249DD681C67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

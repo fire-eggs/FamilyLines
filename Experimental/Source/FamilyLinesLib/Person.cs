@@ -391,6 +391,33 @@ namespace KBS.FamilyLinesLib
         }
 
         /// <summary>
+        /// The year burial of the person
+        /// </summary>
+        public string YearOfBurial
+        {
+            get
+            {
+                if (burialDate.HasValue && !isLiving)
+                    return burialDate.Value.Year.ToString(CultureInfo.CurrentCulture);
+                return "-";
+            }
+        }
+
+
+        /// <summary>
+        /// The year cremation of the person
+        /// </summary>
+        public string YearOfCremation
+        {
+            get
+            {
+                if (cremationDate.HasValue && !isLiving)
+                    return cremationDate.Value.Year.ToString(CultureInfo.CurrentCulture);
+                return "-";
+            }
+        }
+
+        /// <summary>
         /// Gets or sets whether the person is still alive or deceased.
         /// </summary>
         public bool IsLiving

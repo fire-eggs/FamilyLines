@@ -64,16 +64,22 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Attachment.cs" />
     <Compile Include="Experimental.cs" />
+    <Compile Include="KmlDocument.cs" />
+    <Compile Include="KmlFolder.cs" />
     <Compile Include="GEDAttribute.cs" />
     <Compile Include="GEDEvent.cs" />
     <Compile Include="HTMLReport.cs" />
+    <Compile Include="KmlFolderFactory.cs" />
+    <Compile Include="KmlStyleFactory.cs" />
     <Compile Include="PeopleReport.cs" />
+    <Compile Include="KmlPlaceMark.cs" />
     <Compile Include="PlacesExport.cs" />
     <Compile Include="Properties\Resources.ru-RU.Designer.cs">
       <DependentUpon>Resources.ru-RU.resx</DependentUpon>
