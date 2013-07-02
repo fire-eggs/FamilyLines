@@ -58,20 +58,40 @@ namespace KBS.FamilyLines.Controls
         #region helper methods
 
         /// <summary>
-        /// Get the selected options
+        /// Get export type
         /// </summary>
-        private string Options()
+        /// <returns></returns>
+        private ExportType GetExportType()
         {
-            {
-                string choice = "0";
-                if (Option1.IsChecked == true)
-                    choice = "1";
-                if (Option2.IsChecked == true)
-                    choice = "2";
-                if (Lifetimes.IsChecked == true)
-                    choice = "3";
-                return choice;
-            }
+            if (Lifetimes.IsChecked == true)
+                return ExportType.Lifetimes;
+            if (Option2.IsChecked == true)
+                return ExportType.PlacesWithTimes;
+            return ExportType.Places;
+        }
+
+        /// <summary>
+        /// Get export options
+        /// </summary>
+        /// <returns></returns>
+        private ExportOptions GetExportOptions()
+        {
+            var options = ExportOptions.None;
+            if (Privacy())
+                options |= ExportOptions.HideLivingPeople;
+            if (Births())
+                options |= ExportOptions.Births;
+            if (Deaths())
+                options |= ExportOptions.Deaths;
+            if (Burials())
+                options |= ExportOptions.Burials;
+            if (Cremations())
+                options |= ExportOptions.Cremations;
+            if (Marriages())
+                options |= ExportOptions.Marriages;
+            if (Divorces())
+                options |= ExportOptions.Divorces;
+            return options;
         }
 
         private bool Privacy()
@@ -124,7 +144,7 @@ namespace KBS.FamilyLines.Controls
 
         private void Export()
         {
-            if (Options() == "0")
+            if (GetExportOptions() == ExportOptions.None)
                 return; //only run if cancel not clicked
 
             CommonDialog dialog = new CommonDialog();
@@ -148,12 +168,7 @@ namespace KBS.FamilyLines.Controls
 
                     string[] summary = null;
 
-                    if (Options() == "1")
-                        summary = places.ExportPlaces(App.Family, filename, Privacy(), false, false, true, Burials(), Deaths(), Cremations(), Births(), Marriages(), Divorces());
-                    if (Options() == "2")
-                        summary = places.ExportPlaces(App.Family, filename, Privacy(), true, false, false, Burials(), Deaths(), Cremations(), Births(), Marriages(), Divorces());
-                    if (Options() == "3")
-                        summary = places.ExportPlaces(App.Family, filename, Privacy(), false, true, false, Burials(), Deaths(), Cremations(), Births(), Marriages(), Divorces());
+                    summary = PlacesExport.ExportPlaces(App.Family, filename, GetExportType(), GetExportOptions());
 
                     if (summary[1] == "No file")
                     {
