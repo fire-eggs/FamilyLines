@@ -1,8 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using KBS.FamilyLinesLib;
-using System.Xml.Linq;
+﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
+ */
+using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using KBS.FamilyLinesLib;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FamilyLinesLib.Test
 {
@@ -41,8 +45,10 @@ namespace FamilyLinesLib.Test
         [TestMethod]
         public void FolderCreaterWithPeopleTest()
         {
-            var people = new List<Person>{
-                new Person{FirstName="Bill", LastName="Gates", BirthPlace="Seatle", BirthDate=new DateTime(1977,1,1), Gender= GEDCOM.Net.Gender.Male, CremationDate=new DateTime(2013,1,1), CremationPlace="New York"}};
+            var person = MakeBasicBillG();
+            person.CremationDate = new DateTime(2013, 1, 1);
+            person.CremationPlace = "New York";
+            var people = new List<Person> {person};
 
             var sut = KmlFolderFactory.CreateFolderWithTimeStamp(ExportType.Places, ExportOptions.Births | ExportOptions.Cremations, people);
             var expected = new XElement("Folder",
@@ -53,8 +59,8 @@ namespace FamilyLinesLib.Test
                     new XElement("open", "0"),
                     new XElement("Placemark",
                         new XElement("name", "Bill Gates"),
-                        new XElement("address", "Seatle"),
-                        new XElement("description", "Seatle"),
+                        new XElement("address", "Seattle"),
+                        new XElement("description", "Seattle"),
                         new XElement("styleUrl", "#msn_man"))),
                 new XElement("Folder",
                     new XElement("name", "Cremations"),
@@ -68,11 +74,22 @@ namespace FamilyLinesLib.Test
             Assert.AreEqual(actual.ToString(), expected.ToString());
         }
 
+        private Person MakeBasicBillG()
+        {
+            return new Person
+                       {
+                           FirstName = "Bill",
+                           LastName = "Gates",
+                           BirthPlace = "Seattle",
+                           BirthDate = new DateTime(1977, 1, 1),
+                           Gender = GEDCOM.Net.Gender.Male
+                       };
+        }
+
         [TestMethod]
         public void FolderCreaterWithPeopleTimeTest()
         {
-            var people = new List<Person>{
-                new Person{FirstName="Bill", LastName="Gates", BirthPlace="Seatle", BirthDate=new DateTime(1977,1,1), Gender= GEDCOM.Net.Gender.Male}};
+            var people = new List<Person>{ MakeBasicBillG() };
 
             var sut = KmlFolderFactory.CreateFolderWithTimeStamp(ExportType.PlacesWithTimes, ExportOptions.Births | ExportOptions.Cremations, people);
             var expected = new XElement("Folder",
@@ -83,8 +100,8 @@ namespace FamilyLinesLib.Test
                     new XElement("open", "0"),
                     new XElement("Placemark",
                         new XElement("name", "Bill Gates"),
-                        new XElement("address", "Seatle"),
-                        new XElement("description", "Seatle"),
+                        new XElement("address", "Seattle"),
+                        new XElement("description", "Seattle"),
                         new XElement("TimeStamp",
                             new XElement("when", "1977")),
                         new XElement("styleUrl", "#msn_man"))),
@@ -98,7 +115,7 @@ namespace FamilyLinesLib.Test
         [TestMethod]
         public void FolderCreaterWithPeopleTimeMarriageTest()
         {
-            var person = new Person { FirstName = "Bill", LastName = "Gates", BirthPlace = "Seatle", BirthDate = new DateTime(1977, 1, 1), Gender = GEDCOM.Net.Gender.Male };
+            var person = MakeBasicBillG();
             person.Relationships.Add(new SpouseRelationship(person, SpouseModifier.Current) { MarriageDate = new DateTime(1990, 1, 1), MarriagePlace = "Los Angeles" });
 
             var people = new List<Person> { person };
@@ -124,8 +141,7 @@ namespace FamilyLinesLib.Test
         [TestMethod]
         public void FolderCreaterWithPeopleTimeDivorceWithNoDivorceTest()
         {
-            var person = new Person { FirstName = "Bill", LastName = "Gates", BirthPlace = "Seatle", BirthDate = new DateTime(1977, 1, 1), Gender = GEDCOM.Net.Gender.Male };
-            var people = new List<Person> { person };
+            var people = new List<Person> { MakeBasicBillG() };
 
             var sut = KmlFolderFactory.CreateFolderWithTimeStamp(ExportType.PlacesWithTimes, ExportOptions.Divorces, people);
             var expected = new XElement("Folder",
@@ -141,8 +157,7 @@ namespace FamilyLinesLib.Test
         [TestMethod]
         public void FolderCreaterWithPeopleLifeTest()
         {
-            var person = new Person { FirstName = "Bill", LastName = "Gates", BirthPlace = "Seatle", BirthDate = new DateTime(1977, 1, 1), Gender = GEDCOM.Net.Gender.Male };
-            var people = new List<Person> { person };
+            var people = new List<Person> { MakeBasicBillG() };
 
             var sut = KmlFolderFactory.CreateFolder(ExportType.Lifetimes, ExportOptions.Births, people);
             var expected = new XElement("Folder",
@@ -150,8 +165,8 @@ namespace FamilyLinesLib.Test
                 new XElement("open", "0"),
                 new XElement("Placemark",
                     new XElement("name", "Bill Gates"),
-                    new XElement("address", "Seatle"),
-                    new XElement("description", "Seatle"),
+                    new XElement("address", "Seattle"),
+                    new XElement("description", "Seattle"),
                     new XElement("TimeSpan",
                         new XElement("begin", "1977"),
                         new XElement("end", "-")),

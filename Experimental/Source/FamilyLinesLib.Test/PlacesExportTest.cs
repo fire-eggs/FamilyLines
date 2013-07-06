@@ -1,21 +1,19 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FamilyLinesLib;
-using GEDCOM.Net;
+﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
+ */
+
+using System;
 using System.Xml.Linq;
+using GEDCOM.Net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FamilyLinesLib.Test
 {
     [TestClass]
     public class PlacesExportTest
     {
-        private TestContext _testContext;
-
-        public TestContext TestContext
-        {
-            get { return _testContext; }
-            set { _testContext = value; }
-        }
+        public TestContext TestContext { get; set; }
 
         [TestMethod]
         [DataSource("PerosonMarkExcelDataSource")]
@@ -28,7 +26,7 @@ namespace FamilyLinesLib.Test
             var description=TestContext.DataRow["Description"].ToString();
             if (description == "null") description = null;
             Gender gender;
-            Assert.IsTrue(Gender.TryParse(TestContext.DataRow["Gender"].ToString(), out gender), "Data is incorrect");
+            Assert.IsTrue(Enum.TryParse(TestContext.DataRow["Gender"].ToString(), out gender), "Data is incorrect");
 
             var sut = new KmlPlaceMark(name, address, description, gender);
 
@@ -50,7 +48,7 @@ namespace FamilyLinesLib.Test
             var when = TestContext.DataRow["When"].ToString();
             if (when == "null") when = null;
             Gender gender;
-            Assert.IsTrue(Gender.TryParse(TestContext.DataRow["Gender"].ToString(), out gender), "Data is incorrect");
+            Assert.IsTrue(Enum.TryParse(TestContext.DataRow["Gender"].ToString(), out gender), "Data is incorrect");
 
             var sut = new PersonPlaceMarkWithTimeStamp(name, address, description, gender) { TimeStamp = new KmlTimeStamp(when) };
 
@@ -74,7 +72,7 @@ namespace FamilyLinesLib.Test
             var end = TestContext.DataRow["End"].ToString();
             if (end == "null") end = null;
             Gender gender;
-            Assert.IsTrue(Gender.TryParse(TestContext.DataRow["Gender"].ToString(), out gender), "Data is incorrect");
+            Assert.IsTrue(Enum.TryParse(TestContext.DataRow["Gender"].ToString(), out gender), "Data is incorrect");
 
             var sut = new PersonPlaceMarkWithTimeSpan(name, address, description, gender) { TimeSpan = new KmlTimeSpan(begin, end ) };
 

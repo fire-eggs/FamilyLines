@@ -1,6 +1,6 @@
 ﻿
--Microsoft Visual Studio Solution File, Format Version 11.00
--# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{C354EA53-F548-45D1-B441-2589EBD113C5}"
 	ProjectSection(SolutionItems) = preProject
 		..\Libraries\Microsoft.WindowsAPICodePack.dll = ..\Libraries\Microsoft.WindowsAPICodePack.dll
@@ -23,9 +23,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SUT.PrintEngine", "SUT.Prin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GEDCOM.Net", "GEDCOM.Net\GEDCOM.Net.csproj", "{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyLinesLib.Test", "FamilyLinesLib.Test\FamilyLinesLib.Test.csproj", "{7EA31FAB-C856-47B5-BC3F-6249DD681C67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyLinesLib.Test", "FamilyLinesLib.Test\FamilyLinesLib.Test.csproj", "{756DD0C9-7691-4B6E-9A62-33C16135CA67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7C701A3A-E8A1-40FB-891E-B1BBE314BE8A}"
+	ProjectSection(SolutionItems) = preProject
+		FamilyLines.vsmdi = FamilyLines.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
 EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = FamilyLines.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -47,10 +57,10 @@ Global
 		{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A5AE3C1-902A-4E72-BFCE-F54ED9584923}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7EA31FAB-C856-47B5-BC3F-6249DD681C67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7EA31FAB-C856-47B5-BC3F-6249DD681C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7EA31FAB-C856-47B5-BC3F-6249DD681C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7EA31FAB-C856-47B5-BC3F-6249DD681C67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{756DD0C9-7691-4B6E-9A62-33C16135CA67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756DD0C9-7691-4B6E-9A62-33C16135CA67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756DD0C9-7691-4B6E-9A62-33C16135CA67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756DD0C9-7691-4B6E-9A62-33C16135CA67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
