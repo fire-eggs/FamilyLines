@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
+ */
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using GEDCOM.Net;
