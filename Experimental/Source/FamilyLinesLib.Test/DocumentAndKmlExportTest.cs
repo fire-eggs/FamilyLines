@@ -1,18 +1,34 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using KBS.FamilyLinesLib;
+﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using KBS.FamilyLinesLib;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FamilyLinesLib.Test
 {
     [TestClass]
-    public class DocuemtnAndKmlExportTest
+    public class DocumentAndKmlExportTest
     {
+        private Person MakeBasicBillG()
+        {
+            return new Person
+            {
+                FirstName = "Bill",
+                LastName = "Gates",
+                BirthPlace = "Seattle",
+                BirthDate = new DateTime(1977, 1, 1),
+                Gender = GEDCOM.Net.Gender.Male
+            };
+        }
+
         [TestMethod]
         public void DocumentExportTest()
         {
-            var person = new Person { FirstName = "Bill", LastName = "Gates", BirthPlace = "Seatle", BirthDate = new DateTime(1977, 1, 1), Gender = GEDCOM.Net.Gender.Male };
+            var person = MakeBasicBillG();
             person.Relationships.Add(new SpouseRelationship(person, SpouseModifier.Current) { MarriageDate = new DateTime(1990, 1, 1), MarriagePlace = "Los Angeles" });
 
             var people = new List<Person> { person };
@@ -34,7 +50,7 @@ namespace FamilyLinesLib.Test
                         new XElement("styleUrl", "#msn_man"))));
             var serializedElement = XmlSerializerHelper.ToXElement(sut);
             var actualFolder = serializedElement.Element("Folder");
-            var actualName = serializedElement.Element("name").Value.ToString();
+            var actualName = serializedElement.Element("name").Value;
             Assert.AreEqual(expectedFolder.ToString(), actualFolder.ToString());
             Assert.AreEqual("Output", actualName);
         }
@@ -42,18 +58,18 @@ namespace FamilyLinesLib.Test
         [TestMethod]
         public void KmlExportTest()
         {
-            var person = new Person { FirstName = "Bill", LastName = "Gates", BirthPlace = "Seatle", BirthDate = new DateTime(1977, 1, 1), Gender = GEDCOM.Net.Gender.Male };
+            var person = MakeBasicBillG();
             person.Relationships.Add(new SpouseRelationship(person, SpouseModifier.Current) { MarriageDate = new DateTime(1990, 1, 1), MarriagePlace = "Los Angeles" });
 
             var people = new List<Person> { person };
 
             var folder = KmlFolderFactory.CreateFolderWithTimeStamp(ExportType.PlacesWithTimes, ExportOptions.Marriages, people);
             var sut = Kml.Create("NewKml", ExportType.PlacesWithTimes, ExportOptions.Marriages, people);
-            var expectedgxNamespace = "http://www.google.com/kml/ext/2.2";
+            const string expectedgxNamespace = "http://www.google.com/kml/ext/2.2";
             var serializedElement = XmlSerializerHelper.ToXElement(sut);
             XNamespace ns = "http://www.opengis.net/kml/2.2";
             var actualgxNamespace = serializedElement.GetNamespaceOfPrefix("gx").NamespaceName;
-            var actualName = serializedElement.Element(ns + "Document").Element(ns + "name").Value.ToString();
+            var actualName = serializedElement.Element(ns + "Document").Element(ns + "name").Value;
             Assert.AreEqual("NewKml", actualName);
             Assert.AreEqual(expectedgxNamespace, actualgxNamespace);
         }
