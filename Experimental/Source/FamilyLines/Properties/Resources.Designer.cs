@@ -259,6 +259,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agency.
+        /// </summary>
+        public static string Agency {
+            get {
+                return ResourceManager.GetString("Agency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Center (Ctrl+E).
         /// </summary>
         public static string AlignCenter {
@@ -570,6 +579,15 @@ namespace KBS.FamilyLines.Properties {
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cause.
+        /// </summary>
+        public static string Cause {
+            get {
+                return ResourceManager.GetString("Cause", resourceCulture);
             }
         }
         
@@ -969,6 +987,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string DateHead {
+            get {
+                return ResourceManager.GetString("DateHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date of Birth.
         /// </summary>
         public static string DateOfBirth {
@@ -1145,6 +1172,15 @@ namespace KBS.FamilyLines.Properties {
         public static string DescendantGenerations {
             get {
                 return ResourceManager.GetString("DescendantGenerations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string DescHead {
+            get {
+                return ResourceManager.GetString("DescHead", resourceCulture);
             }
         }
         
@@ -1490,6 +1526,15 @@ namespace KBS.FamilyLines.Properties {
         public static string ExtractingStatus {
             get {
                 return ResourceManager.GetString("ExtractingStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fact/Event.
+        /// </summary>
+        public static string FactEventHead {
+            get {
+                return ResourceManager.GetString("FactEventHead", resourceCulture);
             }
         }
         
@@ -2869,6 +2914,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Place.
+        /// </summary>
+        public static string PlaceHead {
+            get {
+                return ResourceManager.GetString("PlaceHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Places.
         /// </summary>
         public static string Places {
@@ -3072,6 +3126,15 @@ namespace KBS.FamilyLines.Properties {
         public static string RepositoryList {
             get {
                 return ResourceManager.GetString("RepositoryList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
             }
         }
         

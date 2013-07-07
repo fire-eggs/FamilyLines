@@ -2,10 +2,10 @@
  * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
  * 
  */
-
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,9 +19,19 @@ namespace KBS.FamilyLines.Controls
     /// </summary>
     public partial class ViewAllFacts : INotifyPropertyChanged
     {
+        private class EventGlob
+        {
+            public string Display;
+            public GedcomEvent.GedcomEventType Type;
+            public override string ToString()
+            {
+                return Display;
+            }
+        }
+
         #region Event and Fact display for adding a new event/fact
-        private readonly List<string> EventList = new List<string>();
-        private readonly List<string> FactList = new List<string>();
+        private List<EventGlob> EventList = new List<EventGlob>();
+        private List<EventGlob> FactList = new List<EventGlob>();
 
         public GedcomEvent.GedcomEventType[] FactsOnly = new[]
                                                              {
@@ -69,39 +79,43 @@ namespace KBS.FamilyLines.Controls
                                                                     GedcomEvent.GedcomEventType.Custom
                                                                    };
 
+        // Create lists of event/fact types for when the user wishes to create a new event/fact.
+        // Used for data binding to a combobox.
+        // TODO consider moving to the GedcomEvent class as a static helper?
         private void initLists()
         {
             foreach (GedcomEvent.GedcomEventType enumVal in IndivEventsOnly)
             {
                 string val = GedcomEvent.TypeToReadable(enumVal);
                 if (!string.IsNullOrEmpty(val))
-                    EventList.Add(val);
+                    EventList.Add(new EventGlob{Display = val, Type = enumVal});
             }
-            EventList.Sort();
+            EventList = EventList.OrderBy(o => o.Display).ToList();
+            //EventList.Sort(); // alphabetical sort
             foreach (GedcomEvent.GedcomEventType enumVal in FactsOnly)
             {
                 string val = GedcomEvent.TypeToReadable(enumVal);
                 if (!string.IsNullOrEmpty(val))
-                    FactList.Add(val);
+                    FactList.Add(new EventGlob { Display = val, Type = enumVal });
             }
-            FactList.Sort();
+            FactList = FactList.OrderBy(o => o.Display).ToList();
+            //FactList.Sort(); // alphabetical sort
         }
 
         #endregion
-
-        private Person _target;
 
         public ViewAllFacts()
         {
             InitializeComponent();
             DataContext = this; // TODO set in XAML?
-            initLists();
+            initLists(); // Note: relies on the ctor called only once
         }
 
         /// <summary>
         /// The person whose facts/events we're to view. Changing the
         /// person needs to force the title bar, grid, etc to update.
         /// </summary>
+        private Person _target;
         public Person Target
         {
             get
@@ -148,6 +162,9 @@ namespace KBS.FamilyLines.Controls
             }
         }
 
+        /// <summary>
+        /// The person name to show in the title bar
+        /// </summary>
         public string PName
         {
             get
@@ -223,10 +240,10 @@ namespace KBS.FamilyLines.Controls
             _activeEvent = DisplayGrid.SelectedItem as GEDEvent;
 
             // hide the event picker combobox
-            eventName.Visibility = Visibility.Visible;
+            eventName.Visibility = Visibility.Visible;  // TODO move to setButtonState?
             eventPick.Visibility = Visibility.Collapsed;
 
-            if (_activeEvent == null) // true when the blank line in the grid is selected
+            if (_activeEvent == null) // true when the blank line in the grid is selected - not the same as the 'adding' state
             {
                 ClearInputs();
                 setButtonState(OpState.NoSel);
@@ -237,6 +254,7 @@ namespace KBS.FamilyLines.Controls
             resetData();
         }
 
+        // User has clicked the 'add' button. Set state for adding a new event/fact.
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
             DisplayGrid.SelectedItem = null;
@@ -245,6 +263,7 @@ namespace KBS.FamilyLines.Controls
             setButtonState(OpState.AddClick);
         }
 
+        // User has clicked the 'delete' button.
         private void delBtn_Click(object sender, RoutedEventArgs e)
         {
             // TODO confirmation - correct text w/ identification of event/fact
@@ -267,18 +286,61 @@ namespace KBS.FamilyLines.Controls
             setButtonState(OpState.NoSel);
         }
 
+        // User has clicked the 'reset' button. when adding, clear all edits. when editing, reset all edits to original values
         private void resetBtn_Click(object sender, RoutedEventArgs e)
         {
-            // when adding, clear all edits. when editing, reset all edits to original values
             resetData();
         }
 
+        // TODO: when adding, the Save button should be disabled until an event type is picked
+
+        // save all edits
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            // save all edits
-            // when adding, need to add a new event/fact to the person
+            if (_activeEvent == null) // True when adding
+            {
+                EventGlob eType = eventPick.SelectedItem as EventGlob;
+                // TODO: assuming not null
+
+                // create new event/fact
+                // add to appropriate list
+                if (ShowFacts)
+                {
+                    _activeEvent = new GEDAttribute();
+                    _activeEvent.Type = eType.Type;
+                    Facts.Add(_activeEvent as GEDAttribute);
+                }
+                else
+                {
+                    _activeEvent = new GEDEvent();
+                    _activeEvent.Type = eType.Type;
+                    Facts.Add(_activeEvent as GEDAttribute);
+                }
+            }
+
+            // TODO Parse date
+            //txtDate.Text = _activeEvent.Date == null ? "" : _activeEvent.Date.DateString;
+            _activeEvent.Place = txtPlace.Text.Trim();
+            _activeEvent.Description = txtDesc.Text.Trim();
+            if (txtAddress.Text.Trim().Length > 0)
+            {
+                if (_activeEvent.Address == null)
+                    _activeEvent.Address = new GedcomAddress();
+                _activeEvent.Address.AddressLine = txtAddress.Text.Trim();
+            }
+            // TODO parse age
+            //txtAge.Text = _activeEvent.Age == null ? "" : _activeEvent.Age.Years.ToString();
+            _activeEvent.ResponsibleAgency = txtAgency.Text.Trim();
+            _activeEvent.Cause = txtCause.Text.Trim();
+            //txtCertainty.Text = ""; // TODO don't have certainty data
+
+            // Not doing the trick
+            //OnPropertyChanged("Facts");
+            //OnPropertyChanged("Events");
+            DisplayGrid.Items.Refresh(); 
         }
 
+        // User has clicked the 'cancel' button to escape add/edit.
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_activeEvent == null) // true if adding [careful with invalid selection case!]
@@ -293,12 +355,14 @@ namespace KBS.FamilyLines.Controls
             }
         }
 
+        // Reset all data entry fields to "initial" state. When adding, reset to placeholder text.
+        // When editing, reset to original event/fact settings.
         private void resetData()
         {
             if (_activeEvent == null) // true if adding [careful with invalid selection case!]
             {
                 ClearInputs();
-                txtDate.Text = "new date";
+                txtDate.Text = "new date"; // TODO hardcoded string
                 txtPlace.Text = "new place";
                 txtDesc.Text = "new description";
                 txtAddress.Text = "new address";
@@ -317,9 +381,10 @@ namespace KBS.FamilyLines.Controls
             txtAge.Text = _activeEvent.Age == null ? "" : _activeEvent.Age.Years.ToString();
             txtAgency.Text = _activeEvent.ResponsibleAgency;
             txtCause.Text = _activeEvent.Cause;
-            txtCertainty.Text = ""; // TODO don't have certainty data
+            //txtCertainty.Text = ""; // TODO don't have certainty data
         }
 
+        // Clear all data entry fields
         private void ClearInputs()
         {
             eventName.Content = "";
@@ -334,9 +399,10 @@ namespace KBS.FamilyLines.Controls
             txtAge.Text = "";
             txtAgency.Text = "";
             txtCause.Text = "";
-            txtCertainty.Text = "";
+            //txtCertainty.Text = "";
         }
 
+        // Set the button visibility based on which input state 
         private void setButtonState(OpState state)
         {
             switch (state)

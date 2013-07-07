@@ -1456,9 +1456,6 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   <data name="HeaderEditTTip" xml:space="preserve">
     <value>Edit the GEDCOM header settings for export</value>
   </data>
-  <data name="Divorces" xml:space="preserve">
-    <value>Divorces</value>
-  </data>
   <data name="Credits" xml:space="preserve">
     <value>Family Lines Team
     Brian Belden, Kevin Routley: Coordinators
@@ -1469,5 +1466,26 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
 
         V0.2 : Candice Olechna, Agon Eous       
     </value>
+  </data>
+  <data name="Agency" xml:space="preserve">
+    <value>Agency</value>
+  </data>
+  <data name="Cause" xml:space="preserve">
+    <value>Cause</value>
+  </data>
+  <data name="DateHead" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DescHead" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="FactEventHead" xml:space="preserve">
+    <value>Fact/Event</value>
+  </data>
+  <data name="PlaceHead" xml:space="preserve">
+    <value>Place</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
   </data>
 </root>
