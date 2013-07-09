@@ -1092,6 +1092,8 @@ namespace KBS.FamilyLines
             TheFamilyView.Init();
 
             DiagramPane.Visibility = !UsingFamilyView ? Visibility.Collapsed : Visibility.Visible;
+            // Hide/Display DiagramControl, issue 1590.
+            DiagramControl.Visibility = !UsingFamilyView ? Visibility.Collapsed : Visibility.Visible;  
             FamilyViewPane.Visibility = !UsingFamilyView ? Visibility.Visible : Visibility.Collapsed;
             TheFamilyView.Visibility = !UsingFamilyView ? Visibility.Visible : Visibility.Collapsed;
 
@@ -1877,6 +1879,11 @@ namespace KBS.FamilyLines
         {
             DetailsPane.Visibility = Visibility.Collapsed;
 
+            //After collapse DetailsPanel, Update DiagramControl's Layout.
+            //Without this sentence, DiagramControl will not update its size when it is back to visibile and
+            //Grid size inside ScrollViewer could not get updated. Issue 1590
+            DiagramControl.UpdateLayout();
+
             // Remove the cloned columns from layers 0
             if (DiagramPane.ColumnDefinitions.Contains(column1CloneForLayer0))
                 DiagramPane.ColumnDefinitions.Remove(column1CloneForLayer0);
@@ -1886,7 +1893,7 @@ namespace KBS.FamilyLines
 
         /// <summary>
         /// Hides the Family Data Control.
-        /// </summary>
+        /// </summary>7
         private void HideFamilyDataControl()
         {
             // Uses an animation to hide the Family Data Control
