@@ -2696,6 +2696,9 @@ namespace KBS.FamilyLines
         /// </summary>
         private void SetFamilyMemberAddButton()
         {
+            if (family == null || family.Current == null || family.Current.Parents == null)
+                return; // No context in design mode
+
             if (family.Current.Parents.Count == 2)
                 // Person has parents, choice another default.
                 SetNextFamilyMemberAction(FamilyMemberComboBoxValue.Brother);
