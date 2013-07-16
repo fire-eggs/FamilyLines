@@ -829,10 +829,11 @@ namespace KBS.FamilyLines.Properties {
         ///   Looks up a localized string similar to Family Lines Team
         ///    Brian Belden, Kevin Routley: Coordinators
         ///    Additional Contributions from:
+        ///
+        ///        V0.5 : Bill Zhang, Hema Shivram, Tiago Damian
+        ///
         ///        V0.4 : Hema Shivram
-        ///
         ///        V0.3 : Agon Eous
-        ///
         ///        V0.2 : Candice Olechna, Agon Eous       
         ///    .
         /// </summary>
