@@ -1,7 +1,10 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using KBS.FamilyLinesLib;
 
 namespace KBS.FamilyLines
@@ -9,7 +12,7 @@ namespace KBS.FamilyLines
     /// <summary>
     /// Interaction logic for AttachmentViewer.xaml
     /// </summary>
-    public partial class AttachmentViewer : System.Windows.Controls.UserControl
+    public partial class AttachmentViewer
     {
         public AttachmentViewer()
         {
@@ -18,7 +21,7 @@ namespace KBS.FamilyLines
 
         #region routed events
 
-        public static readonly RoutedEvent CloseButtonClickEvent = EventManager.RegisterRoutedEvent(
+        [Localizable(false)] public static readonly RoutedEvent CloseButtonClickEvent = EventManager.RegisterRoutedEvent(
             "CloseButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(AttachmentViewer));
 
         // Expose the AttachmentViewer Close Button click event
@@ -115,14 +118,10 @@ namespace KBS.FamilyLines
                         }
 
                     }
-                    if (add == true)
+                    if (add)
                         allAttachments.Add(Attachment);
-
-                    
-
                 }
             }
-
 
             foreach (Attachment Attachment in allAttachments)
                 AttachmentsListBox.Items.Add(Attachment);

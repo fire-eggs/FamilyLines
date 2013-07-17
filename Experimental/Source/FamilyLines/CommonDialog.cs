@@ -1,4 +1,7 @@
 /*
+ * Family.Show derived code provided under MS-PL license.
+ */
+/*
  * Displays the common Open and SaveAs dialogs using the Vista-style dialogs.
  * This is accomplished by pinvoking GetOpenFileName and GetSaveFileName and 
  * not specifying a hook. The .NET Microsoft.Win32 OpenFileDialog and 
@@ -25,8 +28,8 @@ namespace KBS.FamilyLines
     /// </summary>
     public class FilterEntry
     {
-        private string display;
-        private string extension;
+        private readonly string display;
+        private readonly string extension;
 
         public string Display
         {
@@ -202,7 +205,7 @@ namespace KBS.FamilyLines
         private void SetFilter()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (FilterEntry entry in this.filter)
+            foreach (FilterEntry entry in filter)
                 sb.AppendFormat("{0}\0{1}\0", entry.Display, entry.Extension);
             sb.Append("\0\0");
             ofn.filter = sb.ToString();

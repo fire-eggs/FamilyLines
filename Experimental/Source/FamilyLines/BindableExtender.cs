@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Documents;
 
 namespace KBS.FamilyLines
@@ -22,7 +23,7 @@ namespace KBS.FamilyLines
             obj.SetValue(BindableTextProperty, value);
         }
 
-        public static readonly DependencyProperty BindableTextProperty =
+        [Localizable(false)] public static readonly DependencyProperty BindableTextProperty =
             DependencyProperty.RegisterAttached("BindableText",
                 typeof(string),
                 typeof(BindableExtender),

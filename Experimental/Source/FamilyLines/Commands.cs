@@ -1,10 +1,12 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 
 namespace KBS.FamilyLines
 {
     /// <summary>
     /// Routed commands container class. 
     /// </summary>
+    [Localizable(false)]
     public static class Commands
     {
         /// <summary>

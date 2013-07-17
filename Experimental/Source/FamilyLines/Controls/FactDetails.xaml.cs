@@ -88,8 +88,7 @@ namespace KBS.FamilyLines.Controls
             // the person's fact list.
             if (_event == null)
             {
-                _event = new GEDAttribute();
-                _event.Type = EventType;
+                _event = new GEDAttribute {Type = EventType};
                 _individual.Facts.Add(_event);
             }
         }

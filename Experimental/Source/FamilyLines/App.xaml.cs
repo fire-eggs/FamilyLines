@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Windows;
@@ -13,6 +14,7 @@ using KBS.FamilyLines.Properties;
 
 namespace KBS.FamilyLines
 {
+    [Localizable(false)]
     internal partial class App : Application
     {
         #region fields
