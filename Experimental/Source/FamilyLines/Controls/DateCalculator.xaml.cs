@@ -1,4 +1,8 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System;
+using System.ComponentModel;
 using System.Windows;
 
 namespace KBS.FamilyLines
@@ -6,7 +10,7 @@ namespace KBS.FamilyLines
     /// <summary>
     /// Interaction logic for DateCalculator.xaml
     /// </summary>
-    public partial class DateCalculator : System.Windows.Controls.UserControl
+    public partial class DateCalculator
     {
 
         public DateCalculator()
@@ -17,7 +21,7 @@ namespace KBS.FamilyLines
 
         #region routed events
 
-        public static readonly RoutedEvent CancelButtonClickEvent = EventManager.RegisterRoutedEvent(
+        [Localizable(false)] public static readonly RoutedEvent CancelButtonClickEvent = EventManager.RegisterRoutedEvent(
             "CancelButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(DateCalculator));
 
         public event RoutedEventHandler CancelButtonClick
@@ -73,7 +77,7 @@ namespace KBS.FamilyLines
 
                     DeathResult.Content = s2.ToShortDateString();
                     BirthResult.Content = s1.ToShortDateString();
-                    AgeResult.Content = Math.Round(span.Days / 365.25, 0, MidpointRounding.AwayFromZero) + " " + Properties.Resources.years;
+                    AgeResult.Content = Math.Round(span.Days / 365.25, 0, MidpointRounding.AwayFromZero) + " " + Properties.Resources.years; // TODO string.format resource string
 
                 }
 
@@ -89,7 +93,7 @@ namespace KBS.FamilyLines
 
                     DeathResult.Content = s2.ToShortDateString();
                     BirthResult.Content = new DateTime(year, month, day).ToShortDateString();
-                    AgeResult.Content = age + " " + Properties.Resources.years;
+                    AgeResult.Content = age + " " + Properties.Resources.years;  // TODO string.format resource string
 
                 }
 
@@ -105,7 +109,7 @@ namespace KBS.FamilyLines
 
                     BirthResult.Content = s1.ToShortDateString();
                     DeathResult.Content = new DateTime(year, month, day).ToShortDateString();
-                    AgeResult.Content = age + " " + Properties.Resources.years;
+                    AgeResult.Content = age + " " + Properties.Resources.years;  // TODO string.format resource string
 
                 }
             }
@@ -134,7 +138,7 @@ namespace KBS.FamilyLines
             // Hide errors if showing
             HideErrors4();
 
-            if (!string.IsNullOrEmpty(ToBox.Text.ToString()))
+            if (!string.IsNullOrEmpty(ToBox.Text))
             {
                 //Get the date input and try to add/subtract the specified number of days, months and years.
                 DateTime s = App.StringToDate(ToBox.Text);
@@ -152,13 +156,13 @@ namespace KBS.FamilyLines
                 int months = 0;
                 int years = 0;
 
-                try { days = double.Parse(DayBox.Text); }
+                try { days = double.Parse(DayBox.Text); } // TODO use TryParse
                 catch { }
 
-                try { months = int.Parse(MonthBox.Text); }
+                try { months = int.Parse(MonthBox.Text); } // TODO use TryParse
                 catch { }
 
-                try { years = int.Parse(YearBox.Text); }
+                try { years = int.Parse(YearBox.Text); } // TODO use TryParse
                 catch { }
 
                 try
@@ -236,10 +240,7 @@ namespace KBS.FamilyLines
             //When the user changes the add/subtract selection, update the descriptor to/from
             if (AddSubtractComboBox.SelectedItem!=null)
             {
-                if (AddSubtractComboBox.SelectedIndex == 0)
-                    DateTo.Content = Properties.Resources.To.ToLower();
-                else
-                    DateTo.Content = Properties.Resources.From.ToLower();
+                DateTo.Content = AddSubtractComboBox.SelectedIndex == 0 ? Properties.Resources.To.ToLower() : Properties.Resources.From.ToLower();
             }
         }
 

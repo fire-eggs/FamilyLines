@@ -1,3 +1,6 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -10,13 +13,11 @@ using System.Windows.Media.Animation;
 using GEDCOM.Net;
 using KBS.FamilyLinesLib;
 
-
 namespace KBS.FamilyLines
 {
     /// <summary>
     /// Interaction logic for Details.xaml
     /// </summary>
-
     public partial class Details
     {
         #region fields
@@ -107,7 +108,7 @@ namespace KBS.FamilyLines
 
         #region routed events
 
-        public static readonly RoutedEvent PersonInfoClickEvent = EventManager.RegisterRoutedEvent(
+        [Localizable(false)] public static readonly RoutedEvent PersonInfoClickEvent = EventManager.RegisterRoutedEvent(
             "PersonInfoClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Details));
 
         /// <summary>
@@ -119,7 +120,7 @@ namespace KBS.FamilyLines
             remove { RemoveHandler(PersonInfoClickEvent, value); }
         }
 
-        public static readonly RoutedEvent EveryoneDeletedEvent = EventManager.RegisterRoutedEvent(
+        [Localizable(false)] public static readonly RoutedEvent EveryoneDeletedEvent = EventManager.RegisterRoutedEvent(
             "EveryoneDeleted", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Details));
 
         /// <summary>
@@ -131,7 +132,7 @@ namespace KBS.FamilyLines
             remove { RemoveHandler(EveryoneDeletedEvent, value); }
         }
 
-        public static readonly RoutedEvent FamilyDataClickEvent = EventManager.RegisterRoutedEvent(
+        [Localizable(false)] public static readonly RoutedEvent FamilyDataClickEvent = EventManager.RegisterRoutedEvent(
             "FamilyDataClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Details));
 
         /// <summary>

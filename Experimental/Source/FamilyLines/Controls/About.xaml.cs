@@ -1,4 +1,8 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 
@@ -7,7 +11,7 @@ namespace KBS.FamilyLines.Controls
     /// <summary>
     /// Interaction logic for About.xaml
     /// </summary>
-    public partial class About : System.Windows.Controls.UserControl
+    public partial class About
     {
         public About()
         {
@@ -17,7 +21,7 @@ namespace KBS.FamilyLines.Controls
 
         #region routed events
 
-        public static readonly RoutedEvent CloseButtonClickEvent = EventManager.RegisterRoutedEvent(
+        [Localizable(false)] public static readonly RoutedEvent CloseButtonClickEvent = EventManager.RegisterRoutedEvent(
             "CloseButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(About));
 
         // Expose this event for this control's container
