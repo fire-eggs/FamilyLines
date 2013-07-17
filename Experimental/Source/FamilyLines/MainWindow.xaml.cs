@@ -1,3 +1,6 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System;
 using System.IO;
 using System.IO.Packaging;
@@ -1893,7 +1896,7 @@ namespace KBS.FamilyLines
 
         /// <summary>
         /// Hides the Family Data Control.
-        /// </summary>7
+        /// </summary>
         private void HideFamilyDataControl()
         {
             // Uses an animation to hide the Family Data Control
@@ -2310,12 +2313,6 @@ namespace KBS.FamilyLines
             ViewAllFacts.Visibility = Visibility.Visible;
         }
 
-        private void ViewAllEvents_Finish(object sender, RoutedEventArgs e)
-        {
-            ViewAllFacts.Visibility = Visibility.Hidden;
-            removeControlFocus();
-        }
-
         private void Execute_EditAllDetails(object sender, RoutedEventArgs e)
         {
             var factProps = e.OriginalSource as Tuple<Person, GEDAttribute>;
@@ -2334,10 +2331,14 @@ namespace KBS.FamilyLines
             removeControlFocus();
         }
 
-        private void ViewAllFacts_CloseButtonClick(object sender, RoutedEventArgs e)
+        private void BulkImport(object sender, RoutedEventArgs e)
         {
-            ViewAllFacts.Visibility = Visibility.Hidden;
-            removeControlFocus();
+            // 1. folder browse: find the folder containing GED files to import
+            // 2. for each GED file in that folder:
+            //    a. import the GED
+            //    b. save the file to a .familyx
+            //    NOTE: must continue to the next file even if exception occurs
+
         }
     }
 }
