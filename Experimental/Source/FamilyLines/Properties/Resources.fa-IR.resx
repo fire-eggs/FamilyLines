@@ -1,0 +1,1470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="AgeGroupMiddleAge" xml:space="preserve">
+    <value>40-69</value>
+  </data>
+	<data name="AgeGroupSenior" xml:space="preserve">
+    <value>70+</value>
+  </data>
+	<data name="AgeGroupUnknown" xml:space="preserve">
+    <value>?</value>
+  </data>
+	<data name="AgeGroupYouth" xml:space="preserve">
+    <value>0-19</value>
+  </data>
+	<data name="AllExtension" xml:space="preserve">
+    <value>*.*</value>
+  </data>
+	<data name="AllFiles" xml:space="preserve">
+    <value>همه فایل‌ها (*.*)</value>
+  </data>
+	<data name="DefaultFamilyxExtension" xml:space="preserve">
+    <value>.familyx</value>
+  </data>
+	<data name="DefaultGedcomExtension" xml:space="preserve">
+    <value>.ged</value>
+  </data>
+	<data name="DefaultStory" xml:space="preserve">
+    <value>اطلاعات مدرک در اینجا</value>
+  </data>
+	<data name="DefaultXpsExtension" xml:space="preserve">
+    <value>.xps</value>
+  </data>
+	<data name="Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+	<data name="FamilyxFiles" xml:space="preserve">
+    <value>Family.Show 4.0 Files (*.familyx)</value>
+  </data>
+	<data name="GedcomExtension" xml:space="preserve">
+    <value>*.ged</value>
+  </data>
+	<data name="GedcomFailed" xml:space="preserve">
+    <value>Import Failed</value>
+  </data>
+	<data name="GedcomFailedMessage" xml:space="preserve">
+    <value>The GEDCOM file could not be imported.</value>
+  </data>
+	<data name="GedcomFiles" xml:space="preserve">
+    <value>GEDCOM Files (*.ged)</value>
+  </data>
+	<data name="HeaderImport" xml:space="preserve">
+    <value>Import</value>
+  </data>
+	<data name="JpegExtension" xml:space="preserve">
+    <value>*.jpg</value>
+  </data>
+	<data name="JpegFiles" xml:space="preserve">
+    <value>JPEG File Interchange Format (*.jpg)</value>
+  </data>
+	<data name="NotImplemented" xml:space="preserve">
+    <value>این عمل هنوز پیاده سازی نشده</value>
+  </data>
+	<data name="Save" xml:space="preserve">
+    <value>ذخیره</value>
+  </data>
+	<data name="Person" xml:space="preserve">
+    <value>فرد</value>
+  </data>
+	<data name="NotSavedMessage" xml:space="preserve">
+    <value>آیا می‌خواهید تغییرات خانواده جاری را ذخیره کنید؟</value>
+  </data>
+	<data name="ConfirmDeletePerson" xml:space="preserve">
+    <value>آیا از پاک کردن {0} {1} مطمئن هستید؟</value>
+  </data>
+	<data name="Open" xml:space="preserve">
+    <value>باز کردن</value>
+  </data>
+	<data name="SaveAs" xml:space="preserve">
+    <value>ذخیره به عنوان</value>
+  </data>
+	<data name="StoryFontFamily" xml:space="preserve">
+    <value>Segoe UI</value>
+  </data>
+	<data name="StoryFontSize" xml:space="preserve">
+    <value>12</value>
+  </data>
+	<data name="XamlExtension" xml:space="preserve">
+    <value>.xaml</value>
+  </data>
+	<data name="XpsExtension" xml:space="preserve">
+    <value>*.xps</value>
+  </data>
+	<data name="XpsFiles" xml:space="preserve">
+    <value>Xps Files (*.xps)</value>
+  </data>
+	<data name="FamilyxExtension" xml:space="preserve">
+    <value>*.familyx</value>
+  </data>
+	<data name="ConfirmDeleteRelationship" xml:space="preserve">
+    <value>آیا می‌خواهید این روابط را پاک کنید؟</value>
+  </data>
+	<data name="Relationship" xml:space="preserve">
+    <value>رابطه</value>
+  </data>
+	<data name="Merge" xml:space="preserve">
+    <value>ادغام</value>
+  </data>
+	<data name="DefaulthtmlExtension" xml:space="preserve">
+    <value>.html</value>
+  </data>
+	<data name="htmlExtension" xml:space="preserve">
+    <value>*.html</value>
+  </data>
+	<data name="htmlFiles" xml:space="preserve">
+    <value>Hyper Text Markup Language Files (*.html)</value>
+  </data>
+	<data name="Link" xml:space="preserve">
+    <value>پیوند</value>
+  </data>
+	<data name="LinkFailed" xml:space="preserve">
+    <value>پیوند ناموفق بود</value>
+  </data>
+	<data name="LinkAddMessage" xml:space="preserve">
+    <value>The selected file does not already exist in this familyx file.  Add the file instead.</value>
+  </data>
+	<data name="Unsupported" xml:space="preserve">
+    <value>قالب ناشناخته</value>
+  </data>
+	<data name="UnsupportedPhotoMessage" xml:space="preserve">
+    <value>فقط تصاویر *.jpg, *.jpeg, *.png, *.tif, *.tiff or *.gif پشتیبانی می‌شود.</value>
+  </data>
+	<data name="NoMap" xml:space="preserve">
+    <value>نقشه</value>
+  </data>
+	<data name="ExportResult" xml:space="preserve">
+    <value>Export Result</value>
+  </data>
+	<data name="PlacesMessage" xml:space="preserve">
+    <value>آیا می‌خواهید این فایل را در نقشه‌نمای پیشفرض ببینید.</value>
+  </data>
+	<data name="SourcesExportMessage" xml:space="preserve">
+    <value>آیا می‌خواهید پرونده را در مرورگر وب پیشفرض ببینید؟</value>
+  </data>
+	<data name="DefaultkmlExtension" xml:space="preserve">
+    <value>.kml</value>
+  </data>
+	<data name="kmlExtension" xml:space="preserve">
+    <value>*.kml</value>
+  </data>
+	<data name="kmlFiles" xml:space="preserve">
+    <value>Keyhole Markup Language (*.kml)</value>
+  </data>
+	<data name="ConfirmDeleteSource" xml:space="preserve">
+    <value>آیا می‌خواهید این منبع را پاک کنید؟</value>
+  </data>
+	<data name="Source" xml:space="preserve">
+    <value>منبع</value>
+  </data>
+	<data name="Error" xml:space="preserve">
+    <value>خطا</value>
+  </data>
+	<data name="AttachmentExists" xml:space="preserve">
+    <value>این فایل قبلا به این فرد پیوست شده است</value>
+  </data>
+	<data name="ConfirmDeleteAttachment" xml:space="preserve">
+    <value>آیا می‌خواهید این پیوست را پاک کنید؟</value>
+  </data>
+	<data name="Attachment" xml:space="preserve">
+    <value>پیوست</value>
+  </data>
+	<data name="UnsupportedAttachmentMessage" xml:space="preserve">
+    <value>لطفا برای مشاهده لیست کامل پرونده‌های قابل پیوست به راهنما مراجعه فرمایید.</value>
+  </data>
+	<data name="GedcomExportFailedMessage" xml:space="preserve">
+    <value>The familyx file could not be exported to GEDCOM.</value>
+  </data>
+	<data name="GedcomExportSucessfulMessage" xml:space="preserve">
+    <value>The familyx file was sucessfully exported to GEDCOM.</value>
+  </data>
+	<data name="PhotoExistsMessage" xml:space="preserve">
+    <value>این تصویر قبلا به این فرد پیوست شده است.</value>
+  </data>
+	<data name="ConfirmDeleteRepository" xml:space="preserve">
+    <value>آیا می‌خواهید این مخازن را پاک کنید؟</value>
+  </data>
+	<data name="Repository" xml:space="preserve">
+    <value>مخزن</value>
+  </data>
+	<data name="InvalidURL" xml:space="preserve">
+    <value>پیوند معتبر نیست</value>
+  </data>
+	<data name="ConfirmDeletePhoto" xml:space="preserve">
+    <value>آیا می‌خواهید این تصویر را پاک کنید؟</value>
+  </data>
+	<data name="Photo" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+	<data name="SelectPersonFirstMessage" xml:space="preserve">
+    <value>ابتدا فردی را از لیست انتخاب کنید.</value>
+  </data>
+	<data name="AttachmentExtension" xml:space="preserve">
+    <value>*.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.odp; *.odt; *.ods; *.xps; *.htm; *.html; *.pdf; *.txt; *.kml; *.kmz; *.jpeg; *.jpg; *.png; *.rtf</value>
+  </data>
+	<data name="AttachmentFiles" xml:space="preserve">
+    <value>فایل‌های قابل پیوست (*.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.odp; *.odt; *.ods; *.xps; *.htm; *.html; *.pdf; *.txt; *.kml; *.kmz; *.jpeg; *.jpg; *.png; *.rtf)</value>
+  </data>
+	<data name="ImageExtension" xml:space="preserve">
+    <value>*.jpeg; *.jpg; *.png; *.tif; *.tiff; *.gif</value>
+  </data>
+	<data name="ImageFiles" xml:space="preserve">
+    <value>Image Files (*.jpeg; *.jpg; *.png; *.tif; *.tiff; *.gif)</value>
+  </data>
+	<data name="ClearRecentFilesMenu" xml:space="preserve">
+    <value>پاک‌کردن لیست‌ فایل‌ها اخیر</value>
+  </data>
+	<data name="ExportingStatus" xml:space="preserve">
+    <value>(Exporting)</value>
+  </data>
+	<data name="FamilyShow" xml:space="preserve">
+    <value>خطوط خانواده</value>
+  </data>
+	<data name="GedcomMenu" xml:space="preserve">
+    <value>Import GEDCOM...</value>
+  </data>
+	<data name="HelpFileName" xml:space="preserve">
+    <value>help.chm</value>
+  </data>
+	<data name="http" xml:space="preserve">
+    <value>http://</value>
+  </data>
+	<data name="ImportingStatus" xml:space="preserve">
+    <value>(در حال وارد کردن)</value>
+  </data>
+	<data name="LoadingStatus" xml:space="preserve">
+    <value>(در حال بار گذاری)</value>
+  </data>
+	<data name="MergeExistingError" xml:space="preserve">
+    <value>خطایی در حین به روز رسانی اطلاعات بین افراد تکراری رخ داد.</value>
+  </data>
+	<data name="MergeFailed1" xml:space="preserve">
+    <value>ادغام ناموق بود. هیچ تغییری انجام نشد.</value>
+  </data>
+	<data name="MergeFailed2" xml:space="preserve">
+    <value>ادغام ناموفق بود. لطفا فایل اصلی را دوباره بار کنید.</value>
+  </data>
+	<data name="MergeMenu" xml:space="preserve">
+    <value>ادغام...</value>
+  </data>
+	<data name="MergingStatus" xml:space="preserve">
+    <value>(در حال ادغام)</value>
+  </data>
+	<data name="NoExistingAttachments" xml:space="preserve">
+    <value>هیچ پیوستی از قبل موجود نیست.</value>
+  </data>
+	<data name="NotSupportedExtension1" xml:space="preserve">
+    <value>The extension *</value>
+  </data>
+	<data name="NotSupportedExtension2" xml:space="preserve">
+    <value>is not supported.</value>
+  </data>
+	<data name="OpenMenu" xml:space="preserve">
+    <value>باز کردن...</value>
+  </data>
+	<data name="ReportHeader1" xml:space="preserve">
+    <value>خانواده</value>
+  </data>
+	<data name="ReportHeader2" xml:space="preserve">
+    <value>در</value>
+  </data>
+	<data name="SaveBeforeMerge" xml:space="preserve">
+    <value>آیا می‌خواهید تغییرات جاری را قبل از ادغام ذخیره کنید؟</value>
+  </data>
+	<data name="UnableDeleteRepository1" xml:space="preserve">
+    <value>حذف مخزن ناموفق بود</value>
+  </data>
+	<data name="UnableDeleteRepository2" xml:space="preserve">
+    <value>چون این مخزن به منابعی وصل است.</value>
+  </data>
+	<data name="UnableDeleteSource1" xml:space="preserve">
+    <value>حذف منبع نا موفق بود</value>
+  </data>
+	<data name="UnableDeleteSource2" xml:space="preserve">
+    <value>چون منبع به ارجاعاتی متصل است.</value>
+  </data>
+	<data name="UnsavedStatus" xml:space="preserve">
+    <value>(ذخیره نشده)</value>
+  </data>
+	<data name="www" xml:space="preserve">
+    <value>www.</value>
+  </data>
+	<data name="Language" xml:space="preserve">
+    <value>en-US</value>
+  </data>
+	<data name="NewMenu" xml:space="preserve">
+    <value>جدید</value>
+  </data>
+	<data name="ExportGedcomMenu" xml:space="preserve">
+    <value>Export GEDCOM...</value>
+  </data>
+	<data name="ExportHtmlMenu" xml:space="preserve">
+    <value>Export HTML...</value>
+  </data>
+	<data name="ExportPlacesMenu" xml:space="preserve">
+    <value>Export Places...</value>
+  </data>
+	<data name="SaveAsMenu" xml:space="preserve">
+    <value>ذخیره به عنوان...</value>
+  </data>
+	<data name="AttachmentsMenu" xml:space="preserve">
+    <value>پیوست‌ها</value>
+  </data>
+	<data name="ContentsMenu" xml:space="preserve">
+    <value>محتویات</value>
+  </data>
+	<data name="FullScreen" xml:space="preserve">
+    <value>تمام صفحه</value>
+  </data>
+	<data name="Help" xml:space="preserve">
+    <value>کمک</value>
+  </data>
+	<data name="PhotosMenu" xml:space="preserve">
+    <value>تصاویر</value>
+  </data>
+	<data name="Print" xml:space="preserve">
+    <value>چاپ</value>
+  </data>
+	<data name="PrintMenu" xml:space="preserve">
+    <value>چاپ...</value>
+  </data>
+	<data name="PrintXPSMenu" xml:space="preserve">
+    <value>چاپ درخت به عنوان XPS...</value>
+  </data>
+	<data name="RepositoriesMenu" xml:space="preserve">
+    <value>مخازن</value>
+  </data>
+	<data name="SourcesMenu" xml:space="preserve">
+    <value>منابع</value>
+  </data>
+	<data name="StatisticsMenu" xml:space="preserve">
+    <value>آمار</value>
+  </data>
+	<data name="StoriesMenu" xml:space="preserve">
+    <value>داستان‌ها</value>
+  </data>
+	<data name="LanguageMenu" xml:space="preserve">
+    <value>زبان...</value>
+  </data>
+	<data name="ActualText" xml:space="preserve">
+    <value>خود متن</value>
+  </data>
+	<data name="Add" xml:space="preserve">
+    <value>افزودن</value>
+  </data>
+	<data name="AddAFamilyMember" xml:space="preserve">
+    <value>افزودن عضو خانواده</value>
+  </data>
+	<data name="AddFather" xml:space="preserve">
+    <value>افزودن پدر</value>
+  </data>
+	<data name="Attachments" xml:space="preserve">
+    <value>پیوست‌ها</value>
+  </data>
+	<data name="Back" xml:space="preserve">
+    <value>عقب</value>
+  </data>
+	<data name="BirthPlace" xml:space="preserve">
+    <value>محل تولد</value>
+  </data>
+	<data name="Born" xml:space="preserve">
+    <value>متولد</value>
+  </data>
+	<data name="BurialDate" xml:space="preserve">
+    <value>تاریخ به خاک‌سپاری</value>
+  </data>
+	<data name="BurialPlace" xml:space="preserve">
+    <value>محل‌به‌خاک‌سپردن</value>
+  </data>
+	<data name="Cancel" xml:space="preserve">
+    <value>انصراف</value>
+  </data>
+	<data name="Citations" xml:space="preserve">
+    <value>ارجاعات</value>
+  </data>
+	<data name="ConnectAFamilyMemberAs" xml:space="preserve">
+    <value>اتصال یک عضو خانواده به عنوان</value>
+  </data>
+	<data name="CreateRelationship" xml:space="preserve">
+    <value>ایجاد یک رابطه</value>
+  </data>
+	<data name="CremationDate" xml:space="preserve">
+    <value>تاریخ سوزانده شدن</value>
+  </data>
+	<data name="CremationPlace" xml:space="preserve">
+    <value>محل سوزانده شدن</value>
+  </data>
+	<data name="DateOfBirth" xml:space="preserve">
+    <value>تاریخ تولد</value>
+  </data>
+	<data name="DateOfDeath" xml:space="preserve">
+    <value>تاریخ فوت</value>
+  </data>
+	<data name="DeathPlace" xml:space="preserve">
+    <value>محل فوت</value>
+  </data>
+	<data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+	<data name="Details" xml:space="preserve">
+    <value>جزئیات</value>
+  </data>
+	<data name="Done" xml:space="preserve">
+    <value>تمام</value>
+  </data>
+	<data name="EditAttachments" xml:space="preserve">
+    <value>ویرایش پیوست‌ها</value>
+  </data>
+	<data name="EditCitation" xml:space="preserve">
+    <value>ویرایش ارجاعات</value>
+  </data>
+	<data name="EditDetails" xml:space="preserve">
+    <value>ویرایش جزئیات</value>
+  </data>
+	<data name="EditMoreDetails" xml:space="preserve">
+    <value>ویرایش جزئیات بیشتر</value>
+  </data>
+	<data name="EditPerson" xml:space="preserve">
+    <value>ویرایش فرد</value>
+  </data>
+	<data name="EditRelationships" xml:space="preserve">
+    <value>ویرایش روابط</value>
+  </data>
+	<data name="Education" xml:space="preserve">
+    <value>تحصیلات</value>
+  </data>
+	<data name="FamilyData" xml:space="preserve">
+    <value>اطلاعات خانواده</value>
+  </data>
+	<data name="FamilySpace" xml:space="preserve">
+    <value>خانواده</value>
+  </data>
+	<data name="Female" xml:space="preserve">
+    <value>مونث</value>
+  </data>
+	<data name="Filter" xml:space="preserve">
+    <value>صافی</value>
+  </data>
+	<data name="FilterColon" xml:space="preserve">
+    <value>صافی:</value>
+  </data>
+	<data name="From" xml:space="preserve">
+    <value>از</value>
+  </data>
+	<data name="Gender" xml:space="preserve">
+    <value>جنسیت</value>
+  </data>
+	<data name="Living" xml:space="preserve">
+    <value>در قید حیات</value>
+  </data>
+	<data name="Male" xml:space="preserve">
+    <value>مذکر</value>
+  </data>
+	<data name="MapToolTip" xml:space="preserve">
+    <value>در مرورگر پیش‌فرض دنبال این موقعیت بگردید.</value>
+  </data>
+	<data name="More" xml:space="preserve">
+    <value>بیشتر</value>
+  </data>
+	<data name="NameAge" xml:space="preserve">
+    <value>نام و سن</value>
+  </data>
+	<data name="Names" xml:space="preserve">
+    <value>نام (ها)</value>
+  </data>
+	<data name="NewHeader" xml:space="preserve">
+    <value>اولین عضو خانواده را اضافه کنید</value>
+  </data>
+	<data name="None" xml:space="preserve">
+    <value>هیچکدام</value>
+  </data>
+	<data name="Note" xml:space="preserve">
+    <value>یادداشت</value>
+  </data>
+	<data name="Occupation" xml:space="preserve">
+    <value>شغل</value>
+  </data>
+	<data name="OfSpace" xml:space="preserve">
+    <value>از</value>
+  </data>
+	<data name="OpenRecent" xml:space="preserve">
+    <value>بازکردن پرونده‌های اخیر</value>
+  </data>
+	<data name="Parents" xml:space="preserve">
+    <value>والدین</value>
+  </data>
+	<data name="PhotoStory" xml:space="preserve">
+    <value>تصاویر و تاریخچه</value>
+  </data>
+	<data name="Place" xml:space="preserve">
+    <value>مکان</value>
+  </data>
+	<data name="Relationships" xml:space="preserve">
+    <value>روابط</value>
+  </data>
+	<data name="Religion" xml:space="preserve">
+    <value>دین</value>
+  </data>
+	<data name="RemoveParent" xml:space="preserve">
+    <value>حذف والد</value>
+  </data>
+	<data name="RemoveSibling" xml:space="preserve">
+    <value>حذف برادر با خواهر</value>
+  </data>
+	<data name="RemoveSpouse" xml:space="preserve">
+    <value>حذف همسر</value>
+  </data>
+	<data name="Restriction" xml:space="preserve">
+    <value>محدودیت</value>
+  </data>
+	<data name="Siblings" xml:space="preserve">
+    <value>برادرها و خواهرها</value>
+  </data>
+	<data name="SpousePartner" xml:space="preserve">
+    <value>همسر</value>
+  </data>
+	<data name="SpousePartnerCitation" xml:space="preserve">
+    <value>ارجاعات همسر</value>
+  </data>
+	<data name="Suffix" xml:space="preserve">
+    <value>پیشوند</value>
+  </data>
+	<data name="Surname" xml:space="preserve">
+    <value>نام خانوادگی</value>
+  </data>
+	<data name="ThemesHeader" xml:space="preserve">
+    <value>پوسته‌ها</value>
+  </data>
+	<data name="To" xml:space="preserve">
+    <value>تا</value>
+  </data>
+	<data name="ToSpace" xml:space="preserve">
+    <value>تا </value>
+  </data>
+	<data name="Version" xml:space="preserve">
+    <value>نسخه</value>
+  </data>
+	<data name="Welcome" xml:space="preserve">
+    <value>خوش آمدید</value>
+  </data>
+	<data name="WhoAreTheParents" xml:space="preserve">
+    <value>والدین چه کسانی هستند؟</value>
+  </data>
+	<data name="AboutMenu" xml:space="preserve">
+    <value>درباره Family Lines</value>
+  </data>
+	<data name="Time" xml:space="preserve">
+    <value>زمان</value>
+  </data>
+	<data name="TagsColon" xml:space="preserve">
+    <value>برچسب‌ها:</value>
+  </data>
+	<data name="View" xml:space="preserve">
+    <value>دیدن</value>
+  </data>
+	<data name="ZoomLabel" xml:space="preserve">
+    <value>بزرگنمایی</value>
+  </data>
+	<data name="About" xml:space="preserve">
+    <value>درباره</value>
+  </data>
+	<data name="Age" xml:space="preserve">
+    <value>سن</value>
+  </data>
+	<data name="AgeDistributions" xml:space="preserve">
+    <value>توزیع سن‌ها</value>
+  </data>
+	<data name="AllPeople" xml:space="preserve">
+    <value>همه افراد</value>
+  </data>
+	<data name="AncestralAnd" xml:space="preserve">
+    <value>اجداد و </value>
+  </data>
+	<data name="BirthDate" xml:space="preserve">
+    <value>تاریخ تولد</value>
+  </data>
+	<data name="Continue" xml:space="preserve">
+    <value>ادامه</value>
+  </data>
+	<data name="Copyright" xml:space="preserve">
+    <value>حق تکثیر محفوظ است. ۲۰۱۳</value>
+  </data>
+	<data name="CurrentPerson" xml:space="preserve">
+    <value>فرد جاری</value>
+  </data>
+	<data name="CurrentPersonWith" xml:space="preserve">
+    <value>فرد جاری به همراه</value>
+  </data>
+	<data name="DataQualityColon" xml:space="preserve">
+    <value>کیفیت داده:</value>
+  </data>
+	<data name="DataStatusColon" xml:space="preserve">
+    <value>وضعیت داده:</value>
+  </data>
+	<data name="DeathDate" xml:space="preserve">
+    <value>تارخ فوت</value>
+  </data>
+	<data name="DescendantGenerations" xml:space="preserve">
+    <value>نوادگان</value>
+  </data>
+	<data name="Edit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+	<data name="ExportHtml" xml:space="preserve">
+    <value>Export HTML</value>
+  </data>
+	<data name="ExportSourcesAndRepositories" xml:space="preserve">
+    <value>Export sources and repositories</value>
+  </data>
+	<data name="GenderDistributions" xml:space="preserve">
+    <value>توزیع جنسیتی</value>
+  </data>
+	<data name="HideLivingPeople" xml:space="preserve">
+    <value>پنهان سازی افراد زنده</value>
+  </data>
+	<data name="ImmediateRelatives" xml:space="preserve">
+    <value>خویشاوندان درجه یک</value>
+  </data>
+	<data name="LivingStatus" xml:space="preserve">
+    <value>وضعیت حیات</value>
+  </data>
+	<data name="Localization" xml:space="preserve">
+    <value>بومی سازی</value>
+  </data>
+	<data name="Name" xml:space="preserve">
+    <value>نام</value>
+  </data>
+	<data name="OK" xml:space="preserve">
+    <value>بسیار خوب</value>
+  </data>
+	<data name="Statistics" xml:space="preserve">
+    <value>آمار</value>
+  </data>
+	<data name="Stories" xml:space="preserve">
+    <value>داستان‌ها</value>
+  </data>
+	<data name="SummaryOfData" xml:space="preserve">
+    <value>خلاصه داده‌ها</value>
+  </data>
+	<data name="SummaryOfEvents" xml:space="preserve">
+    <value>خلاصه رویدادها</value>
+  </data>
+	<data name="SummaryOfMedia" xml:space="preserve">
+    <value>خلاصه رسانه‌ها</value>
+  </data>
+	<data name="SummaryOfNames" xml:space="preserve">
+    <value>خلاصه نام‌ها</value>
+  </data>
+	<data name="UTF1" xml:space="preserve">
+    <value>فامیلی لاینز به طور کامل از UTF-8 پشتیبانی می‌کند. اما متاسفانه اغلب GEDCOM ها در طول وارد کردن با این قالب ذخیره نشده اند و به همین خاطر فامیلی لاینز حروفی که نمی‌تواند نشان دهد را از آنها حذف می‌کند. اگر شما از زبانی استفاده کرده اید که حروف توسعه یافته دارد، بعضی از اطلاعات ممکن است از دست بروند.</value>
+  </data>
+	<data name="UTF2" xml:space="preserve">
+    <value>به هر حال ممکن است که با برنامه‌هایی مثل notepad پرونده‌ها را به قالب UTF-8 تبدیل کنید. بعد از اینکه پرونده‌تان به شکل درست درآورده شد، روی فعال  سازی UTF-8 کلیک کنید تا حریف توسعه یافته فعال شوند.</value>
+  </data>
+	<data name="Address" xml:space="preserve">
+    <value>آدرس</value>
+  </data>
+	<data name="Author" xml:space="preserve">
+    <value>نویسنده</value>
+  </data>
+	<data name="BracketRepositoryNameBracket" xml:space="preserve">
+    <value>(اسم مخزن)</value>
+  </data>
+	<data name="ChooseWhoToSaveColon" xml:space="preserve">
+    <value>انتخاب فردی برای ذخیره:</value>
+  </data>
+	<data name="Contains" xml:space="preserve">
+    <value>شامل</value>
+  </data>
+	<data name="CurrentPersonAndImmediateRelatives" xml:space="preserve">
+    <value>فرد جاری و اقوام درجه یک</value>
+  </data>
+	<data name="Died" xml:space="preserve">
+    <value>فوتی</value>
+  </data>
+	<data name="IfPersons" xml:space="preserve">
+    <value>اگر </value>
+  </data>
+	<data name="PrivacyTooltip" xml:space="preserve">
+    <value>جلوگیری از خروج اطلاعات افراد زنده</value>
+  </data>
+	<data name="Publisher" xml:space="preserve">
+    <value>ناشر</value>
+  </data>
+	<data name="Repositories" xml:space="preserve">
+    <value>مخازن</value>
+  </data>
+	<data name="RepositoryList" xml:space="preserve">
+    <value>لیست مخازن</value>
+  </data>
+	<data name="SourceList" xml:space="preserve">
+    <value>لیست منابع</value>
+  </data>
+	<data name="Sources" xml:space="preserve">
+    <value>منبع</value>
+  </data>
+	<data name="SourcesExportTooltip" xml:space="preserve">
+    <value>خروج منابع و مخازن اطلاعات مجاز است.</value>
+  </data>
+	<data name="AddNewImage" xml:space="preserve">
+    <value>افزودن تصویر جدید...</value>
+  </data>
+	<data name="DropPhotosIntoThisBox" xml:space="preserve">
+    <value>تصاویر را در این جعبه بیندازید.</value>
+  </data>
+	<data name="LinkExistingImage" xml:space="preserve">
+    <value>پیوند زدن تصویر موجود...</value>
+  </data>
+	<data name="NoPrimary" xml:space="preserve">
+    <value>بدون ابتدایی</value>
+  </data>
+	<data name="SetAsPrimary" xml:space="preserve">
+    <value>انتخاب به عنوان اصلی</value>
+  </data>
+	<data name="Story" xml:space="preserve">
+    <value>داستان</value>
+  </data>
+	<data name="Tools" xml:space="preserve">
+    <value>ابزارها</value>
+  </data>
+	<data name="AppendStar" xml:space="preserve">
+    <value>افزودن * به نام افراد وارد شده</value>
+  </data>
+	<data name="ChooseTheLanguageColon" xml:space="preserve">
+    <value>انتخاب زبان:</value>
+  </data>
+	<data name="ClickContinue" xml:space="preserve">
+    <value>روی «ادامه» برای شروع کلیک کنید:</value>
+  </data>
+	<data name="ClickFinish" xml:space="preserve">
+    <value>روی «پایان» برای ذخیره‌سازی و دیدن فایل‌تان کلیک کنید:</value>
+  </data>
+	<data name="Danish" xml:space="preserve">
+    <value>دانمارکی</value>
+  </data>
+	<data name="ExistingCitation" xml:space="preserve">
+    <value>ارجاعات فعلی</value>
+  </data>
+	<data name="ExistingInformation" xml:space="preserve">
+    <value>اطلاعات فعلی</value>
+  </data>
+	<data name="Field" xml:space="preserve">
+    <value>فیلد</value>
+  </data>
+	<data name="Finish" xml:space="preserve">
+    <value>پایان</value>
+  </data>
+	<data name="LanguageChangeMessage" xml:space="preserve">
+    <value>تغیر زبان در اجرای بعدی برنامه تاثیر خواهد گذاشت.</value>
+  </data>
+	<data name="LanguageHeader" xml:space="preserve">
+    <value>زبان</value>
+  </data>
+	<data name="MergeDuplicates" xml:space="preserve">
+    <value>ادغام تکراری‌ها</value>
+  </data>
+	<data name="MergeDuplicatesMessage1" xml:space="preserve">
+    <value>بعضی از افراد در شجره جاری در فایلی که ادغامی شد هم موجود بودند.</value>
+  </data>
+	<data name="MergeDuplicatesMessage2" xml:space="preserve">
+    <value>در صفحه بعد، شما می‌توانید افراد موجود را که اطلاعات جدید یا متناقض دارند، ویرایش کنید.</value>
+  </data>
+	<data name="NewCitation" xml:space="preserve">
+    <value>ارجاع جدید</value>
+  </data>
+	<data name="NewConflicting" xml:space="preserve">
+    <value>اطلاعات جدید یا متناقض</value>
+  </data>
+	<data name="Options" xml:space="preserve">
+    <value>گزینه‌ها</value>
+  </data>
+	<data name="Skip" xml:space="preserve">
+    <value>پرش</value>
+  </data>
+	<data name="Summary" xml:space="preserve">
+    <value>خلاصه</value>
+  </data>
+	<data name="Uncited" xml:space="preserve">
+    <value>بدون ارجاع</value>
+  </data>
+	<data name="Unknown" xml:space="preserve">
+    <value>ناشناخته</value>
+  </data>
+	<data name="Update" xml:space="preserve">
+    <value>به روز رسانی</value>
+  </data>
+	<data name="UpdateQuestion" xml:space="preserve">
+    <value>به روز شود؟</value>
+  </data>
+	<data name="Adopted" xml:space="preserve">
+    <value>فرزند خوانده</value>
+  </data>
+	<data name="Birth" xml:space="preserve">
+    <value>تولد</value>
+  </data>
+	<data name="Brother" xml:space="preserve">
+    <value>برادر</value>
+  </data>
+	<data name="Burial" xml:space="preserve">
+    <value>به‌خاک‌سپاری</value>
+  </data>
+	<data name="ConnectFamilyMember" xml:space="preserve">
+    <value>اتصال اعضای خانواده...</value>
+  </data>
+	<data name="Cremation" xml:space="preserve">
+    <value>سوزانده شدن</value>
+  </data>
+	<data name="Current" xml:space="preserve">
+    <value>کنونی</value>
+  </data>
+	<data name="Daughter" xml:space="preserve">
+    <value>دختر</value>
+  </data>
+	<data name="Death" xml:space="preserve">
+    <value>فوت</value>
+  </data>
+	<data name="Divorce" xml:space="preserve">
+    <value>طلاق</value>
+  </data>
+	<data name="Father" xml:space="preserve">
+    <value>پدر</value>
+  </data>
+	<data name="Former" xml:space="preserve">
+    <value>سابق</value>
+  </data>
+	<data name="Fostered" xml:space="preserve">
+    <value>رضاعی</value>
+  </data>
+	<data name="Locked" xml:space="preserve">
+    <value>قفل</value>
+  </data>
+	<data name="Marriage" xml:space="preserve">
+    <value>ازدواج</value>
+  </data>
+	<data name="Mother" xml:space="preserve">
+    <value>مادر</value>
+  </data>
+	<data name="Natural" xml:space="preserve">
+    <value>طبیعی</value>
+  </data>
+	<data name="Private" xml:space="preserve">
+    <value>خصوصی</value>
+  </data>
+	<data name="Sister" xml:space="preserve">
+    <value>خواهر</value>
+  </data>
+	<data name="Son" xml:space="preserve">
+    <value>پسر</value>
+  </data>
+	<data name="Spouse" xml:space="preserve">
+    <value>همسر</value>
+  </data>
+	<data name="Unrelated" xml:space="preserve">
+    <value>بدون رابطه</value>
+  </data>
+	<data name="DataSize" xml:space="preserve">
+    <value>اندازه داده:</value>
+  </data>
+	<data name="Deceased" xml:space="preserve">
+    <value>متوفی</value>
+  </data>
+	<data name="Divorces" xml:space="preserve">
+    <value>طلاق‌ها</value>
+  </data>
+	<data name="EarliestKnownEvent" xml:space="preserve">
+    <value>نزدیک ترین رویداد شناخته شده</value>
+  </data>
+	<data name="FactsEvents" xml:space="preserve">
+    <value>حقایق/رویدادها</value>
+  </data>
+	<data name="LatestKnownEvent" xml:space="preserve">
+    <value>آخرین رویدادهای شناخته شده</value>
+  </data>
+	<data name="Marriages" xml:space="preserve">
+    <value>ازدواج‌ها</value>
+  </data>
+	<data name="Notes" xml:space="preserve">
+    <value>یادداشت ها</value>
+  </data>
+	<data name="Photos" xml:space="preserve">
+    <value>تصاویر</value>
+  </data>
+	<data name="StatisticsReport" xml:space="preserve">
+    <value>گزارش آماری</value>
+  </data>
+	<data name="StatisticsReportFor" xml:space="preserve">
+    <value>گزارش آماری برای</value>
+  </data>
+	<data name="TopBoysNames" xml:space="preserve">
+    <value>اسامی پسر برتر</value>
+  </data>
+	<data name="TopGirlsNames" xml:space="preserve">
+    <value>اسامی دختر برتر</value>
+  </data>
+	<data name="TopSurnames" xml:space="preserve">
+    <value>نام‌های خانواگی‌ برتر</value>
+  </data>
+	<data name="Xml" xml:space="preserve">
+    <value>XML</value>
+  </data>
+	<data name="FamilyStatistics" xml:space="preserve">
+    <value>آمار خانواده</value>
+  </data>
+	<data name="HasAttachments" xml:space="preserve">
+    <value>این فرد پیوست دارد.</value>
+  </data>
+	<data name="HasCitations" xml:space="preserve">
+    <value>این فرد ارجاع دارد.</value>
+  </data>
+	<data name="HasNotes" xml:space="preserve">
+    <value>این فرد یادداشت دارد.</value>
+  </data>
+	<data name="HasPhotos" xml:space="preserve">
+    <value>This person has photos.</value>
+  </data>
+	<data name="HasRestrictions" xml:space="preserve">
+    <value>این فرد یک محدودیت دارد.</value>
+  </data>
+	<data name="HideAncestors" xml:space="preserve">
+    <value>پنهان سازی اجداد</value>
+  </data>
+	<data name="HideAuntsAndUncles" xml:space="preserve">
+    <value>پنهان سازی عمه‌ها و عموها و خاله و دایی ها</value>
+  </data>
+	<data name="HideCurrentSpouse" xml:space="preserve">
+    <value>پنهان سازی همسر فعلی</value>
+  </data>
+	<data name="HideDates" xml:space="preserve">
+    <value>پنهان سازی تاریخ‌ها</value>
+  </data>
+	<data name="HideDescendants" xml:space="preserve">
+    <value>پنهان سازی نوادگان</value>
+  </data>
+	<data name="HideInLaws" xml:space="preserve">
+    <value>پنهان سازی خویشاوندان نسبی</value>
+  </data>
+	<data name="HidePreviousSpouses" xml:space="preserve">
+    <value>پنهان سازی همسران قبلی</value>
+  </data>
+	<data name="HideSiblings" xml:space="preserve">
+    <value>پنهان سازی برادرها و خواهرها</value>
+  </data>
+	<data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+	<data name="Image" xml:space="preserve">
+    <value>تصویر</value>
+  </data>
+	<data name="IsLivingQuestion" xml:space="preserve">
+    <value>در قید حیات؟</value>
+  </data>
+	<data name="ShowAllGenerations" xml:space="preserve">
+    <value>نمایش همه نسل‌ها</value>
+  </data>
+	<data name="ShowBloodlines" xml:space="preserve">
+    <value>نمایش خطوط خونی</value>
+  </data>
+	<data name="ShowGenerationOutline" xml:space="preserve">
+    <value>نمایش کلیات نسل</value>
+  </data>
+	<data name="ShowImmediateFamilyOnly" xml:space="preserve">
+    <value>نماش فقط خانواده اصلی</value>
+  </data>
+	<data name="ShowPhotos" xml:space="preserve">
+    <value>نمایش تصاویر</value>
+  </data>
+	<data name="Birthdays" xml:space="preserve">
+    <value>روزهای تولد</value>
+  </data>
+	<data name="Surnames" xml:space="preserve">
+    <value>نام‌های خانوادگی</value>
+  </data>
+	<data name="PrivateRecord" xml:space="preserve">
+    <value>رکورد خصوصی</value>
+  </data>
+	<assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+	<data name="KennedySampleFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Sample Files\Kennedy.ged;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</data>
+	<data name="WindsorSampleFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Sample Files\Windsor.familyx;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</data>
+	<data name="DateCalculator" xml:space="preserve">
+    <value>حسابگر تاریخ</value>
+  </data>
+	<data name="DateCalculatorMessage" xml:space="preserve">
+    <value>از این ابزار برای محاسبه تاریخ‌ها از روی مدارکی که جمع‌اوری کرده اید استفاده کنید.</value>
+  </data>
+	<data name="Year" xml:space="preserve">
+    <value>سال</value>
+  </data>
+	<data name="AddOrSubtract" xml:space="preserve">
+    <value>افزودن یا کم کردن</value>
+  </data>
+	<data name="AgeBirthDeath" xml:space="preserve">
+    <value>سن‌ها، تولدها و مرگ‌ها</value>
+  </data>
+	<data name="Calculate" xml:space="preserve">
+    <value>محاسبه</value>
+  </data>
+	<data name="DateCalculatorMenu" xml:space="preserve">
+    <value>حسابگر تاریخ</value>
+  </data>
+	<data name="DateTo" xml:space="preserve">
+    <value>تا</value>
+  </data>
+	<data name="days" xml:space="preserve">
+    <value>روز</value>
+  </data>
+	<data name="months" xml:space="preserve">
+    <value>ماه</value>
+  </data>
+	<data name="Subtract" xml:space="preserve">
+    <value>تفریق</value>
+  </data>
+	<data name="years" xml:space="preserve">
+    <value>سال‌ها</value>
+  </data>
+	<data name="Black" xml:space="preserve">
+    <value>سیاه</value>
+  </data>
+	<data name="Silver" xml:space="preserve">
+    <value>نقره‌ای</value>
+  </data>
+	<data name="StartANewFamilyTree" xml:space="preserve">
+    <value>ایجاد شجره نامه جدید...</value>
+  </data>
+	<data name="Links" xml:space="preserve">
+    <value>پیوندها</value>
+  </data>
+	<data name="HideControls" xml:space="preserve">
+    <value>پنهان سازی کنترل‌های نمودار</value>
+  </data>
+	<data name="SavingStatus" xml:space="preserve">
+    <value>(درحال ذخیره سازی)</value>
+  </data>
+	<data name="DropPhotosHere" xml:space="preserve">
+    <value>تصاویر را اینجا بیندازید.</value>
+  </data>
+	<data name="NoExistingPhotos" xml:space="preserve">
+    <value>هیچ عکسی از قبل موجود نیست.</value>
+  </data>
+	<data name="Discussion" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+	<data name="EULA" xml:space="preserve">
+    <value>Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/
+
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+1. Definitions.
+
+"License" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.
+
+"Licensor" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.
+
+"Legal Entity" shall mean the union of the acting entity and all other entities that control, are controlled by, or are under common control with that entity. For the purposes of this definition, "control" means (i) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (ii) ownership of fifty percent (50%) or more of the outstanding shares, or (iii) beneficial ownership of such entity.
+
+"You" (or "Your") shall mean an individual or Legal Entity exercising permissions granted by this License.
+
+"Source" form shall mean the preferred form for making modifications, including but not limited to software source code, documentation source, and configuration files.
+
+"Object" form shall mean any form resulting from mechanical transformation or translation of a Source form, including but not limited to compiled object code, generated documentation, and conversions to other media types.
+
+"Work" shall mean the work of authorship, whether in Source or Object form, made available under the License, as indicated by a copyright notice that is included in or attached to the work (an example is provided in the Appendix below).
+
+"Derivative Works" shall mean any work, whether in Source or Object form, that is based on (or derived from) the Work and for which the editorial revisions, annotations, elaborations, or other modifications represent, as a whole, an original work of authorship. For the purposes of this License, Derivative Works shall not include works that remain separable from, or merely link (or bind by name) to the interfaces of, the Work and Derivative Works thereof.
+
+"Contribution" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, "submitted" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as "Not a Contribution."
+
+"Contributor" shall mean Licensor and any individual or Legal Entity on behalf of whom a Contribution has been received by Licensor and subsequently incorporated within the Work.
+
+2. Grant of Copyright License.
+
+Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.
+
+3. Grant of Patent License.
+
+Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.
+
+4. Redistribution.
+
+You may reproduce and distribute copies of the Work or Derivative Works thereof in any medium, with or without modifications, and in Source or Object form, provided that You meet the following conditions:
+
+1. You must give any other recipients of the Work or Derivative Works a copy of this License; and
+
+2. You must cause any modified files to carry prominent notices stating that You changed the files; and
+
+3. You must retain, in the Source form of any Derivative Works that You distribute, all copyright, patent, trademark, and attribution notices from the Source form of the Work, excluding those notices that do not pertain to any part of the Derivative Works; and
+
+4. If the Work includes a "NOTICE" text file as part of its distribution, then any Derivative Works that You distribute must include a readable copy of the attribution notices contained within such NOTICE file, excluding those notices that do not pertain to any part of the Derivative Works, in at least one of the following places: within a NOTICE text file distributed as part of the Derivative Works; within the Source form or documentation, if provided along with the Derivative Works; or, within a display generated by the Derivative Works, if and wherever such third-party notices normally appear. The contents of the NOTICE file are for informational purposes only and do not modify the License. You may add Your own attribution notices within Derivative Works that You distribute, alongside or as an addendum to the NOTICE text from the Work, provided that such additional attribution notices cannot be construed as modifying the License.
+
+You may add Your own copyright statement to Your modifications and may provide additional or different license terms and conditions for use, reproduction, or distribution of Your modifications, or for any such Derivative Works as a whole, provided Your use, reproduction, and distribution of the Work otherwise complies with the conditions stated in this License.
+
+5. Submission of Contributions.
+
+Unless You explicitly state otherwise, any Contribution intentionally submitted for inclusion in the Work by You to the Licensor shall be under the terms and conditions of this License, without any additional terms or conditions. Notwithstanding the above, nothing herein shall supersede or modify the terms of any separate license agreement you may have executed with Licensor regarding such Contributions.
+
+6. Trademarks.
+
+This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the NOTICE file.
+
+7. Disclaimer of Warranty.
+
+Unless required by applicable law or agreed to in writing, Licensor provides the Work (and each Contributor provides its Contributions) on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any risks associated with Your exercise of permissions under this License.
+
+8. Limitation of Liability.
+
+In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall any Contributor be liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising as a result of this License or out of the use or inability to use the Work (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if such Contributor has been advised of the possibility of such damages.
+
+9. Accepting Warranty or Additional Liability.
+
+While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.</value>
+  </data>
+	<data name="Homepage" xml:space="preserve">
+    <value>صفحه خانه</value>
+  </data>
+	<data name="People" xml:space="preserve">
+    <value>مردم</value>
+  </data>
+	<data name="ChooseWhatToExtractColon" xml:space="preserve">
+    <value>انتخاب چیزی برای استخراج:</value>
+  </data>
+	<data name="CurrentPersonOnly" xml:space="preserve">
+    <value>فقط فرد جاری</value>
+  </data>
+	<data name="ExtractHeader" xml:space="preserve">
+    <value>Extract Contents</value>
+  </data>
+	<data name="OpenFolderAfterExtraction" xml:space="preserve">
+    <value>بازکردن پوشه بعد از استخراج</value>
+  </data>
+	<data name="ExtractingStatus" xml:space="preserve">
+    <value>(درحال استخراج)</value>
+  </data>
+	<data name="ExtractFilesMenu" xml:space="preserve">
+    <value>Extract Contents...</value>
+  </data>
+	<data name="Extract" xml:space="preserve">
+    <value>Extract</value>
+  </data>
+	<data name="HideFiltered" xml:space="preserve">
+    <value>پنهان سازی صافی شده ها</value>
+  </data>
+	<data name="Events" xml:space="preserve">
+    <value>رویدادها</value>
+  </data>
+	<data name="Tiebreak" xml:space="preserve">
+    <value>* denotes a tie break.</value>
+  </data>
+	<data name="DoYouWantToHideLivingPeople" xml:space="preserve">
+    <value>آیا می‌خواهید افراد زنده مخفی شوند؟</value>
+  </data>
+	<data name="ExportPlaces" xml:space="preserve">
+    <value>Export Places</value>
+  </data>
+	<data name="ChooseWhatToExportColon" xml:space="preserve">
+    <value>انتخاب چیزی برای صدور:</value>
+  </data>
+	<data name="EnableUTF8" xml:space="preserve">
+    <value>فعال سازی UTF-8</value>
+  </data>
+	<data name="AlignCenter" xml:space="preserve">
+    <value>وسط چین (Ctrl+E)</value>
+  </data>
+	<data name="AlignJustify" xml:space="preserve">
+    <value>از طرفین به یک اندازه (Ctrl+J)</value>
+  </data>
+	<data name="AlignLeft" xml:space="preserve">
+    <value>تنظیم حاشیه چپ (Ctrl+L)</value>
+  </data>
+	<data name="AlignRight" xml:space="preserve">
+    <value>تنظیم حاشیه راست (Ctrl+R)</value>
+  </data>
+	<data name="Births" xml:space="preserve">
+    <value>تولدها</value>
+  </data>
+	<data name="Bold" xml:space="preserve">
+    <value>کلفت (Ctrl+B)</value>
+  </data>
+	<data name="Bullets" xml:space="preserve">
+    <value>Bullets</value>
+  </data>
+	<data name="Burials" xml:space="preserve">
+    <value>به‌خاک سپاری‌ها</value>
+  </data>
+	<data name="Cremations" xml:space="preserve">
+    <value>سوزاندن‌ها</value>
+  </data>
+	<data name="Deaths" xml:space="preserve">
+    <value>فوت‌ها</value>
+  </data>
+	<data name="DecreaseIndentation" xml:space="preserve">
+    <value>کاستن دندانه</value>
+  </data>
+	<data name="GrowFont" xml:space="preserve">
+    <value>بزرگ کردن قلم (Ctrl+&gt;)</value>
+  </data>
+	<data name="IncreaseIndentation" xml:space="preserve">
+    <value>افزایش دندانه</value>
+  </data>
+	<data name="Italic" xml:space="preserve">
+    <value>Italic (Ctrl+I)</value>
+  </data>
+	<data name="Lifetimes" xml:space="preserve">
+    <value>طول حیات‌ها</value>
+  </data>
+	<data name="Numbering" xml:space="preserve">
+    <value>شماره گذاری</value>
+  </data>
+	<data name="Places" xml:space="preserve">
+    <value>اماکن</value>
+  </data>
+	<data name="PlacesWithTimes" xml:space="preserve">
+    <value>مکان‌هایی که زمان دارند.</value>
+  </data>
+	<data name="ShrinkFont" xml:space="preserve">
+    <value>کوچک کردن قلم (Ctrl+&lt;)</value>
+  </data>
+	<data name="Underline" xml:space="preserve">
+    <value>Underline (Ctrl+U)</value>
+  </data>
+	<data name="ClearFilterText" xml:space="preserve">
+    <value>پاک‌کردن متن فیلتر.</value>
+  </data>
+	<data name="Compatability" xml:space="preserve">
+    <value>سازگاری</value>
+  </data>
+	<data name="DefaultFamilyExtension" xml:space="preserve">
+    <value>.family</value>
+  </data>
+	<data name="FamilyExtension" xml:space="preserve">
+    <value>*.family</value>
+  </data>
+	<data name="FamilyFiles" xml:space="preserve">
+    <value>Family.Show 2.0 Files (*.family)</value>
+  </data>
+	<data name="FamilyShowExtensions" xml:space="preserve">
+    <value>*.family;*.familyx</value>
+  </data>
+	<data name="FamilyShowFiles" xml:space="preserve">
+    <value>Family.Show Files (*.familyx or *.family)</value>
+  </data>
+	<data name="OldVersionMessage" xml:space="preserve">
+    <value>این پرونده با نسخه‌های قدیمی‌تر فامیلی لاینز ساخته شده است و به فرمت جدید ذخیره خواهد شد. پرونده‌های جدید با familyx ذخیره می‌شوند و همه اطلاعات مثل عکس‌های خانوادگی، داستان‌ها و غیره را در یک فایل ذخیره می‌کند.</value>
+  </data>
+	<data name="FamilyxFilesAll" xml:space="preserve">
+    <value>Family.Show 3.0 - 4.0 Files (*.familyx)</value>
+  </data>
+	<data name="AgeGroupAdult" xml:space="preserve">
+    <value>20-39</value>
+    <comment>If these age groups are changed update AgeGroup in Person.cs</comment>
+  </data>
+	<data name="Prefix" xml:space="preserve">
+    <value>پیشوند</value>
+  </data>
+	<data name="TreeNum" xml:space="preserve">
+    <value>شجره #</value>
+  </data>
+	<data name="ApplicationName" xml:space="preserve">
+    <value>Family Lines</value>
+  </data>
+	<data name="FamilyListViewToolTip" xml:space="preserve">
+    <value>برای مرتب سازی چندگانه، کلید شیفت را نگه داشته و روی ستون‌های دیگر کلیک نمایید</value>
+  </data>
+	<data name="AddANewPerson" xml:space="preserve">
+    <value>افزودن عضو جدید</value>
+  </data>
+	<data name="Metro" xml:space="preserve">
+    <value>مترو</value>
+  </data>
+	<data name="GParentView_Change_the_current_person" xml:space="preserve">
+    <value>انتخاب {0} به عنوان شخص جاری</value>
+    <comment>
+      {0} is a person name - "first last"
+    </comment>
+  </data>
+	<data name="GParentView_Add_father_for_" xml:space="preserve">
+    <value>افزودن پدر برای {0}</value>
+    <comment>
+      {0} is a person's full name
+    </comment>
+  </data>
+	<data name="GParentView_Add_mother_for" xml:space="preserve">
+    <value>افزودن مادر برای {0}</value>
+    <comment>
+      {0} is a person's full name
+    </comment>
+  </data>
+	<data name="GParentView_Add_Father" xml:space="preserve">
+    <value>افزودن پدر</value>
+  </data>
+	<data name="GParentView_Add_Mother" xml:space="preserve">
+    <value>افزودن مادر</value>
+  </data>
+	<data name="AddDaughter" xml:space="preserve">
+    <value>افزودن دختر</value>
+  </data>
+	<data name="AddSon" xml:space="preserve">
+    <value>افزودن پسر</value>
+  </data>
+	<data name="Children" xml:space="preserve">
+    <value>فرزندان</value>
+  </data>
+	<data name="ClickMarriageDetail" xml:space="preserve">
+    <value>برای ویرایش وضعیت تاهل کلیک کنید</value>
+  </data>
+	<data name="AddNewSpouse" xml:space="preserve">
+    <value>افزودن همسر جدید</value>
+  </data>
+	<data name="ClickToMakeCurrent" xml:space="preserve">
+    <value>برای انتخاب {0} به عنوان فرد جاری کلیک کنید</value>
+    <comment>
+      {0} is a person's name
+    </comment>
+  </data>
+	<data name="FamilyViewMenu" xml:space="preserve">
+    <value>نمای خانواده</value>
+  </data>
+	<data name="HeaderViewMenu" xml:space="preserve">
+    <value>سرآیند GEDCOM</value>
+  </data>
+	<data name="HeaderEditMenu" xml:space="preserve">
+    <value>ویرایش سرآیند GEDCOM</value>
+  </data>
+	<data name="HeaderViewTTip" xml:space="preserve">
+    <value>مشاهده سرآیند GEDCOM وارد شده</value>
+  </data>
+	<data name="HeaderEditTTip" xml:space="preserve">
+    <value>ویرایش سرآیند GEDCOM برای export</value>
+  </data>
+	<data name="Credits" xml:space="preserve">
+    <value>تیم فامیلی لاینز
+    مدیران: کوین روتلی، برایان بلدن
+باهمکاری: 
+    هما شیوران‌ : نسخه  ۰/۴
+
+    ایگان ایوس : نسخه  ۰/۳
+
+    کندیس اولکنا، ایگان ایوس : نسخه ۰/۲
+    </value>
+  </data>
+</root>
