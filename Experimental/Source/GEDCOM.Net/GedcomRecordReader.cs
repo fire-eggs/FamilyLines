@@ -175,7 +175,7 @@ namespace GEDCOM.Net
 		{		
 			string error = GedcomParser.GedcomErrorString(_Parser.ErrorState);
 			Debug.WriteLine(error);
-			Console.WriteLine(error);
+		    importLog(error);
 		}
 		
 		private void Parser_TagFound(object sender, EventArgs e)
@@ -240,7 +240,8 @@ namespace GEDCOM.Net
 							{
 								// pointer to a note, this should not occur
 								// as we should be at level 0 here
-								
+
+                                importLog("Spurious Note pointer: " + _xrefID + "\t at level: " + _level);
 								Debug.WriteLine("Spurious Note pointer: " + _xrefID + "\t at level: " + _level);
 							}
 						}
@@ -405,7 +406,7 @@ namespace GEDCOM.Net
                 var logPath = Path.Combine(mydocs, logName);
                 StreamWriter log = new StreamWriter(logPath, true);
                 if (mark) log.WriteLine("=========================");
-                log.WriteLine("{0} : {2} {1}", DateTime.Now, extra, msg);
+                log.WriteLine("{0} : {2} {1} [Line:{3}]", DateTime.Now, extra, msg, lineNum);
                 log.Close();
             }
             catch
@@ -417,7 +418,10 @@ namespace GEDCOM.Net
         {
             try
             {
-                StreamWriter log = new StreamWriter(logName, true);
+                // write the log to "my documents" instead of a possibly non-existing folder
+                var mydocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                var logPath = Path.Combine(mydocs, logName);
+                StreamWriter log = new StreamWriter(logPath, true);
                 log.WriteLine("Input Line {3} ({4}) - Exception '{0}'({1}) : {2}", ex.Message, ex.InnerException, ex.StackTrace, lineNum, extra);
                 log.Close();
             }
@@ -430,7 +434,9 @@ namespace GEDCOM.Net
         {
             try
             {
-                StreamWriter log = new StreamWriter(logName, true);
+                var mydocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                var logPath = Path.Combine(mydocs, logName);
+                StreamWriter log = new StreamWriter(logPath, true);
                 log.WriteLine("Input Line {1} - Parser error '{0}'", err, lineNum);
                 log.Close();
             }
@@ -838,7 +844,8 @@ namespace GEDCOM.Net
 						}
 						else
 						{
-							Debug.WriteLine("Child in family points to non individual record");	
+							Debug.WriteLine("Child in family points to non individual record");
+                            importLog("Child in family points to non individual record");	
 						}
 					}
 					family.ClearLinkageTypes();
@@ -871,7 +878,7 @@ namespace GEDCOM.Net
                         importLog("Missing reference: ",xref);
 					}
 				}
-				Console.WriteLine("Removed " + _removedNotes.Count + " notes");
+				importLog("Removed " + _removedNotes.Count + " empty notes");
 				_missingReferences = null;
 			
 				// link sources with citations which reference them
@@ -885,6 +892,7 @@ namespace GEDCOM.Net
 					else
 					{
 						Debug.WriteLine("Missing source reference: " + citation.Source);
+                        importLog("Missing source reference", citation.Source);
 					}
 				}
 				_sourceCitations = null;
@@ -900,6 +908,7 @@ namespace GEDCOM.Net
 					else
 					{
 						Debug.WriteLine("Missing repo reference: " + citation.Repository);
+                        importLog("Missing repo reference", citation.Repository);
 					}
 				}
 				_repoCitations = null;
@@ -1207,9 +1216,9 @@ namespace GEDCOM.Net
 					case "NOTE":
 					    AddNoteRecord(headerRecord);
 						break;
-                    //default:
-                    //    Console.WriteLine("Unhandled header tag:(" + _level + ")" + _tag);
-                    //    break;
+                    default:
+                        importLog("Unhandled header tag:(" + _level + ")" + _tag);
+				        break;
 				}
 			}
 			else if (_level == headerRecord.ParsingLevel + 2)
@@ -1251,9 +1260,9 @@ namespace GEDCOM.Net
 						}
 						break;
 
-                    //default:
-                    //    Console.WriteLine("Unhandled header tag:(" + _level + ")" + _tag);
-                    //    break;
+                    default:
+                        importLog("Unhandled header tag:(" + _level + ")" + _tag);
+                        break;
                 }
 			}
 			else if (_level == headerRecord.ParsingLevel + 3)
@@ -1402,9 +1411,9 @@ namespace GEDCOM.Net
 							}
 						}
 						break;
-                    //default:
-                    //    Console.WriteLine("Unhandled header tag:(" + _level + ")" + _tag);
-                    //    break;
+                    default:
+                        importLog("Unhandled header tag:(" + _level + ")" + _tag);
+                        break;
                 }
 			}
 			else if (_level == headerRecord.ParsingLevel + 4)
@@ -1421,6 +1430,7 @@ namespace GEDCOM.Net
             if (familyRecord == null)
             {
                 Debug.WriteLine("Unexpected record null");
+                importLog("Unexpected null record");
                 return;
             }
 			
@@ -1433,8 +1443,11 @@ namespace GEDCOM.Net
                         if (Enum.TryParse(_lineValue, true, out tmp))
                             familyRecord.StartStatus = tmp;
                         else
+                        {
                             Debug.WriteLine("Unknown marriage start state: " + _lineValue);
-						break;
+                            importLog("Unknown marriage start state", _lineValue);
+                        }
+				        break;
 					case "_FREL":
 					case "_MREL":
 						if ( (!string.IsNullOrEmpty(_ParseState.PreviousTag)) &&
@@ -1458,9 +1471,12 @@ namespace GEDCOM.Net
 								case "Adopted":
 									familyRecord.SetLinkageType(childID, PedegreeLinkageType.Adopted, linkTo);
 									break;
-								default:
-									Debug.WriteLine("Unsupported value for " + _tag + ": " + _lineValue);
-									break;
+                                default:
+							        {
+							            Debug.WriteLine("Unsupported value for " + _tag + ": " + _lineValue);
+                                        importLog("Unsupported value for " + _tag + ": " + _lineValue);
+							        }
+							        break;
 							}
 							break;
 						}
@@ -1500,6 +1516,7 @@ namespace GEDCOM.Net
                             else
                             {
                                 Debug.WriteLine("Invalid restriction type: " + _lineValue);
+                                importLog("Invalid restriction type: " + _lineValue);
 
                                 // default to confidential to protect privacy
                                 familyRecord.RestrictionNotice = GedcomRestrictionNotice.Confidential;
@@ -1628,6 +1645,7 @@ namespace GEDCOM.Net
 							catch
 							{
 								Debug.WriteLine("Invalid number for Number of children tag");
+                                importLog("Invalid number for Number of children tag");
 							}
 						}
 						break;
@@ -1651,7 +1669,7 @@ namespace GEDCOM.Net
 						
 						break;
 					case "FIXME?????":
-						// lds spouse sealing
+						// TODO lds spouse sealing
 						break;
 					case "REFN":
 						if (_lineValueType == GedcomLineValueType.DataType)
@@ -1860,6 +1878,7 @@ namespace GEDCOM.Net
                             else
 							{
 								Debug.WriteLine("Invalid restriction type: " + _lineValue);
+                                importLog("Invalid restriction type: " + _lineValue);
 								
 								// default to confidential to protect privacy
 								individualRecord.RestrictionNotice = GedcomRestrictionNotice.Confidential;
@@ -2719,9 +2738,8 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing individual (" + individualRecord.XRefID + ") node: " + _tag + "\t at level: " + _level);
-				Console.WriteLine("Unknown state / tag parsing individual (" + individualRecord.XRefID + ") node: " + _tag + "\t at level: " + _level);
-                Console.WriteLine("Previous tag: " + _ParseState.PreviousTag + "\tPrevious Level: " + _ParseState.PreviousLevel);
                 importLog("Unknown state / tag parsing individual (" + individualRecord.XRefID, ") node: " + _tag + "\t at level: " + _level);
+                importLog("Previous tag: " + _ParseState.PreviousTag + "\tPrevious Level: " + _ParseState.PreviousLevel);
             }
 		}
 		
@@ -2857,6 +2875,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing multimedia node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing multimedia node: " + _tag + "\t at level: " + _level);
 			}
 		}
 
@@ -2915,6 +2934,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing note node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing note node: " + _tag + "\t at level: " + _level);
 			}
 	    }
 
@@ -3119,6 +3139,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing note node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing note node: " + _tag + "\t at level: " + _level);
 			}
 		}
 		
@@ -3401,6 +3422,7 @@ namespace GEDCOM.Net
 								// invalid, provide a name anyway
 								place.Name = "Unknown";
 								Debug.WriteLine("invalid place node, no name at level: " + _level);
+                                importLog("invalid place node, no name at level: " + _level);
 							}
 							_ParseState.Records.Push(place);
 							break;
@@ -3411,6 +3433,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing note node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing note node: " + _tag + "\t at level: " + _level);
 			}
 		}
 
@@ -3617,6 +3640,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing submitter node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing submitter node: " + _tag + "\t at level: " + _level);
 			}
 		}
 		
@@ -3707,6 +3731,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing submission node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing submission node: " + _tag + "\t at level: " + _level);
 			}
 		}
 
@@ -3890,6 +3915,7 @@ namespace GEDCOM.Net
 								// invalid, provide a name anyway
 								place.Name = string.Empty; //"Unknown";
 								Debug.WriteLine("invalid place node, no name at level: " + _level);
+                                importLog("invalid place node, no name at level: " + _level);
 							}
 							_ParseState.Records.Push(place);
 							break;
@@ -4038,6 +4064,7 @@ namespace GEDCOM.Net
                                 else
 								{
 									Debug.WriteLine("Invalid restriction type: " + _lineValue);
+                                    importLog("Invalid restriction type: " + _lineValue);
 									
 									// default to confidential to protect privacy
 									eventRecord.RestrictionNotice = GedcomRestrictionNotice.Confidential;
@@ -4161,6 +4188,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing place node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing place node: " + _tag + "\t at level: " + _level);
 			}
 		}
 
@@ -4345,6 +4373,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing source citation node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing source citation node: " + _tag + "\t at level: " + _level);
 			}
 		}
 		
@@ -4367,6 +4396,7 @@ namespace GEDCOM.Net
                             else
                             {
                                 Debug.WriteLine("Invalid pedigree linkage type: " + _lineValue);
+                                importLog("Invalid pedigree linkage type: " + _lineValue);
                                 childOf.Pedigree = PedegreeLinkageType.Unknown;
                             }
 						}
@@ -4380,7 +4410,7 @@ namespace GEDCOM.Net
                             else
                             {
                                 Debug.WriteLine("Invalid child linkage status type: " + _lineValue);
-
+                                importLog("Invalid child linkage status type: " + _lineValue);
                                 childOf.Status = ChildLinkageStatus.Unknown;
                             }
 						}
@@ -4394,6 +4424,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing family link node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing family link node: " + _tag + "\t at level: " + _level);
 			}
 		}
 
@@ -4425,6 +4456,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing association node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing association node: " + _tag + "\t at level: " + _level);
 			}
 	    }
 
@@ -4554,6 +4586,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing name node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing name node: " + _tag + "\t at level: " + _level);
 			}
 		}
 
@@ -4613,6 +4646,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing date node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing date node: " + _tag + "\t at level: " + _level);
 			}
 		}
 
@@ -4675,6 +4709,7 @@ namespace GEDCOM.Net
 			{
 				// shouldn't be here
 				Debug.WriteLine("Unknown state / tag parsing repo node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing repo node: " + _tag + "\t at level: " + _level);
 			}
 		}
 
