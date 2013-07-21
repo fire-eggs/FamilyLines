@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
+ */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +17,14 @@ namespace KBS.FamilyLinesLib
 {
     public class Experimental
     {
+        public static void LocationConcordanceHTML(string destFilePath, PeopleCollection people)
+        {
+            // Variants: (sort : output)
+            //     Location, surname : Location, person, event
+            //     Surname, Location : Surname, Location, person, event
+            //     Location: Location, one person
+            // Birth/Death only; Birth/Death/Marriage/Divorce; All events; All events + facts
+        }
 
         // common logic for hashing a person event to location
         private static void addHash(Hashtable hash, Person person, string loc)
@@ -355,13 +367,6 @@ namespace KBS.FamilyLinesLib
                 doc.AddFeature(deaths);
                 //                doc.AddFeature(marry);
                 doc.AddFeature(timespans);
-
-                //System.Console.WriteLine("Births:" + births.Features.Count());
-                //System.Console.WriteLine("Deaths:" + deaths.Features.Count());
-                //foreach (var folder in spans)
-                //{
-                //    System.Console.WriteLine("Span:" + folder.Features.Count());
-                //}
 
                 var ser = new Serializer();
                 ser.Serialize(doc);
