@@ -3277,6 +3277,7 @@ namespace GEDCOM.Net
 						}
 						break;
 					case "CHAN":
+                    case "CREA": // seen in MacFamilyTree - possibly custom?
 						GedcomChangeDate date = new GedcomChangeDate(Database);
 						date.Level = _level;
 						_ParseState.Records.Push(date);
@@ -3287,7 +3288,9 @@ namespace GEDCOM.Net
 					case "OBJE":
 						AddMultimediaRecord(sourceRecord);
 						break;
-
+                    default:
+                        importLog("Unknown state / tag parsing source record: " + _tag + "\t at level: " + _level);
+				        break;
 				}
 			}
 			else if ( (!string.IsNullOrEmpty(_ParseState.PreviousTag)) &&
@@ -3455,8 +3458,7 @@ namespace GEDCOM.Net
 			else
 			{
 				// shouldn't be here
-				Debug.WriteLine("Unknown state / tag parsing note node: " + _tag + "\t at level: " + _level);
-                importLog("Unknown state / tag parsing note node: " + _tag + "\t at level: " + _level);
+                importLog("Unknown state / tag parsing source record: " + _tag + "\t at level: " + _level);
 			}
 		}
 
