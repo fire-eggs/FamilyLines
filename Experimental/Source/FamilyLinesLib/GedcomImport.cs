@@ -110,9 +110,9 @@ namespace KBS.FamilyLinesLib
                 _finder.Add(aPerson);
             }
 
-#if DEBUG
-            startLog(@"c:\temp\kbrlog_gn.txt");
-#endif
+//#if DEBUG
+//            startLog(@"c:\temp\kbrlog_gn.txt");
+//#endif
             ImportFamiliesGN();
             ImportSourcesGN();
             ImportRepositoriesGN();
@@ -175,33 +175,33 @@ namespace KBS.FamilyLinesLib
         }
 
 #if DEBUG
-        private string logName;
-        private void startLog(string logname)
-        {
-            try
-            {
-                logName = logname;
-                StreamWriter log = new StreamWriter(logName, false);
-                log.WriteLine(DateTime.Now);
-                log.WriteLine("=========================");
-                log.Close();
-            }
-            catch (Exception)
-            {
-            }
-        }
+        //private string logName;
+        //private void startLog(string logname)
+        //{
+        //    try
+        //    {
+        //        logName = logname;
+        //        StreamWriter log = new StreamWriter(logName, false);
+        //        log.WriteLine(DateTime.Now);
+        //        log.WriteLine("=========================");
+        //        log.Close();
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
+        //}
 
         private void kbrLog(string text, Person husbandPerson, Person childPerson, object husbandModifier)
         {
-            try
-            {
-                StreamWriter log = new StreamWriter(logName, true);
-                log.WriteLine("{0} : '{2}' to '{1}' as {3}", text, husbandPerson.Name, childPerson.Name, husbandModifier);
-                log.Close();
-            }
-            catch (Exception)
-            {
-            }
+        //    try
+        //    {
+        //        StreamWriter log = new StreamWriter(logName, true);
+        //        log.WriteLine("{0} : '{2}' to '{1}' as {3}", text, husbandPerson.Name, childPerson.Name, husbandModifier);
+        //        log.Close();
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
         }
 #else
         private void kbrLog(string text, Person husbandPerson, Person childPerson, object husbandModifier)

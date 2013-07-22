@@ -878,7 +878,10 @@ namespace GEDCOM.Net
                         importLog("Missing reference: ",xref);
 					}
 				}
-				importLog("Removed " + _removedNotes.Count + " empty notes");
+
+                if (_removedNotes.Count > 0)
+				    importLog("Removed " + _removedNotes.Count + " empty notes"); // TODO: important why?
+
 				_missingReferences = null;
 			
 				// link sources with citations which reference them
@@ -1438,13 +1441,24 @@ namespace GEDCOM.Net
 			{
 				switch (_tag)
 				{
+                    // TODO I believe this is an incorrect interpretation of the "_MSTAT" tag. It is the marriage status at the time of the event (?) not the "marriage start status" (?). If so, then "Married" is a valid value.
 					case "_MSTAT":
 						MarriageStartStatus tmp;
                         if (Enum.TryParse(_lineValue, true, out tmp))
                             familyRecord.StartStatus = tmp;
+                        else if (_lineValue.ToLower().StartsWith("célibataires") // from "Arbre Généalogique"
+                              || _lineValue.ToLower().StartsWith("ledig")) // from "Ahnengalerie"
+                        {
+                            familyRecord.StartStatus = MarriageStartStatus.Single;
+                        }
+                        else if (_lineValue.ToLower().StartsWith("verheiratet") // from "Ahnengalerie"
+                              || _lineValue.ToLower().CompareTo("married") == 0)
+                        {
+                            //familyRecord.StartStatus = MarriageStartStatus.Married; // TODO this may be incorrect, possibly needs to be 'married'?
+                        }
                         else
                         {
-                            Debug.WriteLine("Unknown marriage start state: " + _lineValue);
+                            // Some seen: 'Friends', "In eheähnlicher Gemeinschaft"
                             importLog("Unknown marriage start state", _lineValue);
                         }
 				        break;
@@ -1463,19 +1477,28 @@ namespace GEDCOM.Net
 								linkTo = GedcomAdoptionType.Wife;
 							}
 							
-							switch (_lineValue)
+							switch (_lineValue.Trim().ToLower()) // ignore case
 							{
-								case "Natural":
+								case "natural":
+                                case "naturel": // from "Arbre Généalogique"
+                                case "leiblich": // from "Ahnengalerie" - a misspelling of "lieblich"?
 									familyRecord.SetLinkageType(childID, PedegreeLinkageType.Birth, linkTo);
 									break;
-								case "Adopted":
+								case "adopted":
 									familyRecord.SetLinkageType(childID, PedegreeLinkageType.Adopted, linkTo);
 									break;
+                                case "foster": // from "Family Tree Maker for Windows"
+                                    familyRecord.SetLinkageType(childID, PedegreeLinkageType.Foster, linkTo);
+                                    break;
+                                case "step": // TODO what to do with this?
+                                case "family member": // TODO what to do with this?
+                                    break;
+                                case "private":
+                                case "unknown":
+                                case "?":
+                                    break; // valid but have no data
                                 default:
-							        {
-							            Debug.WriteLine("Unsupported value for " + _tag + ": " + _lineValue);
-                                        importLog("Unsupported value for " + _tag + ": " + _lineValue);
-							        }
+                                    importLog("Unsupported value for " + _tag + ": " + _lineValue);
 							        break;
 							}
 							break;
