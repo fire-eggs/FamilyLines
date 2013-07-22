@@ -899,7 +899,8 @@ namespace GEDCOM.Net
 		}
 
         // KBR 20130629 LIFELINES appears to be using dd/mm/yyyy format?
-	    private static readonly char[] SPLITCHARS = {'-', ' ', '/'};
+        // KBR 20130722 MacFamilyTree appears to be using dd.mm.yyyy format
+	    private static readonly char[] SPLITCHARS = {'-', ' ', '/', '.'};
 
 		private static DateTime? GetDateInfo(string[] dateSplit, int start, int num, Calendar calendar)
 		{
