@@ -286,6 +286,24 @@ namespace KBS.FamilyLinesLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daughter of {0}.
+        /// </summary>
+        public static string DaughterP1 {
+            get {
+                return ResourceManager.GetString("DaughterP1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daughter of {0} and {1}.
+        /// </summary>
+        public static string DaughterP2 {
+            get {
+                return ResourceManager.GetString("DaughterP2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Death Date.
         /// </summary>
         public static string DeathDate {
@@ -925,6 +943,24 @@ namespace KBS.FamilyLinesLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Son of {0}.
+        /// </summary>
+        public static string SonP1 {
+            get {
+                return ResourceManager.GetString("SonP1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Son of {0} and {1}.
+        /// </summary>
+        public static string SonP2 {
+            get {
+                return ResourceManager.GetString("SonP2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source.
         /// </summary>
         public static string Source {
@@ -1020,6 +1056,24 @@ namespace KBS.FamilyLinesLib.Properties {
         public static string Unknown {
             get {
                 return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown of {0}.
+        /// </summary>
+        public static string UnkP1 {
+            get {
+                return ResourceManager.GetString("UnkP1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown of {1}.
+        /// </summary>
+        public static string UnkP2 {
+            get {
+                return ResourceManager.GetString("UnkP2", resourceCulture);
             }
         }
         

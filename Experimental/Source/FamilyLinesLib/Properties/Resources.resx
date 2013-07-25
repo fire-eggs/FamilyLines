@@ -582,4 +582,28 @@ function showhideall(hide,thing) {
 // --&gt;
 &lt;/script&gt;</value>
   </data>
+  <data name="DaughterP1" xml:space="preserve">
+    <value>Daughter of {0}</value>
+    <comment>One known parent; {0} is parent's name</comment>
+  </data>
+  <data name="DaughterP2" xml:space="preserve">
+    <value>Daughter of {0} and {1}</value>
+    <comment>Two known parents; {0} and {1} are parent's names</comment>
+  </data>
+  <data name="SonP1" xml:space="preserve">
+    <value>Son of {0}</value>
+    <comment>One known parent; {0} is parent's name</comment>
+  </data>
+  <data name="SonP2" xml:space="preserve">
+    <value>Son of {0} and {1}</value>
+    <comment>Two known parents; {0} and {1} are parent's names</comment>
+  </data>
+  <data name="UnkP1" xml:space="preserve">
+    <value>Unknown of {0}</value>
+    <comment>One known parent; {0} is parent's name</comment>
+  </data>
+  <data name="UnkP2" xml:space="preserve">
+    <value>Unknown of {1}</value>
+    <comment>Two known parents; {0} and {1} are parent's names</comment>
+  </data>
 </root>

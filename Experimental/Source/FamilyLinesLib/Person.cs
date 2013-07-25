@@ -2066,26 +2066,6 @@ namespace KBS.FamilyLinesLib
         #region Relationship text
 
         /// <summary>
-        /// Calculated property that returns string that describes this person to their parents.
-        /// </summary>
-        [XmlIgnore]
-        public string ParentRelationshipText
-        {
-            get
-            {
-                switch (gender)
-                {
-                    case Gender.Male:
-                        return Resources.Son;
-                    case Gender.Female:
-                        return Resources.Daughter;
-                    default:
-                        return "Unknown"; // TODO embedded string
-                }
-            }
-        }
-
-        /// <summary>
         /// Calculated property that returns string text for this person's parents
         /// </summary>
         [XmlIgnore]
@@ -2093,29 +2073,77 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                int i = 1;
-                string parentsText = string.Empty;
+                string[] parentsTexts = {"", ""};
+
+                int parentCount = 0;
+//                string parentsText = string.Empty;
                 foreach (Relationship rel in relationships)
                 {
-
                     if (rel.RelationshipType == RelationshipType.Parent)
                     {
-
                         ParentRelationship parents = rel as ParentRelationship;
                         if (parents != null && parents.ParentChildModifier == ParentChildModifier.Natural)
                         {
-                            if (i == 1)
-                                parentsText +=  parents.PersonFullName;
-                            if (i != 1)
-                                parentsText += " " + Resources.And + " " + parents.PersonFullName;
-                            i += 1;
+                            if (parentCount == 0)
+                            {
+                                parentsTexts[0] = parents.PersonFullName;
+//                                parentsText += parents.PersonFullName;
+                            }
+                            if (parentCount == 1)
+                            {
+                                parentsTexts[1] = parents.PersonFullName;
+//                                parentsText += " " + Resources.And + " " + parents.PersonFullName;
+                            }
+                            parentCount += 1;
+
+                            if (parentCount > 1)
+                                break; // TODO no support for three or more natural parents
                         }
                     }
-
                 }
-                if (!string.IsNullOrEmpty(parentsText))
-                    return " " + Resources.Of + " " + parentsText;
-                return parentsText;
+
+                //if (!string.IsNullOrEmpty(parentsText))
+                //    return " " + Resources.Of + " " + parentsText;
+
+                switch (gender)
+                {
+                    case Gender.Male:
+                        {
+                            switch (parentCount)
+                            {
+                                case 1:
+                                    return string.Format(Resources.SonP1, parentsTexts[0]);
+                                case 2:
+                                    return string.Format(Resources.SonP2, parentsTexts[0], parentsTexts[1]);
+                                default:
+                                    return Resources.Son;
+                            }
+                        }
+                    case Gender.Female:
+                        {
+                            switch (parentCount)
+                            {
+                                case 1:
+                                    return string.Format(Resources.DaughterP1, parentsTexts[0]);
+                                case 2:
+                                    return string.Format(Resources.DaughterP2, parentsTexts[0], parentsTexts[1]);
+                                default:
+                                    return Resources.Daughter;
+                            }
+                        }
+                    default:
+                        {
+                            switch (parentCount)
+                            {
+                                case 1:
+                                    return string.Format(Resources.UnkP1, parentsTexts[0]);
+                                case 2:
+                                    return string.Format(Resources.UnkP2, parentsTexts[0], parentsTexts[1]);
+                                default:
+                                    return Resources.Unknown;
+                            }
+                        }
+                }
             }
         }
 
@@ -2522,6 +2550,7 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Fires the event for the property when it changes.
         /// </summary>
+        [Localizable(false)]
         public virtual void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -2692,6 +2721,7 @@ namespace KBS.FamilyLinesLib
 
         public IList<GEDAttribute> GetFacts(GedcomEvent.GedcomEventType evType)
         {
+            // BUG opened windsor.familyx, m_facts not empty but m_facts[0] is null
             // TODO custom attributes
             return m_facts.Where(gedEvent => gedEvent.Type == evType).ToList();
         }
