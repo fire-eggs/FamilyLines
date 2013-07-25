@@ -1290,7 +1290,7 @@
                                     <Image Margin="0,0,0,0" x:Name="HasRestrictionsIndicator"  HorizontalAlignment="Center" Visibility="{Binding Path=Person.HasRestriction, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" VerticalAlignment="Center"  Source="..\..\Images\SecurityLock.png" Grid.Column="0" Width="16" Height="16" />
                                 </Grid>
                                 <TextBlock TextWrapping="Wrap" x:Name="ParentsDatePanel" Margin="0,0,0,5">
-                  <Run local:BindableExtender.BindableText="{Binding Path=Person.ParentRelationshipText}" /><Run local:BindableExtender.BindableText="{Binding Path=Person.ParentsText}" />
+                                    <Run local:BindableExtender.BindableText="{Binding Path=Person.ParentsText}" />
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap" x:Name="SiblingsDatePanel" Margin="0,0,0,5">
                   <Run local:BindableExtender.BindableText="{Binding Path=Person.SiblingRelationshipText}" /><Run local:BindableExtender.BindableText="{Binding Path=Person.SiblingsText}" />
