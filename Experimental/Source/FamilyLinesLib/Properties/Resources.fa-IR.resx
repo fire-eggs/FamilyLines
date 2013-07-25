@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,347 +59,347 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="AdditionalInfo" xml:space="preserve">
-    <value>Additional Info</value>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="AdditionalInfo" xml:space="preserve">
+    <value>اطلاعات بیشتر</value>
   </data>
-  <data name="AddNewPersonAs" xml:space="preserve">
-    <value>Add new person as</value>
+	<data name="AddNewPersonAs" xml:space="preserve">
+    <value>افزودن فرد جدید به عنوان</value>
   </data>
-  <data name="Address" xml:space="preserve">
+	<data name="Address" xml:space="preserve">
     <value>آدرس</value>
   </data>
-  <data name="Adopted" xml:space="preserve">
+	<data name="Adopted" xml:space="preserve">
     <value>فرزند خوانده</value>
   </data>
-  <data name="Age" xml:space="preserve">
+	<data name="Age" xml:space="preserve">
     <value>سن</value>
   </data>
-  <data name="All" xml:space="preserve">
-    <value>All</value>
+	<data name="All" xml:space="preserve">
+    <value>همه</value>
   </data>
-  <data name="AncestralGenerations" xml:space="preserve">
-    <value>Ancestral generations:</value>
+	<data name="AncestralGenerations" xml:space="preserve">
+    <value>نسل‌های نیاکان:</value>
   </data>
-  <data name="And" xml:space="preserve">
-    <value>and</value>
+	<data name="And" xml:space="preserve">
+    <value>و</value>
   </data>
-  <data name="Author" xml:space="preserve">
+	<data name="Author" xml:space="preserve">
     <value>نویسنده</value>
   </data>
-  <data name="BirthDate" xml:space="preserve">
+	<data name="BirthDate" xml:space="preserve">
     <value>تاریخ تولد</value>
   </data>
-  <data name="BirthPlace" xml:space="preserve">
+	<data name="BirthPlace" xml:space="preserve">
     <value>محل تولد</value>
   </data>
-  <data name="Births" xml:space="preserve">
+	<data name="Births" xml:space="preserve">
     <value>تولدها</value>
   </data>
-  <data name="Brother" xml:space="preserve">
+	<data name="Brother" xml:space="preserve">
     <value>برادر</value>
   </data>
-  <data name="BurialDate" xml:space="preserve">
+	<data name="BurialDate" xml:space="preserve">
     <value>تاریخ به خاک‌سپاری</value>
   </data>
-  <data name="BurialPlace" xml:space="preserve">
+	<data name="BurialPlace" xml:space="preserve">
     <value>محل‌به‌خاک‌سپردن</value>
   </data>
-  <data name="Child" xml:space="preserve">
-    <value>Child</value>
+	<data name="Child" xml:space="preserve">
+    <value>فرزند</value>
   </data>
-  <data name="CremationDate" xml:space="preserve">
+	<data name="CremationDate" xml:space="preserve">
     <value>تاریخ سوزانده شدن</value>
   </data>
-  <data name="CremationPlace" xml:space="preserve">
+	<data name="CremationPlace" xml:space="preserve">
     <value>محل سوزانده شدن</value>
   </data>
-  <data name="CurrentPerson" xml:space="preserve">
+	<data name="CurrentPerson" xml:space="preserve">
     <value>فرد جاری:</value>
   </data>
-  <data name="Daughter" xml:space="preserve">
+	<data name="Daughter" xml:space="preserve">
     <value>دختر</value>
   </data>
-  <data name="DeathDate" xml:space="preserve">
+	<data name="DeathDate" xml:space="preserve">
     <value>تارخ فوت</value>
   </data>
-  <data name="DeathPlace" xml:space="preserve">
+	<data name="DeathPlace" xml:space="preserve">
     <value>محل فوت</value>
   </data>
-  <data name="Deaths" xml:space="preserve">
+	<data name="Deaths" xml:space="preserve">
     <value>فوت‌ها</value>
   </data>
-  <data name="DescendantGenerations" xml:space="preserve">
+	<data name="DescendantGenerations" xml:space="preserve">
     <value>نوادگان:</value>
   </data>
-  <data name="DuplicatePeople" xml:space="preserve">
-    <value>Duplicate people:</value>
+	<data name="DuplicatePeople" xml:space="preserve">
+    <value>افراد تکراری:</value>
   </data>
-  <data name="Education" xml:space="preserve">
+	<data name="Education" xml:space="preserve">
     <value>تحصیلات</value>
   </data>
-  <data name="FamilyShow" xml:space="preserve">
-    <value>خطوط خانواده</value>
+	<data name="FamilyShow" xml:space="preserve">
+    <value>فامیلی لاینز</value>
   </data>
-  <data name="Father" xml:space="preserve">
+	<data name="Father" xml:space="preserve">
     <value>پدر</value>
   </data>
-  <data name="FilteredOn" xml:space="preserve">
-    <value>Filtered on:</value>
+	<data name="FilteredOn" xml:space="preserve">
+    <value>صاف شده براساس:</value>
   </data>
-  <data name="Foster" xml:space="preserve">
+	<data name="Foster" xml:space="preserve">
     <value>رضاعی</value>
   </data>
-  <data name="GeneratedByFamilyShow" xml:space="preserve">
-    <value>Generated by FamilyLines Version</value>
+	<data name="GeneratedByFamilyShow" xml:space="preserve">
+    <value>ساخته شده بر اساس فامیلی لاینز نسخه</value>
   </data>
-  <data name="HideNotes" xml:space="preserve">
-    <value>Hide all notes</value>
+	<data name="HideNotes" xml:space="preserve">
+    <value>پنهان سازی همه یادداشت‌ها</value>
   </data>
-  <data name="HidingNotes" xml:space="preserve">
-    <value>Hiding notes requires JavaScript to be enabled.</value>
+	<data name="HidingNotes" xml:space="preserve">
+    <value>پنهان‌سازی یادداشت‌ها نیاز به فعال‌سازی جاوا اسکریپت دارد.</value>
   </data>
-  <data name="Husband" xml:space="preserve">
-    <value>Husband</value>
-  </data>
-  <data name="ImportedPeople" xml:space="preserve">
-    <value>Imported people:</value>
-  </data>
-  <data name="ImportedRepositories" xml:space="preserve">
-    <value>Imported Repositories:</value>
-  </data>
-  <data name="ImportedSources" xml:space="preserve">
-    <value>Imported Sources:</value>
-  </data>
-  <data name="InvalidDate" xml:space="preserve">
-    <value>This does not appear to be a valid date (DD/MM/YYYY).</value>
-  </data>
-  <data name="Living" xml:space="preserve">
-    <value>در قید حیات</value>
-  </data>
-  <data name="Marriages" xml:space="preserve">
-    <value>ازدواج‌ها</value>
-  </data>
-  <data name="MergedRepositories" xml:space="preserve">
-    <value>Merged repositories:</value>
-  </data>
-  <data name="MergedSources" xml:space="preserve">
-    <value>Merged sources:</value>
-  </data>
-  <data name="Mother" xml:space="preserve">
-    <value>مادر</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>نام</value>
-  </data>
-  <data name="Names" xml:space="preserve">
-    <value>Name(s)</value>
-  </data>
-  <data name="Natural" xml:space="preserve">
-    <value>طبیعی</value>
-  </data>
-  <data name="NoPlaces" xml:space="preserve">
-    <value>No places to export.</value>
-  </data>
-  <data name="NoRepositories" xml:space="preserve">
-    <value>No repositories to import.</value>
-  </data>
-  <data name="NoSources" xml:space="preserve">
-    <value>No sources to import.</value>
-  </data>
-  <data name="Note" xml:space="preserve">
-    <value>یادداشت</value>
-  </data>
-  <data name="NumberOfPeople" xml:space="preserve">
-    <value>Number of people:</value>
-  </data>
-  <data name="Occupation" xml:space="preserve">
-    <value>شغل</value>
-  </data>
-  <data name="On" xml:space="preserve">
-    <value>on</value>
-  </data>
-  <data name="Parent" xml:space="preserve">
-    <value>Parent</value>
-  </data>
-  <data name="PeopleImported" xml:space="preserve">
-    <value>people imported.</value>
-  </data>
-  <data name="PlacesExported" xml:space="preserve">
-    <value>places exported.</value>
-  </data>
-  <data name="PrivateRecord" xml:space="preserve">
-    <value>رکورد خصوصی</value>
-  </data>
-  <data name="Publisher" xml:space="preserve">
-    <value>ناشر</value>
-  </data>
-  <data name="RelationshipToCurrentPerson" xml:space="preserve">
-    <value>Relationship to Current Person</value>
-  </data>
-  <data name="Religion" xml:space="preserve">
-    <value>دین</value>
-  </data>
-  <data name="RepositoriesImported" xml:space="preserve">
-    <value>repositories imported.</value>
-  </data>
-  <data name="Repository" xml:space="preserve">
-    <value>مخزن</value>
-  </data>
-  <data name="ShowNotes" xml:space="preserve">
-    <value>Show all notes</value>
-  </data>
-  <data name="Sibling" xml:space="preserve">
-    <value>Sibling</value>
-  </data>
-  <data name="Sister" xml:space="preserve">
-    <value>خواهر</value>
-  </data>
-  <data name="Son" xml:space="preserve">
-    <value>پسر</value>
-  </data>
-  <data name="Source" xml:space="preserve">
-    <value>منبع</value>
-  </data>
-  <data name="SourcesImported" xml:space="preserve">
-    <value>sources imported.</value>
-  </data>
-  <data name="Spouse" xml:space="preserve">
+	<data name="Husband" xml:space="preserve">
     <value>همسر</value>
   </data>
-  <data name="SummaryOfPeople" xml:space="preserve">
-    <value>Summary of people</value>
+	<data name="ImportedPeople" xml:space="preserve">
+    <value>افراد وارد شده:</value>
   </data>
-  <data name="SummaryOfRepositories" xml:space="preserve">
-    <value>Summary of reporitories</value>
+	<data name="ImportedRepositories" xml:space="preserve">
+    <value>مخازن وارد شده:</value>
   </data>
-  <data name="SummaryOfRepositoriesForFile" xml:space="preserve">
-    <value>Summary of repositories for file</value>
+	<data name="ImportedSources" xml:space="preserve">
+    <value>منابع وارد شده:</value>
   </data>
-  <data name="SummaryOfSources" xml:space="preserve">
-    <value>Summary of sources</value>
+	<data name="InvalidDate" xml:space="preserve">
+    <value>این تاریخ به نظر نمی‌رسد معتبر باشد (DD/MM/YYYY).</value>
   </data>
-  <data name="SummaryOfSourcesForFile" xml:space="preserve">
-    <value>Summary of sources for file</value>
+	<data name="Living" xml:space="preserve">
+    <value>در قید حیات</value>
   </data>
-  <data name="Surname" xml:space="preserve">
+	<data name="Marriages" xml:space="preserve">
+    <value>ازدواج‌ها</value>
+  </data>
+	<data name="MergedRepositories" xml:space="preserve">
+    <value>مخازن ادغام شده:</value>
+  </data>
+	<data name="MergedSources" xml:space="preserve">
+    <value>منابع ادغام شده:</value>
+  </data>
+	<data name="Mother" xml:space="preserve">
+    <value>مادر</value>
+  </data>
+	<data name="Name" xml:space="preserve">
+    <value>نام</value>
+  </data>
+	<data name="Names" xml:space="preserve">
+    <value>نام (ها)</value>
+  </data>
+	<data name="Natural" xml:space="preserve">
+    <value>طبیعی</value>
+  </data>
+	<data name="NoPlaces" xml:space="preserve">
+    <value>هیچ مکانی برای صادر کردن یافت نشد.</value>
+  </data>
+	<data name="NoRepositories" xml:space="preserve">
+    <value>هیج منبعی برای وارد کردن یافت نشد.</value>
+  </data>
+	<data name="NoSources" xml:space="preserve">
+    <value>هیج منبعی برای وارد کردن یافت نشد.</value>
+  </data>
+	<data name="Note" xml:space="preserve">
+    <value>یادداشت</value>
+  </data>
+	<data name="NumberOfPeople" xml:space="preserve">
+    <value>تعداد افراد:</value>
+  </data>
+	<data name="Occupation" xml:space="preserve">
+    <value>شغل</value>
+  </data>
+	<data name="On" xml:space="preserve">
+    <value>در</value>
+  </data>
+	<data name="Parent" xml:space="preserve">
+    <value>والدین</value>
+  </data>
+	<data name="PeopleImported" xml:space="preserve">
+    <value>افراد وارد شدند.</value>
+  </data>
+	<data name="PlacesExported" xml:space="preserve">
+    <value>مکان‌ها صادر شدند.</value>
+  </data>
+	<data name="PrivateRecord" xml:space="preserve">
+    <value>رکورد خصوصی</value>
+  </data>
+	<data name="Publisher" xml:space="preserve">
+    <value>ناشر</value>
+  </data>
+	<data name="RelationshipToCurrentPerson" xml:space="preserve">
+    <value>رابطه با فرد جاری</value>
+  </data>
+	<data name="Religion" xml:space="preserve">
+    <value>دین</value>
+  </data>
+	<data name="RepositoriesImported" xml:space="preserve">
+    <value>مخازن وارد شدند.</value>
+  </data>
+	<data name="Repository" xml:space="preserve">
+    <value>مخزن</value>
+  </data>
+	<data name="ShowNotes" xml:space="preserve">
+    <value>نمایش همه یادداشت‌ها</value>
+  </data>
+	<data name="Sibling" xml:space="preserve">
+    <value>برادر یا خواهد</value>
+  </data>
+	<data name="Sister" xml:space="preserve">
+    <value>خواهر</value>
+  </data>
+	<data name="Son" xml:space="preserve">
+    <value>پسر</value>
+  </data>
+	<data name="Source" xml:space="preserve">
+    <value>منبع</value>
+  </data>
+	<data name="SourcesImported" xml:space="preserve">
+    <value>منابع وارد شدند.</value>
+  </data>
+	<data name="Spouse" xml:space="preserve">
+    <value>همسر</value>
+  </data>
+	<data name="SummaryOfPeople" xml:space="preserve">
+    <value>خلاصه افراد</value>
+  </data>
+	<data name="SummaryOfRepositories" xml:space="preserve">
+    <value>خلاصه مخازن</value>
+  </data>
+	<data name="SummaryOfRepositoriesForFile" xml:space="preserve">
+    <value>خلاصه مخازن پرونده</value>
+  </data>
+	<data name="SummaryOfSources" xml:space="preserve">
+    <value>خلاصه منابع</value>
+  </data>
+	<data name="SummaryOfSourcesForFile" xml:space="preserve">
+    <value>خلاصه منابع برای پرونده</value>
+  </data>
+	<data name="Surname" xml:space="preserve">
     <value>نام خانوادگی</value>
   </data>
-  <data name="FamilyTree" xml:space="preserve">
-    <value>Family Tree</value>
+	<data name="FamilyTree" xml:space="preserve">
+    <value>شجره‌نامه</value>
   </data>
-  <data name="Unknown" xml:space="preserve">
+	<data name="Unknown" xml:space="preserve">
     <value>ناشناخته</value>
   </data>
-  <data name="Wife" xml:space="preserve">
-    <value>Wife</value>
+	<data name="Wife" xml:space="preserve">
+    <value>زن</value>
   </data>
-  <data name="Of" xml:space="preserve">
+	<data name="Of" xml:space="preserve">
     <value>از</value>
   </data>
-  <data name="To" xml:space="preserve">
+	<data name="To" xml:space="preserve">
     <value>تا</value>
   </data>
-  <data name="Compatability" xml:space="preserve">
-    <value>Compatability</value>
+	<data name="Compatability" xml:space="preserve">
+    <value>سازگاری</value>
   </data>
-  <data name="CompatabilityMessage" xml:space="preserve">
-    <value>This file was created with an earlier version of Family.Show.  FamilyLines has many new features which allow you to record additional information about your family.  Please note that you may lose data if you edit a file created in a newer version of FamilyLines with an earlier version of the program.</value>
+	<data name="CompatabilityMessage" xml:space="preserve">
+    <value>این پرونده با نسخه قدیمی‌تر «فایمیلی شو» ساخته شده است. فامیلی لاینز امکانات جدید بسیاری دارد که به شما اجازه می‌دهد اطلاعات کامل‌تری از خانواده‌تان را نگهداری کنید. لطفا توجه داشته باشید که در صورتی که پرونده‌ای را که با نسخه‌های جدیدتر ساخته اید، با نسخه‌های قدیمی‌تر ویرایش کنید، ممکن است همه اطلاعات جدیدتر از بین برود.</value>
   </data>
-  <data name="Events" xml:space="preserve">
+	<data name="Events" xml:space="preserve">
     <value>رویدادها</value>
   </data>
-  <data name="People" xml:space="preserve">
+	<data name="People" xml:space="preserve">
     <value>مردم</value>
   </data>
-  <data name="DiedOn" xml:space="preserve">
-    <value>died on</value>
+	<data name="DiedOn" xml:space="preserve">
+    <value>فوت در </value>
   </data>
-  <data name="In" xml:space="preserve">
-    <value>in</value>
+	<data name="In" xml:space="preserve">
+    <value>در</value>
   </data>
-  <data name="WasBornOn" xml:space="preserve">
-    <value>was born on</value>
+	<data name="WasBornOn" xml:space="preserve">
+    <value>متولد</value>
   </data>
-  <data name="At" xml:space="preserve">
-    <value>at</value>
+	<data name="At" xml:space="preserve">
+    <value>در</value>
   </data>
-  <data name="Burials" xml:space="preserve">
+	<data name="Burials" xml:space="preserve">
     <value>به‌خاک سپاری‌ها</value>
   </data>
-  <data name="Cremations" xml:space="preserve">
+	<data name="Cremations" xml:space="preserve">
     <value>سوزاندن‌ها</value>
   </data>
-  <data name="WasBuriedOn" xml:space="preserve">
-    <value>was buried on</value>
+	<data name="WasBuriedOn" xml:space="preserve">
+    <value>خاک سپاری در</value>
   </data>
-  <data name="WasCrematedOn" xml:space="preserve">
-    <value>was cremated on</value>
+	<data name="WasCrematedOn" xml:space="preserve">
+    <value>ساخته‌شده در تاریخ</value>
   </data>
-  <data name="IncompatibleFormat" xml:space="preserve">
-    <value>This .familyx file appears to have been created by another program, such as "My Family Tree". FamilyLines is currently unable to load this family.</value>
+	<data name="IncompatibleFormat" xml:space="preserve">
+    <value>به نظر می‌رسد پرونده .familyx به وسیله نرم‌افزاری دیگر مانند «My Family Tree» ساخته شده است. فامیلی لاینز قادر به بازگذاری این خانواده نیست.</value>
   </data>
-  <data name="Divorces" xml:space="preserve">
+	<data name="Divorces" xml:space="preserve">
     <value>طلاق‌ها</value>
   </data>
-  <data name="PeopleReportCSS" xml:space="preserve">
+	<data name="PeopleReportCSS" xml:space="preserve">
     <value>&lt;style type="text/css"&gt;
 body { background-color: white; font-family: Calibri, Arial, sans-serif; font-size: 12px; line-height: 1; padding: 1em; color: #2E2E2E; }
 td { text-align: left; }
@@ -440,37 +440,37 @@ tr &gt;*+*+*+*+*+*+*+*{display: none; }
 &lt;/style&gt;</value>
     <comment>Do not translate.</comment>
   </data>
-  <data name="GEDCOMDate" xml:space="preserve">
+	<data name="GEDCOMDate" xml:space="preserve">
     <value>{0}{1}{2}</value>
     <comment>E.g. "About 1-Jan-2000". {1} is a space if required.</comment>
   </data>
-  <data name="PeopleReportPersonAliveTD" xml:space="preserve">
+	<data name="PeopleReportPersonAliveTD" xml:space="preserve">
     <value>&lt;td class="people" colspan="7"&gt;{0}, {1} &amp;nbsp;&amp;nbsp; Born: {2} &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;td&gt;</value>
   </data>
-  <data name="PeopleReportPersonTD" xml:space="preserve">
+	<data name="PeopleReportPersonTD" xml:space="preserve">
     <value>&lt;td class="people" colspan="8"&gt;{0}, {1} &amp;nbsp;&amp;nbsp; Born: {2} &amp;nbsp;&amp;nbsp; Died: {3} &amp;nbsp; Age: {4}&lt;/td&gt;</value>
   </data>
-  <data name="PeopleReportTRFormat" xml:space="preserve">
+	<data name="PeopleReportTRFormat" xml:space="preserve">
     <value>&lt;tr id="id_{0}"&gt;</value>
   </data>
-  <data name="PeopleReportEventLink" xml:space="preserve">
+	<data name="PeopleReportEventLink" xml:space="preserve">
     <value>[&lt;a href="javascript:showhide('id_{0}','event')"&gt;Events&lt;/a&gt;]</value>
   </data>
-  <data name="PeopleReportFactLink" xml:space="preserve">
+	<data name="PeopleReportFactLink" xml:space="preserve">
     <value>[&lt;a href="javascript:showhide('id_{0}','fact')"&gt;Facts&lt;/a&gt;]</value>
   </data>
-  <data name="PeopleReportNoteLink" xml:space="preserve">
+	<data name="PeopleReportNoteLink" xml:space="preserve">
     <value>[&lt;a href="javascript:showhide('id_{0}','note')"&gt;Note&lt;/a&gt;]</value>
   </data>
-  <data name="PeopleReportNoteTD" xml:space="preserve">
+	<data name="PeopleReportNoteTD" xml:space="preserve">
     <value>&lt;td colspan="9"&gt;&lt;b&gt;Note:&lt;/b&gt;&lt;pre&gt;{0}&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;</value>
     <comment>The word "Note:" can be translated</comment>
   </data>
-  <data name="PeopleReportNoteTR" xml:space="preserve">
+	<data name="PeopleReportNoteTR" xml:space="preserve">
     <value>&lt;tr id="note_id_{0}" class="noteshow"&gt;</value>
     <comment>Do not translate! {0} is a GUID.</comment>
   </data>
-  <data name="PeopleReportShowHideScript" xml:space="preserve">
+	<data name="PeopleReportShowHideScript" xml:space="preserve">
     <value>&lt;script type="text/javascript"&gt;
 function showhide(id,thing) {
   var person = document.getElementById(id);
@@ -506,7 +506,7 @@ function showhideall(hide,thing) {
 &lt;/script&gt;</value>
     <comment>Do not translate!</comment>
   </data>
-  <data name="PeopleReportStripeScript" xml:space="preserve">
+	<data name="PeopleReportStripeScript" xml:space="preserve">
     <value>&lt;script type="text/javascript"&gt;
 &lt;!--
 // this function is needed to work around 

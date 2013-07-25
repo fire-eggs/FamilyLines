@@ -133,7 +133,7 @@
     <value>*.*</value>
   </data>
 	<data name="AllFiles" xml:space="preserve">
-    <value>همه فایل‌ها (*.*)</value>
+    <value>همه پرونده‌ها (*.*)</value>
   </data>
 	<data name="DefaultFamilyxExtension" xml:space="preserve">
     <value>.familyx</value>
@@ -148,7 +148,7 @@
     <value>.xps</value>
   </data>
 	<data name="Export" xml:space="preserve">
-    <value>Export</value>
+    <value>صادر کردن </value>
   </data>
 	<data name="FamilyxFiles" xml:space="preserve">
     <value>Family.Show 4.0 Files (*.familyx)</value>
@@ -160,7 +160,7 @@
     <value>Import Failed</value>
   </data>
 	<data name="GedcomFailedMessage" xml:space="preserve">
-    <value>The GEDCOM file could not be imported.</value>
+    <value>پرونده GEDCOM قابل وارد سازی نیست.</value>
   </data>
 	<data name="GedcomFiles" xml:space="preserve">
     <value>GEDCOM Files (*.ged)</value>
@@ -238,7 +238,7 @@
     <value>پیوند ناموفق بود</value>
   </data>
 	<data name="LinkAddMessage" xml:space="preserve">
-    <value>The selected file does not already exist in this familyx file.  Add the file instead.</value>
+    <value>پرونده انتخاب شده در حال حاضر در پرونده familyx وجود ندارد. به جای اینکار، آن را اضافه کنید.</value>
   </data>
 	<data name="Unsupported" xml:space="preserve">
     <value>قالب ناشناخته</value>
@@ -250,10 +250,10 @@
     <value>نقشه</value>
   </data>
 	<data name="ExportResult" xml:space="preserve">
-    <value>Export Result</value>
+    <value>صادر کردن نتایج</value>
   </data>
 	<data name="PlacesMessage" xml:space="preserve">
-    <value>آیا می‌خواهید این فایل را در نقشه‌نمای پیشفرض ببینید.</value>
+    <value>آیا می‌خواهید این پرونده را در نقشه‌نمای پیشفرض ببینید.</value>
   </data>
 	<data name="SourcesExportMessage" xml:space="preserve">
     <value>آیا می‌خواهید پرونده را در مرورگر وب پیشفرض ببینید؟</value>
@@ -277,7 +277,7 @@
     <value>خطا</value>
   </data>
 	<data name="AttachmentExists" xml:space="preserve">
-    <value>این فایل قبلا به این فرد پیوست شده است</value>
+    <value>این پرونده قبلا به این فرد پیوست شده است</value>
   </data>
 	<data name="ConfirmDeleteAttachment" xml:space="preserve">
     <value>آیا می‌خواهید این پیوست را پاک کنید؟</value>
@@ -292,7 +292,7 @@
     <value>The familyx file could not be exported to GEDCOM.</value>
   </data>
 	<data name="GedcomExportSucessfulMessage" xml:space="preserve">
-    <value>The familyx file was sucessfully exported to GEDCOM.</value>
+    <value>پرونده familyx با موفقیت به GEDCOM صادر شد.</value>
   </data>
 	<data name="PhotoExistsMessage" xml:space="preserve">
     <value>این تصویر قبلا به این فرد پیوست شده است.</value>
@@ -319,7 +319,7 @@
     <value>*.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.odp; *.odt; *.ods; *.xps; *.htm; *.html; *.pdf; *.txt; *.kml; *.kmz; *.jpeg; *.jpg; *.png; *.rtf</value>
   </data>
 	<data name="AttachmentFiles" xml:space="preserve">
-    <value>فایل‌های قابل پیوست (*.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.odp; *.odt; *.ods; *.xps; *.htm; *.html; *.pdf; *.txt; *.kml; *.kmz; *.jpeg; *.jpg; *.png; *.rtf)</value>
+    <value>پرونده‌های قابل پیوست (*.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.odp; *.odt; *.ods; *.xps; *.htm; *.html; *.pdf; *.txt; *.kml; *.kmz; *.jpeg; *.jpg; *.png; *.rtf)</value>
   </data>
 	<data name="ImageExtension" xml:space="preserve">
     <value>*.jpeg; *.jpg; *.png; *.tif; *.tiff; *.gif</value>
@@ -328,13 +328,13 @@
     <value>Image Files (*.jpeg; *.jpg; *.png; *.tif; *.tiff; *.gif)</value>
   </data>
 	<data name="ClearRecentFilesMenu" xml:space="preserve">
-    <value>پاک‌کردن لیست‌ فایل‌ها اخیر</value>
+    <value>پاک‌کردن لیست‌ پرونده‌ها اخیر</value>
   </data>
 	<data name="ExportingStatus" xml:space="preserve">
     <value>(Exporting)</value>
   </data>
 	<data name="FamilyShow" xml:space="preserve">
-    <value>خطوط خانواده</value>
+    <value>فامیلی لاینز</value>
   </data>
 	<data name="GedcomMenu" xml:space="preserve">
     <value>Import GEDCOM...</value>
@@ -355,7 +355,7 @@
     <value>خطایی در حین به روز رسانی اطلاعات بین افراد تکراری رخ داد.</value>
   </data>
 	<data name="MergeFailed1" xml:space="preserve">
-    <value>ادغام ناموق بود. هیچ تغییری انجام نشد.</value>
+    <value>ادغام ناموفق بود. لطفا پرونده اصلی را دوباره بار کنید.</value>
   </data>
 	<data name="MergeFailed2" xml:space="preserve">
     <value>ادغام ناموفق بود. لطفا فایل اصلی را دوباره بار کنید.</value>
@@ -412,13 +412,13 @@
     <value>جدید</value>
   </data>
 	<data name="ExportGedcomMenu" xml:space="preserve">
-    <value>Export GEDCOM...</value>
+    <value>صادر کردن GEDCOM...</value>
   </data>
 	<data name="ExportHtmlMenu" xml:space="preserve">
-    <value>Export HTML...</value>
+    <value>صادر کردن HTML...</value>
   </data>
 	<data name="ExportPlacesMenu" xml:space="preserve">
-    <value>Export Places...</value>
+    <value>صادر کردن مکان‌ها...</value>
   </data>
 	<data name="SaveAsMenu" xml:space="preserve">
     <value>ذخیره به عنوان...</value>
@@ -553,7 +553,7 @@
     <value>اطلاعات خانواده</value>
   </data>
 	<data name="FamilySpace" xml:space="preserve">
-    <value>خانواده</value>
+    <value>خانواده </value>
   </data>
 	<data name="Female" xml:space="preserve">
     <value>مونث</value>
@@ -601,7 +601,7 @@
     <value>شغل</value>
   </data>
 	<data name="OfSpace" xml:space="preserve">
-    <value>از</value>
+    <value>از </value>
   </data>
 	<data name="OpenRecent" xml:space="preserve">
     <value>بازکردن پرونده‌های اخیر</value>
@@ -667,7 +667,7 @@
     <value>والدین چه کسانی هستند؟</value>
   </data>
 	<data name="AboutMenu" xml:space="preserve">
-    <value>درباره Family Lines</value>
+    <value>درباره فامیلی لاینز</value>
   </data>
 	<data name="Time" xml:space="preserve">
     <value>زمان</value>
@@ -694,7 +694,7 @@
     <value>همه افراد</value>
   </data>
 	<data name="AncestralAnd" xml:space="preserve">
-    <value>اجداد و </value>
+    <value>نیاکان و </value>
   </data>
 	<data name="BirthDate" xml:space="preserve">
     <value>تاریخ تولد</value>
@@ -727,10 +727,10 @@
     <value>ویرایش</value>
   </data>
 	<data name="ExportHtml" xml:space="preserve">
-    <value>Export HTML</value>
+    <value>صادر کردن HTML</value>
   </data>
 	<data name="ExportSourcesAndRepositories" xml:space="preserve">
-    <value>Export sources and repositories</value>
+    <value>صادر کردن منابع و مخازن</value>
   </data>
 	<data name="GenderDistributions" xml:space="preserve">
     <value>توزیع جنسیتی</value>
@@ -853,7 +853,7 @@
     <value>روی «ادامه» برای شروع کلیک کنید:</value>
   </data>
 	<data name="ClickFinish" xml:space="preserve">
-    <value>روی «پایان» برای ذخیره‌سازی و دیدن فایل‌تان کلیک کنید:</value>
+    <value>روی «پایان» برای ذخیره‌سازی و دیدن پرونده‌تان کلیک کنید:</value>
   </data>
 	<data name="Danish" xml:space="preserve">
     <value>دانمارکی</value>
@@ -880,7 +880,7 @@
     <value>ادغام تکراری‌ها</value>
   </data>
 	<data name="MergeDuplicatesMessage1" xml:space="preserve">
-    <value>بعضی از افراد در شجره جاری در فایلی که ادغامی شد هم موجود بودند.</value>
+    <value>بعضی از افراد در شجره جاری در پروندهی که ادغامی شد هم موجود بودند.</value>
   </data>
 	<data name="MergeDuplicatesMessage2" xml:space="preserve">
     <value>در صفحه بعد، شما می‌توانید افراد موجود را که اطلاعات جدید یا متناقض دارند، ویرایش کنید.</value>
@@ -1036,7 +1036,7 @@
     <value>این فرد یادداشت دارد.</value>
   </data>
 	<data name="HasPhotos" xml:space="preserve">
-    <value>This person has photos.</value>
+    <value>فرد تصویر دارد.</value>
   </data>
 	<data name="HasRestrictions" xml:space="preserve">
     <value>این فرد یک محدودیت دارد.</value>
@@ -1252,7 +1252,7 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
     <value>فقط فرد جاری</value>
   </data>
 	<data name="ExtractHeader" xml:space="preserve">
-    <value>Extract Contents</value>
+    <value>استخراج محتویات</value>
   </data>
 	<data name="OpenFolderAfterExtraction" xml:space="preserve">
     <value>بازکردن پوشه بعد از استخراج</value>
@@ -1261,10 +1261,10 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
     <value>(درحال استخراج)</value>
   </data>
 	<data name="ExtractFilesMenu" xml:space="preserve">
-    <value>Extract Contents...</value>
+    <value>استخراج محتویات...</value>
   </data>
 	<data name="Extract" xml:space="preserve">
-    <value>Extract</value>
+    <value>استخراج</value>
   </data>
 	<data name="HideFiltered" xml:space="preserve">
     <value>پنهان سازی صافی شده ها</value>
@@ -1279,7 +1279,7 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
     <value>آیا می‌خواهید افراد زنده مخفی شوند؟</value>
   </data>
 	<data name="ExportPlaces" xml:space="preserve">
-    <value>Export Places</value>
+    <value>صادر کردن مکان‌ها</value>
   </data>
 	<data name="ChooseWhatToExportColon" xml:space="preserve">
     <value>انتخاب چیزی برای صدور:</value>
@@ -1306,7 +1306,7 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
     <value>کلفت (Ctrl+B)</value>
   </data>
 	<data name="Bullets" xml:space="preserve">
-    <value>Bullets</value>
+    <value>بولت</value>
   </data>
 	<data name="Burials" xml:space="preserve">
     <value>به‌خاک سپاری‌ها</value>
@@ -1369,7 +1369,7 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
     <value>Family.Show Files (*.familyx or *.family)</value>
   </data>
 	<data name="OldVersionMessage" xml:space="preserve">
-    <value>این پرونده با نسخه‌های قدیمی‌تر فامیلی لاینز ساخته شده است و به فرمت جدید ذخیره خواهد شد. پرونده‌های جدید با familyx ذخیره می‌شوند و همه اطلاعات مثل عکس‌های خانوادگی، داستان‌ها و غیره را در یک فایل ذخیره می‌کند.</value>
+    <value>این پرونده با نسخه‌های قدیمی‌تر فامیلی لاینز ساخته شده است و به فرمت جدید ذخیره خواهد شد. پرونده‌های جدید با familyx ذخیره می‌شوند و همه اطلاعات مثل عکس‌های خانوادگی، داستان‌ها و غیره را در یک پرونده ذخیره می‌کند.</value>
   </data>
 	<data name="FamilyxFilesAll" xml:space="preserve">
     <value>Family.Show 3.0 - 4.0 Files (*.familyx)</value>
@@ -1467,4 +1467,28 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
     کندیس اولکنا، ایگان ایوس : نسخه ۰/۲
     </value>
   </data>
+	<data name="Agency" xml:space="preserve">
+		<value>آژانس</value>
+	</data>
+	<data name="Cause" xml:space="preserve">
+		<value>علت</value>
+	</data>
+	<data name="DateHead" xml:space="preserve">
+		<value>تاریخ</value>
+	</data>
+	<data name="DescHead" xml:space="preserve">
+		<value>توضیحات</value>
+	</data>
+	<data name="FactEventHead" xml:space="preserve">
+		<value>حقیقت/رویداد</value>
+	</data>
+	<data name="PlaceHead" xml:space="preserve">
+		<value>مکان</value>
+	</data>
+	<data name="Reset" xml:space="preserve">
+		<value>بازگشت به حالت اول</value>
+	</data>
+	<data name="Media" xml:space="preserve">
+		<value>رسانه</value>
+	</data>
 </root>
