@@ -1,6 +1,5 @@
 ﻿<!-- 
  Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
-  
  -->
 <UserControl x:Class="KBS.FamilyLines.Controls.HeaderEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -16,8 +15,7 @@
                 BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,0" 
                 CornerRadius="5,5,0,0" Height="30">
 
-                <!--TODO Embedded string -->
-                <TextBlock Padding="5,0,0,0" Text="Edit GEDCOM Header Data" 
+            <TextBlock Padding="5,0,0,0" Text="{x:Static Properties:Resources.EditHeaderData}" 
                        TextWrapping="Wrap" Foreground="{DynamicResource HeaderFontColor}" 
                        FontSize="18" FontWeight="Bold" VerticalAlignment="Center" 
                        HorizontalAlignment="Left"/>
@@ -46,16 +44,14 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                            Grid.Row="0"
                            Grid.Column="0"
                            Padding="0"
                            Margin="5,0,5,0"
                            FontWeight="Bold"
-                           Content="Submitter"/>
+                           Content="{x:Static Properties:Resources.Submitter}"/>
                     
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                            Grid.Row="1"
                            Grid.Column="0"
@@ -63,14 +59,13 @@
                            Margin="5,0,5,0"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
-                           Content="Name"/>
+                           Content="{x:Static Properties:Resources.Name}"/>
                     <TextBox Grid.Row="1"
                              Grid.Column="1"
                              MaxLength="60"
                              Margin="3"
                              Text="{Binding Mode=TwoWay, Path=SubmitterName}"/>
                     
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                            Grid.Row="2"
                            Grid.Column="0"
@@ -78,14 +73,13 @@
                            Margin="5,0,5,0"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
-                           Content="Address (1)"/>
+                           Content="{x:Static Properties:Resources.Address1}"/>
                     <TextBox Grid.Row="2"
                              Grid.Column="1"
                              MaxLength="60"
                              Margin="3"
                              Text="{Binding Path=Address1}"/>
                     
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                            Grid.Row="3"
                            Grid.Column="0"
@@ -93,7 +87,7 @@
                            Margin="5,0,5,0"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
-                           Content="Address (2)"/>
+                           Content="{x:Static Properties:Resources.Address2}"/>
                     <TextBox Grid.Row="3"
                              Grid.Column="1"
                              MaxLength="60"
@@ -107,7 +101,7 @@
                            Margin="5,0,5,0"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
-                           Content="Phone"/>
+                           Content="{x:Static Properties:Resources.Phone}"/>
                     <TextBox Grid.Row="4"
                              Grid.Column="1"
                              MaxLength="25"
@@ -116,7 +110,6 @@
                              Margin="3"
                              Text="{Binding Path=Phone}"/>
                     
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                            Grid.Row="5"
                            Grid.Column="0"
@@ -124,14 +117,13 @@
                            Margin="5,0,5,0"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
-                           Content="Language"/>
+                           Content="{x:Static Properties:Resources.LanguageHeader}"/>
                     <TextBox Grid.Row="5"
                              Grid.Column="1"
                              MaxLength="90"
                              Margin="3"
                              Text="{Binding Mode=TwoWay, Path=Lang}"/>
                     
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                            Grid.Row="6"
                            Grid.Column="0"
@@ -139,7 +131,7 @@
                            Margin="5,0,5,0"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
-                           Content="Registered RFN"/>
+                           Content="{x:Static Properties:Resources.RegisteredRFN}"/>
                     <TextBox Grid.Row="6"
                              Grid.Column="1"
                              MaxLength="30"
@@ -148,7 +140,6 @@
                              HorizontalAlignment="Left"
                              Text="{Binding Mode=TwoWay, Path=RFN}"/>
 
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                            Grid.Row="8"
                            Grid.Column="0"
@@ -156,7 +147,7 @@
                            Margin="5,0,5,0"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
-                           Content="Copyright"/>
+                           Content="{x:Static Properties:Resources.CopyrightLabel}"/>
                     <TextBox Grid.Row="8"
                              Grid.Column="1"
                              MaxLength="90"
@@ -166,10 +157,8 @@
                 </Grid>
 
                 <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
-                    <!--TODO Embedded string -->
-                    <Button Margin="0,0,6,0" x:Name="Save" Click="Save_Click" Content="Save"/>
-                    <!--TODO Embedded string -->
-                    <Button Margin="6,0,0,0" x:Name="Close" Click="Close_Click" Content="Close"/>
+                    <Button Margin="0,0,6,0" x:Name="Save" Click="Save_Click" Content="{x:Static Properties:Resources.Save}"/>
+                    <Button Margin="6,0,0,0" x:Name="Close" Click="Close_Click" Content="{x:Static Properties:Resources.Close}"/>
                 </StackPanel>
             </StackPanel>
 

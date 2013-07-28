@@ -198,9 +198,6 @@
   <data name="StoryFontFamily" xml:space="preserve">
     <value>Segoe UI</value>
   </data>
-  <data name="StoryFontSize" xml:space="preserve">
-    <value>12</value>
-  </data>
   <data name="XamlExtension" xml:space="preserve">
     <value>.xaml</value>
   </data>
@@ -378,35 +375,20 @@
   <data name="OpenMenu" xml:space="preserve">
     <value>Open...</value>
   </data>
-  <data name="ReportHeader1" xml:space="preserve">
-    <value>Family of</value>
-  </data>
-  <data name="ReportHeader2" xml:space="preserve">
-    <value>in</value>
+  <data name="ReportHeader" xml:space="preserve">
+    <value>Family of {0} in {1}</value>
   </data>
   <data name="SaveBeforeMerge" xml:space="preserve">
     <value>Do you want to save changes to the current family before merging?</value>
   </data>
-  <data name="UnableDeleteRepository1" xml:space="preserve">
-    <value>Unable to delete repository</value>
-  </data>
-  <data name="UnableDeleteRepository2" xml:space="preserve">
-    <value>as this repository is linked to sources.</value>
-  </data>
-  <data name="UnableDeleteSource1" xml:space="preserve">
-    <value>Unable to delete source</value>
-  </data>
-  <data name="UnableDeleteSource2" xml:space="preserve">
-    <value>as this source is linked to citations.</value>
+  <data name="UnableDeleteSource" xml:space="preserve">
+    <value>Unable to delete source {0} as this source is linked to citations.</value>
   </data>
   <data name="UnsavedStatus" xml:space="preserve">
     <value>(Unsaved)</value>
   </data>
-  <data name="www" xml:space="preserve">
-    <value>www.</value>
-  </data>
   <data name="Language" xml:space="preserve">
-    <value>en-US</value>
+    <value>pt-BR</value>
   </data>
   <data name="NewMenu" xml:space="preserve">
     <value>New</value>
@@ -600,9 +582,6 @@
   <data name="Occupation" xml:space="preserve">
     <value>Ocupação</value>
   </data>
-  <data name="OfSpace" xml:space="preserve">
-    <value>de </value>
-  </data>
   <data name="OpenRecent" xml:space="preserve">
     <value>Open Recent</value>
   </data>
@@ -653,9 +632,6 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>Para</value>
-  </data>
-  <data name="ToSpace" xml:space="preserve">
-    <value>para </value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version </value>
@@ -854,9 +830,6 @@
   </data>
   <data name="ClickFinish" xml:space="preserve">
     <value>Click 'Finish' to save and view your file:</value>
-  </data>
-  <data name="Danish" xml:space="preserve">
-    <value>Danish</value>
   </data>
   <data name="ExistingCitation" xml:space="preserve">
     <value>Existing Citation</value>
@@ -1125,9 +1098,6 @@
   </data>
   <data name="DateCalculatorMenu" xml:space="preserve">
     <value>Date Calculator</value>
-  </data>
-  <data name="DateTo" xml:space="preserve">
-    <value>to</value>
   </data>
   <data name="days" xml:space="preserve">
     <value>days</value>
@@ -1488,5 +1458,8 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
+  </data>
+  <data name="UnableDeleteRepository" xml:space="preserve">
+    <value>Unable to delete repository {0} as this repository is linked to sources.</value>
   </data>
 </root>

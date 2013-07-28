@@ -312,26 +312,14 @@
   <data name="OpenMenu" xml:space="preserve">
     <value>Abrir...</value>
   </data>
-  <data name="ReportHeader1" xml:space="preserve">
-    <value>Familia de</value>
-  </data>
-  <data name="ReportHeader2" xml:space="preserve">
-    <value>en</value>
+  <data name="ReportHeader" xml:space="preserve">
+    <value>Familia de {0} en {1}</value>
   </data>
   <data name="SaveBeforeMerge" xml:space="preserve">
     <value>¿Desea guardar los cambios en la familia actual antes de la fusión?</value>
   </data>
-  <data name="UnableDeleteRepository1" xml:space="preserve">
-    <value>No se puede eliminar del repositorio</value>
-  </data>
-  <data name="UnableDeleteRepository2" xml:space="preserve">
-    <value>como este depósito está vinculada a las fuentes.</value>
-  </data>
-  <data name="UnableDeleteSource1" xml:space="preserve">
-    <value>No se puede eliminar la fuente</value>
-  </data>
-  <data name="UnableDeleteSource2" xml:space="preserve">
-    <value>Mientras que esta fuente está vinculada a las citas.</value>
+  <data name="UnableDeleteSource" xml:space="preserve">
+    <value>No se puede eliminar la fuente {0} mientras que esta fuente está vinculada a las citas.</value>
   </data>
   <data name="UnsavedStatus" xml:space="preserve">
     <value>(Sin guardar)</value>
@@ -534,9 +522,6 @@
   <data name="Occupation" xml:space="preserve">
     <value>Ocupación</value>
   </data>
-  <data name="OfSpace" xml:space="preserve">
-    <value>de </value>
-  </data>
   <data name="OpenRecent" xml:space="preserve">
     <value>Abrir reciente</value>
   </data>
@@ -587,9 +572,6 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>Para</value>
-  </data>
-  <data name="ToSpace" xml:space="preserve">
-    <value>para </value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Versión </value>
@@ -785,9 +767,6 @@
   </data>
   <data name="ClickFinish" xml:space="preserve">
     <value>Haga clic en 'Finalizar' para guardar y ver su archivo:</value>
-  </data>
-  <data name="Danish" xml:space="preserve">
-    <value>Danés</value>
   </data>
   <data name="ExistingCitation" xml:space="preserve">
     <value>Cita existentes</value>
@@ -1044,9 +1023,6 @@
   <data name="DateCalculatorMessage" xml:space="preserve">
     <value>Utilizar esta herramienta para ayudar con el cálculo de fechas de las pruebas que ha reunido.</value>
   </data>
-  <data name="DateTo" xml:space="preserve">
-    <value>para</value>
-  </data>
   <data name="days" xml:space="preserve">
     <value>día</value>
   </data>
@@ -1261,6 +1237,9 @@
   </data>
   <data name="FamilyViewMenu">
     <value xml:space="preserve">Family View</value>
+  </data>
+  <data name="UnableDeleteRepository" xml:space="preserve">
+    <value>No se puede eliminar del repositorio {0} como este depósito está vinculada a las fuentes.</value>
   </data>
 
 </root>

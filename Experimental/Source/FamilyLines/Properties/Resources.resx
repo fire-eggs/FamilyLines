@@ -131,21 +131,25 @@
   </data>
   <data name="AllExtension" xml:space="preserve">
     <value>*.*</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="AllFiles" xml:space="preserve">
     <value>All Files (*.*)</value>
   </data>
   <data name="DefaultFamilyxExtension" xml:space="preserve">
     <value>.familyx</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="DefaultGedcomExtension" xml:space="preserve">
     <value>.ged</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="DefaultStory" xml:space="preserve">
     <value>Document information here.</value>
   </data>
   <data name="DefaultXpsExtension" xml:space="preserve">
     <value>.xps</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="Export" xml:space="preserve">
     <value>Export</value>
@@ -155,6 +159,7 @@
   </data>
   <data name="GedcomExtension" xml:space="preserve">
     <value>*.ged</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="GedcomFailed" xml:space="preserve">
     <value>Import Failed</value>
@@ -170,6 +175,7 @@
   </data>
   <data name="JpegExtension" xml:space="preserve">
     <value>*.jpg</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="JpegFiles" xml:space="preserve">
     <value>JPEG File Interchange Format (*.jpg)</value>
@@ -198,20 +204,19 @@
   <data name="StoryFontFamily" xml:space="preserve">
     <value>Segoe UI</value>
   </data>
-  <data name="StoryFontSize" xml:space="preserve">
-    <value>12</value>
-  </data>
   <data name="XamlExtension" xml:space="preserve">
     <value>.xaml</value>
   </data>
   <data name="XpsExtension" xml:space="preserve">
     <value>*.xps</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="XpsFiles" xml:space="preserve">
     <value>Xps Files (*.xps)</value>
   </data>
   <data name="FamilyxExtension" xml:space="preserve">
     <value>*.familyx</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="ConfirmDeleteRelationship" xml:space="preserve">
     <value>Do you want to remove this relationship?</value>
@@ -224,9 +229,11 @@
   </data>
   <data name="DefaulthtmlExtension" xml:space="preserve">
     <value>.html</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="htmlExtension" xml:space="preserve">
     <value>*.html</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="htmlFiles" xml:space="preserve">
     <value>Hyper Text Markup Language Files (*.html)</value>
@@ -260,9 +267,11 @@
   </data>
   <data name="DefaultkmlExtension" xml:space="preserve">
     <value>.kml</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="kmlExtension" xml:space="preserve">
     <value>*.kml</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="kmlFiles" xml:space="preserve">
     <value>Keyhole Markup Language (*.kml)</value>
@@ -317,12 +326,14 @@
   </data>
   <data name="AttachmentExtension" xml:space="preserve">
     <value>*.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.odp; *.odt; *.ods; *.xps; *.htm; *.html; *.pdf; *.txt; *.kml; *.kmz; *.jpeg; *.jpg; *.png; *.rtf</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="AttachmentFiles" xml:space="preserve">
     <value>Attachment Files (*.doc; *.docx; *.xls; *.xlsx; *.ppt; *.pptx; *.odp; *.odt; *.ods; *.xps; *.htm; *.html; *.pdf; *.txt; *.kml; *.kmz; *.jpeg; *.jpg; *.png; *.rtf)</value>
   </data>
   <data name="ImageExtension" xml:space="preserve">
     <value>*.jpeg; *.jpg; *.png; *.tif; *.tiff; *.gif</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="ImageFiles" xml:space="preserve">
     <value>Image Files (*.jpeg; *.jpg; *.png; *.tif; *.tiff; *.gif)</value>
@@ -341,9 +352,11 @@
   </data>
   <data name="HelpFileName" xml:space="preserve">
     <value>help.chm</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="http" xml:space="preserve">
     <value>http://</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="ImportingStatus" xml:space="preserve">
     <value>(Importing)</value>
@@ -378,32 +391,25 @@
   <data name="OpenMenu" xml:space="preserve">
     <value>Open...</value>
   </data>
-  <data name="ReportHeader1" xml:space="preserve">
-    <value>Family of</value>
-  </data>
-  <data name="ReportHeader2" xml:space="preserve">
-    <value>in</value>
+  <data name="ReportHeader" xml:space="preserve">
+    <value>Family of {0} in {1}</value>
+    <comment>{0} is a family name; {1} is a year (New for V0.5)</comment>
   </data>
   <data name="SaveBeforeMerge" xml:space="preserve">
     <value>Do you want to save changes to the current family before merging?</value>
   </data>
-  <data name="UnableDeleteRepository1" xml:space="preserve">
-    <value>Unable to delete repository</value>
+  <data name="UnableDeleteRepository" xml:space="preserve">
+    <value>Unable to delete repository {0} as this repository is linked to sources.</value>
   </data>
-  <data name="UnableDeleteRepository2" xml:space="preserve">
-    <value>as this repository is linked to sources.</value>
-  </data>
-  <data name="UnableDeleteSource1" xml:space="preserve">
-    <value>Unable to delete source</value>
-  </data>
-  <data name="UnableDeleteSource2" xml:space="preserve">
-    <value>as this source is linked to citations.</value>
+  <data name="UnableDeleteSource" xml:space="preserve">
+    <value>Unable to delete source {0} as this source is linked to citations.</value>
   </data>
   <data name="UnsavedStatus" xml:space="preserve">
     <value>(Unsaved)</value>
   </data>
   <data name="www" xml:space="preserve">
     <value>www.</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="Language" xml:space="preserve">
     <value>en-US</value>
@@ -600,9 +606,6 @@
   <data name="Occupation" xml:space="preserve">
     <value>Occupation</value>
   </data>
-  <data name="OfSpace" xml:space="preserve">
-    <value> of </value>
-  </data>
   <data name="OpenRecent" xml:space="preserve">
     <value>Open Recent</value>
   </data>
@@ -653,9 +656,6 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>To</value>
-  </data>
-  <data name="ToSpace" xml:space="preserve">
-    <value>to </value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version </value>
@@ -850,13 +850,10 @@
     <value>Choose the language:</value>
   </data>
   <data name="ClickContinue" xml:space="preserve">
-    <value>Click to 'Continue' to begin:</value>
+    <value>Click 'Continue' to begin:</value>
   </data>
   <data name="ClickFinish" xml:space="preserve">
     <value>Click 'Finish' to save and view your file:</value>
-  </data>
-  <data name="Danish" xml:space="preserve">
-    <value>Danish</value>
   </data>
   <data name="ExistingCitation" xml:space="preserve">
     <value>Existing Citation</value>
@@ -1126,9 +1123,6 @@
   <data name="DateCalculatorMenu" xml:space="preserve">
     <value>Date Calculator</value>
   </data>
-  <data name="DateTo" xml:space="preserve">
-    <value>to</value>
-  </data>
   <data name="days" xml:space="preserve">
     <value>days</value>
   </data>
@@ -1355,15 +1349,18 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   </data>
   <data name="DefaultFamilyExtension" xml:space="preserve">
     <value>.family</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="FamilyExtension" xml:space="preserve">
     <value>*.family</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="FamilyFiles" xml:space="preserve">
     <value>Family.Show 2.0 Files (*.family)</value>
   </data>
   <data name="FamilyShowExtensions" xml:space="preserve">
     <value>*.family;*.familyx</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="FamilyShowFiles" xml:space="preserve">
     <value>Family.Show Files (*.familyx or *.family)</value>
@@ -1398,21 +1395,15 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   </data>
   <data name="GParentView_Change_the_current_person" xml:space="preserve">
     <value>Make {0} the current person</value>
-    <comment>
-      {0} is a person name - "first last"
-    </comment>
+    <comment>{0} is a person name - "first last"</comment>
   </data>
   <data name="GParentView_Add_father_for_" xml:space="preserve">
     <value>Add father for {0}</value>
-    <comment>
-      {0} is a person's full name
-    </comment>
+    <comment>{0} is a person's full name</comment>
   </data>
   <data name="GParentView_Add_mother_for" xml:space="preserve">
     <value>Add mother for {0}</value>
-    <comment>
-      {0} is a person's full name
-    </comment>
+    <comment>{0} is a person's full name</comment>
   </data>
   <data name="GParentView_Add_Father" xml:space="preserve">
     <value>Add Father</value>
@@ -1437,9 +1428,7 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   </data>
   <data name="ClickToMakeCurrent" xml:space="preserve">
     <value>Click to make {0} the current person</value>
-    <comment>
-      {0} is a person's name
-    </comment>
+    <comment>{0} is a person's name</comment>
   </data>
   <data name="FamilyViewMenu" xml:space="preserve">
     <value>Family View</value>
@@ -1488,5 +1477,60 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
+  </data>
+  <data name="Address1" xml:space="preserve">
+    <value>Address (1)</value>
+    <comment>New for V0.5 - HeaderEditor</comment>
+  </data>
+  <data name="Address2" xml:space="preserve">
+    <value>Address (2)</value>
+    <comment>New for V0.5 - HeaderEditor</comment>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+    <comment>Close Button - New for V0.5 - HeaderEditor</comment>
+  </data>
+  <data name="CopyrightLabel" xml:space="preserve">
+    <value>Copyright</value>
+    <comment>New for V0.5 - HeaderEditor</comment>
+  </data>
+  <data name="EditHeaderData" xml:space="preserve">
+    <value>Edit GEDCOM Header Data</value>
+    <comment>New for V0.5 - HeaderEditor</comment>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+    <comment>New for V0.5 - HeaderEditor</comment>
+  </data>
+  <data name="RegisteredRFN" xml:space="preserve">
+    <value>Registered RFN</value>
+    <comment>New for V0.5 - HeaderEditor</comment>
+  </data>
+  <data name="Submitter" xml:space="preserve">
+    <value>Submitter</value>
+    <comment>New for V0.5 - HeaderEditor</comment>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+    <comment>As in "the application is called Family Lines"</comment>
+  </data>
+  <data name="Certainty" xml:space="preserve">
+    <value>Certainty</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Company</value>
+    <comment>As in "the company name is Microsoft"</comment>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="FactEditTooltip" xml:space="preserve">
+    <value>View and edit all fact details</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="ViewHeaderHeader" xml:space="preserve">
+    <value>View GEDCOM Header Data</value>
   </data>
 </root>

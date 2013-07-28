@@ -1,3 +1,6 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System;
 using System.Globalization;
 using System.IO;
@@ -196,6 +199,8 @@ namespace KBS.FamilyLines
             StoryViewer.ViewingMode = FlowDocumentReaderViewingMode.Page;
         }
 
+        private const string FONTSIZE = "12";
+
 		// KBR 03/12/2012 On import, person notes have NOT been converted to a 'story' (RTF file).
 		// Check for this and load the note into the display. Seems to have the side-effect of improving
 		// the handling of carriage returns in the original notes.
@@ -222,8 +227,8 @@ namespace KBS.FamilyLines
                 if (person.Note != null)
                 {
                     textRange.Text = person.Note;
-                    textRange.ApplyPropertyValue(TextElement.FontFamilyProperty, Properties.Resources.StoryFontFamily);
-                    textRange.ApplyPropertyValue(TextElement.FontSizeProperty, Properties.Resources.StoryFontSize);
+                    textRange.ApplyPropertyValue(TextElement.FontFamilyProperty, FONTSIZE);
+                    textRange.ApplyPropertyValue(TextElement.FontSizeProperty, FONTSIZE);
                     return;
                     // Save will take care of converting the note to RTF etc
                 }
@@ -236,7 +241,7 @@ namespace KBS.FamilyLines
             textRange.Text = Properties.Resources.DefaultStory;
 
             textRange.ApplyPropertyValue(TextElement.FontFamilyProperty, Properties.Resources.StoryFontFamily);
-            textRange.ApplyPropertyValue(TextElement.FontSizeProperty, Properties.Resources.StoryFontSize);
+            textRange.ApplyPropertyValue(TextElement.FontSizeProperty, FONTSIZE);
         }
 
         private void FontsComboBox_SelectionChanged(object sender, RoutedEventArgs e)

@@ -1,6 +1,5 @@
 ﻿<!-- 
  Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
-  
  -->
 <!-- A control to show and modify all details regarding a single fact (EVENT in GEDCOM) -->
 <UserControl x:Class="KBS.FamilyLines.Controls.FactEditor"
@@ -8,7 +7,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:KBS.FamilyLines"
+             xmlns:local="clr-namespace:KBS.FamilyLines" 
+             xmlns:Properties="clr-namespace:KBS.FamilyLines.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" 
              d:DesignWidth="300">
@@ -37,8 +37,6 @@
 
     </UserControl.Resources>
 
-    <!-- TODO embedded strings -->
-    
     <StackPanel>
 
         <!-- Header -->
@@ -63,7 +61,7 @@
 
                 <!-- Fact (Event Type) -->
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Event:" Margin="5,0,5,0"
+                    <Label Content="{x:Static Properties:Resources.Event}" Margin="5,0,5,0"
                            Foreground="{DynamicResource InputFontColor}"
                            />
                     <Label Content="{Binding Path=EventName}"
@@ -83,7 +81,7 @@
                     </Grid.RowDefinitions>
 
                     <!-- Event date: row 0 -->
-                    <Label Grid.Row="0" Grid.Column="0" Content="Date"
+                    <Label Grid.Row="0" Grid.Column="0" Content="{x:Static Properties:Resources.DateHead}"
                            HorizontalAlignment="Right"
                            Margin="0,5,0,0"
                            VerticalAlignment="Center"
@@ -105,7 +103,7 @@
                              />
 
                     <!-- Place : row 1 -->
-                    <Label Grid.Row="1" Grid.Column="0" Content="Place"
+                    <Label Grid.Row="1" Grid.Column="0" Content="{x:Static Properties:Resources.Place}"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            Padding="0"
@@ -125,7 +123,7 @@
                              ToolTipOpening="ToolTip_All"/>
 
                     <!-- Description : row 2 -->
-                    <Label Grid.Row="2" Grid.Column="0" Content="Description"
+                    <Label Grid.Row="2" Grid.Column="0" Content="{x:Static Properties:Resources.DescHead}"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            Padding="0"
@@ -148,9 +146,9 @@
                             Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             >
-                    <Button Content="Notes"/>
-                    <Button Content="Multimedia"/>
-                    <Button Content="Citations"/>
+                    <Button Content="{x:Static Properties:Resources.Notes}"/>
+                    <Button Content="{x:Static Properties:Resources.Photos}"/>
+                    <Button Content="{x:Static Properties:Resources.Citations}"/>
                 </StackPanel>
 
                 <Expander Name="expandCHR" 
@@ -174,7 +172,7 @@
                         </Grid.RowDefinitions>
 
                         <!-- Address -->
-                        <Label Grid.Row="0" Grid.Column="0" Content="Address"
+                        <Label Grid.Row="0" Grid.Column="0" Content="{x:Static Properties:Resources.Address}"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            Padding="0"
@@ -192,7 +190,7 @@
                              ToolTipOpening="ToolTip_All"/>
                         <!-- Age -->
                         <Label Grid.Row="1" Grid.Column="0" 
-                               Content="Age"
+                               Content="{x:Static Properties:Resources.Age}"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center"
                                Padding="0"
@@ -201,7 +199,7 @@
                                />
                         <!-- Cause -->
                         <Label Grid.Row="2" Grid.Column="0" 
-                               Content="Cause"
+                               Content="{x:Static Properties:Resources.Cause}"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center"
                                Padding="0"
@@ -218,7 +216,7 @@
                                  ToolTip="" 
                                  ToolTipOpening="ToolTip_All"/>
                         <!-- Responsible Agency -->
-                        <Label Grid.Row="3" Grid.Column="0" Content="Agency"
+                        <Label Grid.Row="3" Grid.Column="0" Content="{x:Static Properties:Resources.Agency}"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            Padding="0"
@@ -235,7 +233,7 @@
                              ToolTip="" 
                              ToolTipOpening="ToolTip_All"/>
                         <!-- Certainty -->
-                        <Label Grid.Row="4" Grid.Column="0" Content="Certainty"
+                        <Label Grid.Row="4" Grid.Column="0" Content="{x:Static Properties:Resources.Certainty}"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            Padding="0"
@@ -243,7 +241,7 @@
                            Foreground="{DynamicResource InputFontColor}" 
                            />
                         <!-- Privacy -->
-                        <Label Grid.Row="5" Grid.Column="0" Content="Privacy"
+                        <Label Grid.Row="5" Grid.Column="0" Content="{x:Static Properties:Resources.Privacy}"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            Padding="0"
@@ -251,7 +249,7 @@
                            Foreground="{DynamicResource InputFontColor}" 
                            />
                         <!-- Religious Affiliation -->
-                        <Label Grid.Row="6" Grid.Column="0" Content="Religion"
+                        <Label Grid.Row="6" Grid.Column="0" Content="{x:Static Properties:Resources.Religion}"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            Padding="0"
@@ -270,38 +268,6 @@
 
                     </Grid>
                 </Expander>
-                
-                <!-- Collapsible panel -->
-                <!-- Age -->
-                <!-- Cause -->
-                <!-- Certainty -->
-                <!-- Privacy -->
-                <!-- Agency -->
-                <!-- Religious -->
-
-                <!-- Notes link -->
-                <!-- Multimedia link -->
-                <!-- Citation link -->
-
-
-                <!--<StackPanel Orientation="Horizontal" Margin="10,5,0,0">
-                    <Image Margin="-3,2,3,0"  Source="/FamilyLines;component/FamilyLines.ico" Height="25"/>
-                    <Label FontWeight="Bold" FontSize="13" Foreground="{DynamicResource InputFontColor}" Content="{x:Static properties:Resources.FamilyShow}"/>
-                </StackPanel>
-                <Separator Margin="40,5,10,-3"/>
-
-                <Label Margin="35,0,0,0" x:Name="VersionLabel" Foreground="{DynamicResource InputFontColor}" Content="{x:Static properties:Resources.Version}"/>
-                <Label Margin="35,0,0,0" Foreground="{DynamicResource InputFontColor}" Content="{x:Static properties:Resources.Copyright}"/>
-                <Separator Margin="40,5,10,-3"/>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                    <Label Margin="35,0,0,0" Foreground="{DynamicResource InputFontColor}" FontWeight="Bold" Content="{x:Static properties:Resources.Homepage}" MouseLeftButtonUp="Homepage_MouseLeftButtonUp" Cursor="Hand"/>
-                    <Label Margin="10,0,0,0" Foreground="{DynamicResource InputFontColor}" FontWeight="Bold" Content="{x:Static properties:Resources.Discussion}" MouseLeftButtonUp="Discussion_MouseLeftButtonUp" Cursor="Hand"/>
-                </StackPanel>
-                <Separator Margin="40,5,10,-3"/>
-                <Label Margin="35,0,0,0" Foreground="{DynamicResource InputFontColor}" FontWeight="Bold" Content="Apache License 2.0 (Apache)"/>
-                <ScrollViewer Margin="40,5,5,0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Width="280" Height="70">
-                    <TextBlock Foreground="{DynamicResource InputFontColor}" TextWrapping="Wrap" Text="{x:Static properties:Resources.EULA}"/>
-                </ScrollViewer>-->
             </StackPanel>
         </Border>
 

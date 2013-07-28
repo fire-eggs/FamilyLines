@@ -971,7 +971,7 @@ namespace KBS.FamilyLines
                     //Titles
                     TextBlock titles = new TextBlock();
                     titles.Height = titleheight;
-                    titles.Text = Properties.Resources.ReportHeader1 + " " + App.Family.Current.FullName + " " + Properties.Resources.ReportHeader2 + " " + DiagramControl.YearFilter.Content.ToString();
+                    titles.Text = string.Format(Properties.Resources.ReportHeader, App.Family.Current.FullName, DiagramControl.YearFilter.Content);
 
                     //Scale
                     double scale = Math.Min((pd.PrintableAreaWidth - padding - padding) / widthActual, (pd.PrintableAreaHeight - padding - padding - titleheight) / heightActual);

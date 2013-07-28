@@ -198,9 +198,6 @@
   <data name="StoryFontFamily" xml:space="preserve">
     <value>Segoe UI</value>
   </data>
-  <data name="StoryFontSize" xml:space="preserve">
-    <value>12</value>
-  </data>
   <data name="XamlExtension" xml:space="preserve">
     <value>.xaml</value>
   </data>
@@ -378,32 +375,17 @@
   <data name="OpenMenu" xml:space="preserve">
     <value>Открыть...</value>
   </data>
-  <data name="ReportHeader1" xml:space="preserve">
-    <value>Семья</value>
-  </data>
-  <data name="ReportHeader2" xml:space="preserve">
-    <value>в</value>
+  <data name="ReportHeader" xml:space="preserve">
+    <value>Семья {0} в {1}</value>
   </data>
   <data name="SaveBeforeMerge" xml:space="preserve">
     <value>Вы хотите сохранить изменения текущей семьи перед объединением?</value>
   </data>
-  <data name="UnableDeleteRepository1" xml:space="preserve">
-    <value>Не удается удалить репозиторию</value>
-  </data>
-  <data name="UnableDeleteRepository2" xml:space="preserve">
-    <value>поскольку эта репозитория связана с источниками.</value>
-  </data>
-  <data name="UnableDeleteSource1" xml:space="preserve">
-    <value>Не удается удалить источник</value>
-  </data>
-  <data name="UnableDeleteSource2" xml:space="preserve">
-    <value>так как этот источник связан с ссылками.</value>
+  <data name="UnableDeleteSource" xml:space="preserve">
+    <value>Не удается удалить источник {0} так как этот источник связан с ссылками.</value>
   </data>
   <data name="UnsavedStatus" xml:space="preserve">
     <value>(Не Сохранено)</value>
-  </data>
-  <data name="www" xml:space="preserve">
-    <value>www.</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>ru-RU</value>
@@ -600,9 +582,6 @@
   <data name="Occupation" xml:space="preserve">
     <value>Оккупация</value>
   </data>
-  <data name="OfSpace" xml:space="preserve">
-    <value>из</value>
-  </data>
   <data name="OpenRecent" xml:space="preserve">
     <value>Открыть недавние</value>
   </data>
@@ -652,9 +631,6 @@
     <value>Тема</value>
   </data>
   <data name="To" xml:space="preserve">
-    <value>к</value>
-  </data>
-  <data name="ToSpace" xml:space="preserve">
     <value>к</value>
   </data>
   <data name="Version" xml:space="preserve">
@@ -854,9 +830,6 @@
   </data>
   <data name="ClickFinish" xml:space="preserve">
     <value>Нажмите "Готово" для сохранения и просмотра файлов:</value>
-  </data>
-  <data name="Danish" xml:space="preserve">
-    <value>Датский</value>
   </data>
   <data name="ExistingCitation" xml:space="preserve">
     <value>Существующие ссылки</value>
@@ -1125,9 +1098,6 @@
   </data>
   <data name="DateCalculatorMenu" xml:space="preserve">
     <value>Калькулятор даты</value>
-  </data>
-  <data name="DateTo" xml:space="preserve">
-    <value>к</value>
   </data>
   <data name="days" xml:space="preserve">
     <value>Дней</value>
@@ -1441,5 +1411,8 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
   </data>
   <data name="FamilyViewMenu">
     <value xml:space="preserve">Family View</value>
+  </data>
+  <data name="UnableDeleteRepository" xml:space="preserve">
+    <value>Не удается удалить репозиторию {0} поскольку эта репозитория связана с источниками.</value>
   </data>
 </root>
