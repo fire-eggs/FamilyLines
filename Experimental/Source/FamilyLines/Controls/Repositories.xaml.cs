@@ -1,3 +1,6 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System.IO;
 using System.Windows;
 using KBS.FamilyLinesLib;
@@ -175,7 +178,8 @@ namespace KBS.FamilyLines.Controls
 
                 }
                 else
-                    MessageBox.Show(Properties.Resources.UnableDeleteRepository1 +" "+ repositoryToRemove.Id + " "+ Properties.Resources.UnableDeleteRepository2, Properties.Resources.Repository, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(string.Format(Properties.Resources.UnableDeleteRepository, repositoryToRemove.Id),
+                                    Properties.Resources.Repository, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

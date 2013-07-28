@@ -169,6 +169,24 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address (1).
+        /// </summary>
+        public static string Address1 {
+            get {
+                return ResourceManager.GetString("Address1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address (2).
+        /// </summary>
+        public static string Address2 {
+            get {
+                return ResourceManager.GetString("Address2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Son.
         /// </summary>
         public static string AddSon {
@@ -345,6 +363,15 @@ namespace KBS.FamilyLines.Properties {
         public static string AppendStar {
             get {
                 return ResourceManager.GetString("AppendStar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application.
+        /// </summary>
+        public static string Application {
+            get {
+                return ResourceManager.GetString("Application", resourceCulture);
             }
         }
         
@@ -592,6 +619,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Certainty.
+        /// </summary>
+        public static string Certainty {
+            get {
+                return ResourceManager.GetString("Certainty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Children.
         /// </summary>
         public static string Children {
@@ -664,7 +700,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click to &apos;Continue&apos; to begin:.
+        ///   Looks up a localized string similar to Click &apos;Continue&apos; to begin:.
         /// </summary>
         public static string ClickContinue {
             get {
@@ -696,6 +732,24 @@ namespace KBS.FamilyLines.Properties {
         public static string ClickToMakeCurrent {
             get {
                 return ResourceManager.GetString("ClickToMakeCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company.
+        /// </summary>
+        public static string Company {
+            get {
+                return ResourceManager.GetString("Company", resourceCulture);
             }
         }
         
@@ -817,6 +871,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copyright.
+        /// </summary>
+        public static string CopyrightLabel {
+            get {
+                return ResourceManager.GetString("CopyrightLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Relationship.
         /// </summary>
         public static string CreateRelationship {
@@ -830,7 +893,7 @@ namespace KBS.FamilyLines.Properties {
         ///    Brian Belden, Kevin Routley: Coordinators
         ///    Additional Contributions from:
         ///
-        ///        V0.5 : Bill Zhang, Hema Shivram, Tiago Damian
+        ///        V0.5 : Bill Zhang, Mostafa Satari, Hema Shivram, Tiago Damian
         ///
         ///        V0.4 : Hema Shivram
         ///        V0.3 : Agon Eous
@@ -925,15 +988,6 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Danish.
-        /// </summary>
-        public static string Danish {
-            get {
-                return ResourceManager.GetString("Danish", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Data Quality:.
         /// </summary>
         public static string DataQualityColon {
@@ -1011,15 +1065,6 @@ namespace KBS.FamilyLines.Properties {
         public static string DateOfDeath {
             get {
                 return ResourceManager.GetString("DateOfDeath", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to to.
-        /// </summary>
-        public static string DateTo {
-            get {
-                return ResourceManager.GetString("DateTo", resourceCulture);
             }
         }
         
@@ -1312,6 +1357,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit GEDCOM Header Data.
+        /// </summary>
+        public static string EditHeaderData {
+            get {
+                return ResourceManager.GetString("EditHeaderData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit More Details.
         /// </summary>
         public static string EditMoreDetails {
@@ -1383,6 +1437,15 @@ namespace KBS.FamilyLines.Properties {
         public static string EULA {
             get {
                 return ResourceManager.GetString("EULA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event.
+        /// </summary>
+        public static string Event {
+            get {
+                return ResourceManager.GetString("Event", resourceCulture);
             }
         }
         
@@ -1527,6 +1590,15 @@ namespace KBS.FamilyLines.Properties {
         public static string ExtractingStatus {
             get {
                 return ResourceManager.GetString("ExtractingStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View and edit all fact details.
+        /// </summary>
+        public static string FactEditTooltip {
+            get {
+                return ResourceManager.GetString("FactEditTooltip", resourceCulture);
             }
         }
         
@@ -2762,15 +2834,6 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  of .
-        /// </summary>
-        public static string OfSpace {
-            get {
-                return ResourceManager.GetString("OfSpace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         public static string OK {
@@ -2857,6 +2920,15 @@ namespace KBS.FamilyLines.Properties {
         public static string Person {
             get {
                 return ResourceManager.GetString("Person", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        public static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
             }
         }
         
@@ -2987,6 +3059,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Privacy.
+        /// </summary>
+        public static string Privacy {
+            get {
+                return ResourceManager.GetString("Privacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prevent details of living people being exported..
         /// </summary>
         public static string PrivacyTooltip {
@@ -3019,6 +3100,15 @@ namespace KBS.FamilyLines.Properties {
         public static string Publisher {
             get {
                 return ResourceManager.GetString("Publisher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registered RFN.
+        /// </summary>
+        public static string RegisteredRFN {
+            get {
+                return ResourceManager.GetString("RegisteredRFN", resourceCulture);
             }
         }
         
@@ -3077,20 +3167,11 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Family of.
+        ///   Looks up a localized string similar to Family of {0} in {1}.
         /// </summary>
-        public static string ReportHeader1 {
+        public static string ReportHeader {
             get {
-                return ResourceManager.GetString("ReportHeader1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to in.
-        /// </summary>
-        public static string ReportHeader2 {
-            get {
-                return ResourceManager.GetString("ReportHeader2", resourceCulture);
+                return ResourceManager.GetString("ReportHeader", resourceCulture);
             }
         }
         
@@ -3473,11 +3554,11 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 12.
+        ///   Looks up a localized string similar to Submitter.
         /// </summary>
-        public static string StoryFontSize {
+        public static string Submitter {
             get {
-                return ResourceManager.GetString("StoryFontSize", resourceCulture);
+                return ResourceManager.GetString("Submitter", resourceCulture);
             }
         }
         
@@ -3644,15 +3725,6 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to to .
-        /// </summary>
-        public static string ToSpace {
-            get {
-                return ResourceManager.GetString("ToSpace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Tree #.
         /// </summary>
         public static string TreeNum {
@@ -3662,38 +3734,20 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to delete repository.
+        ///   Looks up a localized string similar to Unable to delete repository {0} as this repository is linked to sources..
         /// </summary>
-        public static string UnableDeleteRepository1 {
+        public static string UnableDeleteRepository {
             get {
-                return ResourceManager.GetString("UnableDeleteRepository1", resourceCulture);
+                return ResourceManager.GetString("UnableDeleteRepository", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to as this repository is linked to sources..
+        ///   Looks up a localized string similar to Unable to delete source {0} as this source is linked to citations..
         /// </summary>
-        public static string UnableDeleteRepository2 {
+        public static string UnableDeleteSource {
             get {
-                return ResourceManager.GetString("UnableDeleteRepository2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to delete source.
-        /// </summary>
-        public static string UnableDeleteSource1 {
-            get {
-                return ResourceManager.GetString("UnableDeleteSource1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to as this source is linked to citations..
-        /// </summary>
-        public static string UnableDeleteSource2 {
-            get {
-                return ResourceManager.GetString("UnableDeleteSource2", resourceCulture);
+                return ResourceManager.GetString("UnableDeleteSource", resourceCulture);
             }
         }
         
@@ -3820,6 +3874,15 @@ namespace KBS.FamilyLines.Properties {
         public static string View {
             get {
                 return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View GEDCOM Header Data.
+        /// </summary>
+        public static string ViewHeaderHeader {
+            get {
+                return ResourceManager.GetString("ViewHeaderHeader", resourceCulture);
             }
         }
         

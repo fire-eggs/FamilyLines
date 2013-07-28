@@ -1,6 +1,5 @@
 ﻿<!-- 
  Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
-  
  -->
 <UserControl x:Class="KBS.FamilyLines.Controls.HeaderViewer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -16,8 +15,7 @@
                 BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,1,1,0" 
                 CornerRadius="5,5,0,0" Height="30">
             
-            <!--TODO Embedded string -->
-            <TextBlock Padding="5,0,0,0" Text="View GEDCOM Header Data" 
+            <TextBlock Padding="5,0,0,0" Text="{x:Static Properties:Resources.ViewHeaderHeader}" 
                        TextWrapping="Wrap" Foreground="{DynamicResource HeaderFontColor}" 
                        FontSize="18" FontWeight="Bold" VerticalAlignment="Center" 
                        HorizontalAlignment="Left"/>
@@ -46,85 +44,78 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                            Grid.Column="0"
                            Grid.Row="0"
                            Padding="0"
                            Margin="5,0,5,0"
-                           Content="Submitter"/>
+                           Content="{x:Static Properties:Resources.Submitter}"/>
                     <TextBlock Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="0"
                                Grid.Column="1"
                                Text="{Binding Path=Submitter}"/>
 
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="1"
                                Grid.Column="0"
                            Padding="0"
                                Margin="5,0,5,0"
-                           Content="Copyright"/>
+                           Content="{x:Static Properties:Resources.CopyrightLabel}"/>
                     <TextBlock Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="1"
                                Grid.Column="1"
                                Text="{Binding Path=Copyright}"/>
 
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="2"
                                Grid.Column="0"
                            Padding="0"
                                Margin="5,0,5,0"
-                           Content="Date"/>
+                           Content="{x:Static Properties:Resources.DateHead}"/>
                     <TextBlock Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="2"
                                Grid.Column="1"
                                Text="{Binding Path=SubmitDate}"/>
 
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="3"
                                Grid.Column="0"
                            Padding="0"
                                Margin="5,0,5,0"
-                           Content="Language"/>
+                           Content="{x:Static Properties:Resources.LanguageHeader}"/>
                     <TextBlock Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="3"
                                Grid.Column="1"
                                Text="{Binding Path=HeadLanguage}"/>
 
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="4"
                                Grid.Column="0"
                                Padding="0"
                                Margin="5,0,5,0"
-                           Content="Source"/>
+                           Content="{x:Static Properties:Resources.Source}"/>
                     <TextBlock Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="4"
                                Grid.Column="1"
                                Text="{Binding Path=Source}"/>
 
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="5"
                                Grid.Column="0"
                            Padding="0"
                                Margin="5,0,5,0"
-                           Content="Application"/>
+                           Content="{x:Static Properties:Resources.Application}"/>
                     <TextBlock Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="5"
                                Grid.Column="1"
                                Text="{Binding Path=Application}"/>
 
-                    <!--TODO Embedded string -->
                     <Label Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="6"
                                Grid.Column="0"
                            Padding="0"
                                Margin="5,0,5,0"
-                           Content="Company"/>
+                           Content="{x:Static Properties:Resources.Company}"/>
                     <TextBlock Foreground="{DynamicResource InputFontColor}" 
                                Grid.Row="6"
                                Grid.Column="1"
@@ -137,8 +128,7 @@
                                Margin="5,0,5,0"
                            Content="{Binding Path=SubmitCount}"/>
                 </Grid>
-                <!--TODO Embedded string -->
-                <Button Content="Close" Click="Button_Click"/>
+                <Button Content="{x:Static Properties:Resources.Close}" Click="Button_Click"/>
 
             </StackPanel>
             

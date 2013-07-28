@@ -198,9 +198,6 @@
 	<data name="StoryFontFamily" xml:space="preserve">
     <value>Segoe UI</value>
   </data>
-	<data name="StoryFontSize" xml:space="preserve">
-    <value>12</value>
-  </data>
 	<data name="XamlExtension" xml:space="preserve">
     <value>.xaml</value>
   </data>
@@ -378,35 +375,20 @@
 	<data name="OpenMenu" xml:space="preserve">
     <value>باز کردن...</value>
   </data>
-	<data name="ReportHeader1" xml:space="preserve">
-    <value>خانواده</value>
-  </data>
-	<data name="ReportHeader2" xml:space="preserve">
-    <value>در</value>
+  <data name="ReportHeader" xml:space="preserve">
+    <value>Family of {0} in {1}</value>
   </data>
 	<data name="SaveBeforeMerge" xml:space="preserve">
     <value>آیا می‌خواهید تغییرات جاری را قبل از ادغام ذخیره کنید؟</value>
   </data>
-	<data name="UnableDeleteRepository1" xml:space="preserve">
-    <value>حذف مخزن ناموفق بود</value>
-  </data>
-	<data name="UnableDeleteRepository2" xml:space="preserve">
-    <value>چون این مخزن به منابعی وصل است.</value>
-  </data>
-	<data name="UnableDeleteSource1" xml:space="preserve">
-    <value>حذف منبع نا موفق بود</value>
-  </data>
-	<data name="UnableDeleteSource2" xml:space="preserve">
-    <value>چون منبع به ارجاعاتی متصل است.</value>
+	<data name="UnableDeleteSource" xml:space="preserve">
+    <value>چون منبع به ارجاعاتی متصل است {0} حذف منبع نا موفق بود</value>
   </data>
 	<data name="UnsavedStatus" xml:space="preserve">
     <value>(ذخیره نشده)</value>
   </data>
-	<data name="www" xml:space="preserve">
-    <value>www.</value>
-  </data>
 	<data name="Language" xml:space="preserve">
-    <value>en-US</value>
+    <value>fa-IR</value>
   </data>
 	<data name="NewMenu" xml:space="preserve">
     <value>جدید</value>
@@ -600,9 +582,6 @@
 	<data name="Occupation" xml:space="preserve">
     <value>شغل</value>
   </data>
-	<data name="OfSpace" xml:space="preserve">
-    <value>از </value>
-  </data>
 	<data name="OpenRecent" xml:space="preserve">
     <value>بازکردن پرونده‌های اخیر</value>
   </data>
@@ -653,9 +632,6 @@
   </data>
 	<data name="To" xml:space="preserve">
     <value>تا</value>
-  </data>
-	<data name="ToSpace" xml:space="preserve">
-    <value>تا </value>
   </data>
 	<data name="Version" xml:space="preserve">
     <value>نسخه</value>
@@ -854,9 +830,6 @@
   </data>
 	<data name="ClickFinish" xml:space="preserve">
     <value>روی «پایان» برای ذخیره‌سازی و دیدن پرونده‌تان کلیک کنید:</value>
-  </data>
-	<data name="Danish" xml:space="preserve">
-    <value>دانمارکی</value>
   </data>
 	<data name="ExistingCitation" xml:space="preserve">
     <value>ارجاعات فعلی</value>
@@ -1125,9 +1098,6 @@
   </data>
 	<data name="DateCalculatorMenu" xml:space="preserve">
     <value>حسابگر تاریخ</value>
-  </data>
-	<data name="DateTo" xml:space="preserve">
-    <value>تا</value>
   </data>
 	<data name="days" xml:space="preserve">
     <value>روز</value>
@@ -1491,4 +1461,7 @@ While redistributing the Work or Derivative Works thereof, You may choose to off
 	<data name="Media" xml:space="preserve">
 		<value>رسانه</value>
 	</data>
+  <data name="UnableDeleteRepository" xml:space="preserve">
+    <value>Unable to delete repository {0} as this repository is linked to sources.</value>
+  </data>
 </root>

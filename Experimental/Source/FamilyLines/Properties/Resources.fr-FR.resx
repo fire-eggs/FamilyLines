@@ -312,26 +312,14 @@
   <data name="OpenMenu" xml:space="preserve">
     <value>Ouvrir...</value>
   </data>
-  <data name="ReportHeader1" xml:space="preserve">
-    <value>Famille de</value>
-  </data>
-  <data name="ReportHeader2" xml:space="preserve">
-    <value>dans</value>
+  <data name="ReportHeader" xml:space="preserve">
+    <value>Famille de {0} dans {1}</value>
   </data>
   <data name="SaveBeforeMerge" xml:space="preserve">
     <value>Voulez-vous enregistrer les modifications apportées à la famille en cours avant la fusion?</value>
   </data>
-  <data name="UnableDeleteRepository1" xml:space="preserve">
-    <value>Impossible de supprimer le référentiel</value>
-  </data>
-  <data name="UnableDeleteRepository2" xml:space="preserve">
-    <value>que ce référentiel est lié à des sources.</value>
-  </data>
-  <data name="UnableDeleteSource1" xml:space="preserve">
-    <value>Impossible de supprimer la source</value>
-  </data>
-  <data name="UnableDeleteSource2" xml:space="preserve">
-    <value>car cette source est liée à des citations.</value>
+  <data name="UnableDeleteSource" xml:space="preserve">
+    <value>Impossible de supprimer la source {0} car cette source est liée à des citations.</value>
   </data>
   <data name="UnsavedStatus" xml:space="preserve">
     <value>(Non sauvegardée)</value>
@@ -534,9 +522,6 @@
   <data name="Occupation" xml:space="preserve">
     <value>Profession</value>
   </data>
-  <data name="OfSpace" xml:space="preserve">
-    <value>de </value>
-  </data>
   <data name="OpenRecent" xml:space="preserve">
     <value>Récemment ouverts</value>
   </data>
@@ -587,9 +572,6 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>À</value>
-  </data>
-  <data name="ToSpace" xml:space="preserve">
-    <value>à</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version </value>
@@ -779,9 +761,6 @@
   </data>
   <data name="ClickFinish" xml:space="preserve">
     <value>Cliquez sur 'Terminer' pour enregistrer et consulter votre dossier:</value>
-  </data>
-  <data name="Danish" xml:space="preserve">
-    <value>Danois</value>
   </data>
   <data name="ExistingCitation" xml:space="preserve">
     <value>Citation existants</value>
@@ -1038,9 +1017,6 @@
   <data name="DateCalculatorMessage" xml:space="preserve">
     <value>Utilisez cet outil pour aider à calculer les dates de preuves que vous avez recueillies.</value>
   </data>
-  <data name="DateTo" xml:space="preserve">
-    <value>à</value>
-  </data>
   <data name="days" xml:space="preserve">
     <value>jour</value>
   </data>
@@ -1262,5 +1238,7 @@
   <data name="FamilyViewMenu">
     <value xml:space="preserve">Family View</value>
   </data>
-
+  <data name="UnableDeleteRepository" xml:space="preserve">
+    <value>Impossible de supprimer le référentiel {0} que ce référentiel est lié à des sources.</value>
+  </data>
 </root>

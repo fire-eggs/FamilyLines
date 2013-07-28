@@ -1,3 +1,6 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System;
 using System.IO;
 using System.Windows;
@@ -258,7 +261,8 @@ namespace KBS.FamilyLines
                     }
                 }
                 else
-                    MessageBox.Show(Properties.Resources.UnableDeleteSource1 + " " + sourceToRemove.Id + " " + Properties.Resources.UnableDeleteSource2 ,Properties.Resources.Source, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(string.Format(Properties.Resources.UnableDeleteSource, sourceToRemove.Id),
+                                    Properties.Resources.Source, MessageBoxButton.OK, MessageBoxImage.Warning);
 
             }
         }

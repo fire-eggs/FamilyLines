@@ -1,3 +1,6 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System.ComponentModel;
 using System.Text;
 using System.Windows;
@@ -209,8 +212,11 @@ namespace KBS.FamilyLines
 
         }
 
+        private const string FONTSIZE = "12";
+
 		// KBR 03/12/2012 On import, person notes have NOT been converted to a 'story' (RTF file).
 		// Check for this and load the note into the display.
+        // TODO duplicated in PersonInfo.xaml.cs
         private void LoadStoryText(FlowDocument flowDocument)
         {
 
@@ -235,8 +241,8 @@ namespace KBS.FamilyLines
                 else if (person.Note != null)
                 {
                     textRange.Text = person.Note;
-                    textRange.ApplyPropertyValue(TextElement.FontFamilyProperty, Properties.Resources.StoryFontFamily);
-                    textRange.ApplyPropertyValue(TextElement.FontSizeProperty, Properties.Resources.StoryFontSize);
+                    textRange.ApplyPropertyValue(TextElement.FontFamilyProperty, FONTSIZE);
+                    textRange.ApplyPropertyValue(TextElement.FontSizeProperty, FONTSIZE);
 
                     // Save will take care of converting the note to RTF etc
                 }
@@ -248,7 +254,7 @@ namespace KBS.FamilyLines
             textRange.Text = Properties.Resources.DefaultStory;
 
             textRange.ApplyPropertyValue(TextElement.FontFamilyProperty, Properties.Resources.StoryFontFamily);
-            textRange.ApplyPropertyValue(TextElement.FontSizeProperty, Properties.Resources.StoryFontSize);
+            textRange.ApplyPropertyValue(TextElement.FontSizeProperty, FONTSIZE);
         }
 
         private void FontsComboBox_SelectionChanged(object sender, RoutedEventArgs e)
