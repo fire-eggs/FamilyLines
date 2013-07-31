@@ -1,4 +1,7 @@
 ﻿/*
+ * Family.Show derived code provided under MS-PL license.
+ */
+/*
 * Exports time encoded place information to a kml file.
 * 
 * Three sections are exported: Events and People

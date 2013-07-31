@@ -1,4 +1,7 @@
 ﻿/*
+ * Family.Show derived code provided under MS-PL license.
+ */
+/*
  * A clone of the photo class which creates a serializable repository.
  * 
  * The fields contained in the repository are comparable to the GEDCOM 

@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+ * Family.Show derived code provided under MS-PL license.
+ */
+using System;
 using System.IO;
 using System.IO.Packaging;
 using System.Net.Mime;

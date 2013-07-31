@@ -1,4 +1,7 @@
 ﻿/*
+ * Family.Show derived code provided under MS-PL license.
+ */
+/*
  * Exports sources from the People collection to a Html based report.
  * 
  * The report is based on the same style as the Person report.

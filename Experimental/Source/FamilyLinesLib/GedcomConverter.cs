@@ -1,4 +1,7 @@
 /*
+ * Family.Show derived code provided under MS-PL license.
+ */
+/*
  * GedcomConverter class
  * Converts a GEDCOM file to an XML file.
  * 

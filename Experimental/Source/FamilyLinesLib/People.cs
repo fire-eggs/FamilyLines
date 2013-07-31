@@ -1,4 +1,7 @@
 /*
+ * Family.Show derived code provided under MS-PL license.
+ */
+/*
  * The "People" class creates a family made up of persons, sources, and repositories.
  * 
  * A source/repository is a simple clone of the person object.

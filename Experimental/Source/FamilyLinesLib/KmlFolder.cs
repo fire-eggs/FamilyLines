@@ -1,4 +1,8 @@
-﻿using FamilyLinesLib;
+﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
+ */
+using FamilyLinesLib;
 using System;
 using System.Collections.Generic;
 using System.IO;
