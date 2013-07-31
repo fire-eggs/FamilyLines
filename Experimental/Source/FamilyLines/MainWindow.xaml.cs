@@ -1449,8 +1449,11 @@ namespace KBS.FamilyLines
                 familyCollection.ExportHeader = newFamily.ExportHeader.Copy();
                 family = familyCollection.PeopleCollection; 
                 App.Family = family;
-                if (family.Count > 1)
-                    family.Current = family[1]; // magic to force the details pane to focus properly
+                if (family.Count > 0)
+                {
+                    family.Current = null;
+                    family.Current = family[0]; // magic to force the details pane to focus properly
+                }
                 family.CurrentChanged += People_CurrentChanged;
 
                 family.Current = family[0];
