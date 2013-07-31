@@ -39,6 +39,7 @@ namespace KBS.FamilyLines
 
         #endregion
 
+        [Localizable(false)]
         public Details()
         {
             InitializeComponent();

@@ -226,6 +226,7 @@ namespace KBS.FamilyLines.Controls
         /// <summary>
         /// Fires the event for the property when it changes.
         /// </summary>
+        [Localizable(false)]
         public virtual void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
