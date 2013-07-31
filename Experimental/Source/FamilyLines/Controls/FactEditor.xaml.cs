@@ -205,6 +205,7 @@ namespace KBS.FamilyLines.Controls
 
         #region routed events
 
+        [Localizable(false)] 
         public static readonly RoutedEvent CloseButtonClickEvent = EventManager.RegisterRoutedEvent(
             "CloseButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FactEditor));
 
