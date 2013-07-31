@@ -1,3 +1,6 @@
+/*
+ * Family.Show derived code provided under MS-PL license.
+ */
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

@@ -1,4 +1,8 @@
-﻿using GEDCOM.Net;
+﻿/*
+ * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
+ * 
+ */
+using GEDCOM.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
