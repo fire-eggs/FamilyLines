@@ -132,6 +132,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Resource Include="Licenses\Apache-2.0.txt" />
+    <Resource Include="Licenses\gpl-2.0.txt" />
     <Content Include="Themes\Metro\MetroResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -606,7 +608,7 @@
     <Resource Include="Images\Help.png" />
     <Resource Include="Images\SecurityLock.png" />
     <Resource Include="Images\Statistics.png" />
-    <Resource Include="EULA.txt" />
+    <Resource Include="Licenses\MS-PL.txt" />
     <Resource Include="Images\Calculator.png" />
     <Resource Include="Images\RightArrowBlue.png" />
     <Resource Include="Images\Merge.png">
