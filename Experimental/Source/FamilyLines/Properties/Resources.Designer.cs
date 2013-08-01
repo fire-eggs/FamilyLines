@@ -907,6 +907,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credits.
+        /// </summary>
+        public static string CreditsLabel {
+            get {
+                return ResourceManager.GetString("CreditsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cremation.
         /// </summary>
         public static string Cremation {
@@ -1420,19 +1429,13 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apache License
-        ///Version 2.0, January 2004
-        ///http://www.apache.org/licenses/
+        ///   Looks up a localized string similar to For the text of all relevant licenses, please see the &quot;Licenses&quot; folder installed in the Family Lines application folder.
         ///
-        ///TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+        ///Family Lines is based on code from the &quot;Family.Show&quot; project. All &quot;Family.Show&quot; code, and modifications, are released under the MS-PL license.
         ///
-        ///1. Definitions.
+        ///Family Lines uses the &quot;GEDCOM.NET&quot; library, which is licensed under GPL V2. The GEDCOM.NET code, and our changes to that code, is available as part of the Family Lines repository.
         ///
-        ///&quot;License&quot; shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.
-        ///
-        ///&quot;Licensor&quot; shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.
-        ///
-        ///&quot;Legal Entity&quot; shall mean the union of the acting entity and all other entities that contr [rest of string was truncated]&quot;;.
+        ///All other code, strings, resources, images, icons etc. cre [rest of string was truncated]&quot;;.
         /// </summary>
         public static string EULA {
             get {
@@ -2389,6 +2392,15 @@ namespace KBS.FamilyLines.Properties {
         public static string LatestKnownEvent {
             get {
                 return ResourceManager.GetString("LatestKnownEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licenses.
+        /// </summary>
+        public static string Licenses {
+            get {
+                return ResourceManager.GetString("Licenses", resourceCulture);
             }
         }
         
