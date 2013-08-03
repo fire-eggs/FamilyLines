@@ -1641,7 +1641,7 @@
                         Style="{DynamicResource DetailsBorderStyle}"  
                         Margin="0,0,0,0" Background="{DynamicResource InputBackgroundBrush}" 
                         BorderThickness="0,1,0,1" CornerRadius="0,0,0,0" Padding="0,0,0,0" 
-                        Height="615" Visibility="Visible">
+                        Height="Auto" Visibility="Visible">
 
                     <StackPanel Margin="10,5,10,0" HorizontalAlignment="Stretch">
                         <DockPanel Margin="0,0,0,5" DockPanel.Dock="Top">
@@ -1649,12 +1649,17 @@
                             <Button Margin="0,0,0,0" HorizontalAlignment="Left" DockPanel.Dock="Top" Content="{x:Static properties:Resources.Back}" Height="15" FontSize="10" IsDefault="True" Width="Auto" MinWidth="60" x:Name="DoneEditMoreButton" Click="DoneEditMoreButton_Click" IsCancel="True" />
                         </DockPanel>
 
+                        <Controls1:EventDetails x:Name="BaptismEvent"/>
+                        <Controls1:EventDetails x:Name="ChristeningEvent"/>
+                        <Controls1:EventDetails x:Name="CremationEvent"/>
+                        <Controls1:EventDetails x:Name="BurialEvent"/>
+
+                        <!--
                         <Expander Name="expandBAPM" 
 				                  Style="{StaticResource MainViewExpander}"
                                   ExpandDirection="Down" 
                                   IsExpanded="False" 
                                   Header="Baptism">
-                            <Controls1:EventDetails x:Name="BaptismEvent"/>
                         </Expander>
                         
                         <Expander Name="expandCHR" 
@@ -1662,20 +1667,18 @@
                                   ExpandDirection="Down" 
                                   IsExpanded="False" 
                                   Header="Christening">
-                            <Controls1:EventDetails x:Name="ChristeningEvent"/>
                         </Expander>
 
                         <Expander Name="expandCRE" ExpandDirection="Down" 
 				                  Style="{StaticResource MainViewExpander}"
                                   IsExpanded="False" Header="Cremation">
-                            <Controls1:EventDetails x:Name="CremationEvent"/>
                         </Expander>
 
                         <Expander Name="expandBUR" ExpandDirection="Down" 
 				                  Style="{StaticResource MainViewExpander}"
                                   IsExpanded="False" Header="Burial">
-                            <Controls1:EventDetails x:Name="BurialEvent"/>
                         </Expander>
+                        -->
 
                         <Controls1:FactDetails x:Name="TitleFact"/>
                         <Controls1:FactDetails x:Name="CasteFact"/>
@@ -1699,10 +1702,11 @@
                 </Border>
 
                 
-                
                 <!-- Details Edit Citations is used for modifying the person's information sources -->
 
-                <Border x:Name="DetailsEditCitations" DockPanel.Dock="Top" Style="{DynamicResource DetailsBorderStyle}"  Margin="0,0,0,0" Background="{DynamicResource InputBackgroundBrush}" BorderThickness="0,1,0,1" CornerRadius="0,0,0,0" Padding="0,0,0,0" Height="Auto" Width="Auto"  Visibility="Visible">
+                <Border x:Name="DetailsEditCitations" DockPanel.Dock="Top" Style="{DynamicResource DetailsBorderStyle}"  Margin="0,0,0,0" 
+                        Background="{DynamicResource InputBackgroundBrush}" BorderThickness="0,1,0,1" CornerRadius="0,0,0,0" Padding="0,0,0,0" 
+                        Height="Auto" Width="Auto"  Visibility="Visible">
 
                     <StackPanel Margin="10,5,10,0">
                         <DockPanel Margin="0,0,0,5" DockPanel.Dock="Top">
@@ -1839,7 +1843,6 @@
                             </RadioButton>
 
                             <ListBox x:Name="ParentChildListbox" 
-                                     ItemTemplate="{DynamicResource ParentChildModifierDataTemplate}" 
                                      KeyboardNavigation.DirectionalNavigation="Cycle" 
                                      BorderBrush="Transparent" 
                                      Foreground="{DynamicResource InputFontColor}" 
@@ -1890,7 +1893,8 @@
                                
                                 <RadioButton Margin="14,3,0,0" x:Name="SpouseModifer" Visibility="{Binding Path=IsLocked, Converter={StaticResource BoolToVisibilityConverter}, Mode=Default}" Foreground="{DynamicResource InputFontColor}" IsChecked="True"/>
                                 
-                                <ListBox x:Name="SpouseStatusListbox" ItemTemplate="{DynamicResource SpouseModifierDataTemplate}" KeyboardNavigation.DirectionalNavigation="Cycle" BorderBrush="Transparent" Foreground="{DynamicResource InputFontColor}" Background="{x:Null}" Padding="10,10,0,0" SelectionChanged="SpouseStatusListbox_SelectionChanged" Margin="0,-10,0,0" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}">
+                                <ListBox x:Name="SpouseStatusListbox"
+                                         KeyboardNavigation.DirectionalNavigation="Cycle" BorderBrush="Transparent" Foreground="{DynamicResource InputFontColor}" Background="{x:Null}" Padding="10,10,0,0" SelectionChanged="SpouseStatusListbox_SelectionChanged" Margin="0,-10,0,0" Visibility="{Binding Path=IsLocked, Converter={StaticResource NotBoolToVisibilityConverter}, Mode=Default}">
                                     <ListBox.Resources>
                                         <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}" >
                                             <Setter Property="Margin" Value="2, 2, 2, 0" />
