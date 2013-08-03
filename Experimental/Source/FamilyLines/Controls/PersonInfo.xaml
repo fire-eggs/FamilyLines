@@ -204,9 +204,9 @@
                           
                             <Grid ScrollViewer.CanContentScroll="True">
                                 <Grid.RowDefinitions>
-                                  <RowDefinition Height="25"/>
-                                    <RowDefinition Height="25"/>
-                                    <RowDefinition Height="25"/>
+                                  <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="25"/>
                                     <RowDefinition Height="25"/>
                                 </Grid.RowDefinitions>
@@ -215,25 +215,65 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="1" Width="Auto" MinWidth="65" x:Name="SaveLinkButton" Content="{x:Static properties:Resources.Save}" HorizontalAlignment="Right" Margin="0,2,10,0"  IsDefault="True" FontSize="10" Height="15" VerticalAlignment="Top" Style="{DynamicResource RedButtonStyle}" Click="SaveLink_Click" />
-                              
-                                <TextBlock  Grid.Row="1" Margin="25,5,5,5" HorizontalAlignment="Left" Foreground="{DynamicResource FontColor}" ><Run Text="{x:Static properties:Resources.Link}"/></TextBlock>
-                                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="LinkTextBox" HorizontalAlignment="Left" Margin="5,5,5,5" Width="Auto" MinWidth="350"></TextBox>
+                                <Button Grid.Column="1" Width="Auto" MinWidth="65" 
+                                        x:Name="SaveLinkButton" 
+                                        Content="{x:Static properties:Resources.Save}" 
+                                        HorizontalAlignment="Right" Margin="0,3,10,3"  
+                                        IsDefault="True" FontSize="10" Height="15" 
+                                        VerticalAlignment="Top" Padding="0"
+                                        Style="{DynamicResource RedButtonStyle}" 
+                                        Click="SaveLink_Click" />
 
-                                <Button Grid.Row="1" Grid.Column="2" Height="15"  HorizontalAlignment="Right" Width="15"  x:Name="LinkButton" Click="LinkButton_Click" IsDefault="True" >
-                                        <Image HorizontalAlignment="Left" Source="..\Images\Globe.png"  Height="15" />
+                                <!-- TODO Create a 'linkedit' control for link/desc pair -->
+                                <!--TODO need to use/create appropriate Style -->
+                                <Label  Grid.Row="1" HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Foreground="{DynamicResource FontColor}" Padding="0"
+                                        Content="{x:Static properties:Resources.Link}"/>
+                                <!--TODO need to use/create appropriate Style -->
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="LinkTextBox"
+                                         FontSize="11"
+                                         HorizontalAlignment="Left" Margin="5,0,5,5" Height="22" Padding="0"
+                                         Width="Auto" MinWidth="350"></TextBox>
+
+                                <Button Grid.Row="1" Grid.Column="2" Height="15"  HorizontalAlignment="Right" Width="15"  
+                                        x:Name="LinkButton" Click="LinkButton_Click">
+                                        <Image HorizontalAlignment="Left" Source="..\Images\Globe.png" Height="15" />
                                     </Button>
-                                <TextBlock  Grid.Row="2" Margin="25,5,5,5" HorizontalAlignment="Left" Foreground="{DynamicResource FontColor}" ><Run Text="Description"/></TextBlock>
-                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="DescTextBox" HorizontalAlignment="Left"  Margin="5,5,5,5" Width="Auto" MinWidth="350"></TextBox>
+                                <Label  Grid.Row="2" HorizontalAlignment="Right"
+                                        VerticalAlignment="Center" Padding="0"
+                                        Foreground="{DynamicResource FontColor}" 
+                                        Content="{x:Static properties:Resources.DescHead}"/>
 
-                                <TextBlock  Grid.Row="3" Margin="25,5,5,5" HorizontalAlignment="Left" Foreground="{DynamicResource FontColor}" ><Run Text="{x:Static properties:Resources.Link}"/></TextBlock>
-                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="LinkTextBox2" Margin="5,5,5,5" Width="Auto" MinWidth="350"></TextBox>
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="DescTextBox" 
+                                         HorizontalAlignment="Left" Margin="5,0,5,5" 
+                                         Height="22" FontSize="11"
+                                         Width="Auto" MinWidth="350"></TextBox>
 
-                                <Button  Grid.Row="3" Grid.Column="2" Height="15"  HorizontalAlignment="Right" Width="15"  x:Name="LinkButton2" Click="LinkButton2_Click" IsDefault="True" >
-                                    <Image HorizontalAlignment="Left" Source="..\Images\Globe.png"  Height="20" />
+                                <!--TODO need to use/create appropriate Style -->
+                                <Label  Grid.Row="3" HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Foreground="{DynamicResource FontColor}" Padding="0"
+                                        Content="{x:Static properties:Resources.Link}"/>
+                                <!--TODO need to use/create appropriate Style -->
+                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="LinkTextBox2"
+                                         FontSize="11"
+                                         HorizontalAlignment="Left" Margin="5,0,5,5" Height="22" Padding="0"
+                                         Width="Auto" MinWidth="350"></TextBox>
+
+                                <Button Grid.Row="3" Grid.Column="2" Height="15"  HorizontalAlignment="Right" Width="15"  
+                                        x:Name="LinkButton2" Click="LinkButton2_Click">
+                                    <Image HorizontalAlignment="Left" Source="..\Images\Globe.png" Height="15" />
                                 </Button>
-                                <TextBlock  Grid.Row="4" Margin="25,5,5,5" HorizontalAlignment="Left" Foreground="{DynamicResource FontColor}" ><Run Text="Description"/></TextBlock>
-                                <TextBox Grid.Row="4" Grid.Column="1" x:Name="DescTextBox2" Margin="5,5,5,5" HorizontalAlignment="Left"  Width="Auto" MinWidth="350"></TextBox>
+                                <Label  Grid.Row="4" HorizontalAlignment="Right"
+                                        VerticalAlignment="Center" Padding="0"
+                                        Foreground="{DynamicResource FontColor}" 
+                                        Content="{x:Static properties:Resources.DescHead}"/>
+
+                                <TextBox Grid.Row="4" Grid.Column="1" x:Name="DescTextBox2" 
+                                         HorizontalAlignment="Left" Margin="5,0,5,5" 
+                                         Height="22" FontSize="11"
+                                         Width="Auto" MinWidth="350"></TextBox>
 
                             </Grid>
                         </ScrollViewer>
