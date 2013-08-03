@@ -52,6 +52,7 @@ namespace KBS.FamilyLines.Controls.FamilyView
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        [Localizable(false)]
         protected virtual void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)

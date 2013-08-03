@@ -1,7 +1,10 @@
 ﻿/*
  * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
- * 
  */
+//
+// View all the facts/events for a given person.
+// The ShowFacts property indicates whether showing Facts or Events.
+//
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,6 +14,13 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using GEDCOM.Net;
 using KBS.FamilyLinesLib;
+
+// TODO enforce events which "should" be single? Birth, Cremation, Death
+// TODO 'custom' event needs field for user to enter event name?
+// TODO: when adding, the Save button should be disabled until an event type is picked
+// TODO 'age' support
+// TODO 'certainty' support
+// TODO date validation
 
 namespace KBS.FamilyLines.Controls
 {
@@ -191,6 +201,7 @@ namespace KBS.FamilyLines.Controls
 
         #region routed events
 
+        [Localizable(false)] 
         public static readonly RoutedEvent CloseButtonClickEvent = EventManager.RegisterRoutedEvent(
             "CloseButtonClick", RoutingStrategy.Bubble, typeof (RoutedEventHandler), typeof (ViewAllFacts));
 
@@ -267,8 +278,13 @@ namespace KBS.FamilyLines.Controls
         // User has clicked the 'delete' button.
         private void delBtn_Click(object sender, RoutedEventArgs e)
         {
-            // TODO confirmation - correct text w/ identification of event/fact
-            MessageBoxResult result = MessageBox.Show(Properties.Resources.ConfirmDeleteSource, Properties.Resources.Source, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            string msg;
+            if (ShowFacts)
+                msg = string.Format(Properties.Resources.ConfirmDeleteFact, _activeEvent.EventName);
+            else
+                msg = string.Format(Properties.Resources.ConfirmDeleteEvent, _activeEvent.EventName);
+
+            MessageBoxResult result = MessageBox.Show(msg, Properties.Resources.DeleteFactOrEvent, MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result != MessageBoxResult.Yes)
                 return;
 
@@ -293,15 +309,14 @@ namespace KBS.FamilyLines.Controls
             resetData();
         }
 
-        // TODO: when adding, the Save button should be disabled until an event type is picked
-
         // save all edits
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_activeEvent == null) // True when adding
             {
                 EventGlob eType = eventPick.SelectedItem as EventGlob;
-                // TODO: assuming not null
+                if (eType == null)
+                    return;
 
                 // create new event/fact
                 // add to appropriate list
@@ -315,12 +330,13 @@ namespace KBS.FamilyLines.Controls
                 {
                     _activeEvent = new GEDEvent();
                     _activeEvent.Type = eType.Type;
-                    Facts.Add(_activeEvent as GEDAttribute);
+                    Events.Add(_activeEvent);
                 }
             }
 
-            // TODO Parse date
-            //txtDate.Text = _activeEvent.Date == null ? "" : _activeEvent.Date.DateString;
+            _activeEvent.Date = new GedcomDate();
+            _activeEvent.Date.Date1 = txtDate.Text.Trim(); // TODO date validation; range/approximate support
+
             _activeEvent.Place = txtPlace.Text.Trim();
             _activeEvent.Description = txtDesc.Text.Trim();
             if (txtAddress.Text.Trim().Length > 0)
@@ -329,8 +345,9 @@ namespace KBS.FamilyLines.Controls
                     _activeEvent.Address = new GedcomAddress();
                 _activeEvent.Address.AddressLine = txtAddress.Text.Trim();
             }
-            // TODO parse age
-            //txtAge.Text = _activeEvent.Age == null ? "" : _activeEvent.Age.Years.ToString();
+
+            //_activeEvent.Age = txtAge.Text.Trim(); // TODO no means of parsing age. also, text age (e.g. "6 months")?
+
             _activeEvent.ResponsibleAgency = txtAgency.Text.Trim();
             _activeEvent.Cause = txtCause.Text.Trim();
             //txtCertainty.Text = ""; // TODO don't have certainty data
@@ -363,10 +380,10 @@ namespace KBS.FamilyLines.Controls
             if (_activeEvent == null) // true if adding [careful with invalid selection case!]
             {
                 ClearInputs();
-                txtDate.Text = "new date"; // TODO hardcoded string
-                txtPlace.Text = "new place";
-                txtDesc.Text = "new description";
-                txtAddress.Text = "new address";
+                txtDate.Text = Properties.Resources.ViewAllFacts_resetData_new_date;
+                txtPlace.Text = Properties.Resources.ViewAllFacts_resetData_new_place;
+                txtDesc.Text = Properties.Resources.ViewAllFacts_resetData_new_description;
+                txtAddress.Text = Properties.Resources.ViewAllFacts_resetData_new_address;
 
                 eventName.Visibility = Visibility.Collapsed;
                 eventPick.Visibility = Visibility.Visible;
@@ -379,7 +396,8 @@ namespace KBS.FamilyLines.Controls
             txtPlace.Text = _activeEvent.Place;
             txtDesc.Text = _activeEvent.Description;
             txtAddress.Text = _activeEvent.Address == null ? "" : _activeEvent.Address.AddressLine;
-            txtAge.Text = _activeEvent.Age == null ? "" : _activeEvent.Age.Years.ToString();
+            // TODO not ready for V0.5
+            //txtAge.Text = _activeEvent.Age == null ? "" : _activeEvent.Age.Years.ToString();
             txtAgency.Text = _activeEvent.ResponsibleAgency;
             txtCause.Text = _activeEvent.Cause;
             //txtCertainty.Text = ""; // TODO don't have certainty data

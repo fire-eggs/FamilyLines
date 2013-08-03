@@ -67,8 +67,7 @@ namespace KBS.FamilyLines.Controls
         {
             get
             {
-                // TODO localization
-                return "Date of " + GedcomEvent.TypeToReadable(EventType);
+                return string.Format(Properties.Resources.DateOfEvent, GedcomEvent.TypeToReadable(EventType));
             }
         }
 
@@ -76,8 +75,7 @@ namespace KBS.FamilyLines.Controls
         {
             get
             {
-                // TODO localization
-                return "Place of " + GedcomEvent.TypeToReadable(EventType);
+                return string.Format(Properties.Resources.PlaceOfEvent, GedcomEvent.TypeToReadable(EventType));
             }
         }
 
@@ -200,7 +198,7 @@ namespace KBS.FamilyLines.Controls
 
         private void UpdateToolTip(TextBox box)
         {
-            box.ToolTip = "TBD: filler tooltip"; // TODO real tooltip
+//            box.ToolTip = "TBD: filler tooltip"; // TODO real tooltip
         }
 
         public void Leaving()

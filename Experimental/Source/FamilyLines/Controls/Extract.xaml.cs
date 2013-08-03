@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using KBS.FamilyLinesLib;
@@ -17,9 +18,11 @@ namespace KBS.FamilyLines.Controls
 
         #region routed events
 
+        [Localizable(false)] 
         public static readonly RoutedEvent ExtractButtonClickEvent = EventManager.RegisterRoutedEvent(
             "ExtractButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Extract));
 
+        [Localizable(false)] 
         public static readonly RoutedEvent CancelButtonClickEvent = EventManager.RegisterRoutedEvent(
             "CancelButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Extract));
 

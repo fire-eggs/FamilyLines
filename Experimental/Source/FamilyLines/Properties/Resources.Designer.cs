@@ -772,6 +772,24 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you wish to remove the event &apos;{0}&apos;?.
+        /// </summary>
+        public static string ConfirmDeleteEvent {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you wish to remove the fact &apos;{0}&apos;?.
+        /// </summary>
+        public static string ConfirmDeleteFact {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteFact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete {0} {1}?.
         /// </summary>
         public static string ConfirmDeletePerson {
@@ -1078,6 +1096,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date of {0}.
+        /// </summary>
+        public static string DateOfEvent {
+            get {
+                return ResourceManager.GetString("DateOfEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daughter.
         /// </summary>
         public static string Daughter {
@@ -1218,6 +1245,15 @@ namespace KBS.FamilyLines.Properties {
         public static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete a Fact or Event.
+        /// </summary>
+        public static string DeleteFactOrEvent {
+            get {
+                return ResourceManager.GetString("DeleteFactOrEvent", resourceCulture);
             }
         }
         
@@ -3008,6 +3044,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Place of {0}.
+        /// </summary>
+        public static string PlaceOfEvent {
+            get {
+                return ResourceManager.GetString("PlaceOfEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Places.
         /// </summary>
         public static string Places {
@@ -3886,6 +3931,42 @@ namespace KBS.FamilyLines.Properties {
         public static string View {
             get {
                 return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new address.
+        /// </summary>
+        public static string ViewAllFacts_resetData_new_address {
+            get {
+                return ResourceManager.GetString("ViewAllFacts_resetData_new_address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new date.
+        /// </summary>
+        public static string ViewAllFacts_resetData_new_date {
+            get {
+                return ResourceManager.GetString("ViewAllFacts_resetData_new_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new description.
+        /// </summary>
+        public static string ViewAllFacts_resetData_new_description {
+            get {
+                return ResourceManager.GetString("ViewAllFacts_resetData_new_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new place.
+        /// </summary>
+        public static string ViewAllFacts_resetData_new_place {
+            get {
+                return ResourceManager.GetString("ViewAllFacts_resetData_new_place", resourceCulture);
             }
         }
         

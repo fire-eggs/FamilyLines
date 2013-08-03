@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using GEDCOM.Net;
@@ -79,6 +80,8 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         private void ExportSummary(string gedcomFilePath,string familyxFilePath, string language)
 		{
+            // TODO grab & export data from header object if available
+
                 WriteLine(1, "SOUR", "");
 				
                 Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -102,6 +105,7 @@ namespace KBS.FamilyLinesLib
 				WriteLine(2, "FORM", "LINEAGE-LINKED");
 				WriteLine(1, "CHAR", "UTF-8");
 
+            // TODO more languages - pull from language.xml
                 switch (language)
                 {
                     case "en-US":
@@ -584,11 +588,11 @@ namespace KBS.FamilyLinesLib
         private void ExportEvent(GEDEvent evData, string extra="")
         {
             // Do nothing if don't have important data
-            if (evData.Date == null || string.IsNullOrEmpty(evData.Place))
+            if (evData.Date == null && string.IsNullOrEmpty(evData.Place))
                 return;
 
             WriteLine(1, evData.GEDCOMTag, evData.Description ?? "");
-            if (!string.IsNullOrEmpty(evData.Date.DateString))
+            if (evData.Date != null && !string.IsNullOrEmpty(evData.Date.DateString))
                 WriteLine(2, "DATE", evData.Date.DateString);
             if (!string.IsNullOrEmpty(evData.Place))
                 WriteLine(2, "PLAC", evData.Place);
@@ -738,6 +742,7 @@ namespace KBS.FamilyLinesLib
         // return. Then divide each carriage-return line into chunks of 200 characters. 
         // The first line contains the original tag name and level, carriage returns contain
         // the CONT tag and continue lines contains CONC.
+        [Localizable(false)]
         private void WriteLine(int level, string tag, string value)
         {
             // Trim leading white space

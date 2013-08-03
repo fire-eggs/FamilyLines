@@ -5,6 +5,7 @@
 */
 
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
@@ -318,6 +319,7 @@ namespace KBS.FamilyLines
     /// </summary>
     public class ChildDiagramConnector : DiagramConnector
     {
+        [Localizable(false)]
         public ChildDiagramConnector(DiagramConnectorNode startConnector, 
             DiagramConnectorNode endConnector) : base(startConnector, endConnector)
         {
@@ -455,8 +457,9 @@ namespace KBS.FamilyLines
             }
         }
 
-        #endregion        
+        #endregion
 
+        [Localizable(false)]
         public MarriedDiagramConnector(bool isMarried,
             DiagramConnectorNode startConnector, DiagramConnectorNode endConnector) : 
             base(startConnector, endConnector)

@@ -73,7 +73,7 @@ namespace KBS.FamilyLines.Controls
 
         private void ToolTip_All(object sender, ToolTipEventArgs e)
         {
-            FactTextBox.ToolTip = "TBD: filler tooltip"; // TODO real tooltip
+            //FactTextBox.ToolTip = "TBD: filler tooltip"; // TODO real tooltip
         }
 
         public bool IsLocked

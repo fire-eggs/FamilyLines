@@ -17,6 +17,7 @@
 */
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
@@ -414,6 +415,7 @@ namespace KBS.FamilyLines
         /// <summary>
         /// Return the brush resouse based on the node type.
         /// </summary>
+        [Localizable(false)]
         private Brush GetBrushResource(string part)
         {
             // Format string, the resource is in the XAML file.
@@ -443,6 +445,7 @@ namespace KBS.FamilyLines
         /// <summary>
         /// Update the node template based on the node type.
         /// </summary>
+        [Localizable(false)]
         private void UpdateTemplate()
         {
             // Determine the node template based on node properties.
