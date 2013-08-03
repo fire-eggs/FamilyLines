@@ -1478,4 +1478,35 @@ All other code, strings, resources, images, icons etc. created by the Family Lin
   <data name="Licenses" xml:space="preserve">
     <value>Licenses</value>
   </data>
+  <data name="ViewAllFacts_resetData_new_date" xml:space="preserve">
+    <value>new date</value>
+  </data>
+  <data name="ViewAllFacts_resetData_new_place" xml:space="preserve">
+    <value>new place</value>
+  </data>
+  <data name="ViewAllFacts_resetData_new_description" xml:space="preserve">
+    <value>new description</value>
+  </data>
+  <data name="ViewAllFacts_resetData_new_address" xml:space="preserve">
+    <value>new address</value>
+  </data>
+  <data name="ConfirmDeleteEvent" xml:space="preserve">
+    <value>Do you wish to remove the event '{0}'?</value>
+    <comment>{0} is an event name, e.g. 'Baptism'</comment>
+  </data>
+  <data name="ConfirmDeleteFact" xml:space="preserve">
+    <value>Do you wish to remove the fact '{0}'?</value>
+    <comment>{0} is a fact name, e.g. 'Education'</comment>
+  </data>
+  <data name="DeleteFactOrEvent" xml:space="preserve">
+    <value>Delete a Fact or Event</value>
+  </data>
+  <data name="DateOfEvent" xml:space="preserve">
+    <value>Date of {0}</value>
+    <comment>{0} is an event name, e.g. 'Baptism'</comment>
+  </data>
+  <data name="PlaceOfEvent" xml:space="preserve">
+    <value>Place of {0}</value>
+    <comment>{0} is an event name, e.g. 'Baptism'</comment>
+  </data>
 </root>

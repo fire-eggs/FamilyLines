@@ -149,7 +149,10 @@ Family Lines code is provided using the Apache License V2.0, January 2004 http:/
                     <Label Grid.Row="5" Grid.Column="0" 
                            Content="{x:Static properties:Resources.Age}" 
                            HorizontalAlignment="Right"/>
+                    
+                    <!-- TODO not ready for V0.5 -->
                     <TextBox Grid.Row="5" Grid.Column="1" 
+                             IsEnabled="False"
                              x:Name="txtAge" />
                     <Label Grid.Row="6" Grid.Column="0" 
                            Content="{x:Static properties:Resources.Agency}" 
@@ -161,16 +164,24 @@ Family Lines code is provided using the Apache License V2.0, January 2004 http:/
                            HorizontalAlignment="Right"/>
                     <TextBox Grid.Row="7" Grid.Column="1" 
                              x:Name="txtCause" />
-                    <!--<Label Grid.Row="8" Grid.Column="0" 
+                    <!-- TODO don't have certainty yet
+                    <Label Grid.Row="8" Grid.Column="0" 
                            Content="Certainty:" 
                            HorizontalAlignment="Right"/>
                     <TextBox Grid.Row="8" Grid.Column="1" 
                              x:Name="txtCertainty" />-->
                 </Grid>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
-                    <Button x:Name="NotesBtn"  Margin="5" Content="{x:Static properties:Resources.Notes}"/>
-                    <Button x:Name="MMediaBtn" Margin="5" Content="{x:Static properties:Resources.Photos}"/>
-                    <Button x:Name="SourceBtn" Margin="5" Content="{x:Static properties:Resources.Sources}"/>
+                    <!-- TODO not ready for V0.5 -->
+                    <Button x:Name="NotesBtn"  Margin="5" 
+                            IsEnabled="False"
+                            Content="{x:Static properties:Resources.Notes}"/>
+                    <Button x:Name="MMediaBtn" Margin="5" 
+                            IsEnabled="False"
+                            Content="{x:Static properties:Resources.Photos}"/>
+                    <Button x:Name="SourceBtn" Margin="5" 
+                            IsEnabled="False"
+                            Content="{x:Static properties:Resources.Sources}"/>
                 </StackPanel>
             </Grid>
         </Border>
