@@ -1293,7 +1293,7 @@
                                     <Run local:BindableExtender.BindableText="{Binding Path=Person.ParentsText}" />
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap" x:Name="SiblingsDatePanel" Margin="0,0,0,5">
-                  <Run local:BindableExtender.BindableText="{Binding Path=Person.SiblingRelationshipText}" /><Run local:BindableExtender.BindableText="{Binding Path=Person.SiblingsText}" />
+                                    <Run local:BindableExtender.BindableText="{Binding Path=Person.SiblingsText}" />
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap" x:Name="SpousesDatePanel" Margin="0,0,0,5">
                   <Run local:BindableExtender.BindableText="{Binding Path=Person.SpouseRelationshipText}" /><Run local:BindableExtender.BindableText="{Binding Path=Person.SpousesText}" />
