@@ -452,6 +452,8 @@ namespace KBS.FamilyLinesLib
             get { return birthDate; }
             set
             {
+                Console.WriteLine("BirthDate: incoming'" + value + "'");
+
                 if (birthDate == null || birthDate != value)
                 {
                     birthDate = value;
@@ -2148,26 +2150,6 @@ namespace KBS.FamilyLinesLib
         }
 
         /// <summary>
-        /// Calculated property that returns string that describes this person to their siblings.
-        /// </summary>
-        [XmlIgnore]
-        public string SiblingRelationshipText
-        {
-            get
-            {
-                switch (gender)
-                {
-                    case Gender.Male:
-                        return Resources.Brother;
-                    case Gender.Female:
-                        return Resources.Sister;
-                    default:
-                        return "Unknown"; // TODO embedded string
-                }
-            }
-        }
-
-        /// <summary>
         /// Calculated property that returns string text for this person's siblings
         /// </summary>
         [XmlIgnore]
@@ -2176,29 +2158,74 @@ namespace KBS.FamilyLinesLib
             get
             {
                 Collection<Person> siblings = Siblings;
+                if (siblings.Count < 1)
+                    return "";
 
-                string siblingsText = string.Empty;
-                if (siblings.Count > 0)
+                // For improved localization, a) use a brute force resource lookup; b) limit the maximum
+                // number of siblings we'll display.
+                switch (siblings.Count)
                 {
-                    siblingsText = siblings[0].Name;
-
-                    if (siblings.Count == 2)
-                        siblingsText += " " + Resources.And + " " + siblings[1].Name;
-                    else
-                    {
-                        for (int i = 1; i < siblings.Count; i++)
-                        {
-                            if (i == siblings.Count - 1)
-                                siblingsText += " " + Resources.And + " " + siblings[i].Name;
-                            else
-                                siblingsText += ", " + siblings[i].Name;
-                        }
-                    }
+                    case 1:
+                        return sibSex1(siblings[0]);
+                    case 2:
+                        return sibSex2(siblings[0], siblings[1]);
+                    case 3:
+                        return sibSex3(siblings);
+                    default:
+                        return sibSexMany(siblings);
                 }
+            }
+        }
 
-                if(!string.IsNullOrEmpty(siblingsText))
-                    return " " + Resources.To + " " + siblingsText;
-                return siblingsText;
+        private string sibSexMany(Collection<Person> siblings)
+        {
+            switch (gender)
+            {
+                case Gender.Male:
+                    return string.Format(Resources.BrotherToMany, siblings[0].Name, siblings[1].Name, siblings[2].Name);
+                case Gender.Female:
+                    return string.Format(Resources.SisterToMany, siblings[0].Name, siblings[1].Name, siblings[2].Name);
+                default:
+                    return string.Format(Resources.UnknownToMany, siblings[0].Name, siblings[1].Name, siblings[2].Name);
+            }
+        }
+
+        private string sibSex3(Collection<Person> siblings)
+        {
+            switch (gender)
+            {
+                case Gender.Male:
+                    return string.Format(Resources.BrotherTo3, siblings[0].Name, siblings[1].Name, siblings[2].Name);
+                case Gender.Female:
+                    return string.Format(Resources.SisterTo3, siblings[0].Name, siblings[1].Name, siblings[2].Name);
+                default:
+                    return string.Format(Resources.UnknownTo3, siblings[0].Name, siblings[1].Name, siblings[2].Name);
+            }
+        }
+
+        private string sibSex2(Person person, Person person1)
+        {
+            switch (gender)
+            {
+                case Gender.Male:
+                    return string.Format(Resources.BrotherTo2, person.Name, person1.Name);
+                case Gender.Female:
+                    return string.Format(Resources.SisterTo2, person.Name, person1.Name);
+                default:
+                    return string.Format(Resources.UnknownTo2, person.Name, person1.Name);
+            }
+        }
+
+        private string sibSex1(Person person)
+        {
+            switch (gender)
+            {
+                case Gender.Male:
+                    return string.Format(Resources.BrotherTo, person.Name);
+                case Gender.Female:
+                    return string.Format(Resources.SisterTo, person.Name);
+                default:
+                    return string.Format(Resources.UnknownTo, person.Name);
             }
         }
 

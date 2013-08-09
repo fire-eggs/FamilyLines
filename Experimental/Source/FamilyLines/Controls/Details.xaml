@@ -1021,7 +1021,7 @@
                     <TextBlock TextTrimming="CharacterEllipsis" MaxWidth="200" MaxHeight="20"  LineStackingStrategy="MaxHeight" x:Name="Name" Text="{Binding Path=FullName}" FontWeight="Bold" TextWrapping="Wrap" Margin="-7,0,7,5" />
                     <TextBlock x:Name="BirthDatePanel" Text="{Binding Path=BirthDateAndPlace}" TextWrapping="Wrap" Margin="0,0,0,5" />
                     <TextBlock TextWrapping="Wrap" x:Name="ParentsDatePanel" Margin="0,0,0,5"><Run local:BindableExtender.BindableText="{Binding Path=ParentsText}" /></TextBlock>
-                    <TextBlock TextWrapping="Wrap" x:Name="SiblingsDatePanel" Margin="0,0,0,5"><Run local:BindableExtender.BindableText="{Binding Path=SiblingRelationshipText}"/><Run local:BindableExtender.BindableText="{Binding Path=SiblingsText}" /></TextBlock>
+                    <TextBlock TextWrapping="Wrap" x:Name="SiblingsDatePanel" Margin="0,0,0,5"><Run local:BindableExtender.BindableText="{Binding Path=SiblingsText}" /></TextBlock>
                     <TextBlock TextWrapping="Wrap" x:Name="SpousesDatePanel" Margin="0,0,0,5"><Run local:BindableExtender.BindableText="{Binding Path=SpouseRelationshipText}" /><Run local:BindableExtender.BindableText="{Binding Path=SpousesText}" /></TextBlock>
                     <TextBlock TextWrapping="Wrap" x:Name="ChildrenDatePanel" Margin="0,0,0,5"><Run local:BindableExtender.BindableText="{Binding Path=ChildRelationshipText}" /><Run local:BindableExtender.BindableText="{Binding Path=ChildrenText}" /></TextBlock>
                 </HeaderedItemsControl>

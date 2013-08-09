@@ -606,4 +606,52 @@ function showhideall(hide,thing) {
     <value>Unknown of {1}</value>
     <comment>Two known parents; {0} and {1} are parent's names</comment>
   </data>
+  <data name="BrotherTo" xml:space="preserve">
+    <value>Brother to {0}</value>
+    <comment>{0} is a person's name</comment>
+  </data>
+  <data name="BrotherTo2" xml:space="preserve">
+    <value>Brother to {0} and {1}</value>
+    <comment>{0} and {1} are people's names</comment>
+  </data>
+  <data name="BrotherTo3" xml:space="preserve">
+    <value>Brother to {0}, {1} and {2}</value>
+    <comment>{0} {1} and {2} are people's names</comment>
+  </data>
+  <data name="BrotherToMany" xml:space="preserve">
+    <value>Brother to {0}, {1}, {2} and more...</value>
+    <comment>{0} {1} and {2} are people's names</comment>
+  </data>
+  <data name="SisterTo" xml:space="preserve">
+    <value>Sister to {0}</value>
+    <comment>{0} is a person's name</comment>
+  </data>
+  <data name="SisterTo2" xml:space="preserve">
+    <value>Sister to {0} and {1}</value>
+    <comment>{0} and {1} are people's names</comment>
+  </data>
+  <data name="SisterTo3" xml:space="preserve">
+    <value>Sister to {0}, {1} and {2}</value>
+    <comment>{0} {1} and {2} are people's names</comment>
+  </data>
+  <data name="SisterToMany" xml:space="preserve">
+    <value>Sister to {0}, {1}, {2} and more...</value>
+    <comment>{0} {1} and {2} are people's names</comment>
+  </data>
+  <data name="UnknownTo" xml:space="preserve">
+    <value>Unknown to {0}</value>
+    <comment>{0} is a person's name</comment>
+  </data>
+  <data name="UnknownTo2" xml:space="preserve">
+    <value>Unknown to {0} and {1}</value>
+    <comment>{0} and {1} are people's names</comment>
+  </data>
+  <data name="UnknownTo3" xml:space="preserve">
+    <value>Unknown to {0}, {1} and {2}</value>
+    <comment>{0} {1} and {2} are people's names</comment>
+  </data>
+  <data name="UnknownToMany" xml:space="preserve">
+    <value>Unknown to {0}, {1}, {2} and more...</value>
+    <comment>{0} {1} and {2} are people's names</comment>
+  </data>
 </root>
