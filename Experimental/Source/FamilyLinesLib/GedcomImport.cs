@@ -472,6 +472,8 @@ namespace KBS.FamilyLinesLib
         /// </summary>
         private GedcomHeader ImportHeader()
         {
+            if (_database.Header == null)
+                return null;
             return _database.Header.Copy();
         }
     }
