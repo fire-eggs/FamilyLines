@@ -75,7 +75,6 @@
             Height="15" 
             Grid.Row="3"
             Grid.Column="1"
-            IsDefault="True" 
             HorizontalAlignment="Center" 
             Click="CancelButton_Click" 
             TabIndex="140" 
