@@ -229,7 +229,7 @@
     <value>Импортированные источники:</value>
   </data>
   <data name="InvalidDate" xml:space="preserve">
-    <value>Это видимо не годная дата (DD / MM / YYYY).</value>
+    <value>Это видимо не годная дата (DD/MM/YYYY, d-mmm-yyyy).</value>
   </data>
   <data name="Living" xml:space="preserve">
     <value>Живущий</value>

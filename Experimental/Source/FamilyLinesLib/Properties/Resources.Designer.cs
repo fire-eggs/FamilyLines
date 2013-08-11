@@ -556,7 +556,7 @@ namespace KBS.FamilyLinesLib.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This does not appear to be a valid date (DD/MM/YYYY)..
+        ///   Looks up a localized string similar to This does not appear to be a valid date (DD/MM/YYYY, d-mmm-yyyy)..
         /// </summary>
         public static string InvalidDate {
             get {

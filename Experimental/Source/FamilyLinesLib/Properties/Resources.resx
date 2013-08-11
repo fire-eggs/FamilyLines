@@ -229,7 +229,7 @@
     <value>Imported Sources:</value>
   </data>
   <data name="InvalidDate" xml:space="preserve">
-    <value>This does not appear to be a valid date (DD/MM/YYYY).</value>
+    <value>This does not appear to be a valid date (DD/MM/YYYY, d-mmm-yyyy).</value>
   </data>
   <data name="Living" xml:space="preserve">
     <value>Living</value>
