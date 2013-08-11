@@ -682,8 +682,9 @@ namespace KBS.FamilyLines
                 GedcomExport ged = new GedcomExport();
                 try
                 {
-
-                    ged.Export(family, source, repository, dialog.FileName, familyCollection.FullyQualifiedFilename, Properties.Resources.Language);
+                    ged.Export(familyCollection.ExportHeader, family, source, repository, 
+                               dialog.FileName, familyCollection.FullyQualifiedFilename, 
+                               Properties.Resources.Language);
                     MessageBox.Show(this, Properties.Resources.GedcomExportSucessfulMessage,
                         Properties.Resources.Export, MessageBoxButton.OK,
                         MessageBoxImage.Information);
@@ -2332,16 +2333,6 @@ namespace KBS.FamilyLines
         {
             EditFactDetails.Visibility = Visibility.Hidden;
             removeControlFocus();
-        }
-
-        private void BulkImport(object sender, RoutedEventArgs e)
-        {
-            // 1. folder browse: find the folder containing GED files to import
-            // 2. for each GED file in that folder:
-            //    a. import the GED
-            //    b. save the file to a .familyx
-            //    NOTE: must continue to the next file even if exception occurs
-
         }
     }
 }

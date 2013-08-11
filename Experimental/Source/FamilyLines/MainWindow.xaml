@@ -443,7 +443,6 @@
                     <MenuItem Header="Print Preview - VisualPrint" Click="PrintSUT2"/>
                     <MenuItem Header="Location Concordance..." Click="LocationConcordance_Click" />
                     <MenuItem Header="Map to KML..." Click="MapToKML_Click" />
-                    <MenuItem Header="Bulk GEDCOM Import" Click="BulkImport" />
                 </MenuItem>
 		
                 <MenuItem

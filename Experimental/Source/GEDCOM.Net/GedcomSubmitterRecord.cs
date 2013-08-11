@@ -156,7 +156,6 @@ namespace GEDCOM.Net
 
 		public override void Output(TextWriter sw)
 		{
-			sw.Write(Environment.NewLine);
 			sw.Write(Util.IntToString(Level));
 			sw.Write(" ");
 			
@@ -207,7 +206,8 @@ namespace GEDCOM.Net
 			}
 			
 			OutputStandard(sw);
-		}
+            sw.Write(Environment.NewLine);
+        }
 		
 		#endregion
 	}
