@@ -349,6 +349,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All people with all events (alternate format).
+        /// </summary>
+        public static string AllPeopleAndEvents {
+            get {
+                return ResourceManager.GetString("AllPeopleAndEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  ancestral and .
         /// </summary>
         public static string AncestralAnd {
@@ -1402,7 +1411,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit GEDCOM Header Data.
+        ///   Looks up a localized string similar to Edit GEDCOM Header and Submitter Data.
         /// </summary>
         public static string EditHeaderData {
             get {
@@ -1692,6 +1701,24 @@ namespace KBS.FamilyLines.Properties {
         public static string FamilyListViewToolTip {
             get {
                 return ResourceManager.GetString("FamilyListViewToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Family Notes.
+        /// </summary>
+        public static string FamilyNotesMenu {
+            get {
+                return ResourceManager.GetString("FamilyNotesMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Family Notes.
+        /// </summary>
+        public static string FamilyNotesTTip {
+            get {
+                return ResourceManager.GetString("FamilyNotesTTip", resourceCulture);
             }
         }
         
@@ -2047,7 +2074,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit GEDCOM Header.
+        ///   Looks up a localized string similar to Edit GEDCOM Submitter.
         /// </summary>
         public static string HeaderEditMenu {
             get {
@@ -2056,7 +2083,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit the GEDCOM header settings for export.
+        ///   Looks up a localized string similar to Edit the GEDCOM header and submitter data for export.
         /// </summary>
         public static string HeaderEditTTip {
             get {
@@ -2083,7 +2110,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View the imported GEDCOM header info.
+        ///   Looks up a localized string similar to View the imported GEDCOM header and submitter info.
         /// </summary>
         public static string HeaderViewTTip {
             get {
@@ -3971,7 +3998,7 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View GEDCOM Header Data.
+        ///   Looks up a localized string similar to View GEDCOM Header and Submitter Data.
         /// </summary>
         public static string ViewHeaderHeader {
             get {

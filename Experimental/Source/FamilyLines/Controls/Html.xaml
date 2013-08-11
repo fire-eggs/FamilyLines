@@ -75,8 +75,13 @@
                                  Checked="Option6_CheckedChanged" Unchecked="Option6_CheckedChanged">
                         <Label Padding="0" Content="{x:Static properties:Resources.Events}" Foreground="{DynamicResource InputFontColor}"/>
                     </RadioButton>
-
-                    <!--<Expander IsExpanded="True" Header="{x:Static properties:Resources.Options}" Height="Auto" Foreground="{DynamicResource InputFontColor}" FontWeight="Bold" Width="Auto" Margin="5,0,0,0" >-->
+                    <RadioButton GroupName="Html" Margin="10,5,0,0" x:Name="Option7" Height="16"
+                                 VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Black"
+                                 Checked="Option7_Checked" Unchecked="Option7_Unchecked">
+                        <Label Padding="0" Content="{x:Static properties:Resources.AllPeopleAndEvents}" Foreground="{DynamicResource InputFontColor}"/>
+                    </RadioButton>
+                    
+                        <!--<Expander IsExpanded="True" Header="{x:Static properties:Resources.Options}" Height="Auto" Foreground="{DynamicResource InputFontColor}" FontWeight="Bold" Width="Auto" Margin="5,0,0,0" >-->
                         <StackPanel>
                             <Label Margin="5,0,0,0" Foreground="{DynamicResource InputFontColor}" FontWeight="Bold" Content="{x:Static properties:Resources.Options}" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             <CheckBox Margin="10,5,0,0" x:Name="PrivacyHtml" ToolTip="{x:Static properties:Resources.PrivacyTooltip}" Foreground="Black">
@@ -91,7 +96,6 @@
                         <StackPanel x:Name="OptionsPanel" Orientation="Horizontal" Margin="10,10,0,10">
                             <Button Style="{DynamicResource RedButtonStyle}" Content="{x:Static properties:Resources.Export}" x:Name="ExportButton" Click="ExportButton_Click" HorizontalAlignment="Left" Width="Auto" MinWidth="60" Height="15"  />
                             <Button Content="{x:Static properties:Resources.Cancel}" x:Name="CancelButton" Click="CancelButton_Click" Margin="5,0,0,0" Height="15" VerticalAlignment="Bottom"  Width="Auto" MinWidth="60" />
-                        <Button Content="Test" x:Name="TestBtn" Click="TestButton_Click" Margin="5,0,0,0" Height="15" VerticalAlignment="Bottom"  Width="Auto" MinWidth="60"/>
                         </StackPanel>
                     
 
