@@ -229,7 +229,7 @@
     <value>Fontes Importadas:</value>
   </data>
   <data name="InvalidDate" xml:space="preserve">
-    <value>Essa data nao aparenta estar no formato correto (DD/MM/AAAAA).</value>
+    <value>Essa data nao aparenta estar no formato correto (DD/MM/AAAAA, d-mmm-aaaa).</value>
   </data>
   <data name="Living" xml:space="preserve">
     <value>Vivo</value>

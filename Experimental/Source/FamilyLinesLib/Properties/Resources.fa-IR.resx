@@ -229,7 +229,7 @@
     <value>منابع وارد شده:</value>
   </data>
   <data name="InvalidDate" xml:space="preserve">
-    <value>این تاریخ به نظر نمی‌رسد معتبر باشد (DD/MM/YYYY).</value>
+    <value>این تاریخ به نظر نمی‌رسد معتبر باشد (DD/MM/YYYY, d-mmm-yyyy).</value>
   </data>
   <data name="Living" xml:space="preserve">
     <value>در قید حیات</value>

@@ -226,7 +226,7 @@
     <value>Importierte Quellen:</value>
   </data>
   <data name="InvalidDate" xml:space="preserve">
-    <value>Dies scheint nicht als ein gültiges Datum (TT / MM / JJJJ).</value>
+    <value>Dies scheint nicht als ein gültiges Datum (TT/MM/JJJJ, t-mmm-jjjj).</value>
   </data>
   <data name="Living" xml:space="preserve">
     <value>Lebendig</value>

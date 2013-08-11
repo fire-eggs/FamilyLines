@@ -226,7 +226,7 @@
     <value>Importate Fonti:</value>
   </data>
   <data name="InvalidDate" xml:space="preserve">
-    <value>Questo non sembra essere una data valida (GG/MM/AAAA).</value>
+    <value>Questo non sembra essere una data valida (GG/MM/AAAA, g-mmm-aaaa).</value>
   </data>
   <data name="Living" xml:space="preserve">
     <value>Vita</value>
