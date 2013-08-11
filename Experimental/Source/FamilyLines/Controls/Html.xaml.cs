@@ -82,6 +82,14 @@ namespace KBS.FamilyLines.Controls
             SourcesHtml.IsEnabled = Option6.IsChecked != true;
         }
 
+        private void Option7_Checked(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Option7_Unchecked(object sender, RoutedEventArgs e)
+        {
+        }
+
         #endregion
 
         #region helper methods
@@ -105,6 +113,8 @@ namespace KBS.FamilyLines.Controls
                     choice = "5";
                 if (Option6.IsChecked == true)
                     choice = "6";
+                if (Option7.IsChecked == true)
+                    choice = "7";
                 return choice;
             }
         }
@@ -199,6 +209,11 @@ namespace KBS.FamilyLines.Controls
                     int end = DateTime.Now.Year;
                     html.ExportEventsByDecade(family, source, repository, dialog.FileName, Path.GetFileName(familyCollection.FullyQualifiedFilename), Privacy(), start, end);
                     break;
+                case "7":
+                    var pr = new PeopleReport(dialog.FileName, App.Family, App.Sources, App.Repositories);
+                    pr.Privacy = Privacy();
+                    pr.generateReport(showHide:true);
+                    break;
             }
             MessageBoxResult result = MessageBox.Show(Properties.Resources.SourcesExportMessage, Properties.Resources.ExportResult, MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -211,41 +226,5 @@ namespace KBS.FamilyLines.Controls
         }
 
         #endregion
-
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-            RaiseEvent(new RoutedEventArgs(CancelButtonClickEvent)); // TODO this is unintuitive: why raise a 'cancel'?
-            ExportKBR();
-            Clear(); // TODO why are we clearing the settings? shouldn't they be left alone?
-        }
-
-        private void ExportKBR()
-        {
-            if (Options() == "0")
-                return;
-
-            var dialog = new CommonDialog();
-            dialog.InitialDirectory = People.ApplicationFolderPath;
-            dialog.Filter.Add(new FilterEntry(Properties.Resources.htmlFiles, Properties.Resources.htmlExtension));
-            dialog.Title = Properties.Resources.Export;
-            dialog.DefaultExtension = Properties.Resources.DefaulthtmlExtension;
-            dialog.ShowSave();
-
-            if (string.IsNullOrEmpty(dialog.FileName))
-                return;
-
-            PeopleReport pr = new PeopleReport(dialog.FileName, App.Family, App.Sources, App.Repositories);
-            pr.Privacy = Privacy();
-            pr.generateReport(showHide:true);
-
-            MessageBoxResult result = MessageBox.Show(Properties.Resources.SourcesExportMessage, Properties.Resources.ExportResult, MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            try
-            {
-                if (result == MessageBoxResult.Yes)
-                    System.Diagnostics.Process.Start(dialog.FileName);
-            }
-            catch { }
-        }
     }
 }

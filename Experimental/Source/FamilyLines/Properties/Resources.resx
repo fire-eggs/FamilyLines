@@ -1434,7 +1434,7 @@ All other code, strings, resources, images, icons etc. created by the Family Lin
     <comment>New for V0.5 - HeaderEditor</comment>
   </data>
   <data name="EditHeaderData" xml:space="preserve">
-    <value>Edit GEDCOM Header Data</value>
+    <value>Edit GEDCOM Header and Submitter Data</value>
     <comment>New for V0.5 - HeaderEditor</comment>
   </data>
   <data name="Phone" xml:space="preserve">
@@ -1470,7 +1470,7 @@ All other code, strings, resources, images, icons etc. created by the Family Lin
     <value>Privacy</value>
   </data>
   <data name="ViewHeaderHeader" xml:space="preserve">
-    <value>View GEDCOM Header Data</value>
+    <value>View GEDCOM Header and Submitter Data</value>
   </data>
   <data name="CreditsLabel" xml:space="preserve">
     <value>Credits</value>
@@ -1508,5 +1508,14 @@ All other code, strings, resources, images, icons etc. created by the Family Lin
   <data name="PlaceOfEvent" xml:space="preserve">
     <value>Place of {0}</value>
     <comment>{0} is an event name, e.g. 'Baptism'</comment>
+  </data>
+  <data name="FamilyNotesMenu" xml:space="preserve">
+    <value>Family Notes</value>
+  </data>
+  <data name="FamilyNotesTTip" xml:space="preserve">
+    <value>Edit Family Notes</value>
+  </data>
+  <data name="AllPeopleAndEvents" xml:space="preserve">
+    <value>All people with all events (alternate format)</value>
   </data>
 </root>
