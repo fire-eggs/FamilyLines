@@ -1376,13 +1376,13 @@ All other code, strings, resources, images, icons etc. created by the Family Lin
     <value>GEDCOM Header</value>
   </data>
   <data name="HeaderEditMenu" xml:space="preserve">
-    <value>Edit GEDCOM Header</value>
+    <value>Edit GEDCOM Submitter</value>
   </data>
   <data name="HeaderViewTTip" xml:space="preserve">
-    <value>View the imported GEDCOM header info</value>
+    <value>View the imported GEDCOM header and submitter info</value>
   </data>
   <data name="HeaderEditTTip" xml:space="preserve">
-    <value>Edit the GEDCOM header settings for export</value>
+    <value>Edit the GEDCOM header and submitter data for export</value>
   </data>
   <data name="Credits" xml:space="preserve">
     <value>Family Lines Team

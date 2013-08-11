@@ -48,6 +48,7 @@ namespace KBS.FamilyLinesLib
         private PeopleCollection people;
         private SourceCollection sources;
         private RepositoryCollection repositories;
+        private GedcomHeader header;
 
         // Family group counter.
         private int familyId = 1;
@@ -57,16 +58,18 @@ namespace KBS.FamilyLinesLib
         /// <summary>
         /// Export the data from the People collection to the specified GEDCOM file.
         /// </summary>
-        public void Export(PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, string gedcomFilePath, string familyxFilePath, string language)
+        public void Export(GedcomHeader exportHeader, PeopleCollection peopleCollection, SourceCollection sourceCollection, RepositoryCollection repositoryCollection, string gedcomFilePath, string familyxFilePath, string language)
         {
-            this.people = peopleCollection;
-            this.sources = sourceCollection;
-            this.repositories = repositoryCollection;
+            people = peopleCollection;
+            sources = sourceCollection;
+            repositories = repositoryCollection;
+            header = exportHeader;
 
             using (writer = new StreamWriter(gedcomFilePath))
             {
                 WriteLine(0, "HEAD", "");
 				ExportSummary(gedcomFilePath,familyxFilePath,language);
+                exportSubmitter();
                 ExportPeople(gedcomFilePath);
                 ExportFamilies();
                 ExportSources();
@@ -78,10 +81,9 @@ namespace KBS.FamilyLinesLib
 		/// <summary>
         /// Export summary to GEDCOM file.
         /// </summary>
-        private void ExportSummary(string gedcomFilePath,string familyxFilePath, string language)
+		[Localizable(false)]
+		private void ExportSummary(string gedcomFilePath,string familyxFilePath, string language)
 		{
-            // TODO grab & export data from header object if available
-
                 WriteLine(1, "SOUR", "");
 				
                 Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -90,8 +92,10 @@ namespace KBS.FamilyLinesLib
                 WriteLine(2, "NAME", Resources.FamilyShow); // TODO: change resource name!
                 WriteLine(2, "CORP", "");
 
-                if(!string.IsNullOrEmpty(familyxFilePath))
-                WriteLine(2, "DATA", Path.GetFileName(familyxFilePath));
+                if (!string.IsNullOrEmpty(familyxFilePath))
+                {
+                    WriteLine(2, "DATA", Path.GetFileName(familyxFilePath));
+                }
 
                 string Date = ExportDate(DateTime.Now);  //GEDCOM dates must be of the form 01 JAN 2009
 				string filename = Path.GetFileName(gedcomFilePath);
@@ -130,9 +134,27 @@ namespace KBS.FamilyLinesLib
                         WriteLine(1, "LANG", "English");
                         break;
                 }
-	
+                if (!string.IsNullOrEmpty(header.Copyright))
+                {
+                    WriteLine(3, "COPR", header.Copyright);
+                }
 		}
-      
+
+        /// <summary>
+        /// Export submitter data, if we have it.
+        /// </summary>
+        [Localizable(false)]
+        private void exportSubmitter()
+        {
+            if (header.Submitter == null)
+                return;
+
+            // TODO this is an "immediate indirection" setup - see if we can do this with an output line of "0 SUBM submitter-name" instead
+            WriteLine(1, "SUBM", "@SUBMIT1@");
+            header.Submitter.XRefID = "SUBMIT1";
+            header.Submitter.Output(writer);
+        }
+
 		/// <summary>
         /// Export sources to GEDCOM file.
         /// </summary>
