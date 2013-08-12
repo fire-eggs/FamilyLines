@@ -2229,65 +2229,53 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                Collection<Person> siblings = Siblings;
-                if (siblings.Count < 1)
-                    return "";
-
-                // For improved localization, a) use a brute force resource lookup; b) limit the maximum
-                // number of siblings we'll display.
-                switch (siblings.Count)
+                switch (Siblings.Count)
                 {
+                    case 0:
+                        return "";
                     case 1:
-                        return sibSex1(siblings[0]);
-                    case 2:
-                        return sibSex2(siblings[0], siblings[1]);
-                    case 3:
-                        return sibSex3(siblings);
+                        return sibSex1(Siblings[0]);
                     default:
-                        return sibSexMany(siblings);
+                        return sibSexMany(Siblings);
                 }
             }
         }
 
+        /// <summary>
+        /// Handle 2 or more siblings.
+        /// </summary>
+        /// <param name="siblings"></param>
+        /// <returns></returns>
         private string sibSexMany(Collection<Person> siblings)
         {
+            int sibCount = siblings.Count;
+            string val;
             switch (gender)
             {
                 case Gender.Male:
-                    return string.Format(Resources.BrotherToMany, siblings[0].Name, siblings[1].Name, siblings[2].Name);
+                    val = string.Format(Resources.BrotherToBase, siblings[0].Name);
+                    break;
                 case Gender.Female:
-                    return string.Format(Resources.SisterToMany, siblings[0].Name, siblings[1].Name, siblings[2].Name);
+                    val = string.Format(Resources.SisterToBase, siblings[0].Name);
+                    break;
                 default:
-                    return string.Format(Resources.UnknownToMany, siblings[0].Name, siblings[1].Name, siblings[2].Name);
+                    val = string.Format(Resources.UnknownToBase, siblings[0].Name);
+                    break;
             }
-        }
 
-        private string sibSex3(Collection<Person> siblings)
-        {
-            switch (gender)
+            for (int i = 1; i < sibCount-1; i++)
             {
-                case Gender.Male:
-                    return string.Format(Resources.BrotherTo3, siblings[0].Name, siblings[1].Name, siblings[2].Name);
-                case Gender.Female:
-                    return string.Format(Resources.SisterTo3, siblings[0].Name, siblings[1].Name, siblings[2].Name);
-                default:
-                    return string.Format(Resources.UnknownTo3, siblings[0].Name, siblings[1].Name, siblings[2].Name);
+                val += string.Format(Resources.AndName, siblings[i].Name);
             }
+            val += string.Format(Resources.AndNamePeriod, siblings[sibCount - 1].Name);
+            return val;
         }
 
-        private string sibSex2(Person person, Person person1)
-        {
-            switch (gender)
-            {
-                case Gender.Male:
-                    return string.Format(Resources.BrotherTo2, person.Name, person1.Name);
-                case Gender.Female:
-                    return string.Format(Resources.SisterTo2, person.Name, person1.Name);
-                default:
-                    return string.Format(Resources.UnknownTo2, person.Name, person1.Name);
-            }
-        }
-
+        /// <summary>
+        /// Special case of only one sibling.
+        /// </summary>
+        /// <param name="person"></param>
+        /// <returns></returns>
         private string sibSex1(Person person)
         {
             switch (gender)
