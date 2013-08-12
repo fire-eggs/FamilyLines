@@ -444,6 +444,49 @@ namespace KBS.FamilyLinesLib
 
         #region birth details
 
+        [XmlIgnore]
+        private string _localBirthDateString;
+       
+        /// <summary>
+        /// A string variant of the BirthDate for GUI entry and validation.
+        /// </summary>
+        [XmlIgnore] 
+        public string BirthDateString
+        {
+            get
+            {
+                return _localBirthDateString;
+            }
+            set
+            {
+                _localBirthDateString = value;
+                DateTime test = IsValidDate(value);
+                if (test != DateTime.MinValue)
+                {
+                    BirthDate = test;
+                }
+                OnPropertyChanged("BirthDateString");
+            }
+        }
+
+        [Localizable(false)] 
+        private readonly string[] validFormats = {
+                                            "d", "yyyy",
+                                            "M-d-yyyy", "M/d/yyyy",
+                                            "d-M-yyyy", "d/M/yyyy",
+                                            "MM-d-yyyy", "MM/d/yyyy",
+                                            "d-MM-yyyy", "d/MM/yyyy",
+                                            "MMM-d-yyyy", "MMM/d/yyyy",
+                                            "d-MMM-yyyy", "d/MMM/yyyy"
+                                        };
+        private DateTime IsValidDate(string value)
+        {
+            DateTime testDate;
+            if (DateTime.TryParseExact(value, validFormats, CultureInfo.CurrentCulture, DateTimeStyles.None, out testDate))
+                return testDate;
+            return DateTime.MinValue;
+        }
+
         /// <summary>
         /// Gets or sets the person's birth date.  This property can be null.
         /// </summary>
@@ -452,17 +495,18 @@ namespace KBS.FamilyLinesLib
             get { return birthDate; }
             set
             {
-                Console.WriteLine("BirthDate: incoming'" + value + "'");
-
                 if (birthDate == null || birthDate != value)
                 {
                     birthDate = value;
+                    if (birthDate.HasValue)
+                        _localBirthDateString = birthDate.Value.ToShortDateString();
                     OnPropertyChanged("BirthDate");
                     OnPropertyChanged("Age");
                     OnPropertyChanged("AgeGroup");
                     OnPropertyChanged("YearOfBirth");
                     OnPropertyChanged("BirthMonthAndDay");
                     OnPropertyChanged("BirthDateAndPlace");
+                    OnPropertyChanged("BirthDateString");
                 }
             }
         }
@@ -632,6 +676,31 @@ namespace KBS.FamilyLinesLib
 
         #region death details
 
+        [XmlIgnore]
+        private string _localDeathDateString;
+
+        /// <summary>
+        /// A string variant of the DeathDate for GUI entry and validation.
+        /// </summary>
+        [XmlIgnore]
+        public string DeathDateString
+        {
+            get
+            {
+                return _localDeathDateString;
+            }
+            set
+            {
+                _localDeathDateString = value;
+                DateTime test = IsValidDate(value);
+                if (test != DateTime.MinValue)
+                {
+                    DeathDate = test;
+                }
+                OnPropertyChanged("DeathDateString");
+            }
+        }
+
         /// <summary>
         /// Gets or sets the person's death of death.  This property can be null.
         /// </summary>
@@ -643,9 +712,12 @@ namespace KBS.FamilyLinesLib
                 if (deathDate != value)
                 {
                     deathDate = value;
+                    if (deathDate.HasValue)
+                        _localDeathDateString = deathDate.Value.ToShortDateString();
                     OnPropertyChanged("DeathDate");
                     OnPropertyChanged("Age");
                     OnPropertyChanged("YearOfDeath");
+                    OnPropertyChanged("DeathDateString");
                 }
             }
         }
@@ -2699,32 +2771,38 @@ namespace KBS.FamilyLinesLib
         {
             get
             {
-                string result = null;
-
-                if (columnName == "BirthDate")
+                string result = "";
+                switch (columnName)
                 {
-                    if (BirthDate == DateTime.MinValue)
-                        result = Resources.InvalidDate;
+                    case "BirthDateString":
+                        if (_localBirthDateString != null &&
+                            _localBirthDateString.Trim().Length != 0 &&
+                            IsValidDate(_localBirthDateString) == DateTime.MinValue)
+                            result = Resources.InvalidDate;
+                        break;
+                    case "BirthDate":
+                        if (BirthDate == DateTime.MinValue)
+                            result = Resources.InvalidDate;
+                        break;
+                    case "DeathDateString":
+                        if (_localDeathDateString != null &&
+                            _localDeathDateString.Trim().Length != 0 &&
+                            IsValidDate(_localDeathDateString) == DateTime.MinValue)
+                            result = Resources.InvalidDate;
+                        break;
+                    case "DeathDate":
+                        if (DeathDate == DateTime.MinValue)
+                            result = Resources.InvalidDate;
+                        break;
+                    case "CremationDate":
+                        if (CremationDate == DateTime.MinValue)
+                            result = Resources.InvalidDate;
+                        break;
+                    case "BurialDate":
+                        if (BurialDate == DateTime.MinValue)
+                            result = Resources.InvalidDate;
+                        break;
                 }
-
-                if (columnName == "DeathDate")
-                {
-                    if (DeathDate == DateTime.MinValue)
-                        result = Resources.InvalidDate;
-                }
-
-                if (columnName == "CremationDate")
-                {
-                    if (CremationDate == DateTime.MinValue)
-                        result = Resources.InvalidDate;
-                }
-
-                if (columnName == "BurialDate")
-                {
-                    if (BurialDate == DateTime.MinValue)
-                        result = Resources.InvalidDate;
-                }
-
                 return result;
             }
         }
