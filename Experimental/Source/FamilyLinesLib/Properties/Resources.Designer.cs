@@ -133,6 +133,24 @@ namespace KBS.FamilyLinesLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  and {0}.
+        /// </summary>
+        public static string AndName {
+            get {
+                return ResourceManager.GetString("AndName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  and {0}..
+        /// </summary>
+        public static string AndNamePeriod {
+            get {
+                return ResourceManager.GetString("AndNamePeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to at.
         /// </summary>
         public static string At {
@@ -187,7 +205,7 @@ namespace KBS.FamilyLinesLib.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Brother to {0}.
+        ///   Looks up a localized string similar to Brother to {0}..
         /// </summary>
         public static string BrotherTo {
             get {
@@ -196,29 +214,11 @@ namespace KBS.FamilyLinesLib.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Brother to {0} and {1}.
+        ///   Looks up a localized string similar to Brother to {0}.
         /// </summary>
-        public static string BrotherTo2 {
+        public static string BrotherToBase {
             get {
-                return ResourceManager.GetString("BrotherTo2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Brother to {0}, {1} and {2}.
-        /// </summary>
-        public static string BrotherTo3 {
-            get {
-                return ResourceManager.GetString("BrotherTo3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Brother to {0}, {1}, {2} and more....
-        /// </summary>
-        public static string BrotherToMany {
-            get {
-                return ResourceManager.GetString("BrotherToMany", resourceCulture);
+                return ResourceManager.GetString("BrotherToBase", resourceCulture);
             }
         }
         
@@ -979,29 +979,11 @@ namespace KBS.FamilyLinesLib.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sister to {0} and {1}.
+        ///   Looks up a localized string similar to Sister to {0}.
         /// </summary>
-        public static string SisterTo2 {
+        public static string SisterToBase {
             get {
-                return ResourceManager.GetString("SisterTo2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sister to {0}, {1} and {2}.
-        /// </summary>
-        public static string SisterTo3 {
-            get {
-                return ResourceManager.GetString("SisterTo3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sister to {0}, {1}, {2} and more....
-        /// </summary>
-        public static string SisterToMany {
-            get {
-                return ResourceManager.GetString("SisterToMany", resourceCulture);
+                return ResourceManager.GetString("SisterToBase", resourceCulture);
             }
         }
         
@@ -1132,7 +1114,7 @@ namespace KBS.FamilyLinesLib.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown to {0}.
+        ///   Looks up a localized string similar to Unknown to {0}..
         /// </summary>
         public static string UnknownTo {
             get {
@@ -1141,29 +1123,11 @@ namespace KBS.FamilyLinesLib.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown to {0} and {1}.
+        ///   Looks up a localized string similar to Unknown to {0}.
         /// </summary>
-        public static string UnknownTo2 {
+        public static string UnknownToBase {
             get {
-                return ResourceManager.GetString("UnknownTo2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unknown to {0}, {1} and {2}.
-        /// </summary>
-        public static string UnknownTo3 {
-            get {
-                return ResourceManager.GetString("UnknownTo3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unknown to {0}, {1}, {2} and more....
-        /// </summary>
-        public static string UnknownToMany {
-            get {
-                return ResourceManager.GetString("UnknownToMany", resourceCulture);
+                return ResourceManager.GetString("UnknownToBase", resourceCulture);
             }
         }
         
