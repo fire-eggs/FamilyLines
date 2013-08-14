@@ -138,6 +138,11 @@ namespace KBS.FamilyLinesLib
                 {
                     WriteLine(3, "COPR", header.Copyright);
                 }
+                if (header.ContentDescription != null &&
+                    !string.IsNullOrEmpty(header.ContentDescription.Text))
+                {
+                    WriteLine(1, "NOTE", header.ContentDescription.Text);
+                }
 		}
 
         /// <summary>

@@ -26,8 +26,6 @@ using System.Xml;
 
 namespace GEDCOM.Net
 {
-	
-	
 	public class GedcomNoteRecord : GedcomRecord
 	{
 		#region Variables
@@ -124,5 +122,10 @@ namespace GEDCOM.Net
 		}
 		
 		#endregion
+
+	    public GedcomNoteRecord Copy()
+	    {
+	        return (GedcomNoteRecord) MemberwiseClone();
+	    }
 	}
 }

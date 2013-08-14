@@ -148,6 +148,8 @@ namespace GEDCOM.Net
 		{
 			get
 			{
+                if (Submitters.Count < 1)
+                    return null;
 			    return Submitters[0];
                 //// XML Serialization case
                 //if (Database == null)

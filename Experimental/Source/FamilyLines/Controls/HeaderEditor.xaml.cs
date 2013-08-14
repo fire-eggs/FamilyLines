@@ -1,6 +1,5 @@
 ﻿/*
  * Family Lines code is provided using the Apache License V2.0, January 2004 http://www.apache.org/licenses/
- * 
  */
 using System.Collections.Generic;
 using System.Windows;
@@ -10,7 +9,7 @@ using GEDCOM.Net;
 namespace KBS.FamilyLines.Controls
 {
     /// <summary>
-    /// A window for editing GEDCOM header data for export.
+    /// A window for editing GEDCOM header, submitter data for export.
     /// </summary>
     public partial class HeaderEditor
     {
@@ -24,8 +23,7 @@ namespace KBS.FamilyLines.Controls
             DataContext = this;
             header = _header;
 
-            // Dealing with several possible null/uninitialized fields
-
+            // Deal with several possible null/uninitialized fields
             if (header.Submitters == null)
             {
                 header.Submitters = new List<GedcomSubmitterRecord>(1);
