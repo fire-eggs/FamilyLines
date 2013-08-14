@@ -1373,6 +1373,7 @@ namespace KBS.FamilyLines
 
                     familyCollection.ImportedHeader = header;
                     familyCollection.ExportHeader = People.MakeDefaultHeader("Family Lines"); // TODO take from settings; more details
+                    familyCollection.ExportHeader.ContentDescription = header.ContentDescription.Copy();
 
                     // KBR Fixes for missing sources/repositories
                     familyCollection.RepositoryCollection = repository2;
@@ -2276,17 +2277,27 @@ namespace KBS.FamilyLines
             HeaderViewer.ViewHeader(familyCollection.ImportedHeader, ViewContainer, ViewCallback);
         }
 
-        private void ViewCallback()
-        {
-            removeControlFocus();
-            App.canExecuteJumpList = true;
-        }
-
         private void HeaderEditMenuItem_Click(object sender, RoutedEventArgs e)
         {
             App.canExecuteJumpList = false;
             giveControlFocus();
             HeaderEditor.EditHeader(familyCollection.ExportHeader, ViewContainer, ViewCallback);
+        }
+
+        private void HeaderNotesMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            App.canExecuteJumpList = false;
+            giveControlFocus();
+            NotesEditor.Edit(familyCollection.ExportHeader, ViewContainer, ViewCallback);
+        }
+
+        /// <summary>
+        /// Callback method invoked by a "subwindow" when the user exits.
+        /// </summary>
+        private void ViewCallback()
+        {
+            removeControlFocus();
+            App.canExecuteJumpList = true;
         }
 
         private void Execute_ViewAllFacts(object sender, RoutedEventArgs e)

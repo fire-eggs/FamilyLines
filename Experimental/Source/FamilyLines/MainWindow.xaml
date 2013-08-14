@@ -364,6 +364,11 @@
                               x:Name="HeaderEditMenuItem"
                               Click="HeaderEditMenuItem_Click"
                               />
+                    <MenuItem Header="{x:Static properties:Resources.FamilyNotesMenu}"
+                              ToolTip="{x:Static properties:Resources.FamilyNotesTTip}"
+                              x:Name="HeaderNotesMenuItem"
+                              Click="HeaderNotesMenuItem_Click"
+                              />
                 </MenuItem>
                 
                 <MenuItem 

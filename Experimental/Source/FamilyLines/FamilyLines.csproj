@@ -116,6 +116,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\NotesEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ViewAllFacts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,6 +199,9 @@
     </Compile>
     <Compile Include="Controls\HeaderViewer.xaml.cs">
       <DependentUpon>HeaderViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NotesEditor.xaml.cs">
+      <DependentUpon>NotesEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ViewAllFacts.xaml.cs">
       <DependentUpon>ViewAllFacts.xaml</DependentUpon>

@@ -1518,4 +1518,7 @@ All other code, strings, resources, images, icons etc. created by the Family Lin
   <data name="AllPeopleAndEvents" xml:space="preserve">
     <value>All people with all events (alternate format)</value>
   </data>
+  <data name="EditFamilyNotes" xml:space="preserve">
+    <value>Edit Family Notes</value>
+  </data>
 </root>

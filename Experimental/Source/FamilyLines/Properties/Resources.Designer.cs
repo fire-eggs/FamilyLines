@@ -1411,6 +1411,15 @@ namespace KBS.FamilyLines.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Family Notes.
+        /// </summary>
+        public static string EditFamilyNotes {
+            get {
+                return ResourceManager.GetString("EditFamilyNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit GEDCOM Header and Submitter Data.
         /// </summary>
         public static string EditHeaderData {
