@@ -12,11 +12,12 @@ namespace KBS.FamilyLines.Controls
     /// </summary>
     public partial class NotesEditor
     {
-        public delegate void ViewerCallback();
+        public delegate void ViewerCallback(bool wasSaved);
 
         private Grid owner;
         private ViewerCallback cb;
         private readonly GedcomHeader head;
+        private bool _wasSaved;
 
         public NotesEditor(GedcomHeader header)
         {
@@ -25,6 +26,7 @@ namespace KBS.FamilyLines.Controls
             DataContext = this;
 
             test.Text = head.ContentDescription == null ? "" : header.ContentDescription.Text;
+            _wasSaved = false;
         }
 
         public static void Edit(GedcomHeader header, Grid _owner, ViewerCallback _cb)
@@ -44,7 +46,7 @@ namespace KBS.FamilyLines.Controls
             // make the callback to the invoking code. This really, really should not
             // be null (otherwise the app misbehaves) but we'll check just in case.
             if (cb != null)
-                cb();
+                cb(_wasSaved);
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -52,6 +54,7 @@ namespace KBS.FamilyLines.Controls
             if (head.ContentDescription == null)
                 head.ContentDescription = new GedcomNoteRecord();
             head.ContentDescription.Text = test.Text;
+            _wasSaved = true;
         }
     }
 }
