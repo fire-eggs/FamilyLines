@@ -1225,7 +1225,7 @@ namespace KBS.FamilyLines
 
                     familyCollection.ImportedHeader = header;
                     familyCollection.ExportHeader = People.MakeDefaultHeader("Family Lines"); // TODO take from settings; more details
-                    familyCollection.ExportHeader.ContentDescription = header.ContentDescription.Copy();
+                        familyCollection.ExportHeader.ContentDescription = header.ContentDescription == null ? new GedcomNoteRecord() : header.ContentDescription.Copy();
 
                     // KBR Fixes for missing sources/repositories
                     familyCollection.RepositoryCollection = repository2;
@@ -2105,8 +2105,10 @@ namespace KBS.FamilyLines
         /// <summary>
         /// Callback method invoked by a "subwindow" when the user exits.
         /// </summary>
-        private void ViewCallback()
+        private void ViewCallback(bool wasSaved)
         {
+            family.IsDirty = wasSaved;
+
             removeControlFocus();
             App.canExecuteJumpList = true;
         }
