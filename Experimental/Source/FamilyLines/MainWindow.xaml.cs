@@ -1373,7 +1373,7 @@ namespace KBS.FamilyLines
 
                     familyCollection.ImportedHeader = header;
                     familyCollection.ExportHeader = People.MakeDefaultHeader("Family Lines"); // TODO take from settings; more details
-                    familyCollection.ExportHeader.ContentDescription = header.ContentDescription.Copy();
+                        familyCollection.ExportHeader.ContentDescription = header.ContentDescription == null ? new GedcomNoteRecord() : header.ContentDescription.Copy();
 
                     // KBR Fixes for missing sources/repositories
                     familyCollection.RepositoryCollection = repository2;
@@ -2044,6 +2044,7 @@ namespace KBS.FamilyLines
         /// <summary>
         /// Builds the Themes Menu.
         /// </summary>
+        [Localizable(false)]
         private void BuildThemesMenu()
         {
             MenuItem theme1 = new MenuItem();
@@ -2062,9 +2063,27 @@ namespace KBS.FamilyLines
             theme3.CommandParameter = @"Themes\Metro\MetroResources.xaml";
             theme3.Click += ChangeTheme;
 
+            MenuItem theme4 = new MenuItem();
+            theme4.Header = "Blue";
+            theme4.CommandParameter = @"Themes\Blue\BlueResources.xaml";
+            theme4.Click += ChangeTheme;
+
+            MenuItem theme5 = new MenuItem();
+            theme5.Header = "Green";
+            theme5.CommandParameter = @"Themes\Green\GreenResources.xaml";
+            theme5.Click += ChangeTheme;
+
+            MenuItem theme6 = new MenuItem();
+            theme6.Header = "Yellow";
+            theme6.CommandParameter = @"Themes\Yellow\YellowResources.xaml";
+            theme6.Click += ChangeTheme;
+
             ThemesMenu.Items.Add(theme1);
             ThemesMenu.Items.Add(theme2);
             ThemesMenu.Items.Add(theme3);
+            ThemesMenu.Items.Add(theme4);
+            ThemesMenu.Items.Add(theme5);
+            ThemesMenu.Items.Add(theme6);
         }
 
         /// <summary>
@@ -2294,8 +2313,10 @@ namespace KBS.FamilyLines
         /// <summary>
         /// Callback method invoked by a "subwindow" when the user exits.
         /// </summary>
-        private void ViewCallback()
+        private void ViewCallback(bool wasSaved)
         {
+            family.IsDirty = wasSaved;
+
             removeControlFocus();
             App.canExecuteJumpList = true;
         }
