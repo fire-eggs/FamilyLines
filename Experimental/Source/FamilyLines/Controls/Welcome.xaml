@@ -42,7 +42,7 @@
 
         <!-- Footer -->
         <Border Background="{DynamicResource BackgroundBrush}" Height="30" Opacity="0.8" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,1,1" CornerRadius="{DynamicResource AboutBorderBottomCorner}">
-            <Label x:Name="VersionLabel" Margin="10,0,0,0" Foreground="#FFB5C8D8" Content="{x:Static properties:Resources.Version}"/>
+            <Label x:Name="VersionLabel" Margin="10,0,0,0" Foreground="{DynamicResource FontColor}" Content="{x:Static properties:Resources.Version}"/>
         </Border>
 
     </StackPanel>

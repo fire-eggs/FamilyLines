@@ -16,6 +16,7 @@ namespace KBS.FamilyLines.Controls
         private Grid owner;
         private ViewerCallback cb;
         private readonly GedcomHeader header;
+        private bool _wasSaved;
 
         public HeaderEditor(GedcomHeader _header)
         {
@@ -42,9 +43,11 @@ namespace KBS.FamilyLines.Controls
             Lang = header.Submitter.LanguagePreferences[0] ?? "";
             RFN = header.Submitter.RegisteredRFN ?? "";
             Copr = header.Copyright ?? "";
+
+            _wasSaved = false;
         }
 
-        public delegate void ViewerCallback();
+        public delegate void ViewerCallback(bool wasSaved);
 
         public static void EditHeader(GedcomHeader header, Grid _owner, ViewerCallback _cb)
         {
@@ -66,7 +69,7 @@ namespace KBS.FamilyLines.Controls
             // make the callback to the invoking code. This really, really should not
             // be null (otherwise the app misbehaves) but we'll check just in case.
             if (cb != null)
-                cb();
+                cb(_wasSaved);
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -79,6 +82,7 @@ namespace KBS.FamilyLines.Controls
             header.Submitter.LanguagePreferences[0] = Lang.Trim();
             header.Submitter.RegisteredRFN = RFN.Trim();
             header.Copyright = Copr.Trim();
+            _wasSaved = true;
         }
 
         public string SubmitterName { get; set; }

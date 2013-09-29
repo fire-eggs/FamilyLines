@@ -131,7 +131,7 @@ namespace KBS.FamilyLines.Controls
             }
         }
 
-        public delegate void ViewerCallback();
+        public delegate void ViewerCallback(bool wasSaved);
 
         public static void ViewHeader(GedcomHeader header, Grid _owner, ViewerCallback _cb)
         {
@@ -151,7 +151,7 @@ namespace KBS.FamilyLines.Controls
             // make the callback to the invoking code. This really, really should not
             // be null (otherwise the app misbehaves) but we'll check just in case.
             if (cb != null)
-                cb();
+                cb(false);
         }
     }
 }
