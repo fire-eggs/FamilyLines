@@ -81,7 +81,7 @@
         <GradientStop Color="#FF2B78D4" Offset="1" />
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="PersonInfoBackgroundBrush" Color="#FF3E487E" />
+    <SolidColorBrush x:Key="PersonInfoBackgroundBrush" Color="LightSteelBlue" />
 
     <SolidColorBrush x:Key="PhotosBackgroundBrush" Color="#FF000000" />
 
@@ -190,9 +190,12 @@
     <SolidColorBrush x:Key="AxisBrush" Color="#FF979797" />
 
     <!-- Family Data Brushes -->
-    <SolidColorBrush x:Key="FamilyDataFontColor" Color="#FFFFFFFF" />
+    
+    <!-- Text color in the lower family data grid -->
+    <SolidColorBrush x:Key="FamilyDataFontColor" Color="DarkBlue" />
 
-    <SolidColorBrush x:Key="FamilyEditListViewSelectedBrush" Color="#FFF16422" />
+    <!-- The selection color in lower family data grid; also used in "connect family member" -->
+    <SolidColorBrush x:Key="FamilyEditListViewSelectedBrush" Color="LightGoldenrodYellow" />
 
     <SolidColorBrush x:Key="TextBlockForegroundBrush" Color="#FFFA6E15" />
 
