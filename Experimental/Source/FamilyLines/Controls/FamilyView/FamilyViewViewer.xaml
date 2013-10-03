@@ -72,7 +72,7 @@
                 <!-- Marriage details -->
                 <Border Grid.Column="1" 
                         Visibility="{Binding Path=IsMarried, Mode=OneWay, Converter={StaticResource VisiConvert}}"
-                        CornerRadius="10" 
+                        CornerRadius="5" 
                         BorderThickness="1"
                         ToolTip="{x:Static Properties:Resources.ClickMarriageDetail}"
                         MouseUp="Marriage_Click"
@@ -82,9 +82,9 @@
                     
                     <StackPanel VerticalAlignment="Center" 
                                 x:Name="MarrStack" 
-                                Margin="5"
+                                Margin="5,0,5,0"
                                 >
-                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="0,3,0,5">
                             <Label Padding="0" 
                                    Margin="2,0,5,0"
                                    Content="{x:Static Properties:Resources.Marriage}"
@@ -96,7 +96,7 @@
                         <Label Padding="0" Content="{Binding Path=MarrPlace, Mode=OneWay}"/>
                         <StackPanel Orientation="Horizontal"
                                     Visibility="{Binding Path=IsDivorced, Mode=OneWay, Converter={StaticResource VisiConvert}}"
-                                    Margin="0,5,0,0">
+                                    Margin="0,0,0,5">
                             <Label Padding="0" 
                                    Margin="2,0,5,0"
                                    Content="{x:Static Properties:Resources.Divorce}"
