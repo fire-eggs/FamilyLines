@@ -1,0 +1,13 @@
+Here are some of the projects/features to consider for the "V0.6" release of Family Lines. I would like "V0.6" to be no later than a Christmas/New Years release.
+
++Anyone wishing to contribute to the Family Lines project, this is a list of opportunities to help out!+
+
+Follow the links to see additional details. I'll be fleshing these out over time; don't hesitate to contact me (notonyournelly) or post if you have any questions.
+
+	* **Finish V0.5 Features** - [Finish V0.5 Features](Finish-V0.5-Features)
+	* **Diagram Enhancements** - [Diagram Enhancements](Diagram-Enhancements)
+	* **Improve GEDCOM support** - [Improve GEDCOM Support](Improve-GEDCOM-Support)
+	* **Localization support** - [Localization Support](Localization-Support)
+	* **Featurettes** - [Featurettes](Featurettes)
+	* **Code cleanup** - [Code cleanup](Code-cleanup)
+	* **Other** - [Other Items](Other-Items)
